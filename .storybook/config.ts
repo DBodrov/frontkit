@@ -5,6 +5,7 @@ import { addDecorator, configure } from '@storybook/react';
 const req = require.context('../src', true, /.stories.tsx$/);
 
 function loadStories() {
+    // @ts-ignore
     addDecorator(withInfo);
     req.keys().forEach(req);
 }

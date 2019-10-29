@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import { action } from '@storybook/addon-actions';
+// import { action } from '@syatorybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
 import { Header } from '../components/Header/Header';
