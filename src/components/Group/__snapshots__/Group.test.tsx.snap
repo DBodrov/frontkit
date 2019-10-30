@@ -4,6 +4,7 @@ exports[`renders correctly 1`] = `
 <div>
   <div
     class="group"
+    data-test-id="Group-Container"
   >
     <div
       class="block"
