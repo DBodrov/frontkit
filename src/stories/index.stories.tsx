@@ -15,7 +15,7 @@ storiesOf('Group', module).add(
     'simple group',
     () => (
         <Group>
-            <TestDiv >
+            <TestDiv>
                 <TestDiv />
                 <TestDiv />
                 <TestDiv />
