@@ -1,7 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { H1, H2 } from '../components/Header/Header';
 
 storiesOf('Headers', module)
