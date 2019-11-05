@@ -1,8 +1,9 @@
 import React from 'react';
 
-// import { action } from '@syatorybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
-import { Header } from '../components/Header/Header';
+import { H1, H2 } from '../components/Header/Header';
 
-storiesOf('Header', module).add('simple header', () => <Header>Some header</Header>, { info: { inline: true } });
+storiesOf('Headers', module)
+    .add('H1 header', () => <H1>Large header</H1>, { info: { inline: true } })
+    .add('H2 header', () => <H2>Medium header</H2>, { info: { inline: true } });
