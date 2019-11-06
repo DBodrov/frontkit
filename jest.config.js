@@ -20,4 +20,17 @@ module.exports = {
 
     // Module file extensions for importing
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+    // Exclude paths from coverage reporting
+    coveragePathIgnorePatterns: ['/node_modules/', '/src/__test__/', '.*.d.ts', '/src/stories/', '.*/index.ts'],
+    // Minimum test coverage threshold
+    coverageThreshold: {
+        global: {
+            branches: 80,
+            functions: 80,
+            lines: 80,
+            statements: 80,
+        },
+    },
+    // Only collect coverage for components
+    collectCoverageFrom: ['src/components/**/*.{ts,tsx}'],
 };
