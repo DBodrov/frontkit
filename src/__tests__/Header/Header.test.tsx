@@ -1,7 +1,9 @@
 import { render } from '@testing-library/react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react';
 
-import { H1, H2 } from '../../components/Header/Header';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { H1, H2 } from '../../components/Header';
 
 describe('<H1 />', () => {
     test('should render an h1 element', () => {
