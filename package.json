@@ -83,7 +83,7 @@
         }
     },
     "lint-staged": {
-        "!(*test).{ts,js,tsx,jsx}": [
+        "!(*test).{ts,tsx}": [
             "eslint --fix",
             "prettier --write",
             "jest --coverage --findRelatedTests",
