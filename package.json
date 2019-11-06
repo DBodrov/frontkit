@@ -2,6 +2,9 @@
     "name": "a3-uikit",
     "version": "0.1.0",
     "private": true,
+    "main": "./dist/a3-uikit.cjs.js",
+    "module": "./dist/a3-uikit.esm.js",
+    "browser": "./dist/a3-uikit.umd.js",
     "dependencies": {
         "@types/jest": "^24.0.21",
         "@types/node": "12.11.1",
@@ -14,11 +17,13 @@
         "typescript": "3.6.4"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
+        "start": "start-storybook -p 9009 -s public",
+        "build": "node bin/build",
+        "build:lib": "yarn build:rollup && yarn build:dts",
+        "build:rollup": "rollup -c",
+        "build:dts": "tsc -p tsconfig.dts.json",
         "eject": "react-scripts eject",
-        "storybook": "start-storybook -p 9009 -s public",
-        "build-storybook": "build-storybook -s public",
+        "build:storybook": "build-storybook -s public",
         "test": "jest",
         "test:coverage": "jest --coverage",
         "test:watch": "jest --watch"
@@ -64,9 +69,16 @@
         "jest": "^24.9.0",
         "jest-css-modules-transform": "^3.1.0",
         "lint-staged": "^9.4.2",
+        "postcss-modules": "^1.4.1",
         "prettier": "^1.18.2",
         "react-docgen-typescript-loader": "^3.0.1",
-        "ts-jest": "^24.1.0"
+        "rollup": "^1.26.3",
+        "rollup-plugin-commonjs": "^10.1.0",
+        "rollup-plugin-node-resolve": "^5.2.0",
+        "rollup-plugin-postcss": "^2.0.3",
+        "rollup-plugin-typescript": "^1.0.1",
+        "ts-jest": "^24.1.0",
+        "tslib": "^1.10.0"
     },
     "config": {
         "commitizen": {
@@ -89,5 +101,9 @@
             "jest --coverage --findRelatedTests",
             "git add"
         ]
-    }
+    },
+    "files": [
+        "dist"
+    ],
+    "types": "./dist/types/index.d.ts"
 }
