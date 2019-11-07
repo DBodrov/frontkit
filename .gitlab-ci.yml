@@ -22,6 +22,7 @@ stages:
 #     image: node:lts-alpine
 #     before_script:
 #         - yarn
+#         - yarn add react react-dom --peer
 #     script:
 #         - yarn test
 
@@ -37,6 +38,7 @@ stages:
 #     image: node:lts-alpine
 #     before_script:
 #         - yarn
+#         - yarn add react react-dom --peer
 #     script:
 #         - yarn test:coverage
 
@@ -53,6 +55,7 @@ test-release:
     image: node:lts-alpine
     before_script:
         - yarn
+        - yarn add react react-dom --peer
     script:
         - yarn test:coverage
     artifacts:
