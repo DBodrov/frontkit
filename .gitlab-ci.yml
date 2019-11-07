@@ -100,3 +100,5 @@ deploy-release:
         - npm-cli-adduser
     script:
         - npm publish --registry ${NPM_REGISTRY}
+    dependencies:
+        - build-release
