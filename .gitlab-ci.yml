@@ -9,49 +9,49 @@ stages:
     - build
     - deploy
 
-# test-feature-on-push:
-#     stage: test
-#     tags:
-#         - dev-runner
-#     only:
-#         variables:
-#             - $CI_COMMIT_REF_NAME =~ /^(feature|fix)\/[a-zA-Z]+-?[0-9]+\/.+$/
-#     except:
-#         refs:
-#             - merge_requests
-#     image: node:lts-alpine
-#     before_script:
-#         - yarn
-#         - yarn add react react-dom --peer
-#     script:
-#         - yarn test
+test-feature-on-push:
+    stage: test
+    tags:
+        - dev-runner
+    only:
+        variables:
+            - $CI_COMMIT_REF_NAME =~ /^(feature|fix)\/[a-zA-Z]+-?[0-9]+\/.+$/
+    except:
+        refs:
+            - merge_requests
+    image: node:lts-alpine
+    before_script:
+        - yarn
+        - yarn add react react-dom --peer
+    script:
+        - yarn test
 
-# test-feature-on-merge:
-#     stage: test
-#     tags:
-#         - dev-runner
-#     only:
-#         refs:
-#             - merge_requests
-#         variables:
-#             - $CI_COMMIT_REF_NAME =~ /^(feature|fix)\/[a-zA-Z]+-?[0-9]+\/.+$/
-#     image: node:lts-alpine
-#     before_script:
-#         - yarn
-#         - yarn add react react-dom --peer
-#     script:
-#         - yarn test:coverage
+test-feature-on-merge:
+    stage: test
+    tags:
+        - dev-runner
+    only:
+        refs:
+            - merge_requests
+        variables:
+            - $CI_COMMIT_REF_NAME =~ /^(feature|fix)\/[a-zA-Z]+-?[0-9]+\/.+$/
+    image: node:lts-alpine
+    before_script:
+        - yarn
+        - yarn add react react-dom --peer
+    script:
+        - yarn test:coverage
 
 test-release:
     stage: test
     tags:
         - dev-runner
-    # only:
-    #     refs:
-    #         - tags
-    #     variables:
-    #         - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
-    #         - $CI_COMMIT_REF_NAME == "master"
+    only:
+        refs:
+            - tags
+        variables:
+            - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
+            - $CI_COMMIT_REF_NAME == "master"
     image: node:lts-alpine
     before_script:
         - yarn
@@ -67,12 +67,12 @@ build-release:
     stage: build
     tags:
         - dev-runner
-    # only:
-    #     refs:
-    #         - tags
-    #     variables:
-    #         - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
-    #         - $CI_COMMIT_REF_NAME == "master"
+    only:
+        refs:
+            - tags
+        variables:
+            - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
+            - $CI_COMMIT_REF_NAME == "master"
     image: node:lts-alpine
     script:
         - yarn build
@@ -85,16 +85,15 @@ deploy-release:
     stage: deploy
     tags:
         - dev-runner
-    # only:
-    #     refs:
-    #         - tags
-    #     variables:
-    #         - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
-    #         - $CI_COMMIT_REF_NAME == "master"
+    only:
+        refs:
+            - tags
+        variables:
+            - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
+            - $CI_COMMIT_REF_NAME == "master"
     image: node:lts-alpine
     before_script:
-        # - export TAG=$(echo $CI_COMMIT_TAG | grep -E 'v[0-9]+.[0-9]+.[0-9]+' | sed -E -n 's/v([0-9]+.[0-9]+.[0-9]+)/\1/p')
-        - export TAG="0.3.1"
+        - export TAG=$(echo $CI_COMMIT_TAG | grep -E 'v[0-9]+.[0-9]+.[0-9]+' | sed -E -n 's/v([0-9]+.[0-9]+.[0-9]+)/\1/p')
         - ./bin/set_correct_version.sh
         - yarn global add npm-cli-adduser
         - npm-cli-adduser
