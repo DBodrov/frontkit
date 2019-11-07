@@ -1,14 +1,19 @@
+import classnames from 'classnames';
 import React from 'react';
 
 import styles from './Group.module.css';
-type GroupProps = React.BaseHTMLAttributes<HTMLSpanElement> & {
+
+interface GroupProps extends React.HTMLAttributes<HTMLElement> {
+    className?: string;
+    style?: React.StyleHTMLAttributes<HTMLElement>;
     dataTestId?: string;
-};
+}
 
 export function Group(props: GroupProps): JSX.Element {
-    const { children, dataTestId = 'Group-Container' } = props;
+    const { children, dataTestId = 'Group-Container', className, style } = props;
+    const cls = classnames(styles.group, className);
     return (
-        <div className={styles.group} data-test-id={dataTestId}>
+        <div className={cls} data-test-id={dataTestId} style={style}>
             {children}
         </div>
     );
