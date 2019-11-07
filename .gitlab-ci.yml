@@ -61,7 +61,7 @@ test-release:
     artifacts:
         paths:
             - node_modules
-        expire_in: 1 hour
+        expire_in: 10 min
 
 build-release:
     stage: build
@@ -79,7 +79,7 @@ build-release:
     artifacts:
         paths:
             - dist
-        expire_in: 1 hour
+        expire_in: 10 min
 
 deploy-release:
     stage: deploy
@@ -99,4 +99,4 @@ deploy-release:
         - yarn global add npm-cli-adduser
         - npm-cli-adduser
     script:
-        - npm publish --registry ${NPM_REGISTRY} --tag ${TAG}
+        - npm publish --registry ${NPM_REGISTRY}
