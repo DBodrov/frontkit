@@ -16,7 +16,7 @@ export default [
     },
     {
         input: 'src/index.ts',
-        plugins: [resolve({ only: ['classnames'] }), commonjs(), typescript(), postcss({ modules: true })],
+        plugins: [resolve({ only: [] }), commonjs(), typescript(), postcss({ modules: true })],
         output: [{ file: pkg.main, format: 'cjs' }, { file: pkg.module, format: 'es' }],
     },
 ];
