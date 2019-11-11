@@ -1,27 +1,31 @@
 {
-    "name": "a3-uikit",
-    "version": "0.1.0",
-    "private": true,
+    "name": "@a3/uikit",
+    "version": "0.2.0",
+    "description": "A-3 React UI Kit",
+    "main": "./dist/a3-uikit.cjs.js",
+    "module": "./dist/a3-uikit.esm.js",
+    "browser": "./dist/a3-uikit.umd.js",
     "dependencies": {
-        "@types/jest": "^24.0.21",
-        "@types/node": "12.11.1",
-        "@types/react": "16.9.9",
-        "@types/react-dom": "16.9.2",
-        "classnames": "^2.2.6",
+        "classnames": "^2.2.6"
+    },
+    "peerDependencies": {
         "react": "^16.10.2",
-        "react-dom": "^16.10.2",
-        "react-scripts": "3.2.0",
-        "typescript": "3.6.4"
+        "react-dom": "^16.10.2"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
+        "start": "start-storybook -p 9009 -s public",
+        "build": "node bin/build",
+        "build:lib": "yarn build:rollup && yarn build:dts",
+        "build:rollup": "rollup -c",
+        "build:dts": "tsc -p tsconfig.dts.json",
         "eject": "react-scripts eject",
-        "storybook": "start-storybook -p 9009 -s public",
-        "build-storybook": "build-storybook -s public",
+        "build:storybook": "build-storybook -s public",
         "test": "jest",
         "test:coverage": "jest --coverage",
-        "test:watch": "jest --watch"
+        "test:watch": "jest --watch",
+        "clean": "rimraf dist",
+        "lint:eslint": "eslint --fix",
+        "lint:prettier": "prettier --write"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -50,11 +54,14 @@
         "@testing-library/jest-dom": "^4.2.3",
         "@testing-library/react": "^9.3.2",
         "@types/classnames": "^2.2.9",
+        "@types/jest": "^24.0.21",
+        "@types/node": "12.11.1",
+        "@types/react": "16.9.9",
+        "@types/react-dom": "16.9.2",
         "@types/storybook__addon-info": "^4.1.2",
         "@types/storybook__react": "^4.0.2",
         "@typescript-eslint/eslint-plugin": "^2.6.1",
         "@typescript-eslint/parser": "^2.6.1",
-        "babel-loader": "^8.0.6",
         "cz-customizable": "^6.2.0",
         "eslint": "^6.6.0",
         "eslint-config-prettier": "^6.5.0",
@@ -64,9 +71,19 @@
         "jest": "^24.9.0",
         "jest-css-modules-transform": "^3.1.0",
         "lint-staged": "^9.4.2",
+        "postcss-modules": "^1.4.1",
         "prettier": "^1.18.2",
         "react-docgen-typescript-loader": "^3.0.1",
-        "ts-jest": "^24.1.0"
+        "react-scripts": "3.2.0",
+        "rimraf": "^3.0.0",
+        "rollup": "^1.26.3",
+        "rollup-plugin-commonjs": "^10.1.0",
+        "rollup-plugin-node-resolve": "^5.2.0",
+        "rollup-plugin-postcss": "^2.0.3",
+        "rollup-plugin-typescript": "^1.0.1",
+        "ts-jest": "^24.1.0",
+        "tslib": "^1.10.0",
+        "typescript": "3.6.4"
     },
     "config": {
         "commitizen": {
@@ -89,5 +106,41 @@
             "jest --coverage --findRelatedTests",
             "git add"
         ]
-    }
+    },
+    "files": [
+        "dist"
+    ],
+    "types": "./dist/types/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://git.a-3.ru/frontend/a3-uikit.git"
+    },
+    "keywords": [
+        "uikit",
+        "react",
+        "components"
+    ],
+    "maintainers": [
+        {
+            "name": "Andrey Vassilyev",
+            "email": "vasiliev@a-3.ru"
+        },
+        {
+            "name": "Ilya Sharonov",
+            "email": "sharonov@a-3.ru"
+        },
+        {
+            "name": "Sergey Puhalenko",
+            "email": "puhalenko@a-3.ru"
+        },
+        {
+            "name": "Timofey Polonsky",
+            "email": "polonsky@a-3.ru"
+        }
+    ],
+    "license": "SEE LICENSE IN LICENSE.md",
+    "bugs": {
+        "url": "https://git.a-3.ru/frontend/a3-uikit/issues"
+    },
+    "homepage": "https://git.a-3.ru/frontend/a3-uikit.git"
 }
