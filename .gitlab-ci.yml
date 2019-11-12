@@ -45,9 +45,9 @@ test-release:
     only:
         refs:
             - tags
-        # variables:
-        #     - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
-        #     - $CI_COMMIT_REF_NAME == "master"
+        variables:
+            - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
+            - $CI_COMMIT_REF_NAME == "master"
     image: node:lts-alpine
     before_script:
         - ./bin/setup_local_npm.sh
@@ -67,9 +67,9 @@ build-release:
     only:
         refs:
             - tags
-        # variables:
-        #     - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
-        #     - $CI_COMMIT_REF_NAME == "master"
+        variables:
+            - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
+            - $CI_COMMIT_REF_NAME == "master"
     image: node:lts-alpine
     script:
         - yarn build
@@ -85,14 +85,14 @@ deploy-release:
     only:
         refs:
             - tags
-        # variables:
-        #     - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
-        #     - $CI_COMMIT_REF_NAME == "master"
+        variables:
+            - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
+            - $CI_COMMIT_REF_NAME == "master"
     image: node:lts-alpine
     before_script:
         - export TAG=$(echo $CI_COMMIT_TAG | grep -E 'v[0-9]+.[0-9]+.[0-9]+' | sed -E -n 's/v([0-9]+.[0-9]+.[0-9]+)/\1/p')
         - ./bin/set_correct_version.sh
-        - export NPM_REGISTRY=http://192.168.167.51:8081/repository/local-npm/
+        - export NPM_REGISTRY=$NPM_PUBLISH_REGISTRY
         - ./bin/setup_local_npm.sh
     script:
         - npm publish --registry ${NPM_REGISTRY}
