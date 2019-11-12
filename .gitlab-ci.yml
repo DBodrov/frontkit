@@ -1,8 +1,6 @@
 variables:
     NPM_REGISTRY: 'http://192.168.10.194:4873'
-    NPM_USER: 'robot'
-    NPM_PASS: 'tobor'
-    NPM_EMAIL: 'robot@a-3.ru'
+    NPM_EMAIL: 'noreply@a-3.ru'
 
 stages:
     - test
@@ -21,6 +19,8 @@ test-feature-on-push:
             - merge_requests
     image: node:lts-alpine
     before_script:
+        - yarn global add npm-cli-adduser
+        - npm-cli-adduser
         - yarn
         - yarn add react react-dom --peer
     script:
@@ -37,6 +37,8 @@ test-feature-on-merge:
             - $CI_COMMIT_REF_NAME =~ /^(feature|fix)\/[a-zA-Z]+-?[0-9]+\/.+$/
     image: node:lts-alpine
     before_script:
+        - yarn global add npm-cli-adduser
+        - npm-cli-adduser
         - yarn
         - yarn add react react-dom --peer
     script:
@@ -54,6 +56,8 @@ test-release:
             - $CI_COMMIT_REF_NAME == "master"
     image: node:lts-alpine
     before_script:
+        - yarn global add npm-cli-adduser
+        - npm-cli-adduser
         - yarn
         - yarn add react react-dom --peer
     script:
