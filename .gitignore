@@ -11,6 +11,9 @@
 # production
 /build
 
+# IntelliJ IDEA config
+.idea/
+
 # misc
 .DS_Store
 .env.local

@@ -12,6 +12,12 @@ describe('<H1 />', () => {
         const h1 = getByTestId('Header-H1');
         expect(h1).toHaveTextContent(headerText);
     });
+    test('should have dataTestId an h1', () => {
+        const headerText = 'Header';
+        const { getByTestId } = render(<H1 dataTestId={headerText}>{headerText}</H1>);
+        const h1 = getByTestId(headerText);
+        expect(h1).toHaveTextContent(headerText);
+    });
     test(`should have default 'header' and 'h1' classes`, () => {
         const headerClass = 'header';
         const h1Class = 'h1';
@@ -39,6 +45,12 @@ describe('<H2 />', () => {
         const headerText = 'Header';
         const { getByTestId } = render(<H2>{headerText}</H2>);
         const h2 = getByTestId('Header-H2');
+        expect(h2).toHaveTextContent(headerText);
+    });
+    test('should have dataTestId an h2', () => {
+        const headerText = 'Header';
+        const { getByTestId } = render(<H2 dataTestId={headerText}>{headerText}</H2>);
+        const h2 = getByTestId(headerText);
         expect(h2).toHaveTextContent(headerText);
     });
     test(`should have default 'header' and 'h2' classes`, () => {
