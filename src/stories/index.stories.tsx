@@ -3,8 +3,8 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 
-import { Group } from '../components/Group/Group';
-import { TestDiv } from '../components/TestDiv/TestDiv';
+import { Group } from '../components/Group';
+import { Div } from '../__tests__/Group/Div';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { H1, H2 } from '../components/Header';
 
@@ -15,13 +15,13 @@ storiesOf('Group', module).add(
     'simple group',
     () => (
         <Group>
-            <TestDiv>
-                <TestDiv />
-                <TestDiv />
-                <TestDiv />
-            </TestDiv>
-            <TestDiv />
-            <TestDiv />
+            <Div>
+                <Div />
+                <Div />
+                <Div />
+            </Div>
+            <Div />
+            <Div />
         </Group>
     ),
     { info: { inline: true } },

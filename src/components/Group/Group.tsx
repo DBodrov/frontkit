@@ -13,7 +13,7 @@ export function Group(props: GroupProps): JSX.Element {
     const { children, dataTestId = 'Group-Container', className, style } = props;
     const cls = classnames(styles.group, className);
     return (
-        <div className={cls} data-test-id={dataTestId} style={style}>
+        <div className={cls} data-testid={dataTestId} style={style}>
             {children}
         </div>
     );
