@@ -8,6 +8,9 @@ interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
     className?: string;
     /** Inline style objects passed to h1/h2 */
     style?: React.StyleHTMLAttributes<HTMLElement>;
+    /** ID attribute for QA Auto-tests
+     * @default Header-H1 | Header-H2
+     * */
     dataTestId?: string;
 }
 

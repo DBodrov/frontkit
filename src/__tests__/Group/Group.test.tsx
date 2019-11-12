@@ -4,7 +4,6 @@ import React from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Group } from '../../components/Group';
-import { H1 } from '../../components/Header';
 
 describe('<Group />', () => {
     test('should render an Group element', () => {

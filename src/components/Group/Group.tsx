@@ -4,8 +4,13 @@ import React from 'react';
 import styles from './Group.module.css';
 
 interface GroupProps extends React.HTMLAttributes<HTMLElement> {
+    /** Class names passed to group and children in order to change styling */
     className?: string;
+    /** Inline style objects passed to group */
     style?: React.StyleHTMLAttributes<HTMLElement>;
+    /** ID attribute for QA Auto-tests
+     * @default Group-Container
+     * */
     dataTestId?: string;
 }
 
