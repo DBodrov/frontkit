@@ -31,7 +31,6 @@ export function Spinner({ className, circleClassName, style, color = '#79b5ff', 
     return (
         <div data-testid={dataTestId} className={className} style={style}>
             <div className={styles.spinner}>
-                dd
                 <Circle color={color} className={circleClassName} />
                 <Circle color={color} className={circleClassName} />
                 <Circle color={color} className={circleClassName} />
