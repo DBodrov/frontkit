@@ -104,7 +104,6 @@
         "!(*test).{ts,tsx}": [
             "eslint --fix",
             "prettier --write",
-            "jest --coverage --findRelatedTests",
             "git add"
         ]
     },
