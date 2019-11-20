@@ -6,6 +6,8 @@ import styles from './Spinner.module.css';
 interface SpinnerProps extends React.HTMLAttributes<HTMLElement> {
     /** Class names passed to spinner wrapper to change styling */
     className?: string;
+    /** Class names passed to spinner circles to change styling */
+    circleClassName?: string;
     /** Inline style objects passed to spinner wrapper */
     style?: React.StyleHTMLAttributes<HTMLElement>;
     /** String passed to spinner to change color */
@@ -18,20 +20,22 @@ interface SpinnerProps extends React.HTMLAttributes<HTMLElement> {
 
 interface CircleProps extends React.HTMLAttributes<HTMLElement> {
     color: string;
+    className?: string;
 }
 
-const circleCls = classnames(styles.circle, styles.lineAnimation);
+const creacteCircleClass = (className?: string) => classnames(styles.circle, styles.lineAnimation, className);
 
-const Circle = ({ color }: CircleProps) => <div className={circleCls} style={{ backgroundColor: color }} />;
+const Circle = ({ color, className }: CircleProps) => <div className={creacteCircleClass(className)} style={{ backgroundColor: color }} />;
 
-export function Spinner({ className, style, color = '#79b5ff', dataTestId = 'Spinner' }: SpinnerProps): JSX.Element {
+export function Spinner({ className, circleClassName, style, color = '#79b5ff', dataTestId = 'Spinner' }: SpinnerProps): JSX.Element {
     return (
         <div data-testid={dataTestId} className={className} style={style}>
             <div className={styles.spinner}>
-                <Circle color={color} />
-                <Circle color={color} />
-                <Circle color={color} />
-                <Circle color={color} />
+                dd
+                <Circle color={color} className={circleClassName} />
+                <Circle color={color} className={circleClassName} />
+                <Circle color={color} className={circleClassName} />
+                <Circle color={color} className={circleClassName} />
             </div>
         </div>
     );
