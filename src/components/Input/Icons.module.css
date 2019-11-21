@@ -1,4 +1,6 @@
-.error-wrapper {
+.wrapper {
+    width: 15px;
+    height: 15px;
     position: relative;
 }
 .error-circle {
@@ -21,9 +23,6 @@
 }
 
 .success-wrapper {
-    position: relative;
-    width: 15px;
-    height: 15px;
     transform: rotate(45deg);
 }
 .success-stem {
