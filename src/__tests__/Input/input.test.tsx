@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import * as React from 'react';
-import { Input, ErrorIcon } from '../../components/Input';
+import { Input, ErrorIcon, BackgroundProp } from '../../components/Input';
 
 describe('input', () => {
     test('should render input element', () => {
@@ -26,5 +26,12 @@ describe('icons', () => {
         const errorTestId = 'kljdaskljdaskjdkjas';
         const { getByTestId } = render(<Input Icon={() => <ErrorIcon dataTestId={errorTestId} />} />);
         expect(getByTestId(errorTestId)).not.toBeNull();
+    });
+});
+
+describe('colors', () => {
+    test('should be red on error', () => {
+        const { container } = render(<Input background={BackgroundProp.Error} />);
+        expect(container.getElementsByTagName('input')[0].className).toMatch(/error/);
     });
 });

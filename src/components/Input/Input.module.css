@@ -23,3 +23,7 @@
     right: 22px;
     top: 22px;
 }
+
+.error {
+    background-color: #ffe3e3;
+}

@@ -20,13 +20,19 @@ type Props = {
     dataTestId?: string;
 };
 
+function getBackgroundClass(backgroud?: BackgroundProp) {
+    return classnames({
+        [styles.error]: backgroud === BackgroundProp.Error,
+    });
+}
+
 export function Input({ value, uncontrolled, placeholder, Icon, background, className, style, dataTestId, ...rest }: Props): JSX.Element {
     return (
         <div className={styles.wrapper}>
             <input
                 value={value}
                 placeholder={placeholder}
-                className={classnames(className, styles.input)}
+                className={classnames(className, styles.input, getBackgroundClass(background))}
                 style={style}
                 data-testid={dataTestId}
                 {...rest}
