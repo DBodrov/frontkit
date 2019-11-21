@@ -1,0 +1,32 @@
+.input {
+    background: #eaeef4;
+    border: 0;
+    height: 60px;
+    width: 100%;
+    padding: 21px;
+    font-size: 16px;
+    font-family: Lato;
+    line-height: 19px;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+.input:focus {
+    outline: none;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    right: 22px;
+    top: 22px;
+}
+
+.error {
+    background-color: #ffe3e3;
+}
+.success {
+    background-color: #f7f9fb;
+}
