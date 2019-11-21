@@ -34,7 +34,7 @@ describe('icons', () => {
         expect(getByTestId(successTestId)).not.toBeNull();
     });
 
-    test('can change data-testid in error icon', () => {
+    test('can change data-testid in success icon', () => {
         const successTestId = 'dfasbkjvcbn';
         const { getByTestId } = render(<Input Icon={() => <SuccessIcon dataTestId={successTestId} />} />);
         expect(getByTestId(successTestId)).not.toBeNull();
@@ -42,11 +42,11 @@ describe('icons', () => {
 });
 
 describe('colors', () => {
-    test('should be red on error', () => {
+    test('should be red if error', () => {
         const { container } = render(<Input background={BackgroundProp.Error} />);
         expect(container.getElementsByTagName('input')[0].className).toMatch(/error/);
     });
-    test('should be green on error', () => {
+    test('should be green if success', () => {
         const { container } = render(<Input background={BackgroundProp.Success} />);
         expect(container.getElementsByTagName('input')[0].className).toMatch(/success/);
     });

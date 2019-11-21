@@ -20,10 +20,10 @@ type Props = {
     dataTestId?: string;
 };
 
-function getBackgroundClass(backgroud?: BackgroundProp) {
+function getBackgroundClass(background?: BackgroundProp) {
     return classnames({
-        [styles.error]: backgroud === BackgroundProp.Error,
-        [styles.success]: backgroud === BackgroundProp.Success,
+        [styles.error]: background === BackgroundProp.Error,
+        [styles.success]: background === BackgroundProp.Success,
     });
 }
 
