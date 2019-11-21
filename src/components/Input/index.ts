@@ -1,2 +1,2 @@
 export { Input, BackgroundProp } from './Input';
-export { ErrorIcon } from './Icons';
+export { ErrorIcon, SuccessIcon } from './Icons';

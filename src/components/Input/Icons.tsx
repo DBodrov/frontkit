@@ -12,3 +12,12 @@ export function ErrorIcon({ dataTestId = 'input-error-icon' }: IconProps) {
         </div>
     );
 }
+
+export function SuccessIcon({ dataTestId = 'input-success-icon' }: IconProps) {
+    return (
+        <div className={styles['success-wrapper']} data-testid={dataTestId}>
+            <div className={styles['success-stem']}></div>
+            <div className={styles['success-kick']}></div>
+        </div>
+    );
+}

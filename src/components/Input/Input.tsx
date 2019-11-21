@@ -23,6 +23,7 @@ type Props = {
 function getBackgroundClass(backgroud?: BackgroundProp) {
     return classnames({
         [styles.error]: backgroud === BackgroundProp.Error,
+        [styles.success]: backgroud === BackgroundProp.Success,
     });
 }
 
