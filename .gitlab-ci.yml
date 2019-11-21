@@ -13,9 +13,8 @@ test-feature-on-push:
     except:
         refs:
             - merge_requests
-    image: node:lts-alpine
+    image: registry.a-3.ru/frontend/base-images/node:12.13.1
     before_script:
-        - ./bin/setup_local_npm.sh
         - yarn
         - yarn add react react-dom --peer
     script:
@@ -30,9 +29,8 @@ test-feature-on-merge:
             - merge_requests
         variables:
             - $CI_COMMIT_REF_NAME =~ /^(feature|fix)\/[a-zA-Z]+-?[0-9]+\/.+$/
-    image: node:lts-alpine
+    image: registry.a-3.ru/frontend/base-images/node:12.13.1
     before_script:
-        - ./bin/setup_local_npm.sh
         - yarn
         - yarn add react react-dom --peer
     script:
@@ -48,9 +46,8 @@ test-release:
         variables:
             - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
             - $CI_COMMIT_REF_NAME == "master"
-    image: node:lts-alpine
+    image: registry.a-3.ru/frontend/base-images/node:12.13.1
     before_script:
-        - ./bin/setup_local_npm.sh
         - yarn
         - yarn add react react-dom --peer
     script:
@@ -70,7 +67,7 @@ build-release:
         variables:
             - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
             - $CI_COMMIT_REF_NAME == "master"
-    image: node:lts-alpine
+    image: registry.a-3.ru/frontend/base-images/node:12.13.1
     script:
         - yarn build
     artifacts:
@@ -88,7 +85,7 @@ deploy-release:
         variables:
             - $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/
             - $CI_COMMIT_REF_NAME == "master"
-    image: node:lts-alpine
+    image: registry.a-3.ru/frontend/base-images/node:12.13.1
     before_script:
         - export TAG=$(echo $CI_COMMIT_TAG | grep -E 'v[0-9]+.[0-9]+.[0-9]+' | sed -E -n 's/v([0-9]+.[0-9]+.[0-9]+)/\1/p')
         - ./bin/set_correct_version.sh
