@@ -12,7 +12,6 @@ describe('<Button />', () => {
         const button = getByTestId('Button');
         expect(button).not.toBeNull();
         expect(button).toHaveClass(buttonClass);
-        expect(button).toHaveClass('btn');
     });
     test('should have custom style', () => {
         const style = { color: '#000000' };
