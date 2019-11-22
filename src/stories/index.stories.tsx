@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
-
+import { Button } from '../components/Button';
 import { Group } from '../components/Group';
 import { Div } from '../__tests__/Group/Div';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -26,3 +26,4 @@ storiesOf('Group', module).add(
     ),
     { info: { inline: true } },
 );
+storiesOf('Button', module).add('simple button', () => <Button>Отправить</Button>, { info: { inline: true } });

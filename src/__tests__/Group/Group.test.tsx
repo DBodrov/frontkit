@@ -29,6 +29,6 @@ describe('<Group />', () => {
         const groupTestId = 'Group';
         const { getByTestId } = render(<Group dataTestId={groupTestId}/>);
         const group = getByTestId(groupTestId);
-        expect(group).toHaveClass('group');
+        expect(group).not.toBeNull();
     });
 });
