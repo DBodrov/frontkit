@@ -8,27 +8,29 @@ import { Button } from '../../components/Button';
 describe('<Button />', () => {
     test('should render an Button element', () => {
         const buttonClass = 'btn';
-        const { getByTestId } = render(<Button className={buttonClass}/>);
+        const buttonTestId = 'newButton';
+        const { getByTestId } = render(<Button className={buttonClass} dataTestId={buttonTestId} />);
         const button = getByTestId('Button');
         expect(button).not.toBeNull();
         expect(button).toHaveClass(buttonClass);
     });
     test('should have custom style', () => {
         const style = { color: '#000000' };
-        const { getByTestId } = render(<Button style={style}/>);
-        const button = getByTestId('Button');
+        const buttonTestId = 'newButton';
+        const { getByTestId } = render(<Button style={style} dataTestId={buttonTestId} />);
+        const button = getByTestId(buttonTestId);
         expect(button).toHaveStyle('color: #000000');
     });
     test('should have children', () => {
         const buttonText = 'Button';
-        const { getByTestId } = render(<Button>{buttonText}</Button>);
-        const button = getByTestId('Button');
+        const buttonTestId = 'newButton';
+        const { getByTestId } = render(<Button dataTestId={buttonTestId}>{buttonText}</Button>);
+        const button = getByTestId(buttonTestId);
         expect(button).toHaveTextContent(buttonText);
     });
     test('should have data-testid', () => {
-        const buttonTestId = 'newButton';
-        const { getByTestId } = render(<Button dataTestId={buttonTestId}/>);
-        const button = getByTestId(buttonTestId);
+        const { getByTestId } = render(<Button />);
+        const button = getByTestId('Button');
         expect(button).not.toBeNull();
     });
 });
