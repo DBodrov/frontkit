@@ -15,10 +15,10 @@ interface GroupProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export function Group(props: GroupProps): JSX.Element {
-    const { children, dataTestId = 'Group-Container', className, style } = props;
+    const { children, dataTestId = 'Group-Container', className, style, ...rest } = props;
     const cls = classnames(styles.group, className);
     return (
-        <div className={cls} data-testid={dataTestId} style={style}>
+        <div className={cls} data-testid={dataTestId} style={style} {...rest}>
             {children}
         </div>
     );
