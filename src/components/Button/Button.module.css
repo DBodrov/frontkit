@@ -1,0 +1,18 @@
+.button {
+    background: #69A6F1;
+    border: 0;
+    width: 100%;
+    padding: 22px;
+    font-size: 16px;
+    font-family: Lato;
+    line-height: 16px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #F2F2F2;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+}
+.button:focus {
+    outline: none;
+}
