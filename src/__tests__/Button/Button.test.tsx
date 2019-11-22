@@ -10,7 +10,7 @@ describe('<Button />', () => {
         const buttonClass = 'btn';
         const buttonTestId = 'newButton';
         const { getByTestId } = render(<Button className={buttonClass} dataTestId={buttonTestId} />);
-        const button = getByTestId('Button');
+        const button = getByTestId(buttonTestId);
         expect(button).not.toBeNull();
         expect(button).toHaveClass(buttonClass);
     });
