@@ -17,5 +17,5 @@ storiesOf('Group', module).add(
             <Div />
         </Group>
     ),
-    { info: { inline: true } },
+    { info: { inline: true, propTablesExclude: [Div] } },
 );

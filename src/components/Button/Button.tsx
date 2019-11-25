@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import React from 'react';
-import { ThemeContext } from '../ThemeProvider/ThemeProvider';
+import { ThemeContext } from '../ThemeProvider';
 import styles from './Button.module.css';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLElement> {

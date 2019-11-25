@@ -19,5 +19,5 @@ storiesOf('Theme', module).add(
             <Button>Отправить</Button>
         </ThemeProvider>
     ),
-    { info: { inline: true } },
+    { info: { inline: true, propTablesExclude: [Button] } },
 );
