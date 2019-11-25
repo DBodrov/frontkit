@@ -18,10 +18,10 @@ export function Button(props: ButtonProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
     const { children, dataTestId = 'Button', className, style, ...rest } = props;
     const finalStyles = {
-        ...(theme && theme.styles && { backgroundColor: theme.styles.backgroundColor }),
+        ...(theme.styles && { backgroundColor: theme.styles.backgroundColor }),
         ...style,
     };
-    const cls = classnames(styles.button, className, theme && theme.className);
+    const cls = classnames(styles.button, theme.className, className);
     return (
         <button className={cls} data-testid={dataTestId} style={finalStyles} {...rest}>
             {children}
