@@ -4,6 +4,14 @@ import React from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Button } from '../../components/Button';
+import { ThemeProvider } from '../../components/ThemeProvider';
+
+const theme = {
+    styles: {
+        backgroundColor: '#8000ff',
+    },
+    className: 'cn2',
+};
 
 describe('<Button />', () => {
     test('should render an Button element', () => {
@@ -32,5 +40,14 @@ describe('<Button />', () => {
         const { getByTestId } = render(<Button />);
         const button = getByTestId('Button');
         expect(button).not.toBeNull();
+    });
+    test('should have color from theme', () => {
+        const { container } = render(
+            <ThemeProvider value={theme}>
+                <Button />
+            </ThemeProvider>,
+        );
+        const button = container.querySelector(`.${theme.className}`);
+        expect(button).toHaveStyle('background-color: #8000ff');
     });
 });

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { Button } from '../components/Button';
 import { Group } from '../components/Group';
 import { Div } from '../__tests__/Group/Div';
 
@@ -18,6 +17,5 @@ storiesOf('Group', module).add(
             <Div />
         </Group>
     ),
-    { info: { inline: true } },
+    { info: { inline: true, propTablesExclude: [Div] } },
 );
-storiesOf('Button', module).add('simple button', () => <Button>Отправить</Button>, { info: { inline: true } });

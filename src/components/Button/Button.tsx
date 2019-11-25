@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import React from 'react';
-
+import { ThemeContext } from '../ThemeProvider';
 import styles from './Button.module.css';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
@@ -15,10 +15,15 @@ interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export function Button(props: ButtonProps): JSX.Element {
+    const theme = React.useContext(ThemeContext);
     const { children, dataTestId = 'Button', className, style, ...rest } = props;
-    const cls = classnames(styles.button, className);
+    const finalStyles = {
+        ...(theme.styles && { backgroundColor: theme.styles.backgroundColor }),
+        ...style,
+    };
+    const cls = classnames(styles.button, theme.className, className);
     return (
-        <button className={cls} data-testid={dataTestId} style={style} {...rest}>
+        <button className={cls} data-testid={dataTestId} style={finalStyles} {...rest}>
             {children}
         </button>
     );
