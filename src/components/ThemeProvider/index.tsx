@@ -1,13 +1,12 @@
 import * as React from 'react';
 
-type Theme = {
+export type ThemeTypes = {
     styles?: {
-        color?: string;
-        backgroundColor?: string;
+        mainColor?: string;
     };
     className?: string;
 };
 
-export const ThemeContext = React.createContext<Theme>({});
+export const ThemeContext = React.createContext<ThemeTypes>({});
 
 export const ThemeProvider = ThemeContext.Provider;

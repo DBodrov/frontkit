@@ -2,12 +2,11 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { Button } from '../components/Button';
-import { ThemeProvider } from '../components/ThemeProvider';
+import { ThemeTypes, ThemeProvider } from '../components/ThemeProvider';
 
-const theme = {
+const theme: ThemeTypes = {
     styles: {
-        color: 'black',
-        backgroundColor: '#8000ff',
+        mainColor: '#8000ff',
     },
     className: 'cn1',
 };
