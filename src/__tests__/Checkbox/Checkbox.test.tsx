@@ -1,7 +1,5 @@
 import { render } from '@testing-library/react';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Checkbox } from '../../components/Checkbox';
 import { ThemeProvider } from '../../components/ThemeProvider';
 

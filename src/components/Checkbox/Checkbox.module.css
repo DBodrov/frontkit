@@ -32,7 +32,7 @@
     background: #69A6F1;
     box-sizing: border-box;
     max-width: 100%;
-    transition: background 100ms linear;
+    transition: 0.1s;
 }
 
 .checkbox:checked ~ .label > .bigBox > .smallBox {
