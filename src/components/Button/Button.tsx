@@ -23,7 +23,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const getFinalStyles = (theme: ThemeTypes, style: ButtonProps['style'], styleType: StyleTypeProp) => {
-    if (!theme.styles) {
+    if (!theme.styles || !theme.styles.mainColor) {
         return style;
     }
     const { mainColor } = theme.styles;

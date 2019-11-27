@@ -1,0 +1,56 @@
+.checkboxWrapper {
+    display: inline-block;
+}
+
+.checkbox  {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.bigBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: #EAEEF4;
+    border-radius: 2px;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.smallBox {
+    width: 10px;
+    height: 10px;
+    background: #69A6F1;
+    box-sizing: border-box;
+    max-width: 100%;
+    transition: 0.1s;
+}
+
+.checkbox:checked ~ .label > .bigBox > .smallBox {
+    background: none !important;
+}
+
+.checkbox:hover ~ .label > .bigBox {
+    background: #E0E6F0;
+}
+
+.labelText {
+    margin-left: 16px;
+}
+/*For IE*/
+.bigBox:hover {
+    background: #E0E6F0;
+}
+/*For IE*/
+.label:hover > .bigBox {
+    background: #E0E6F0;
+}
