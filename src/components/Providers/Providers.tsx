@@ -17,8 +17,10 @@ type Props = {
 function useOffset(max: number): [number, () => void, () => void] {
     const [offset, setOffset] = React.useState(0);
 
-    const increase = React.useCallback(() => setOffset(o => (o < max ? ++o : max)), [setOffset, max]);
-    const decrease = React.useCallback(() => setOffset(o => (o > 0 ? --o : 0)), [setOffset, max]);
+    React.useEffect(() => setOffset(0), [max]);
+
+    const increase = React.useCallback(() => setOffset(o => Math.min(o + 1, max)), [setOffset, max]);
+    const decrease = React.useCallback(() => setOffset(o => Math.max(o - 1, 0)), [setOffset]);
 
     return [offset, increase, decrease];
 }
@@ -46,16 +48,34 @@ function createChildStyleForIE(order: number): object {
 }
 
 export function Providers({ data, size, gap = '0' }: Props): JSX.Element {
-    const [offset, increase, decrease] = useOffset(data.length);
+    const max = data.length - size;
+    const [offset, increase, decrease] = useOffset(max);
 
     return (
-        <div className={styles.wrapper} style={createStyle(size, gap)}>
-            {data.slice(offset, offset + size).map((provider, id, original) => (
-                <React.Fragment>
-                    <Provider name={provider.name} src={provider.src} width="100%" style={createChildStyleForIE(2 * (id + 1) - 1)} />
-                    {id !== original.length - 1 && <div style={createChildStyleForIE(2 * (id + 1))} />}
-                </React.Fragment>
-            ))}
+        <div>
+            <div className={styles.wrapper} style={createStyle(size, gap)}>
+                {data.slice(offset, offset + size).map((provider, id, original) => (
+                    <React.Fragment key={provider.id}>
+                        <Provider name={provider.name} src={provider.src} width="100%" style={createChildStyleForIE(2 * (id + 1) - 1)} />
+                        {id !== original.length - 1 && <div style={createChildStyleForIE(2 * (id + 1))} />}
+                    </React.Fragment>
+                ))}
+            </div>
+            <Scroller onClickLeft={offset === 0 ? undefined : decrease} onClickRight={offset === max ? undefined : increase} />
+        </div>
+    );
+}
+
+type ScrollerProps = { onClickLeft?: () => void; onClickRight?: () => void };
+function Scroller({ onClickLeft, onClickRight }: ScrollerProps): JSX.Element {
+    return (
+        <div className={styles.scroller}>
+            <button className={styles['scroller-button']} onClick={onClickLeft} disabled={!onClickLeft}>
+                &lsaquo;
+            </button>
+            <button className={styles['scroller-button']} onClick={onClickRight} disabled={!onClickRight}>
+                &rsaquo;
+            </button>
         </div>
     );
 }
