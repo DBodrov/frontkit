@@ -1,18 +1,16 @@
 .header {
-    font-family: GraphikLCG;
-    font-weight: 500;
-    font-stretch: normal;
+    font-weight: 600;
     font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
     text-align: left;
     color: #2c2e2b;
 }
 
 .h1 {
-    font-size: 30px;
+    font-size: 36px;
+    line-height: 40px;
 }
 
 .h2 {
-    font-size: 20px;
+    font-size: 24px;
+    line-height: 28px;
 }
