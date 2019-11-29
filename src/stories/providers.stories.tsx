@@ -1,7 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Provider } from '../components/Providers';
-import { Providers } from '../components/Providers/Providers';
+import { Provider, Providers } from '../components/Providers';
 
 storiesOf('Providers', module)
     .add(

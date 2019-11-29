@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styles from './Providers.module.css';
 import { Provider } from './Provider';
 
@@ -47,33 +47,53 @@ function createChildStyleForIE(order: number): object {
     };
 }
 
-export function Providers({ data, size, gap = '0' }: Props): JSX.Element {
+export function Providers({ data, size, gap = '0', dataTestId = 'providers' }: Props): JSX.Element {
     const max = data.length - size;
     const [offset, increase, decrease] = useOffset(max);
 
     return (
-        <div>
+        <div data-testid={dataTestId}>
             <div className={styles.wrapper} style={createStyle(size, gap)}>
                 {data.slice(offset, offset + size).map((provider, id, original) => (
                     <React.Fragment key={provider.id}>
-                        <Provider name={provider.name} src={provider.src} width="100%" style={createChildStyleForIE(2 * (id + 1) - 1)} />
+                        <Provider
+                            name={provider.name}
+                            src={provider.src}
+                            width="100%"
+                            style={createChildStyleForIE(2 * (id + 1) - 1)}
+                            dataTestId={`${dataTestId}-single-${provider.id}`}
+                        />
                         {id !== original.length - 1 && <div style={createChildStyleForIE(2 * (id + 1))} />}
                     </React.Fragment>
                 ))}
             </div>
-            <Scroller onClickLeft={offset === 0 ? undefined : decrease} onClickRight={offset === max ? undefined : increase} />
+            <Scroller
+                onClickLeft={offset === 0 ? undefined : decrease}
+                onClickRight={offset === max ? undefined : increase}
+                dataTestId={dataTestId + '-scroller'}
+            />
         </div>
     );
 }
 
-type ScrollerProps = { onClickLeft?: () => void; onClickRight?: () => void };
-function Scroller({ onClickLeft, onClickRight }: ScrollerProps): JSX.Element {
+type ScrollerProps = { onClickLeft?: () => void; onClickRight?: () => void; dataTestId: string };
+function Scroller({ onClickLeft, onClickRight, dataTestId }: ScrollerProps): JSX.Element {
     return (
         <div className={styles.scroller}>
-            <button className={styles['scroller-button']} onClick={onClickLeft} disabled={!onClickLeft}>
+            <button
+                className={styles['scroller-button']}
+                onClick={onClickLeft}
+                disabled={!onClickLeft}
+                data-testid={dataTestId + '-decrease'}
+            >
                 &lsaquo;
             </button>
-            <button className={styles['scroller-button']} onClick={onClickRight} disabled={!onClickRight}>
+            <button
+                className={styles['scroller-button']}
+                onClick={onClickRight}
+                disabled={!onClickRight}
+                data-testid={dataTestId + '-increase'}
+            >
                 &rsaquo;
             </button>
         </div>
