@@ -16,9 +16,9 @@ interface CardProps extends React.HTMLAttributes<HTMLElement> {
     children: ReactNode | ReactNode[];
 }
 
-export function Card({ className, style, dataTestId = 'Card', children }: CardProps): JSX.Element {
+export function Card({ className, style, dataTestId = 'Card', children, ...rest }: CardProps): JSX.Element {
     return (
-        <div data-testid={dataTestId} className={classnames(styles.wrapper, className)} style={style}>
+        <div data-testid={dataTestId} className={classnames(styles.wrapper, className)} style={style} {...rest}>
             {children}
         </div>
     );
