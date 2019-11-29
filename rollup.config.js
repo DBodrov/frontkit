@@ -5,7 +5,7 @@ import postcss from 'rollup-plugin-postcss';
 import pkg from './package.json';
 
 export default [
-    {
+    /* {
         input: 'src/index.ts',
         output: {
             name: 'a3-uikit',
@@ -13,10 +13,10 @@ export default [
             format: 'umd',
         },
         plugins: [resolve(), commonjs(), typescript(), postcss({ modules: true })],
-    },
+    }, */
     {
         input: 'src/index.ts',
         plugins: [resolve({ only: [] }), commonjs(), typescript(), postcss({ modules: true })],
-        output: [{ file: pkg.main, format: 'cjs' }, { file: pkg.module, format: 'es' }],
+        output: [/* { file: pkg.main, format: 'cjs' }, */ { file: pkg.module, format: 'es' }],
     },
 ];
