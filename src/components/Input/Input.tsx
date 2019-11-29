@@ -18,16 +18,16 @@ type Props = {
     className?: string;
     style?: object;
     dataTestId?: string;
-};
+} & React.HTMLAttributes<HTMLInputElement>;
 
-function getBackgroundClass(background?: BackgroundProp) {
+function getBackgroundClass(background?: BackgroundProp): string {
     return classnames({
         [styles.error]: background === BackgroundProp.Error,
         [styles.success]: background === BackgroundProp.Success,
     });
 }
 
-export function Input({ value, uncontrolled, placeholder, Icon, background, className, style, dataTestId, ...rest }: Props): JSX.Element {
+export function Input({ value, placeholder, Icon, background, className, style, dataTestId, ...rest }: Props): JSX.Element {
     return (
         <div className={styles.wrapper}>
             <input
