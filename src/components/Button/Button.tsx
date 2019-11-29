@@ -10,7 +10,7 @@ export enum StyleTypeProp {
     WhiteBodyWithShadow,
 }
 
-interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
+interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     /** Class names passed to Button in order to change styling */
     className?: string;
     /** Inline style objects passed to Button */
