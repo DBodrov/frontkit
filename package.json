@@ -1,10 +1,9 @@
 {
     "name": "@a3/uikit",
-    "version": "0.5.5",
+    "version": "0.5.8",
     "description": "A-3 React UI Kit",
-    "main": "./dist/a3-uikit.cjs.js",
+    "main": "./dist/a3-uikit.esm.js",
     "module": "./dist/a3-uikit.esm.js",
-    "browser": "./dist/a3-uikit.umd.js",
     "dependencies": {
         "classnames": "^2.2.6"
     },
