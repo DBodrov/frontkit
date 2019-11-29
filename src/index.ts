@@ -6,3 +6,4 @@ export { Input, BackgroundProp, ErrorIcon, SuccessIcon } from './components/Inpu
 export { Spinner } from './components/Spinner';
 export { ThemeContext, ThemeProvider } from './components/ThemeProvider';
 export { Provider, Providers } from './components/Providers';
+export { Card } from './components/Card';
