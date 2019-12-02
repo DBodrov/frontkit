@@ -4,19 +4,15 @@ import classnames from 'classnames';
 import { IconProps } from './Icons';
 
 export enum BackgroundProp {
+    None,
     Success,
     Error,
-    None,
 }
 
 type Props = {
     value?: string;
-    uncontrolled?: boolean;
-    placeholder?: string;
     Icon?: React.ComponentType<IconProps>;
     background?: BackgroundProp;
-    className?: string;
-    style?: object;
     dataTestId?: string;
 } & React.HTMLAttributes<HTMLInputElement>;
 
