@@ -11,8 +11,9 @@
 # production
 /build
 
-# IntelliJ IDEA config
+# config
 .idea/
+.vscode
 
 # misc
 .DS_Store
