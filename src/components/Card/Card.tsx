@@ -13,7 +13,7 @@ interface CardProps extends React.HTMLAttributes<HTMLElement> {
      * */
     dataTestId?: string;
     /** Childrens passed to card wrapper */
-    children: ReactNode | ReactNode[];
+    children: ReactNode;
 }
 
 export function Card({ className, style, dataTestId = 'Card', children, ...rest }: CardProps): JSX.Element {
