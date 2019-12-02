@@ -4,9 +4,21 @@ import { ThemeContext, ThemeTypes } from '../ThemeProvider';
 import styles from './BreadCrumbs.module.css';
 import { Arrow, ArrowTypes } from './Icons';
 
-const getColor = (theme: ThemeTypes, needColor = false) => {
+interface BreadCrumbsProps extends React.HTMLAttributes<HTMLElement> {
+    /** Class names passed in order to change styling */
+    className?: string;
+    /** Inline style objects passed */
+    style?: React.StyleHTMLAttributes<HTMLElement>;
+    /** ID attribute for QA Auto-tests
+     * @default BreadCrumbs
+     * */
+    dataTestId?: string;
+    data?: { active: boolean; onClick: (event: React.MouseEvent<HTMLDivElement>) => void; text: string }[];
+}
+
+const getColor = (theme: ThemeTypes, needColor: boolean): string => {
     if (!needColor) {
-        return '';
+        return 'inherit';
     }
     if (theme.styles && theme.styles.linkColor) {
         return theme.styles.linkColor;
@@ -14,9 +26,12 @@ const getColor = (theme: ThemeTypes, needColor = false) => {
     return '#4B8BDA';
 };
 
-export function BreadCrumbs(props): JSX.Element {
+export function BreadCrumbs(props: BreadCrumbsProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
-    const { children, dataTestId = 'BreadCrumbs', className, style, data: [mainCrumb, secondCrumb, thirdCrumb] = [], ...rest } = props;
+    const { dataTestId = 'BreadCrumbs', className, style, data: [mainCrumb, secondCrumb, thirdCrumb] = [], ...rest } = props;
+    if (!mainCrumb) {
+        return <div data-testid="emptyBreadCrumbs" />;
+    }
     const clsWrapper = classnames(styles.wrapper, theme.className, className);
     const clsMainPage = classnames(styles.mainCrumb, { [styles.active]: mainCrumb.active });
     const linkColor = getColor(theme, mainCrumb.active);
@@ -34,15 +49,17 @@ export function BreadCrumbs(props): JSX.Element {
             )}
             {secondCrumb && (
                 <div
+                    data-testid={dataTestId + '-2'}
                     className={classnames(styles.crumb, { [styles.active]: secondCrumb.active })}
                     onClick={secondCrumb.active ? secondCrumb.onClick : undefined}
                 >
                     <span>{secondCrumb.text}</span>
                 </div>
             )}
-            {thirdCrumb && <Arrow className={styles.vector} dataTestId={dataTestId + '-right-icon'} type={ArrowTypes.Right} />}
+            {thirdCrumb && <Arrow className={styles.vector} dataTestId={dataTestId + '-right'} type={ArrowTypes.Right} />}
             {thirdCrumb && (
                 <div
+                    data-testid={dataTestId + '-3'}
                     className={classnames(styles.crumb, { [styles.active]: thirdCrumb.active })}
                     onClick={thirdCrumb.active ? thirdCrumb.onClick : undefined}
                 >

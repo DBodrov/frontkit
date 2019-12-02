@@ -21,7 +21,7 @@ export type IconProps = {
     type: ArrowTypes;
 };
 
-export function Arrow({ dataTestId = 'BreadCrumbs-arrow', className, color = '#A6AAB0', type }: IconProps) {
+export function Arrow({ dataTestId, className, color = '#A6AAB0', type }: IconProps) {
     return (
         <svg
             className={className}
