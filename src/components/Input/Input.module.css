@@ -1,7 +1,7 @@
 .wrapper {
     position: relative;
     display: inline-grid;
-    grid-template-columns: 30px 1fr 30px;
+    grid-template-columns: fit-content(21px) 1fr fit-content(21px);
 }
 .wrapper.focused {
     box-shadow: 0 0 6px #eaeef4;

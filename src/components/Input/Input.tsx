@@ -11,7 +11,8 @@ export enum BackgroundProp {
 
 type Props = {
     value?: string;
-    Icon?: React.ComponentType<IconProps>;
+    RightIcon?: React.ComponentType<IconProps>;
+    LeftIcon?: React.ComponentType<IconProps>;
     background?: BackgroundProp;
     dataTestId?: string;
 } & React.HTMLAttributes<HTMLInputElement>;
@@ -63,7 +64,7 @@ function useFocus(): [boolean, () => void, () => void, React.RefObject<HTMLDivEl
     return [focused, onFocus, onBlur, inputRef];
 }
 
-export function Input({ value, placeholder, Icon, background, className, style, dataTestId, ...rest }: Props): JSX.Element {
+export function Input({ value, placeholder, LeftIcon, RightIcon, background, className, style, dataTestId, ...rest }: Props): JSX.Element {
     const [focused, onFocus, onBlur, fieldRef] = useFocus();
     const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -84,7 +85,9 @@ export function Input({ value, placeholder, Icon, background, className, style, 
 
     return (
         <div className={wrapperClassName} ref={fieldRef}>
-            <div className={cn(styles.input, styles.leftArea, backgroundClass)} onClick={onFocus} />
+            <div className={cn(styles.input, styles.leftArea, backgroundClass)} onClick={onFocus}>
+                {LeftIcon && <LeftIcon />}
+            </div>
             <input
                 value={value}
                 placeholder={placeholder}
@@ -97,7 +100,7 @@ export function Input({ value, placeholder, Icon, background, className, style, 
                 {...rest}
             />
             <div className={cn(styles.input, styles.rightArea, backgroundClass)} onClick={onFocus}>
-                {Icon && <Icon />}
+                {RightIcon && <RightIcon />}
             </div>
         </div>
     );
