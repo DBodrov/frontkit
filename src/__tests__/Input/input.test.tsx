@@ -15,28 +15,28 @@ describe('input', () => {
     });
 });
 
-describe('icons', () => {
+describe('right icons', () => {
     test('should render error icon', () => {
         const errorTestId = 'input-error-icon';
-        const { getByTestId } = render(<Input Icon={ErrorIcon} />);
+        const { getByTestId } = render(<Input RightIcon={ErrorIcon} />);
         expect(getByTestId(errorTestId)).not.toBeNull();
     });
 
     test('can change data-testid in error icon', () => {
         const errorTestId = 'kljdaskljdaskjdkjas';
-        const { getByTestId } = render(<Input Icon={() => <ErrorIcon dataTestId={errorTestId} />} />);
+        const { getByTestId } = render(<Input RightIcon={() => <ErrorIcon dataTestId={errorTestId} />} />);
         expect(getByTestId(errorTestId)).not.toBeNull();
     });
 
     test('should render success icon', () => {
         const successTestId = 'input-success-icon';
-        const { getByTestId } = render(<Input Icon={SuccessIcon} />);
+        const { getByTestId } = render(<Input RightIcon={SuccessIcon} />);
         expect(getByTestId(successTestId)).not.toBeNull();
     });
 
     test('can change data-testid in success icon', () => {
         const successTestId = 'dfasbkjvcbn';
-        const { getByTestId } = render(<Input Icon={() => <SuccessIcon dataTestId={successTestId} />} />);
+        const { getByTestId } = render(<Input RightIcon={() => <SuccessIcon dataTestId={successTestId} />} />);
         expect(getByTestId(successTestId)).not.toBeNull();
     });
 });
