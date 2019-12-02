@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 import { ThemeContext, ThemeTypes } from '../ThemeProvider';
 import styles from './BreadCrumbs.module.css';
-import { LeftArrow, RightArrow } from './Icons';
+import { Arrow, ArrowTypes } from './Icons';
 
 const getColor = (theme: ThemeTypes, needColor = false) => {
     if (!needColor) {
@@ -24,7 +24,9 @@ export function BreadCrumbs(props): JSX.Element {
         <div className={clsWrapper} style={style} data-testid={dataTestId} {...rest}>
             {mainCrumb && (
                 <div className={clsMainPage} data-testid={dataTestId + '-mc'} onClick={mainCrumb.active ? mainCrumb.onClick : undefined}>
-                    {mainCrumb.active && <LeftArrow className={styles.vector} dataTestId={dataTestId + '-mc-icon'} color={linkColor} />}
+                    {mainCrumb.active && (
+                        <Arrow className={styles.vector} dataTestId={dataTestId + '-mc-icon'} color={linkColor} type={ArrowTypes.Left} />
+                    )}
                     <span style={{ color: linkColor }} data-testid={dataTestId + '-mc-text'}>
                         {mainCrumb.text}
                     </span>
@@ -38,7 +40,7 @@ export function BreadCrumbs(props): JSX.Element {
                     <span>{secondCrumb.text}</span>
                 </div>
             )}
-            {thirdCrumb && <RightArrow className={styles.vector} dataTestId={dataTestId + '-right-icon'} />}
+            {thirdCrumb && <Arrow className={styles.vector} dataTestId={dataTestId + '-right-icon'} type={ArrowTypes.Right} />}
             {thirdCrumb && (
                 <div
                     className={classnames(styles.crumb, { [styles.active]: thirdCrumb.active })}
