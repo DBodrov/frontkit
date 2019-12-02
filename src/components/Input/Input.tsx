@@ -84,7 +84,7 @@ export function Input({ value, placeholder, LeftIcon, RightIcon, background, cla
     const wrapperClassName = cn(styles.wrapper, { [styles.focused]: focused });
 
     return (
-        <div className={wrapperClassName} ref={fieldRef}>
+        <div className={wrapperClassName} ref={fieldRef} style={style}>
             <div className={cn(styles.input, styles.leftArea, backgroundClass)} onClick={onFocus}>
                 {LeftIcon && <LeftIcon />}
             </div>
@@ -92,7 +92,6 @@ export function Input({ value, placeholder, LeftIcon, RightIcon, background, cla
                 value={value}
                 placeholder={placeholder}
                 className={cn(styles.input, styles.inputArea, backgroundClass, className)}
-                style={style}
                 data-testid={dataTestId}
                 ref={inputRef}
                 onFocus={onFocus}
