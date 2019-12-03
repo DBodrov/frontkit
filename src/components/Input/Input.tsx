@@ -16,6 +16,7 @@ type Props = {
     LeftIcon?: React.ComponentType<IconProps>;
     background?: BackgroundProp;
     dataTestId?: string;
+    right?: boolean;
 } & React.HTMLAttributes<HTMLInputElement>;
 
 function getBackgroundClass(background?: BackgroundProp): string {
@@ -42,7 +43,18 @@ function useFocus(): [boolean, () => void, () => void, React.RefObject<HTMLDivEl
     return [focused, onFocus, onBlur, inputRef];
 }
 
-export function Input({ value, placeholder, LeftIcon, RightIcon, background, className, style, dataTestId, ...rest }: Props): JSX.Element {
+export function Input({
+    right = true,
+    value,
+    placeholder,
+    LeftIcon,
+    RightIcon,
+    background,
+    className,
+    style,
+    dataTestId,
+    ...rest
+}: Props): JSX.Element {
     const [focused, onFocus, onBlur, fieldRef] = useFocus();
     const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -60,6 +72,7 @@ export function Input({ value, placeholder, LeftIcon, RightIcon, background, cla
 
     const backgroundClass = getBackgroundClass(background);
     const wrapperClassName = cn(styles.wrapper, { [styles.focused]: focused });
+    const inputClassName = cn(styles.input, styles.inputArea, backgroundClass, className, { [styles.right]: right });
 
     return (
         <div className={wrapperClassName} ref={fieldRef} style={style} data-testid={dataTestId}>
@@ -69,7 +82,7 @@ export function Input({ value, placeholder, LeftIcon, RightIcon, background, cla
             <input
                 value={value}
                 placeholder={placeholder}
-                className={cn(styles.input, styles.inputArea, backgroundClass, className)}
+                className={inputClassName}
                 ref={inputRef}
                 onFocus={onFocus}
                 onBlur={onBlur}

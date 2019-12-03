@@ -20,6 +20,10 @@
     -ms-grid-row: 1;
 }
 
+.input.right {
+    text-align: right;
+}
+
 .leftArea {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;

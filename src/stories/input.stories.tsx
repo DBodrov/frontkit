@@ -4,6 +4,7 @@ import { Input, ErrorIcon, SuccessIcon, BackgroundProp, SearchIcon, HelpIcon } f
 
 storiesOf('Input', module)
     .add('base', () => <Input />, { info: { inline: true } })
+    .add('text align right', () => <Input right={true} defaultValue="123" />, { info: { inline: true } })
     .add('error', () => <Input RightIcon={ErrorIcon} background={BackgroundProp.Error} />, { info: { inline: true } })
     .add('success', () => <Input RightIcon={SuccessIcon} background={BackgroundProp.Success} />, { info: { inline: true } })
     .add('help', () => <Input RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст" />} />, {
