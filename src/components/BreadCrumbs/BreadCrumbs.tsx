@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import React from 'react';
+import { DEFAULT_LINK_COLOR } from '../../constants/style';
 import { ThemeContext, ThemeTypes } from '../ThemeProvider';
 import styles from './BreadCrumbs.module.css';
 import { Arrow, ArrowTypes } from '../Arrow';
@@ -13,6 +14,11 @@ interface BreadCrumbsProps extends React.HTMLAttributes<HTMLElement> {
      * @default BreadCrumbs
      * */
     dataTestId?: string;
+    /** Array of objects.
+     * active - have another style and onClick
+     * onClick - function
+     * text - text crumb
+     * */
     data?: { active: boolean; onClick: (event: React.MouseEvent<HTMLDivElement>) => void; text: string }[];
 }
 
@@ -23,7 +29,7 @@ const getColor = (theme: ThemeTypes, needColor: boolean): string => {
     if (theme.styles && theme.styles.linkColor) {
         return theme.styles.linkColor;
     }
-    return '#4B8BDA';
+    return DEFAULT_LINK_COLOR;
 };
 
 export function BreadCrumbs(props: BreadCrumbsProps): JSX.Element {
