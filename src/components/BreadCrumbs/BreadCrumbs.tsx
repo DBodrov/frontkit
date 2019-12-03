@@ -32,6 +32,15 @@ const getColor = (theme: ThemeTypes, needColor: boolean): string => {
     return DEFAULT_LINK_COLOR;
 };
 
+const getCrumb = (crumb: { active: boolean; text: string }, name: string, dataTestId: string) => {
+    const cls = classnames(styles.crumb, { [styles.active]: crumb.active });
+    return (
+        <div data-testid={dataTestId + '-' + name} className={cls}>
+            <span>{crumb.text}</span>
+        </div>
+    );
+};
+
 export function BreadCrumbs(props: BreadCrumbsProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
     const { dataTestId = 'BreadCrumbs', className, style, data: [mainCrumb, secondCrumb, thirdCrumb] = [], ...rest } = props;
@@ -40,32 +49,20 @@ export function BreadCrumbs(props: BreadCrumbsProps): JSX.Element {
     }
     const clsWrapper = classnames(styles.wrapper, theme.className, className);
     const cls1 = classnames(styles.mainCrumb, { [styles.link]: mainCrumb.active });
-    const cls2 = classnames(styles.crumb, { [styles.active]: secondCrumb.active });
-    const cls3 = classnames(styles.crumb, { [styles.active]: thirdCrumb.active });
     const linkColor = getColor(theme, mainCrumb.active);
     return (
         <div className={clsWrapper} style={style} data-testid={dataTestId} {...rest}>
-            {mainCrumb && (
-                <div className={cls1} data-testid={dataTestId + '-mc'} onClick={mainCrumb.active ? mainCrumb.onClick : undefined}>
-                    {mainCrumb.active && (
-                        <Arrow className={styles.vector} dataTestId={dataTestId + '-mc-icon'} color={linkColor} type={ArrowTypes.Left} />
-                    )}
-                    <span style={{ color: linkColor }} data-testid={dataTestId + '-mc-text'}>
-                        {mainCrumb.text}
-                    </span>
-                </div>
-            )}
-            {secondCrumb && (
-                <div data-testid={dataTestId + '-2'} className={cls2}>
-                    <span>{secondCrumb.text}</span>
-                </div>
-            )}
+            <div className={cls1} data-testid={dataTestId + '-mc'} onClick={mainCrumb.active ? mainCrumb.onClick : undefined}>
+                {mainCrumb.active && (
+                    <Arrow className={styles.vector} dataTestId={dataTestId + '-mc-icon'} color={linkColor} type={ArrowTypes.Left} />
+                )}
+                <span style={{ color: linkColor }} data-testid={dataTestId + '-mc-text'}>
+                    {mainCrumb.text}
+                </span>
+            </div>
+            {secondCrumb && getCrumb(secondCrumb, 'secondCrumb', dataTestId)}
             {thirdCrumb && <Arrow className={styles.vector} dataTestId={dataTestId + '-right'} type={ArrowTypes.Right} />}
-            {thirdCrumb && (
-                <div data-testid={dataTestId + '-3'} className={cls3}>
-                    <span>{thirdCrumb.text}</span>
-                </div>
-            )}
+            {thirdCrumb && getCrumb(thirdCrumb, 'thirdCrumb', dataTestId)}
         </div>
     );
 }
