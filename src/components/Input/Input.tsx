@@ -34,13 +34,9 @@ function useFocus(): [boolean, () => void, () => void, React.RefObject<HTMLDivEl
     useOnClickOutside(
         inputRef,
         () => {
-            if (!focused) {
-                return;
-            }
-
             setFocused(false);
         },
-        [focused, setFocused],
+        [setFocused],
     );
 
     return [focused, onFocus, onBlur, inputRef];
