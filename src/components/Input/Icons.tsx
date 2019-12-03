@@ -19,3 +19,12 @@ export function SuccessIcon({ dataTestId = 'input-success-icon' }: IconProps) {
         </svg>
     );
 }
+
+export function SearchIcon({ dataTestId = 'input-search-icon' }: IconProps) {
+    return (
+        <svg data-testid={dataTestId} width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="5.25" stroke="#7E8996" strokeWidth="1.5" />
+            <line x1="9.53033" y1="9.46967" x2="15.5303" y2="15.4697" stroke="#7E8996" strokeWidth="1.5" />
+        </svg>
+    );
+}

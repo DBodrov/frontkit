@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
-import { Input, ErrorIcon, BackgroundProp, SuccessIcon } from '../../components/Input';
+import { Input, ErrorIcon, BackgroundProp, SuccessIcon, SearchIcon } from '../../components/Input';
 
 describe('input', () => {
     test('should render input element', () => {
@@ -42,10 +42,15 @@ describe('right icons', () => {
 });
 
 describe('left icons', () => {
-    test('should render error icon', () => {
-        const errorTestId = 'input-error-icon';
-        const { getByTestId } = render(<Input LeftIcon={ErrorIcon} />);
-        expect(getByTestId(errorTestId)).not.toBeNull();
+    test('should render search icon', () => {
+        const searchTestId = 'input-search-icon';
+        const { getByTestId } = render(<Input LeftIcon={SearchIcon} />);
+        expect(getByTestId(searchTestId)).not.toBeNull();
+    });
+    test('can change data-testid in search icon', () => {
+        const searchTestId = '123213asda';
+        const { getByTestId } = render(<Input LeftIcon={() => <SearchIcon dataTestId={searchTestId} />} />);
+        expect(getByTestId(searchTestId)).not.toBeNull();
     });
 });
 
