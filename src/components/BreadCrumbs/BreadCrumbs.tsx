@@ -19,7 +19,7 @@ interface BreadCrumbsProps extends React.HTMLAttributes<HTMLElement> {
      * onClick - function
      * text - text crumb
      * */
-    data?: { active: boolean; onClick: (event: React.MouseEvent<HTMLDivElement>) => void; text: string }[];
+    data?: { active: boolean; onClick?: (event: React.MouseEvent<HTMLDivElement>) => void; text: string }[];
 }
 
 const getColor = (theme: ThemeTypes, needColor: boolean): string => {
@@ -39,7 +39,7 @@ export function BreadCrumbs(props: BreadCrumbsProps): JSX.Element {
         return <div data-testid="emptyBreadCrumbs" />;
     }
     const clsWrapper = classnames(styles.wrapper, theme.className, className);
-    const clsMainPage = classnames(styles.mainCrumb, { [styles.active]: mainCrumb.active });
+    const clsMainPage = classnames(styles.mainCrumb, { [styles.link]: mainCrumb.active });
     const linkColor = getColor(theme, mainCrumb.active);
     return (
         <div className={clsWrapper} style={style} data-testid={dataTestId} {...rest}>
@@ -54,21 +54,13 @@ export function BreadCrumbs(props: BreadCrumbsProps): JSX.Element {
                 </div>
             )}
             {secondCrumb && (
-                <div
-                    data-testid={dataTestId + '-2'}
-                    className={classnames(styles.crumb, { [styles.active]: secondCrumb.active })}
-                    onClick={secondCrumb.active ? secondCrumb.onClick : undefined}
-                >
+                <div data-testid={dataTestId + '-2'} className={classnames(styles.crumb, { [styles.active]: secondCrumb.active })}>
                     <span>{secondCrumb.text}</span>
                 </div>
             )}
             {thirdCrumb && <Arrow className={styles.vector} dataTestId={dataTestId + '-right'} type={ArrowTypes.Right} />}
             {thirdCrumb && (
-                <div
-                    data-testid={dataTestId + '-3'}
-                    className={classnames(styles.crumb, { [styles.active]: thirdCrumb.active })}
-                    onClick={thirdCrumb.active ? thirdCrumb.onClick : undefined}
-                >
+                <div data-testid={dataTestId + '-3'} className={classnames(styles.crumb, { [styles.active]: thirdCrumb.active })}>
                     <span>{thirdCrumb.text}</span>
                 </div>
             )}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BreadCrumbs } from '../../components/BreadCrumbs';
 import { ThemeProvider } from '../../components/ThemeProvider';
-import { render } from '@testing-library/react';
+import { fireEvent, render, RenderResult } from '@testing-library/react';
 
 const theme = {
     styles: {
@@ -10,10 +10,12 @@ const theme = {
     className: 'cn1',
 };
 
+const mockFunc = jest.fn(() => console.log('Главная'));
+
 const simpleBreadCrumbs = [
     {
         text: 'Главная',
-        onClick: () => console.log('Главная'),
+        onClick: mockFunc,
         active: false,
     },
 ];
@@ -21,17 +23,15 @@ const simpleBreadCrumbs = [
 const fullBreadCrumbs = [
     {
         text: 'Главная',
-        onClick: () => console.log('Главная'),
+        onClick: mockFunc,
         active: true,
     },
     {
         text: 'Данные платежа',
-        onClick: () => console.log('Данные платежа'),
         active: false,
     },
     {
         text: 'Оплата',
-        onClick: () => console.log('Оплата'),
         active: true,
     },
 ];
@@ -67,5 +67,20 @@ describe('<BreadCrumbs />', () => {
         );
         const element = getByTestId('BreadCrumbs-mc-text');
         expect(element).toHaveStyle(`color: ${theme.styles.linkColor}`);
+    });
+});
+
+describe('click', () => {
+    let rendered: RenderResult;
+    beforeEach(() => {
+        rendered = render(
+            <BreadCrumbs data={fullBreadCrumbs}
+            />,
+        );
+    });
+
+    test('should click', () => {
+        fireEvent.click(rendered.getByTestId('BreadCrumbs-mc-text'));
+        expect(mockFunc).toBeCalled();
     });
 });

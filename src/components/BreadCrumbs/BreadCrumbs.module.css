@@ -10,8 +10,11 @@
     margin-right: 60px;
 }
 
-.active {
+.link {
     cursor: pointer;
+}
+
+.active {
     color: #2C2E2B;
 }
 
