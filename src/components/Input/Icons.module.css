@@ -1,0 +1,10 @@
+.wrapper {
+    position: relative;
+}
+.icon {
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+}

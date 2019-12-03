@@ -1,7 +1,8 @@
-import React, { DependencyList, EffectCallback } from 'react';
+import React from 'react';
 import styles from './Input.module.css';
 import cn from 'classnames';
 import { IconProps } from './Icons';
+import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 
 export enum BackgroundProp {
     None,
@@ -23,25 +24,6 @@ function getBackgroundClass(background?: BackgroundProp): string {
         [styles.success]: background === BackgroundProp.Success,
     });
 }
-
-function useOnClickOutside(ref: React.RefObject<HTMLElement | null>, f: EffectCallback, deps: DependencyList): void {
-    React.useEffect(() => {
-        function clickHandler(e: MouseEvent): void {
-            const { current } = ref;
-            if (!current) {
-                return;
-            }
-
-            if (!current.contains(e.target as Node)) {
-                f();
-            }
-        }
-
-        document.addEventListener('click', clickHandler);
-        return (): void => document.removeEventListener('click', clickHandler);
-    }, deps);
-}
-
 function useFocus(): [boolean, () => void, () => void, React.RefObject<HTMLDivElement>] {
     const [focused, setFocused] = React.useState(false);
     const inputRef = React.useRef<HTMLDivElement>(null);
