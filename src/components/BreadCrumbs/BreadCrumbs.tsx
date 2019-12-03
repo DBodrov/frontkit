@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 import { ThemeContext, ThemeTypes } from '../ThemeProvider';
 import styles from './BreadCrumbs.module.css';
-import { Arrow, ArrowTypes } from './Icons';
+import { Arrow, ArrowTypes } from '../Arrow';
 
 interface BreadCrumbsProps extends React.HTMLAttributes<HTMLElement> {
     /** Class names passed in order to change styling */

@@ -1,10 +1,7 @@
-import { fireEvent, render, RenderResult } from '@testing-library/react';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BreadCrumbs } from '../../components/BreadCrumbs';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ThemeProvider } from '../../components/ThemeProvider';
+import { render } from '@testing-library/react';
 
 const theme = {
     styles: {
