@@ -39,12 +39,14 @@ export function BreadCrumbs(props: BreadCrumbsProps): JSX.Element {
         return <div data-testid="emptyBreadCrumbs" />;
     }
     const clsWrapper = classnames(styles.wrapper, theme.className, className);
-    const clsMainPage = classnames(styles.mainCrumb, { [styles.link]: mainCrumb.active });
+    const cls1 = classnames(styles.mainCrumb, { [styles.link]: mainCrumb.active });
+    const cls2 = classnames(styles.crumb, { [styles.active]: secondCrumb.active });
+    const cls3 = classnames(styles.crumb, { [styles.active]: thirdCrumb.active });
     const linkColor = getColor(theme, mainCrumb.active);
     return (
         <div className={clsWrapper} style={style} data-testid={dataTestId} {...rest}>
             {mainCrumb && (
-                <div className={clsMainPage} data-testid={dataTestId + '-mc'} onClick={mainCrumb.active ? mainCrumb.onClick : undefined}>
+                <div className={cls1} data-testid={dataTestId + '-mc'} onClick={mainCrumb.active ? mainCrumb.onClick : undefined}>
                     {mainCrumb.active && (
                         <Arrow className={styles.vector} dataTestId={dataTestId + '-mc-icon'} color={linkColor} type={ArrowTypes.Left} />
                     )}
@@ -54,13 +56,13 @@ export function BreadCrumbs(props: BreadCrumbsProps): JSX.Element {
                 </div>
             )}
             {secondCrumb && (
-                <div data-testid={dataTestId + '-2'} className={classnames(styles.crumb, { [styles.active]: secondCrumb.active })}>
+                <div data-testid={dataTestId + '-2'} className={cls2}>
                     <span>{secondCrumb.text}</span>
                 </div>
             )}
             {thirdCrumb && <Arrow className={styles.vector} dataTestId={dataTestId + '-right'} type={ArrowTypes.Right} />}
             {thirdCrumb && (
-                <div data-testid={dataTestId + '-3'} className={classnames(styles.crumb, { [styles.active]: thirdCrumb.active })}>
+                <div data-testid={dataTestId + '-3'} className={cls3}>
                     <span>{thirdCrumb.text}</span>
                 </div>
             )}
