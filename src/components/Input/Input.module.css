@@ -1,7 +1,9 @@
 .wrapper {
     position: relative;
     display: inline-grid;
+    display: -ms-inline-grid;
     grid-template-columns: fit-content(21px) 1fr fit-content(21px);
+    -ms-grid-columns: min-content 1fr min-content;
 }
 .wrapper.focused {
     box-shadow: 0 0 6px #eaeef4;
@@ -15,12 +17,17 @@
     line-height: 19px;
     box-sizing: border-box;
     cursor: text;
+    -ms-grid-row: 1;
 }
 
 .leftArea {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     padding: 21px 0 21px 21px;
+    -ms-grid-column: 1;
+}
+.inputArea {
+    -ms-grid-column: 2;
 }
 .inputArea:focus {
     outline: none;
@@ -29,6 +36,7 @@
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     padding: 21px 21px 21px 0;
+    -ms-grid-column: 3;
 }
 
 .error {
