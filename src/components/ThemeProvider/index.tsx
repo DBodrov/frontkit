@@ -3,6 +3,7 @@ import React from 'react';
 export type ThemeTypes = {
     styles?: {
         mainColor?: string;
+        linkColor?: string;
     };
     className?: string;
 };

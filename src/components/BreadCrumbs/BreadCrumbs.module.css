@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex;
+    font-size: 12px;
+    line-height: 12px;
+    color: #A6AAB0;
+    align-items: center;
+}
+
+.mainCrumb {
+    margin-right: 60px;
+}
+
+.link {
+    cursor: pointer;
+}
+
+.active {
+    color: #2C2E2B;
+}
+
+.vector {
+    margin-right: 16px;
+}
+
+.crumb {
+    margin-right: 18px;
+}
