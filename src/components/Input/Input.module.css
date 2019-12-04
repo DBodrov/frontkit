@@ -10,11 +10,10 @@
 }
 
 .input {
+    display: flex;
+    align-items: center;
     background: #eaeef4;
     border: 0;
-    height: 60px;
-    font-size: 16px;
-    line-height: 19px;
     box-sizing: border-box;
     cursor: text;
     -ms-grid-row: 1;
@@ -27,10 +26,13 @@
 .leftArea {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
-    padding: 21px 0 21px 21px;
+    padding-left: 22px;
     -ms-grid-column: 1;
 }
 .inputArea {
+    padding: 22px 0;
+    font-size: 16px;
+    line-height: 16px;
     -ms-grid-column: 2;
 }
 .inputArea:focus {
@@ -39,7 +41,7 @@
 .rightArea {
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
-    padding: 21px 21px 21px 0;
+    padding-right: 22px;
     -ms-grid-column: 3;
 }
 
