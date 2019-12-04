@@ -14,6 +14,8 @@ interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
      * @default PaymentCard
      * */
     dataTestId?: string;
+    /** array of bank images */
+    images?: Array<{ url: string; name: string }>;
 }
 
 const frontCardCls = classnames(styles.cardWrapper, styles.frontCardWrapper);
@@ -21,11 +23,11 @@ const backCardCls = classnames(styles.cardWrapper, styles.backCardWrapper);
 
 const LittleInput = ({ style }: any) => <input style={{ ...style }} />;
 
-export function PaymentCard({ className, style, dataTestId = 'PaymentCard', ...rest }: PaymentCardProps): JSX.Element {
+export function PaymentCard({ className, style, dataTestId = 'PaymentCard', images, ...rest }: PaymentCardProps): JSX.Element {
     return (
         <div>
             <div className={frontCardCls}>
-                <div>картинки</div>
+                <div>{images && images.map(image => <img src={image.url} alt={image.name} />)}</div>
                 <div>
                     <LittleInput />
                     <div style={{ display: 'flex' }}>

@@ -15,6 +15,7 @@
 }
 
 .frontCardWrapper {
+    z-index: 1;
 }
 
 .backCardWrapper {
