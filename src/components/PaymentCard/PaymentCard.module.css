@@ -1,0 +1,28 @@
+.wrapper {
+}
+
+.cardWrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    background: #f2f6fb;
+    padding: 30px;
+    width: 453px;
+    height: 284px;
+}
+
+.frontCardWrapper {
+}
+
+.backCardWrapper {
+    padding-top: 20px;
+}
+
+.magneticStrip {
+    margin: 0 -30px;
+    height: 68px;
+    background: #eaeef4;
+}
