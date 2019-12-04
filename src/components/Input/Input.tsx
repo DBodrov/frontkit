@@ -44,7 +44,7 @@ function useFocus(): [boolean, () => void, () => void, React.RefObject<HTMLDivEl
 }
 
 export function Input({
-    right = true,
+    right = false,
     value,
     placeholder,
     LeftIcon,
@@ -52,7 +52,7 @@ export function Input({
     background,
     className,
     style,
-    dataTestId,
+    dataTestId = 'input',
     ...rest
 }: Props): JSX.Element {
     const [focused, onFocus, onBlur, fieldRef] = useFocus();
