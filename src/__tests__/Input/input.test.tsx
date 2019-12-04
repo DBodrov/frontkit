@@ -1,6 +1,6 @@
-import { render } from '@testing-library/react';
-import * as React from 'react';
-import { Input, ErrorIcon, BackgroundProp, SuccessIcon } from '../../components/Input';
+import { render, fireEvent } from '@testing-library/react';
+import React from 'react';
+import { Input, ErrorIcon, BackgroundProp, SuccessIcon, SearchIcon } from '../../components/Input';
 
 describe('input', () => {
     test('should render input element', () => {
@@ -15,29 +15,85 @@ describe('input', () => {
     });
 });
 
-describe('icons', () => {
+describe('right icons', () => {
     test('should render error icon', () => {
         const errorTestId = 'input-error-icon';
-        const { getByTestId } = render(<Input Icon={ErrorIcon} />);
+        const { getByTestId } = render(<Input RightIcon={ErrorIcon} />);
         expect(getByTestId(errorTestId)).not.toBeNull();
     });
 
     test('can change data-testid in error icon', () => {
         const errorTestId = 'kljdaskljdaskjdkjas';
-        const { getByTestId } = render(<Input Icon={() => <ErrorIcon dataTestId={errorTestId} />} />);
+        const { getByTestId } = render(<Input RightIcon={() => <ErrorIcon dataTestId={errorTestId} />} />);
         expect(getByTestId(errorTestId)).not.toBeNull();
     });
 
     test('should render success icon', () => {
         const successTestId = 'input-success-icon';
-        const { getByTestId } = render(<Input Icon={SuccessIcon} />);
+        const { getByTestId } = render(<Input RightIcon={SuccessIcon} />);
         expect(getByTestId(successTestId)).not.toBeNull();
     });
 
     test('can change data-testid in success icon', () => {
         const successTestId = 'dfasbkjvcbn';
-        const { getByTestId } = render(<Input Icon={() => <SuccessIcon dataTestId={successTestId} />} />);
+        const { getByTestId } = render(<Input RightIcon={() => <SuccessIcon dataTestId={successTestId} />} />);
         expect(getByTestId(successTestId)).not.toBeNull();
+    });
+});
+
+describe('left icons', () => {
+    test('should render search icon', () => {
+        const searchTestId = 'input-search-icon';
+        const { getByTestId } = render(<Input LeftIcon={SearchIcon} />);
+        expect(getByTestId(searchTestId)).not.toBeNull();
+    });
+    test('can change data-testid in search icon', () => {
+        const searchTestId = '123213asda';
+        const { getByTestId } = render(<Input LeftIcon={() => <SearchIcon dataTestId={searchTestId} />} />);
+        expect(getByTestId(searchTestId)).not.toBeNull();
+    });
+});
+
+describe('focus', () => {
+    test('should focus on click of left element', () => {
+        const dataTestId = '123asdasda';
+        const { getByTestId } = render(<Input dataTestId={dataTestId} />);
+
+        const leftPart = getByTestId(dataTestId + '-left');
+        const inputPart = getByTestId(dataTestId + '-input');
+
+        fireEvent.click(leftPart);
+        expect(document.activeElement).toBe(inputPart);
+    });
+
+    test('should focus on click of right element', () => {
+        const dataTestId = '123asdasda';
+        const { getByTestId } = render(<Input dataTestId={dataTestId} />);
+
+        const rightPart = getByTestId(dataTestId + '-right');
+        const inputPart = getByTestId(dataTestId + '-input');
+
+        fireEvent.click(rightPart);
+        expect(document.activeElement).toBe(inputPart);
+    });
+
+    test('should loose focus on click ouside', () => {
+        const dataTestId = '123asdasda';
+        const outsideTestId = 'outside';
+        const { getByTestId } = render(
+            <>
+                <Input dataTestId={dataTestId} />
+                <div data-testid={outsideTestId} />
+            </>,
+        );
+
+        const inputPart = getByTestId(dataTestId + '-input');
+        const outside = getByTestId(outsideTestId);
+
+        fireEvent.focus(inputPart);
+        expect(document.activeElement).toBe(inputPart);
+        fireEvent.click(outside);
+        expect(document.activeElement).not.toBe(inputPart);
     });
 });
 
