@@ -8,6 +8,7 @@ export enum BackgroundProp {
     None,
     Success,
     Error,
+    White,
 }
 
 type BaseInputProps = {
@@ -20,6 +21,7 @@ function getBackgroundClass(background?: BackgroundProp): string {
     return cn({
         [styles.error]: background === BackgroundProp.Error,
         [styles.success]: background === BackgroundProp.Success,
+        [styles.white]: background === BackgroundProp.White,
     });
 }
 function useFocus(): [boolean, () => void, () => void, React.RefObject<HTMLDivElement>] {

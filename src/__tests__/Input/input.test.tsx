@@ -106,6 +106,10 @@ describe('colors', () => {
         const { container } = render(<Input background={BackgroundProp.Success} />);
         expect(container.getElementsByTagName('input')[0].className).toMatch(/success/);
     });
+    test('should be white if white', () => {
+        const { container } = render(<Input background={BackgroundProp.White} />);
+        expect(container.getElementsByTagName('input')[0].className).toMatch(/white/);
+    });
 });
 
 describe('small input', () => {
