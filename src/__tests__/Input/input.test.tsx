@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
-import { Input, ErrorIcon, BackgroundProp, SuccessIcon, SearchIcon } from '../../components/Input';
+import { Input, ErrorIcon, BackgroundProp, SuccessIcon, SearchIcon, SmallInput } from '../../components/Input';
 
 describe('input', () => {
     test('should render input element', () => {
@@ -105,5 +105,16 @@ describe('colors', () => {
     test('should be green if success', () => {
         const { container } = render(<Input background={BackgroundProp.Success} />);
         expect(container.getElementsByTagName('input')[0].className).toMatch(/success/);
+    });
+    test('should be white if white', () => {
+        const { container } = render(<Input background={BackgroundProp.White} />);
+        expect(container.getElementsByTagName('input')[0].className).toMatch(/white/);
+    });
+});
+
+describe('small input', () => {
+    test('should render input element', () => {
+        const { container } = render(<SmallInput />);
+        expect(container.getElementsByTagName('input').length).toBe(1);
     });
 });
