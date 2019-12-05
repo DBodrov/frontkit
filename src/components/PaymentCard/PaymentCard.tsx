@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './PaymentCard.module.css';
 
-import { Input } from '../Input';
+import { SmallInput, BackgroundProp } from '../Input';
 
 interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
     /** Class names passed to Paymentcard to change styling */
@@ -18,22 +18,20 @@ interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
     images?: Array<{ url: string; name: string }>;
 }
 
-const frontCardCls = classnames(styles.cardWrapper, styles.frontCardWrapper);
-const backCardCls = classnames(styles.cardWrapper, styles.backCardWrapper);
+const frontCardCls = classnames(styles.cardWrapper, styles.frontCard);
+const backCardCls = classnames(styles.cardWrapper, styles.backCard);
 
-const LittleInput = ({ style }: any) => <input style={{ ...style }} />;
+const LittleInput = (props: any) => <SmallInput background={BackgroundProp.White} {...props} />;
 
 export function PaymentCard({ className, style, dataTestId = 'PaymentCard', images, ...rest }: PaymentCardProps): JSX.Element {
     return (
-        <div>
-            <div className={frontCardCls}>
-                <div>{images && images.map(image => <img src={image.url} alt={image.name} />)}</div>
-                <div>
-                    <LittleInput />
-                    <div style={{ display: 'flex' }}>
-                        <LittleInput />
-                        <LittleInput />
-                    </div>
+        <div className={frontCardCls}>
+            <div>{images && images.map(image => <img src={image.url} alt={image.name} />)}</div>
+            <div>
+                <LittleInput name="cc-number" placeholder="Номер карты" className={styles.mb10} autoComplete="cc-number" />
+                <div className={styles.flex}>
+                    <LittleInput name="cc-name" placeholder="Владелец карты" className={styles.ccName} autoComplete="cc-name" />
+                    <LittleInput name="cc-exp" placeholder="ММ/ГГ" maxLength="3" autoComplete="cc-exp" />
                 </div>
             </div>
         </div>
@@ -42,10 +40,22 @@ export function PaymentCard({ className, style, dataTestId = 'PaymentCard', imag
 
 export function PaymentCardBack({ className, style, dataTestId = 'PaymentCard', ...rest }: PaymentCardProps): JSX.Element {
     return (
-        <div>
-            <div className={backCardCls}>
-                <div className={styles.magneticStrip}></div>
-                <LittleInput style={{ width: '50%', marginLeft: 'auto' }} />
+        <div className={backCardCls}>
+            <div className={styles.magneticStrip}></div>
+            <div className={styles.backCardBlock}>
+                <LittleInput name="cc-csc" type="text" placeholder="CVV/CVC" className={styles.mb10} maxLength="3" autoComplete="cc-csc" />
+                <div className={styles.cardText}>Последние 3 цифры на оборотной стороне карты</div>
+            </div>
+        </div>
+    );
+}
+
+export function PaymentCards({ className, style, dataTestId = 'PaymentCard', ...rest }: PaymentCardProps): JSX.Element {
+    return (
+        <div className={styles.wrapper}>
+            <div className={styles.cardsWrapper}>
+                <PaymentCard />
+                <PaymentCardBack />
             </div>
         </div>
     );
