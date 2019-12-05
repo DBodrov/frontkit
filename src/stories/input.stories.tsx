@@ -10,5 +10,17 @@ storiesOf('Input', module)
     .add('help', () => <Input RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст" />} />, {
         info: { inline: true },
     })
+    .add(
+        'custom styles',
+        () => (
+            <Input
+                style={{ width: '200px' }}
+                RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст" />}
+            />
+        ),
+        {
+            info: { inline: true },
+        },
+    )
     .add('search', () => <Input LeftIcon={SearchIcon} />, { info: { inline: true } })
     .add('placeholder', () => <Input placeholder="Подсказка" />, { info: { inline: true } });
