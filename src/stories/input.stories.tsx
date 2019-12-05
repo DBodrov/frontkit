@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Input, ErrorIcon, SuccessIcon, BackgroundProp, SearchIcon, HelpIcon } from '../components/Input';
+import { Input, ErrorIcon, SuccessIcon, BackgroundProp, SearchIcon, HelpIcon, SmallInput } from '../components/Input';
 
 storiesOf('Input', module)
     .add('base', () => <Input />, { info: { inline: true } })
@@ -23,4 +23,5 @@ storiesOf('Input', module)
         },
     )
     .add('search', () => <Input LeftIcon={SearchIcon} />, { info: { inline: true } })
+    .add('small', () => <SmallInput placeholder="placeholder" />, { info: { inline: true } })
     .add('placeholder', () => <Input placeholder="Подсказка" />, { info: { inline: true } });

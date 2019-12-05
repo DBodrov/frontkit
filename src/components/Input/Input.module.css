@@ -1,53 +1,15 @@
-.wrapper {
-    position: relative;
-    display: grid;
-    display: -ms-grid;
-    grid-template-columns: fit-content(21px) 1fr fit-content(21px);
-    -ms-grid-columns: min-content 1fr min-content;
+.right {
+    padding-right: 20px;
 }
-.wrapper.focused {
-    box-shadow: 0 0 6px #eaeef4;
+.left {
+    padding-left: 20px;
 }
 
 .input {
-    display: flex;
-    align-items: center;
-    background: #eaeef4;
-    border: 0;
-    box-sizing: border-box;
-    cursor: text;
-}
-
-.input.right {
-    text-align: right;
-}
-
-.leftArea {
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-    padding-left: 22px;
-    -ms-grid-column: 1;
-}
-.inputArea {
-    padding: 22px 0;
-    font-size: 16px;
-    width: 100%;
     line-height: 16px;
-    -ms-grid-column: 2;
+    font-size: 16px;
+    padding: 20px 0;
 }
-.inputArea:focus {
-    outline: none;
-}
-.rightArea {
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    padding-right: 22px;
-    -ms-grid-column: 3;
-}
-
-.error {
-    background-color: #ffe3e3;
-}
-.success {
-    background-color: #f7f9fb;
+.input::placeholder {
+    font-size: 14px;
 }

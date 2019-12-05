@@ -1,0 +1,15 @@
+.right {
+    padding-right: 16px;
+}
+.left {
+    padding-left: 16px;
+}
+
+.input {
+    line-height: 14px;
+    font-size: 14px;
+    padding: 16px 0;
+}
+.input::placeholder {
+    font-size: 12px;
+}
