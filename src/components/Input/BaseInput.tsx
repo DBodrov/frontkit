@@ -73,7 +73,7 @@ export function BaseInput({
     }, [focused]);
 
     const backgroundClass = getBackgroundClass(background);
-    const wrapperClassName = cn(styles.wrapper, className, { [styles.focused]: focused });
+    const wrapperClassName = cn(styles.wrapper, { [styles.focused]: focused }, className);
     const inputTotalClassName = cn(styles.input, styles.inputArea, backgroundClass, { [styles.right]: right }, inputClassName);
 
     return (
