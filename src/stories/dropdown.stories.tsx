@@ -10,7 +10,6 @@ storiesOf('Dropdown', module).add(
         <Dropdown
             data={data}
             More={() => <div>more</div>}
-            Dimmer={React.Fragment}
             getElement={_ => <div>{_}</div>}
             inputThreshold={2}
             isSuitable={(s, input) => s.startsWith(input)}

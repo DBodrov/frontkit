@@ -1,5 +1,7 @@
 import React from 'react';
-import { Input, SearchIcon } from '../Input';
+import styles from './Dropdown.module.css';
+import { BackgroundProp, Input, SearchIcon } from '../Input';
+import { Dimmer } from './Dimmer';
 
 type IsSuitable<T> = (el: T, searchValue: string) => boolean;
 type GetElement<T> = (el: T) => React.ReactElement<{ key: React.Key }>;
@@ -68,7 +70,6 @@ type Props<T> = {
     resultThreshold: number;
     More: React.ComponentType;
     NotFound: React.ComponentType;
-    Dimmer: React.ComponentType;
 } & React.HTMLAttributes<HTMLDivElement>;
 export function Dropdown<T>({
     data,
@@ -78,18 +79,24 @@ export function Dropdown<T>({
     More,
     resultThreshold,
     NotFound,
-    Dimmer,
     ...rest
 }: Props<T>): JSX.Element {
     const [value, onChangeInput] = useInputValue();
     const [moreElements, showMore] = useRenderedElements(value, data, isSuitable, getElement, inputThreshold, resultThreshold);
 
+    const showDimmer = value.length >= inputThreshold;
     const found = value.length >= inputThreshold && moreElements.length > 0;
     const notFound = value.length >= inputThreshold && moreElements.length === 0;
     return (
         <div {...rest}>
-            <Input LeftIcon={SearchIcon} value={value} onChange={onChangeInput} />
-            {value.length >= inputThreshold && <Dimmer />}
+            <Input
+                background={showDimmer ? BackgroundProp.White : BackgroundProp.None}
+                className={styles.input}
+                LeftIcon={SearchIcon}
+                value={value}
+                onChange={onChangeInput}
+            />
+            {showDimmer && <Dimmer />}
             {found && <List data={moreElements} More={More} showMore={showMore} />}
             {notFound && <NotFound />}
         </div>
