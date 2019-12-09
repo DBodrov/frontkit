@@ -15,5 +15,5 @@ export function useOnClickOutside(ref: RefObject<HTMLElement | null>, f: EffectC
 
         document.addEventListener('click', clickHandler);
         return (): void => document.removeEventListener('click', clickHandler);
-    }, [deps, ref, f]);
+    }, deps);
 }
