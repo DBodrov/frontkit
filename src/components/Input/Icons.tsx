@@ -37,7 +37,7 @@ export type HelpIconProps = {
     text: string;
 } & IconProps;
 export function HelpIcon({ dataTestId = 'input-search-icon', text }: HelpIconProps): JSX.Element {
-    const [inOpen, setIsOpen] = React.useState(false);
+    const [isOpen, setIsOpen] = React.useState(false);
     const onMouseLeave = React.useCallback(() => setIsOpen(false), [setIsOpen]);
     const onMouseEnter = React.useCallback(() => setIsOpen(true), [setIsOpen]);
     return (
@@ -64,7 +64,7 @@ export function HelpIcon({ dataTestId = 'input-search-icon', text }: HelpIconPro
                     fill="#A6AAB0"
                 />
             </svg>
-            {inOpen && (
+            {isOpen && (
                 <div className={styles.tooltip} data-testid={dataTestId + '-tooltip'}>
                     {text}
                 </div>
