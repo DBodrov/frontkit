@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
-import { HelpIcon } from '../../components/Input';
+import { HelpIcon, Input } from '../../components/Input';
 
 describe('help icon', () => {
     test('should render help icon', () => {
@@ -20,7 +20,7 @@ describe('help icon', () => {
         const { getByTestId } = render(<HelpIcon text="test" dataTestId={dataTestId} />);
 
         const icon = getByTestId(dataTestId + '-icon');
-        fireEvent.click(icon);
+        fireEvent.mouseEnter(icon);
         expect(() => getByTestId(dataTestId + '-tooltip')).not.toThrow();
     });
 
@@ -29,26 +29,25 @@ describe('help icon', () => {
         const { getByTestId } = render(<HelpIcon text="test" dataTestId={dataTestId} />);
 
         const icon = getByTestId(dataTestId + '-icon');
-        fireEvent.click(icon);
-        fireEvent.click(icon);
+        fireEvent.mouseEnter(icon);
+        fireEvent.mouseLeave(icon);
         expect(() => getByTestId(dataTestId + '-tooltip')).toThrow();
     });
-
-    test('should hide tooltip on click outside', () => {
-        const dataTestId = 'kjldaskjasdkj';
-        const outsideDataTestId = 'outside';
+    test('should loose focus on click ouside', () => {
+        const dataTestId = '123asdasda';
+        const outsideTestId = 'outside';
         const { getByTestId } = render(
             <>
-                <HelpIcon text="test" dataTestId={dataTestId} />
-                <div data-testid={outsideDataTestId} />
+                <Input dataTestId={dataTestId} RightIcon={() => <HelpIcon text="test" />}/>
+                <div data-testid={outsideTestId} />
             </>,
         );
 
-        const icon = getByTestId(dataTestId + '-icon');
-        const outside = getByTestId(outsideDataTestId);
+        const inputPart = getByTestId(dataTestId + '-input');
+        const icon = getByTestId('input-search-icon-icon');
+
         fireEvent.click(icon);
-        fireEvent.click(outside);
-        expect(() => getByTestId(dataTestId + '-tooltip')).toThrow();
+        expect(document.activeElement).not.toBe(inputPart)
     });
 
     test('should have default data-testid', () => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Icons.module.css';
-import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 
 export type IconProps = {
     dataTestId?: string;
@@ -31,20 +30,6 @@ export function SearchIcon({ dataTestId = 'input-search-icon' }: IconProps): JSX
     );
 }
 
-function useTooltip(): [boolean, () => void, React.RefObject<HTMLDivElement>] {
-    const [showed, setShowed] = React.useState(false);
-    const toggle = React.useCallback(() => setShowed(showed => !showed), [setShowed]);
-    const ref = React.useRef<HTMLDivElement>(null);
-    useOnClickOutside(
-        ref,
-        () => {
-            setShowed(false);
-        },
-        [setShowed],
-    );
-
-    return [showed, toggle, ref];
-}
 function stopPropagation(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
     e.stopPropagation();
 }
@@ -52,10 +37,17 @@ export type HelpIconProps = {
     text: string;
 } & IconProps;
 export function HelpIcon({ dataTestId = 'input-search-icon', text }: HelpIconProps): JSX.Element {
-    const [showed, toggle, ref] = useTooltip();
-
+    const [isOpen, setIsOpen] = React.useState(false);
+    const onMouseLeave = React.useCallback(() => setIsOpen(false), [setIsOpen]);
+    const onMouseEnter = React.useCallback(() => setIsOpen(true), [setIsOpen]);
     return (
-        <div className={styles.wrapper} ref={ref} onClick={stopPropagation} data-testid={dataTestId}>
+        <div
+            className={styles.wrapper}
+            data-testid={dataTestId}
+            onClick={stopPropagation}
+            onMouseLeave={onMouseLeave}
+            onMouseEnter={onMouseEnter}
+        >
             <svg
                 role="button"
                 className={styles.icon}
@@ -65,7 +57,6 @@ export function HelpIcon({ dataTestId = 'input-search-icon', text }: HelpIconPro
                 viewBox="0 0 21 21"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                onClick={toggle}
             >
                 <circle cx="10.5" cy="10.5" r="10.5" fill="#D5DAE0" />
                 <path
@@ -73,7 +64,7 @@ export function HelpIcon({ dataTestId = 'input-search-icon', text }: HelpIconPro
                     fill="#A6AAB0"
                 />
             </svg>
-            {showed && (
+            {isOpen && (
                 <div className={styles.tooltip} data-testid={dataTestId + '-tooltip'}>
                     {text}
                 </div>

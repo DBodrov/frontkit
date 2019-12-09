@@ -1,10 +1,21 @@
-.wrapper {
-    position: relative;
-}
 .icon {
     cursor: pointer;
 }
 
 .tooltip {
     position: absolute;
+    text-align: right;
+    right: 0;
+    padding: 15px;
+    background: #FFFFFF;
+    border: 1px solid #F3F6F9;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(170, 187, 208, 0.16);
+    border-radius: 6px;
+    z-index: 1;
+    width: max-content;
+    font-size: 12px;
+    line-height: 17px;
+    color: #A6AAB0;
+    max-width: 100%;
 }
