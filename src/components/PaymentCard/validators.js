@@ -33,13 +33,13 @@ export const validateCreditCard = value => {
     return nCheck !== 0 && nCheck % 10 === 0;
 };
 
-export const validateExp = value => value.replace(/[^0-9]/g, '').length === 4;
+const validateExp = value => value.replace(/[^0-9]/g, '').length === 4;
 
-export const validateCvv = value => value.length > 0;
+const validateCvv = value => value.length > 0;
 
-export const validateName = value => value.replace(/\s/g, '').length !== 0;
+const validateName = value => value.replace(/\s/g, '').length !== 0;
 
-const isInvalidInput = (name, value) => {
+export const isInvalidInput = (name, value) => {
     switch (name) {
         case 'cc-number':
             return REGEXP_NON_DDS.test(value);
@@ -54,7 +54,7 @@ const isInvalidInput = (name, value) => {
     }
 };
 
-const validate = (name, value) => {
+export const validate = (name, value) => {
     switch (name) {
         case 'cc-number':
             return validateCreditCard(value);
