@@ -12,7 +12,6 @@ storiesOf('Dropdown', module).add(
             getElement={_ => <div>{_}</div>}
             inputThreshold={1}
             isSuitable={(s, input) => s.startsWith(input)}
-            NotFound={() => <div>not found</div>}
             resultThreshold={2}
         />
     ),
