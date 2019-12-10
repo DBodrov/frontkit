@@ -18,7 +18,7 @@ interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
      * */
     dataTestId?: string;
     /** Object of errors passed to Paymentcard to change validation styling */
-    errors?: object;
+    errors: ErrorsTypes;
     /** array of bank images */
     images?: Array<{ url: string; name: string }>;
 }
@@ -29,7 +29,7 @@ const cvvCls = classnames(styles.mb10, styles.cvv);
 
 const LittleInput = (props: any) => <SmallInput background={props.error ? BackgroundProp.Error : BackgroundProp.White} {...props} />;
 
-export function PaymentCard({ className, style, dataTestId = 'PaymentCard', images, errors, ...rest }: PaymentCardProps): JSX.Element {
+export function PaymentCard({ className, style, dataTestId = 'PaymentCard', images, errors }: PaymentCardProps): JSX.Element {
     return (
         <div className={frontCardCls}>
             <div>{images && images.map(image => <img src={image.url} alt={image.name} />)}</div>
@@ -56,7 +56,7 @@ export function PaymentCard({ className, style, dataTestId = 'PaymentCard', imag
     );
 }
 
-function PaymentCardBack({ className, style, dataTestId = 'PaymentCard', errors, ...rest }: PaymentCardProps): JSX.Element {
+function PaymentCardBack({ className, style, dataTestId = 'PaymentCard', errors }: PaymentCardProps): JSX.Element {
     return (
         <div className={backCardCls}>
             <div className={styles.magneticStrip}></div>
@@ -76,25 +76,33 @@ function PaymentCardBack({ className, style, dataTestId = 'PaymentCard', errors,
     );
 }
 
+interface FormFieldsTypes {
+    [key: string]: string;
+}
+
+interface ErrorsTypes {
+    [key: string]: boolean;
+}
+
+const form: FormFieldsTypes = {
+    'cc-number': '',
+    'cc-name': '',
+    'cc-exp': '',
+    'cc-csc': '',
+};
+
+const errors: ErrorsTypes = {
+    'cc-number': false,
+    'cc-name': false,
+    'cc-exp': false,
+    'cc-csc': false,
+};
+
 export function PaymentCards(props: PaymentCardProps) {
-    const form = {
-        'cc-number': '',
-        'cc-name': '',
-        'cc-exp': '',
-        'cc-csc': '',
-    };
-
-    const errors = {
-        'cc-number': false,
-        'cc-name': false,
-        'cc-exp': false,
-        'cc-csc': false,
-    };
-
     const [formState, setFormState] = React.useState(form);
     const [formErrors, setError] = React.useState(errors);
 
-    const handleFormChange = event => {
+    const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         const element = event.target;
 
@@ -104,8 +112,11 @@ export function PaymentCards(props: PaymentCardProps) {
         }
 
         const elementSelection = element.selectionStart;
-        let elementNextSelection = element.selectionStart;
-        const prev = form[name].replace(/\s/g, '').length;
+        if (elementSelection === null) {
+            throw new Error();
+        }
+        let elementNextSelection = elementSelection;
+        const prev = formState[name].replace(/\s/g, '').length;
         const cur = value.replace(/\s/g, '').length;
 
         switch (event.target.name) {
@@ -133,7 +144,7 @@ export function PaymentCards(props: PaymentCardProps) {
         element.setSelectionRange(elementNextSelection, elementNextSelection);
     };
 
-    const { className, style, dataTestId = 'PaymentCard', ...rest }: PaymentCardProps = props;
+    const { className, style, dataTestId = 'PaymentCard' }: PaymentCardProps = props;
     return (
         <div className={styles.wrapper}>
             <div className={styles.cardsWrapper} onChange={handleFormChange}>

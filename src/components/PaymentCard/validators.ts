@@ -3,7 +3,7 @@ export const REGEXP_NON_DATE = /[^0-9/]+/;
 export const REGEXP_NON_LATIN = /[^a-zA-Z' ]+/;
 export const REGEXP_NON_DIGITS = /[^0-9]+/;
 
-export const validateCreditCard = value => {
+export const validateCreditCard = (value: string): boolean => {
     value = value.replace(/\D/g, '');
 
     if (value.length < 12) {
@@ -33,13 +33,13 @@ export const validateCreditCard = value => {
     return nCheck !== 0 && nCheck % 10 === 0;
 };
 
-const validateExp = value => value.replace(/[^0-9]/g, '').length === 4;
+const validateExp = (value: string): boolean => value.replace(/[^0-9]/g, '').length === 4;
 
-const validateCvv = value => value.length > 0;
+const validateCvv = (value: string): boolean => value.length > 0;
 
-const validateName = value => value.replace(/\s/g, '').length !== 0;
+const validateName = (value: string): boolean => value.replace(/\s/g, '').length !== 0;
 
-export const isInvalidInput = (name, value) => {
+export const isInvalidInput = (name: string, value: string): boolean => {
     switch (name) {
         case 'cc-number':
             return REGEXP_NON_DDS.test(value);
@@ -54,7 +54,7 @@ export const isInvalidInput = (name, value) => {
     }
 };
 
-export const validate = (name, value) => {
+export const validate = (name: string, value: string): boolean => {
     switch (name) {
         case 'cc-number':
             return validateCreditCard(value);
