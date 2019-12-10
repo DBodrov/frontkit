@@ -103,33 +103,34 @@ export function PaymentCards(props: PaymentCardProps) {
             return;
         }
 
-        // const elementSelection = element.selectionStart;
-        // let elementNextSelection = element.selectionStart;
-        // const prev = form[name].replace(/\s/g, '').length;
-        // const cur = value.replace(/\s/g, '').length;
+        const elementSelection = element.selectionStart;
+        let elementNextSelection = element.selectionStart;
+        const prev = form[name].replace(/\s/g, '').length;
+        const cur = value.replace(/\s/g, '').length;
 
-        // switch (event.target.name) {
-        //     case 'ccn':
-        //         if (cur >= prev) {
-        //             if (elementSelection % 5 === 0) {
-        //                 elementNextSelection += 1;
-        //             }
-        //         }
-        //         break;
-        //     case 'exp':
-        //         if (cur >= prev) {
-        //             if (elementSelection === 3) {
-        //                 elementNextSelection += 1;
-        //             }
-        //         }
-        //         break;
-        //     default:
-        //         break;
-        // }
+        switch (event.target.name) {
+            case 'cc-number':
+                if (cur >= prev) {
+                    if (elementSelection % 5 === 0) {
+                        elementNextSelection += 1;
+                    }
+                }
+                break;
+            case 'cc-exp':
+                if (cur >= prev) {
+                    if (elementSelection === 3) {
+                        elementNextSelection += 1;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
         element.value = format(name, value);
         setError({ ...formErrors, [name]: !validate(name, element.value) });
         setFormState({ ...formState, [name]: element.value });
-        // element.setSelectionRange(elementNextSelection, elementNextSelection);
+        element.setSelectionRange(elementNextSelection, elementNextSelection);
     };
 
     const { className, style, dataTestId = 'PaymentCard', ...rest }: PaymentCardProps = props;
