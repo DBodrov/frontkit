@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Dropdown.module.css';
 import { BackgroundProp, Input, SearchIcon } from '../Input';
 import { Dimmer } from './Dimmer';
+import { Card, SplitType } from '../Card';
 
 type IsSuitable<T> = (el: T, searchValue: string) => boolean;
 type GetElement<T> = (el: T) => React.ReactElement<{ key: React.Key }>;
@@ -18,6 +19,7 @@ function useInputValue(): [string, React.ChangeEventHandler<HTMLInputElement>] {
     return [value, onChangeInput];
 }
 
+type ShowMore = boolean;
 function useRenderedElements<T>(
     value: string,
     data: Props<T>['data'],
@@ -31,33 +33,43 @@ function useRenderedElements<T>(
         prefix.current++;
         return data.map((el, id) => React.cloneElement(getElement(el), { key: `${prefix.current}_${id}` }));
     }, [data, getElement]);
-    const searchableData: ReadonlyArray<React.ReactElement> = React.useMemo(() => {
+    const [searchableData, showMore]: [ReadonlyArray<React.ReactElement>, ShowMore] = React.useMemo(() => {
         const res: Array<React.ReactElement> = [];
         if (value.length < inputThreshold) {
-            return res;
+            return [res, false];
         }
-        for (let i = 0; i < data.length && res.length < resultThreshold; ++i) {
+        for (let i = 0; i < data.length; ++i) {
             if (isSuitable(data[i], value)) {
+                if (res.length >= resultThreshold) {
+                    return [res, true];
+                }
                 res.push(elements[i]);
             }
         }
-        return res;
+        return [res, false];
     }, [data, isSuitable, value, inputThreshold, resultThreshold]);
 
-    return [searchableData, searchableData.length > resultThreshold];
+    return [searchableData, showMore];
+}
+
+function More(): JSX.Element {
+    return <a className={styles.more}>Больше</a>;
 }
 
 type ListProps<T> = {
     data: ReadonlyArray<ReturnType<GetElement<T>>>;
-    More: React.ComponentType;
-
     showMore: boolean;
 };
-function List<T>({ data, More, showMore }: ListProps<T>): JSX.Element {
+function List<T>({ data, showMore }: ListProps<T>): JSX.Element {
     return (
         <>
-            {data}
-            {showMore && <More />}
+            <Card
+                className={styles.card}
+                getSplitType={(splitOrder, size) => (size - 1 === splitOrder && showMore ? SplitType.Full : SplitType.Padding)}
+            >
+                {data}
+                {showMore && <More />}
+            </Card>
         </>
     );
 }
@@ -68,25 +80,15 @@ type Props<T> = {
     isSuitable: IsSuitable<T>;
     inputThreshold: number;
     resultThreshold: number;
-    More: React.ComponentType;
     NotFound: React.ComponentType;
 } & React.HTMLAttributes<HTMLDivElement>;
-export function Dropdown<T>({
-    data,
-    isSuitable,
-    getElement,
-    inputThreshold,
-    More,
-    resultThreshold,
-    NotFound,
-    ...rest
-}: Props<T>): JSX.Element {
+export function Dropdown<T>({ data, isSuitable, getElement, inputThreshold, resultThreshold, NotFound, ...rest }: Props<T>): JSX.Element {
     const [value, onChangeInput] = useInputValue();
-    const [moreElements, showMore] = useRenderedElements(value, data, isSuitable, getElement, inputThreshold, resultThreshold);
+    const [elements, showMore] = useRenderedElements(value, data, isSuitable, getElement, inputThreshold, resultThreshold);
 
     const showDimmer = value.length >= inputThreshold;
-    const found = value.length >= inputThreshold && moreElements.length > 0;
-    const notFound = value.length >= inputThreshold && moreElements.length === 0;
+    const found = showDimmer && elements.length > 0;
+    const notFound = showDimmer && elements.length === 0;
     return (
         <div {...rest}>
             <Input
@@ -96,9 +98,9 @@ export function Dropdown<T>({
                 value={value}
                 onChange={onChangeInput}
             />
-            {showDimmer && <Dimmer />}
-            {found && <List data={moreElements} More={More} showMore={showMore} />}
+            {found && <List data={elements} showMore={showMore} />}
             {notFound && <NotFound />}
+            {showDimmer && <Dimmer />}
         </div>
     );
 }

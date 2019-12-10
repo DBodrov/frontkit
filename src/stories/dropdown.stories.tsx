@@ -2,19 +2,18 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Dropdown } from '../components/Dropdown';
 
-const data = ['123', '456', '789', '123213'];
+const data = ['123', '12321312', '789', '123213'];
 
 storiesOf('Dropdown', module).add(
     'base',
     () => (
         <Dropdown
             data={data}
-            More={() => <div>more</div>}
             getElement={_ => <div>{_}</div>}
-            inputThreshold={2}
+            inputThreshold={1}
             isSuitable={(s, input) => s.startsWith(input)}
             NotFound={() => <div>not found</div>}
-            resultThreshold={3}
+            resultThreshold={2}
         />
     ),
     { info: { inline: true } },
