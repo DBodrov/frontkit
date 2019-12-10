@@ -82,7 +82,15 @@ type Props<T> = {
     resultThreshold: number;
     NotFound: React.ComponentType;
 } & React.HTMLAttributes<HTMLDivElement>;
-export function Dropdown<T>({ data, isSuitable, getElement, inputThreshold, resultThreshold, NotFound, ...rest }: Props<T>): JSX.Element {
+export function BaseDropdown<T>({
+    data,
+    isSuitable,
+    getElement,
+    inputThreshold,
+    resultThreshold,
+    NotFound,
+    ...rest
+}: Props<T>): JSX.Element {
     const [value, onChangeInput] = useInputValue();
     const [elements, showMore] = useRenderedElements(value, data, isSuitable, getElement, inputThreshold, resultThreshold);
 

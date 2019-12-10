@@ -1,1 +1,3 @@
-export { Dropdown } from './Dropdown';
+import { BaseDropdown } from './BaseDropdown';
+
+export const Dropdown = BaseDropdown;

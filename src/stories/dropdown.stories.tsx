@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Dropdown } from '../components/Dropdown';
+import { Dropdown } from '../';
 
 const data = ['123', '12321312', '789', '123213'];
 
