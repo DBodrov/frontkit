@@ -17,6 +17,8 @@ interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
      * @default PaymentCard
      * */
     dataTestId?: string;
+    /** Object of errors passed to Paymentcard to change validation styling */
+    errors?: object;
     /** array of bank images */
     images?: Array<{ url: string; name: string }>;
 }
@@ -25,23 +27,9 @@ const frontCardCls = classnames(styles.cardWrapper, styles.frontCard);
 const backCardCls = classnames(styles.cardWrapper, styles.backCard);
 const cvvCls = classnames(styles.mb10, styles.cvv);
 
-const form = {
-    exp: '',
-    cvv: '',
-    name: '',
-    ccNumber: '',
-};
-
-const error = {
-    'cc-number': false,
-    'cc-name': false,
-    'cc-exp': false,
-    'cc-csc': false,
-};
-
 const LittleInput = (props: any) => <SmallInput background={props.error ? BackgroundProp.Error : BackgroundProp.White} {...props} />;
 
-export function PaymentCard({ className, style, dataTestId = 'PaymentCard', images, ...rest }: PaymentCardProps): JSX.Element {
+export function PaymentCard({ className, style, dataTestId = 'PaymentCard', images, errors, ...rest }: PaymentCardProps): JSX.Element {
     return (
         <div className={frontCardCls}>
             <div>{images && images.map(image => <img src={image.url} alt={image.name} />)}</div>
@@ -50,26 +38,25 @@ export function PaymentCard({ className, style, dataTestId = 'PaymentCard', imag
                     name="cc-number"
                     placeholder="Номер карты"
                     className={styles.mb10}
-                    error={error['cc-number']}
+                    error={errors['cc-number']}
                     autoComplete="cc-number"
                 />
-                {console.log(error, 2)}
                 <div className={styles.flex}>
                     <LittleInput
                         name="cc-name"
                         placeholder="Владелец карты"
                         className={styles.ccName}
-                        error={error['cc-name']}
+                        error={errors['cc-name']}
                         autoComplete="cc-name"
                     />
-                    <LittleInput name="cc-exp" placeholder="ММ/ГГ" maxLength="5" error={error['cc-exp']} autoComplete="cc-exp" />
+                    <LittleInput name="cc-exp" placeholder="ММ/ГГ" maxLength="5" error={errors['cc-exp']} autoComplete="cc-exp" />
                 </div>
             </div>
         </div>
     );
 }
 
-function PaymentCardBack({ className, style, dataTestId = 'PaymentCard', ...rest }: PaymentCardProps): JSX.Element {
+function PaymentCardBack({ className, style, dataTestId = 'PaymentCard', errors, ...rest }: PaymentCardProps): JSX.Element {
     return (
         <div className={backCardCls}>
             <div className={styles.magneticStrip}></div>
@@ -80,7 +67,7 @@ function PaymentCardBack({ className, style, dataTestId = 'PaymentCard', ...rest
                     placeholder="CVV/CVC"
                     className={cvvCls}
                     maxLength="3"
-                    error={error['cc-csc']}
+                    error={errors['cc-csc']}
                     autoComplete="cc-csc"
                 />
                 <div className={styles.cardText}>Последние 3 цифры на оборотной стороне карты</div>
@@ -89,13 +76,30 @@ function PaymentCardBack({ className, style, dataTestId = 'PaymentCard', ...rest
     );
 }
 
-export class PaymentCards extends Component {
-    handleFormChange = event => {
+export function PaymentCards(props: PaymentCardProps) {
+    const form = {
+        exp: '',
+        cvv: '',
+        name: '',
+        ccNumber: '',
+    };
+
+    const errors = {
+        'cc-number': false,
+        'cc-name': false,
+        'cc-exp': false,
+        'cc-csc': false,
+    };
+
+    const [formState, setFormState] = React.useState(form);
+    const [formErrors, setError] = React.useState(errors);
+
+    const handleFormChange = event => {
         const { name, value } = event.target;
         const element = event.target;
 
         if (isInvalidInput(name, value)) {
-            element.value = form[name];
+            element.value = formState[name];
             return;
         }
 
@@ -122,22 +126,19 @@ export class PaymentCards extends Component {
         //     default:
         //         break;
         // }
-
         element.value = format(name, value);
-        error[name] = !validate(name, element.value);
-        form[name] = element.value;
+        setError({ ...formErrors, [name]: !validate(name, element.value) });
+        setFormState({ ...formState, [name]: element.value });
         // element.setSelectionRange(elementNextSelection, elementNextSelection);
     };
 
-    render() {
-        const { className, style, dataTestId = 'PaymentCard', ...rest }: PaymentCardProps = this.props;
-        return (
-            <div className={styles.wrapper}>
-                <div className={styles.cardsWrapper} onChange={this.handleFormChange}>
-                    <PaymentCard />
-                    <PaymentCardBack />
-                </div>
+    const { className, style, dataTestId = 'PaymentCard', ...rest }: PaymentCardProps = props;
+    return (
+        <div className={styles.wrapper}>
+            <div className={styles.cardsWrapper} onChange={handleFormChange}>
+                <PaymentCard errors={formErrors} />
+                <PaymentCardBack errors={formErrors} />
             </div>
-        );
-    }
+        </div>
+    );
 }
