@@ -18,7 +18,7 @@ interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
      * */
     dataTestId?: string;
     /** Object of errors passed to Paymentcard to change validation styling */
-    errors: ErrorsTypes;
+    errors?: ErrorsTypes;
     /** array of bank images */
     images?: Array<{ url: string; name: string }>;
 }
@@ -29,7 +29,10 @@ const cvvCls = classnames(styles.mb10, styles.cvv);
 
 const LittleInput = (props: any) => <SmallInput background={props.error ? BackgroundProp.Error : BackgroundProp.White} {...props} />;
 
-export function PaymentCard({ className, style, dataTestId = 'PaymentCard', images, errors }: PaymentCardProps): JSX.Element {
+export function PaymentCard({ images, errors }: PaymentCardProps): JSX.Element {
+    if (errors === undefined) {
+        throw new Error();
+    }
     return (
         <div className={frontCardCls}>
             <div>{images && images.map(image => <img src={image.url} alt={image.name} />)}</div>
@@ -56,7 +59,10 @@ export function PaymentCard({ className, style, dataTestId = 'PaymentCard', imag
     );
 }
 
-function PaymentCardBack({ className, style, dataTestId = 'PaymentCard', errors }: PaymentCardProps): JSX.Element {
+function PaymentCardBack({ errors }: PaymentCardProps): JSX.Element {
+    if (errors === undefined) {
+        throw new Error();
+    }
     return (
         <div className={backCardCls}>
             <div className={styles.magneticStrip}></div>
@@ -145,8 +151,9 @@ export function PaymentCards(props: PaymentCardProps) {
     };
 
     const { className, style, dataTestId = 'PaymentCard' }: PaymentCardProps = props;
+    const wrapperCls = classnames(styles.wrapper, className);
     return (
-        <div className={styles.wrapper}>
+        <div className={wrapperCls} style={style} data-testid={dataTestId}>
             <div className={styles.cardsWrapper} onChange={handleFormChange}>
                 <PaymentCard errors={formErrors} />
                 <PaymentCardBack errors={formErrors} />
