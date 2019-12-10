@@ -78,10 +78,10 @@ function PaymentCardBack({ className, style, dataTestId = 'PaymentCard', errors,
 
 export function PaymentCards(props: PaymentCardProps) {
     const form = {
-        exp: '',
-        cvv: '',
-        name: '',
-        ccNumber: '',
+        'cc-number': '',
+        'cc-name': '',
+        'cc-exp': '',
+        'cc-csc': '',
     };
 
     const errors = {
