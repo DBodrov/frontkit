@@ -74,7 +74,13 @@ export function BaseInput({
 
     const backgroundClass = getBackgroundClass(background);
     const wrapperClassName = cn(styles.wrapper, { [styles.focused]: focused }, className);
-    const inputTotalClassName = cn(styles.input, styles.inputArea, backgroundClass, { [styles.right]: right }, inputClassName);
+    const inputTotalClassName = cn(
+        styles.input,
+        styles.inputArea,
+        backgroundClass,
+        { [styles.right]: right, [styles.leftIconExist]: LeftIcon },
+        inputClassName,
+    );
 
     return (
         <div className={wrapperClassName} ref={fieldRef} style={style} data-testid={dataTestId}>
