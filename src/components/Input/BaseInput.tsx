@@ -55,6 +55,7 @@ export function BaseInput({
     leftPartClassName,
     rightPartClassName,
     inputClassName,
+    showOutline = true,
     ...rest
 }: BaseInputProps): JSX.Element {
     const [focused, onFocus, onBlur, fieldRef] = useFocus();
@@ -73,7 +74,7 @@ export function BaseInput({
     }, [focused]);
 
     const backgroundClass = getBackgroundClass(background);
-    const wrapperClassName = cn(styles.wrapper, { [styles.focused]: focused }, className);
+    const wrapperClassName = cn(styles.wrapper, { [styles.focused]: focused && showOutline }, className);
     const inputTotalClassName = cn(
         styles.input,
         styles.inputArea,

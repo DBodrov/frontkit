@@ -9,4 +9,5 @@ export type Props = {
     background?: BackgroundProp;
     dataTestId?: string;
     right?: boolean;
+    showOutline?: boolean;
 } & React.AllHTMLAttributes<HTMLInputElement>;

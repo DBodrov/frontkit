@@ -38,8 +38,9 @@ type Props = {
     data: ReadonlyArray<React.ReactElement<{ key: React.Key }>>;
     type: Type;
     onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    showOutline: boolean;
 } & React.HTMLAttributes<HTMLDivElement>;
-export function BaseDropdown({ inputValue, data, onChangeInput, type, ...rest }: Props): JSX.Element {
+export function BaseDropdown({ showOutline, inputValue, data, onChangeInput, type, ...rest }: Props): JSX.Element {
     return (
         <div {...rest}>
             <Input
@@ -48,6 +49,7 @@ export function BaseDropdown({ inputValue, data, onChangeInput, type, ...rest }:
                 LeftIcon={SearchIcon}
                 value={inputValue}
                 onChange={onChangeInput}
+                showOutline={type === Type.InputOnly}
             />
             {type === Type.Data || (type === Type.DataAndMore && <List data={data} showMore={type === Type.DataAndMore} />)}
             {type === Type.NotFound && <div>not found</div>}
