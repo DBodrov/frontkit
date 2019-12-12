@@ -1,3 +1,5 @@
+import { FormFieldsTypes, ErrorsTypes } from './PaymentCard';
+
 export const REGEXP_NON_DDS = /[^0-9-\s]+/;
 export const REGEXP_NON_DATE = /[^0-9/]+/;
 export const REGEXP_NON_LATIN = /[^a-zA-Z' ]+/;
@@ -35,7 +37,7 @@ export const validateCreditCard = (value: string): boolean => {
 
 const validateExp = (value: string): boolean => value.replace(/[^0-9]/g, '').length === 4;
 
-const validateCvv = (value: string): boolean => value.length > 0;
+const validateCvv = (value: string): boolean => value.length === 3;
 
 const validateName = (value: string): boolean => value.replace(/\s/g, '').length !== 0;
 
@@ -67,4 +69,12 @@ export const validate = (name: string, value: string): boolean => {
         default:
             return true;
     }
+};
+
+export const isFormInvalid = (formErrors: ErrorsTypes, formState: FormFieldsTypes): boolean => {
+    const errors = Object.values(formErrors);
+    const state = Object.values(formState);
+    const hasError = !errors.some(value => value === true);
+    const hasValues = !state.some(value => value === '');
+    return hasError && hasValues;
 };

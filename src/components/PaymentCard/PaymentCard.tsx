@@ -1,7 +1,7 @@
 import classnames from 'classnames';
-import React, { Component } from 'react';
+import React from 'react';
 
-import { isInvalidInput, validate } from './validators';
+import { isInvalidInput, validate, isFormInvalid } from './validators';
 import { format } from './formatters';
 
 import styles from './PaymentCard.module.css';
@@ -82,11 +82,11 @@ function PaymentCardBack({ errors }: PaymentCardProps): JSX.Element {
     );
 }
 
-interface FormFieldsTypes {
+export interface FormFieldsTypes {
     [key: string]: string;
 }
 
-interface ErrorsTypes {
+export interface ErrorsTypes {
     [key: string]: boolean;
 }
 
@@ -107,6 +107,9 @@ const errors: ErrorsTypes = {
 export function PaymentCards(props: PaymentCardProps) {
     const [formState, setFormState] = React.useState(form);
     const [formErrors, setError] = React.useState(errors);
+    React.useEffect(() => {
+        isFormInvalid(formErrors, formState);
+    }, [formErrors]);
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
