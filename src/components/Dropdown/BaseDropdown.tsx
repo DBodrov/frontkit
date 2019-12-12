@@ -40,7 +40,7 @@ type Props = {
     onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
     showOutline: boolean;
 } & React.HTMLAttributes<HTMLDivElement>;
-export function BaseDropdown({ showOutline, inputValue, data, onChangeInput, type, ...rest }: Props): JSX.Element {
+export function BaseDropdown({ inputValue, data, onChangeInput, type, ...rest }: Props): JSX.Element {
     return (
         <div {...rest}>
             <Input
