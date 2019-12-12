@@ -109,8 +109,9 @@ const errors: ErrorsTypes = {
 export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onSuccess }: PaymentCardProps) {
     const [formState, setFormState] = React.useState(form);
     const [formErrors, setError] = React.useState(errors);
+
     React.useEffect(() => {
-        onSuccess(isFormInvalid(formErrors, formState));
+        onSuccess && onSuccess(isFormInvalid(formErrors, formState));
     }, [formErrors]);
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
