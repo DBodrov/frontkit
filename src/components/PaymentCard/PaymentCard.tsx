@@ -21,6 +21,8 @@ interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
     errors?: ErrorsTypes;
     /** array of bank images */
     images?: Array<{ url: string; name: string }>;
+    /** Function passed to Paymentcard to check success */
+    onSuccess?: (successed: boolean) => unknown;
 }
 
 const frontCardCls = classnames(styles.cardWrapper, styles.frontCard);
@@ -104,11 +106,11 @@ const errors: ErrorsTypes = {
     'cc-csc': false,
 };
 
-export function PaymentCards(props: PaymentCardProps) {
+export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onSuccess }: PaymentCardProps) {
     const [formState, setFormState] = React.useState(form);
     const [formErrors, setError] = React.useState(errors);
     React.useEffect(() => {
-        isFormInvalid(formErrors, formState);
+        onSuccess(isFormInvalid(formErrors, formState));
     }, [formErrors]);
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -153,7 +155,6 @@ export function PaymentCards(props: PaymentCardProps) {
         element.setSelectionRange(elementNextSelection, elementNextSelection);
     };
 
-    const { className, style, dataTestId = 'PaymentCard' }: PaymentCardProps = props;
     const wrapperCls = classnames(styles.wrapper, className);
     return (
         <div className={wrapperCls} style={style} data-testid={dataTestId}>
