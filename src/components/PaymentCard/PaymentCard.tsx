@@ -29,9 +29,11 @@ const frontCardCls = classnames(styles.cardWrapper, styles.frontCard);
 const backCardCls = classnames(styles.cardWrapper, styles.backCard);
 const cvvCls = classnames(styles.mb10, styles.cvv);
 
-const LittleInput = (props: any) => <SmallInput background={props.error ? BackgroundProp.Error : BackgroundProp.White} {...props} />;
+const LittleInput = (props: any) => (
+    <SmallInput background={props.error ? BackgroundProp.Error : BackgroundProp.White} dataTestId={props.dataTestId} {...props} />
+);
 
-export function PaymentCard({ images, errors }: PaymentCardProps): JSX.Element {
+export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): JSX.Element {
     if (errors === undefined) {
         throw new Error();
     }
@@ -45,6 +47,7 @@ export function PaymentCard({ images, errors }: PaymentCardProps): JSX.Element {
                     className={styles.mb10}
                     error={errors['cc-number']}
                     autoComplete="cc-number"
+                    data-testid={dataTestId + '-cc-number'}
                 />
                 <div className={styles.flex}>
                     <LittleInput
@@ -53,15 +56,23 @@ export function PaymentCard({ images, errors }: PaymentCardProps): JSX.Element {
                         className={styles.ccName}
                         error={errors['cc-name']}
                         autoComplete="cc-name"
+                        data-testid={dataTestId + '-cc-name'}
                     />
-                    <LittleInput name="cc-exp" placeholder="ММ/ГГ" maxLength="5" error={errors['cc-exp']} autoComplete="cc-exp" />
+                    <LittleInput
+                        name="cc-exp"
+                        placeholder="ММ/ГГ"
+                        maxLength="5"
+                        error={errors['cc-exp']}
+                        autoComplete="cc-exp"
+                        data-testid={dataTestId + '-cc-exp'}
+                    />
                 </div>
             </div>
         </div>
     );
 }
 
-function PaymentCardBack({ errors }: PaymentCardProps): JSX.Element {
+function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element {
     if (errors === undefined) {
         throw new Error();
     }
@@ -77,6 +88,7 @@ function PaymentCardBack({ errors }: PaymentCardProps): JSX.Element {
                     maxLength="3"
                     error={errors['cc-csc']}
                     autoComplete="cc-csc"
+                    data-testid={dataTestId + '-cc-csc'}
                 />
                 <div className={styles.cardText}>Последние 3 цифры на оборотной стороне карты</div>
             </div>
@@ -158,10 +170,10 @@ export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onS
 
     const wrapperCls = classnames(styles.wrapper, className);
     return (
-        <div className={wrapperCls} style={style} data-testid={dataTestId}>
+        <div className={wrapperCls} style={style}>
             <div className={styles.cardsWrapper} onChange={handleFormChange}>
-                <PaymentCard errors={formErrors} />
-                <PaymentCardBack errors={formErrors} />
+                <PaymentCard errors={formErrors} dataTestId={dataTestId} />
+                <PaymentCardBack errors={formErrors} dataTestId={dataTestId} />
             </div>
         </div>
     );
