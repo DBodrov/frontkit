@@ -67,12 +67,21 @@ export type Props<T> = {
     isSuitable: IsSuitable<T>;
     inputThreshold: number;
     resultThreshold: number;
+    dataTestId?: string;
 } & React.HTMLAttributes<HTMLDivElement>;
-export function Dropdown<T>({ data, isSuitable, getElement, inputThreshold, resultThreshold, ...rest }: Props<T>): JSX.Element {
+export function Dropdown<T>({
+    dataTestId = 'dropdown',
+    data,
+    isSuitable,
+    getElement,
+    inputThreshold,
+    resultThreshold,
+    ...rest
+}: Props<T>): JSX.Element {
     const [value, onChangeInput] = useInputValue();
     const [elements, showMore] = useRenderedElements(value, data, isSuitable, getElement, inputThreshold, resultThreshold);
 
     const showDimmer = value.length >= inputThreshold;
     const type = getBaseDropdownType(showDimmer, elements, showMore);
-    return <BaseDropdown {...rest} data={elements} inputValue={value} onChangeInput={onChangeInput} type={type} />;
+    return <BaseDropdown {...rest} dataTestId={dataTestId} data={elements} inputValue={value} onChangeInput={onChangeInput} type={type} />;
 }
