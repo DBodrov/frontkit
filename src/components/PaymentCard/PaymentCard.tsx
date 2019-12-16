@@ -74,9 +74,6 @@ export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): J
 }
 
 function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element {
-    if (errors === undefined) {
-        throw new Error();
-    }
     return (
         <div className={backCardCls}>
             <div className={styles.magneticStrip}></div>
