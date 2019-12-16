@@ -170,7 +170,7 @@ export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onS
 
     const wrapperCls = classnames(styles.wrapper, className);
     return (
-        <div className={wrapperCls} style={style}>
+        <div className={wrapperCls} style={style} data-testid={dataTestId}>
             <div className={styles.cardsWrapper} onChange={handleFormChange}>
                 <PaymentCard errors={formErrors} dataTestId={dataTestId} />
                 <PaymentCardBack errors={formErrors} dataTestId={dataTestId} />

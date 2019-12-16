@@ -1,10 +1,14 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { PaymentCards } from '../../components/PaymentCard';
-import { isInvalidInput, validate, isFormInvalid } from '../../components/PaymentCard/validators';
-import { format } from '../../components/PaymentCard/formatters';
 
-describe('<Spinner />', () => {
+function assert(value: unknown): asserts value {
+    if (!value) {
+        throw new Error();
+    }
+}
+
+describe('<PaymentCard />', () => {
     const cardsTestId = 'cardZZ';
 
     test('should cards rendered', () => {
@@ -12,23 +16,45 @@ describe('<Spinner />', () => {
         const cards = getByTestId(cardsTestId);
         expect(cards).not.toBeNull();
     });
+
+    test('should have default dataTestId', () => {
+        const className = 'testtt';
+        const { container } = render(<PaymentCards className={className} />);
+        const cards = container.querySelector<HTMLElement>('.' + className);
+        assert(cards);
+
+        expect(cards.dataset.testid).toBe('PaymentCard');
+    });
+
+    test('should have a passed className', () => {
+        const cardsTestId = 'cardZZ';
+        const className = 'Плоти';
+
+        const { getByTestId } = render(<PaymentCards dataTestId={cardsTestId} className={className} />);
+        const cards = getByTestId(cardsTestId);
+        expect(cards).toHaveClass('Плоти');
+    });
 });
 
-describe('format', () => {
-    const initialCC = '4111111111111111';
-    const expectCC = '4111 1111 1111 1111';
-    const initialName = 'abu dvach';
-    const expectName = 'ABU DVACH';
-    const initialDate = '1488';
-    const expectDate = '14/88';
+describe('PaymentCard filling', () => {
+    const cardsTestId = 'cardZZ';
 
-    test('format cc', () => {
-        expect(initialCC).toBe(expectCC);
-    });
-    test('format name', () => {
-        expect(initialName).toBe(expectName);
-    });
-    test('format date', () => {
-        expect(initialDate).toBe(expectDate);
+    const mockFn = jest.fn();
+
+    test('should cards rendered', () => {
+        const { getByTestId } = render(<PaymentCards dataTestId={cardsTestId} onSuccess={mockFn} />);
+
+        const ccNumber = getByTestId(cardsTestId + '-cc-number');
+        const ccName = getByTestId(cardsTestId + '-cc-name');
+        const ccExp = getByTestId(cardsTestId + '-cc-exp');
+        const ccCsc = getByTestId(cardsTestId + '-cc-csc');
+
+        fireEvent.change(ccNumber, { target: { value: '4111111111111111' } });
+        fireEvent.change(ccName, { target: { value: 'abu dvach' } });
+        fireEvent.change(ccExp, { target: { value: '1488' } });
+        fireEvent.change(ccCsc, { target: { value: '123' } });
+
+        const mockCalls = mockFn.mock.calls;
+        expect(mockCalls[mockCalls.length - 1]).toEqual([true]);
     });
 });
