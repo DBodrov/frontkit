@@ -18,7 +18,7 @@ interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
      * */
     dataTestId?: string;
     /** Object of errors passed to Paymentcard to change validation styling */
-    errors?: ErrorsTypes;
+    errors: ErrorsTypes;
     /** array of bank images */
     images?: Array<{ url: string; name: string }>;
     /** Function passed to Paymentcard to check success */
@@ -38,9 +38,6 @@ const CardInput = ({ error, ...rest }: CardInputProps) => (
 );
 
 export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): JSX.Element {
-    if (errors === undefined) {
-        throw new Error();
-    }
     return (
         <div className={frontCardCls}>
             <div>{images && images.map(image => <img src={image.url} alt={image.name} />)}</div>
@@ -100,29 +97,25 @@ function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element 
     );
 }
 
-export interface FormFieldsTypes {
-    [key: string]: string;
-}
-
-export interface ErrorsTypes {
-    [key: string]: boolean;
-}
-
-const form: FormFieldsTypes = {
+const form = {
     'cc-number': '',
     'cc-name': '',
     'cc-exp': '',
     'cc-csc': '',
 };
 
-const errors: ErrorsTypes = {
+type FormFieldsTypes = typeof form;
+type nameType = keyof FormFieldsTypes;
+const errors = {
     'cc-number': false,
     'cc-name': false,
     'cc-exp': false,
     'cc-csc': false,
 };
 
-export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onSuccess }: PaymentCardProps) {
+type ErrorsTypes = typeof errors;
+
+export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onSuccess = () => {} }: PaymentCardProps) {
     const [formState, setFormState] = React.useState(form);
     const [formErrors, setError] = React.useState(errors);
 
@@ -131,23 +124,24 @@ export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onS
     }, [formErrors]);
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
         const element = event.target;
-
+        const { name, value } = element;
+        const typedNames = name as nameType;
         if (isInvalidInput(name, value)) {
-            element.value = formState[name];
+            element.value = formState[typedNames];
             return;
         }
 
         const elementSelection = element.selectionStart;
         if (elementSelection === null) {
-            throw new Error();
+            onSuccess(false);
+            return;
         }
         let elementNextSelection = elementSelection;
-        const prev = formState[name].replace(/\s/g, '').length;
+        const prev = formState[typedNames].replace(/\s/g, '').length;
         const cur = value.replace(/\s/g, '').length;
 
-        switch (event.target.name) {
+        switch (typedNames) {
             case 'cc-number':
                 if (cur >= prev) {
                     if (elementSelection % 5 === 0) {
@@ -166,9 +160,9 @@ export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onS
                 break;
         }
 
-        element.value = format(name, value);
-        setError({ ...formErrors, [name]: !validate(name, element.value) });
-        setFormState({ ...formState, [name]: element.value });
+        element.value = format(typedNames, value);
+        setError({ ...formErrors, [typedNames]: !validate(typedNames, element.value) });
+        setFormState({ ...formState, [typedNames]: element.value });
         element.setSelectionRange(elementNextSelection, elementNextSelection);
     };
 
