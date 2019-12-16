@@ -29,8 +29,12 @@ const frontCardCls = classnames(styles.cardWrapper, styles.frontCard);
 const backCardCls = classnames(styles.cardWrapper, styles.backCard);
 const cvvCls = classnames(styles.mb10, styles.cvv);
 
-const LittleInput = (props: any) => (
-    <SmallInput background={props.error ? BackgroundProp.Error : BackgroundProp.White} dataTestId={props.dataTestId} {...props} />
+interface CardInputProps extends React.ComponentProps<typeof SmallInput> {
+    error: boolean;
+}
+
+const CardInput = ({ error, ...rest }: CardInputProps) => (
+    <SmallInput background={error ? BackgroundProp.Error : BackgroundProp.White} {...rest} />
 );
 
 export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): JSX.Element {
@@ -41,7 +45,7 @@ export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): J
         <div className={frontCardCls}>
             <div>{images && images.map(image => <img src={image.url} alt={image.name} />)}</div>
             <div>
-                <LittleInput
+                <CardInput
                     name="cc-number"
                     placeholder="Номер карты"
                     className={styles.mb10}
@@ -50,7 +54,7 @@ export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): J
                     data-testid={dataTestId + '-cc-number'}
                 />
                 <div className={styles.flex}>
-                    <LittleInput
+                    <CardInput
                         name="cc-name"
                         placeholder="Владелец карты"
                         className={styles.ccName}
@@ -58,10 +62,10 @@ export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): J
                         autoComplete="cc-name"
                         data-testid={dataTestId + '-cc-name'}
                     />
-                    <LittleInput
+                    <CardInput
                         name="cc-exp"
                         placeholder="ММ/ГГ"
-                        maxLength="5"
+                        maxLength={5}
                         error={errors['cc-exp']}
                         autoComplete="cc-exp"
                         data-testid={dataTestId + '-cc-exp'}
@@ -80,12 +84,12 @@ function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element 
         <div className={backCardCls}>
             <div className={styles.magneticStrip}></div>
             <div className={styles.backCardBlock}>
-                <LittleInput
+                <CardInput
                     name="cc-csc"
                     type="text"
                     placeholder="CVV/CVC"
                     className={cvvCls}
-                    maxLength="3"
+                    maxLength={3}
                     error={errors['cc-csc']}
                     autoComplete="cc-csc"
                     data-testid={dataTestId + '-cc-csc'}
