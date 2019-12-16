@@ -3,6 +3,7 @@ import styles from './Dropdown.module.css';
 import { BackgroundProp, Input, SearchIcon } from '../Input';
 import { Dimmer } from './Dimmer';
 import { Card, SplitType } from '../Card';
+import { Spinner } from '../Spinner';
 
 function More(): JSX.Element {
     return <a className={styles.more}>Больше</a>;
@@ -32,11 +33,20 @@ function NotFound(): JSX.Element {
     );
 }
 
+function Loading(): JSX.Element {
+    return (
+        <Card className={styles.card}>
+            <Spinner />
+        </Card>
+    );
+}
+
 export enum Type {
     InputOnly,
     NotFound,
     Data,
     DataAndMore,
+    Loading,
 }
 
 type Props = {
@@ -44,7 +54,6 @@ type Props = {
     data: ReadonlyArray<React.ReactElement<{ key: React.Key }>>;
     type: Type;
     onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    showOutline: boolean;
 } & React.HTMLAttributes<HTMLDivElement>;
 export function BaseDropdown({ inputValue, data, onChangeInput, type, ...rest }: Props): JSX.Element {
     return (
@@ -59,6 +68,7 @@ export function BaseDropdown({ inputValue, data, onChangeInput, type, ...rest }:
             />
             {type === Type.Data || (type === Type.DataAndMore && <List data={data} showMore={type === Type.DataAndMore} />)}
             {type === Type.NotFound && <NotFound />}
+            {type === Type.Loading && <Loading />}
             {type !== Type.InputOnly && <Dimmer />}
         </div>
     );
