@@ -8,7 +8,7 @@ import styles from './PaymentCard.module.css';
 
 import { SmallInput, BackgroundProp } from '../Input';
 
-interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
+interface PaymentCardsProps extends React.HTMLAttributes<HTMLElement> {
     /** Class names passed to Paymentcard to change styling */
     className?: string;
     /** Inline style objects passed to Paymentcard wrapper */
@@ -17,12 +17,17 @@ interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
      * @default PaymentCard
      * */
     dataTestId?: string;
-    /** Object of errors passed to Paymentcard to change validation styling */
-    errors: ErrorsTypes;
     /** array of bank images */
     images?: Array<{ url: string; name: string }>;
     /** Function passed to Paymentcard to check success */
     onSuccess?: (successed: boolean) => unknown;
+}
+
+interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
+    dataTestId?: string;
+    /** Object of errors passed to Paymentcard to change validation styling */
+    errors: ErrorsTypes;
+    images?: Array<{ url: string; name: string }>;
 }
 
 const frontCardCls = classnames(styles.cardWrapper, styles.frontCard);
@@ -112,7 +117,7 @@ const errors = {
 
 type ErrorsTypes = typeof errors;
 
-export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onSuccess = () => {} }: PaymentCardProps) {
+export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onSuccess = () => {} }: PaymentCardsProps) {
     const [formState, setFormState] = React.useState(form);
     const [formErrors, setError] = React.useState(errors);
 
