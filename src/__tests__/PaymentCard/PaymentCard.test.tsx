@@ -44,10 +44,10 @@ describe('PaymentCard filling', () => {
     test('should cards rendered', () => {
         const { getByTestId } = render(<PaymentCards dataTestId={cardsTestId} onSuccess={mockFn} />);
 
-        const ccNumber = getByTestId(cardsTestId + '-cc-number');
-        const ccName = getByTestId(cardsTestId + '-cc-name');
-        const ccExp = getByTestId(cardsTestId + '-cc-exp');
-        const ccCsc = getByTestId(cardsTestId + '-cc-csc');
+        const ccNumber = getByTestId(cardsTestId + '-cc-number-input');
+        const ccName = getByTestId(cardsTestId + '-cc-name-input');
+        const ccExp = getByTestId(cardsTestId + '-cc-exp-input');
+        const ccCsc = getByTestId(cardsTestId + '-cc-csc-input');
 
         fireEvent.change(ccNumber, { target: { value: '4111111111111111' } });
         fireEvent.change(ccName, { target: { value: 'abu dvach' } });
