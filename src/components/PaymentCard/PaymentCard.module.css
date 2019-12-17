@@ -1,0 +1,105 @@
+@font-face {
+    font-family: cvc;
+    src: url(data:font/woff2;base64,d09GMgABAAAAAALAAA4AAAAABvgAAAJoAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP0ZGVE0cGiYGYACCQggEEQgKghCCIQscAAE2AiQDIgQgBYQNBzwb9QURlZspyX4k2A0+v6CczSYiDQlxTY6H5/f39Gufe94dwJVEgpEVKkuZSUQcf+OZNOcJXxhQZMv5ATlXAIr//7klVxTBB/AuinrRBdKtx0nd5lkeH6eGaWC1zSc4wqkPWDY4bzuo5CY0+JQIeNayeSN4eeJGK3h148IZgbporr0khLpCRkIgkGNGXFEhnUsLMUX4n8dyvaMnqU4lF6lMqUAAwMz149aip0HFserZ/eKY9wiIf9N9dBQoUKCtAEMVAm1lHZFlgUFV9KxWnwogSgIQCQkAEASryJWyxiMI3x/43DqlvYiqBOqB1ijQFG3RH1PRXQJRBY6c69ap1Mvzha21X76Ioy/rnH/uyLPana7Wuvqp472F95zdP44e06Pn6NEo17OHW9+eGpYK/Ett8Cf6+Slax0uy7U7oMfRujey73nfKyjsaL5LkThGFVogEoYx/WSzeORAs6pf3r2gw9LeaHYrPraJfJ6JzuoqaEghq8D5iBkRnAQDIMUMniBlqVT/iNwTqqSupKySEwEjdhUB9NwWgjYEChFo2CpDUcEyAQicPBMhqRRagomH0FKBUK+YpRK6F/rgQGpsLSX3boDDaOcga+xEqOkb9o0qNY5Qx0EZr08skUiOiCejIHRO+LMTjyNQKPYc/ifKB/nYXxXOyulD6AvPURplRKRISMG9TPzcmFMBskcSk5OnhBDY/MF6jNvJX9RIR8kcZMXHxB2b7sKvIYvsoodr6JKI/FUa62oPtj13CRNVC5mu9QVYNDWGZ8g7TZARrwoaYhcPMlNrVCaBaug9hcj2oQV0kMoVqZ+/g6OQMAAA=)
+            format('woff2'),
+        url(data:font/woff;base64,d09GRgABAAAAAAS0AA4AAAAABvgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAAEmAAAABwAAAAchcbCfUdERUYAAAR0AAAAIgAAACYAJwAzT1MvMgAAAbwAAABQAAAAYF3aZtpjbWFwAAACIAAAAE4AAAFCDh8Y/GN2dCAAAAJwAAAABAAAAAQAIQJ5Z2FzcAAABGwAAAAIAAAACP//AANnbHlmAAACkAAAAIkAAAEQrLbWD2hlYWQAAAFEAAAANQAAADYQn20gaGhlYQAAAXwAAAAeAAAAJASuAHBobXR4AAACDAAAABQAAAAiBPYBKmxvY2EAAAJ0AAAAHAAAABwCCgJcbWF4cAAAAZwAAAAfAAAAIABTAEpuYW1lAAADHAAAASAAAAINOKNvZHBvc3QAAAQ8AAAALQAAADz/uwCteJxjYGRgYADi1O2/++P5bb4yyDO/AIowXG+ZKwmib8zt6WBQBCrRYpoF5HIwMIFEAVc7Ct4AAAB4nGNgZGBgbvovw8DA6M8ABIxaDIwMqIAFADyLAiIAAHicY2BkYGDgZeBhYAJiRiDJACRBYg4MeiAWAAbrAJ4AeJxjYGH0Z5zAwMrAwNTFFMHAwOANoRnjGIwYDYCi3KwszExsTEzMQDlGBiQQkOaaAqQMGCyZm/7LMJxgbmJ4AlPD+IfpBJBSYGAEAN96C294nGP0Z1BkAAJGfzA2xYQAMYgDJHicY2BgYGaAYBkGRgYQsAHyGMF8FgYFIM0ChCC+5f//QNLg////l6EqGRjZGGBMBkYmIMHEgAoYGTAAMwsrGzsHJxc3D6bcUAQAtxUHPgAAACECeQAAACoAKgAqAEAASABQAFgAYABoAHAAeACAAIh4nGNgYlBkYGDUYprFwMzAzqC3kZFB32YTOwvDW6ONbKx3bDYxMwGZDBuZQcKsIOFN7GyMf2w2MYLEjQUVBdWNBZUVGTlfHD/ONOtvmiJTBNA4BlOGj4xSjNcZuBkYzNRMTcyMjcRERdiUK5yd9Q2cnQ0+uoApfReG//9hagXYgC4YcD4A8DVDFwAAAHichY6xbsIwEIZ/Q6DKgirWLu4GEokckApia5HyAKhhj8AKFlGCjBlYO/Zh+ih9lj5C/wTTpQOW7Pt899/dD2CALwhczxMWngVC7D138IAPz10849tzgFAEnnt4FMpzn/mMShGE/L20XQ0LDPHuucO91nMXb/j0HFDz47kHKQae+xiKV6xQ44gLOw0K+nOQGGGLMeMUCgn9T8g5YioqHNoXq/p4sabYOznajuVUJYuJzGNTHQyLGRWOOocSGjvOQFY540q9I66ZK3BmLedWrHVxLnNCSidNXxMtFZpbl7z/p13zM7qLMOe9+URaVy6tbaHlUv5tJM9UNI8ak/e8bZizOLHeeJGc20yO26j4x0bbk6krqVQSK6XknYG/tH1PbHicY2BiAIP/FgxGQIqRAR3wgkWZGIQZRBhEGcQYxBkkGCQZpBikGWQAU44CaAAAAAAAAAH//wACeJxjYGRgYOABYjEGOQYmBkYg5AFiFqAIExAzQjAACS4AWwAAAAAAAQAAAADVpJjbAAAAANeEnRkAAAAA2J2MiA==)
+            format('woff');
+}
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.cardsWrapper {
+    position: relative;
+    width: 100%;
+    min-width: 480px;
+    max-width: 704px;
+    height: 331px;
+}
+
+.cardWrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    background: #f2f6fb;
+    padding: 30px;
+    width: 453px;
+    height: 284px;
+}
+
+.frontCard {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
+
+.ccName {
+    margin-right: 10px;
+    width: 175%;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.flex {
+    display: flex;
+}
+
+.backCard {
+    padding-top: 20px;
+    position: absolute;
+    top: 150px;
+    right: 0;
+}
+
+.backCardBlock {
+    width: 50%;
+    margin-left: auto;
+}
+
+.magneticStrip {
+    margin: 0 -30px;
+    height: 68px;
+    background: #eaeef4;
+}
+
+.cvv input {
+    font-family: cvc;
+}
+
+.cardText {
+    font-size: 12px;
+    line-height: 18px;
+    color: #7e8996;
+}
+
+@media (min-width: 576px) {
+    .cardsWrapper {
+        height: 431px;
+    }
+    .backCardBlock {
+        width: 50%;
+    }
+}
+
+@media (min-width: 768px) {
+    .backCardBlock {
+        width: 33%;
+    }
+    .backCard {
+        top: 50px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .backCardBlock {
+        width: 50%;
+    }
+}

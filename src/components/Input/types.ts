@@ -9,4 +9,4 @@ export type Props = {
     background?: BackgroundProp;
     dataTestId?: string;
     right?: boolean;
-} & React.HTMLAttributes<HTMLInputElement>;
+} & React.AllHTMLAttributes<HTMLInputElement>;
