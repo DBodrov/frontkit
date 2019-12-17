@@ -1,4 +1,4 @@
-import { FormFieldsTypes, ErrorsTypes } from './PaymentCard';
+import { FormFieldsTypes, ErrorsTypes, nameType } from './PaymentCard';
 
 export const REGEXP_NON_DDS = /[^0-9-\s]+/;
 export const REGEXP_NON_DATE = /[^0-9/]+/;
@@ -41,7 +41,7 @@ const validateCvv = (value: string): boolean => value.length === 3;
 
 const validateName = (value: string): boolean => value.replace(/\s/g, '').length !== 0;
 
-export const isInvalidInput = (name: string, value: string): boolean => {
+export const isInvalidInput = (name: nameType, value: string): boolean => {
     switch (name) {
         case 'cc-number':
             return REGEXP_NON_DDS.test(value);
@@ -56,7 +56,7 @@ export const isInvalidInput = (name: string, value: string): boolean => {
     }
 };
 
-export const validate = (name: string, value: string): boolean => {
+export const validate = (name: nameType, value: string): boolean => {
     switch (name) {
         case 'cc-number':
             return validateCreditCard(value);

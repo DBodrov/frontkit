@@ -106,8 +106,8 @@ const form = {
     'cc-csc': '',
 };
 
-type FormFieldsTypes = typeof form;
-type nameType = keyof FormFieldsTypes;
+export type FormFieldsTypes = typeof form;
+export type nameType = keyof FormFieldsTypes;
 const errors = {
     'cc-number': false,
     'cc-name': false,
@@ -115,7 +115,7 @@ const errors = {
     'cc-csc': false,
 };
 
-type ErrorsTypes = typeof errors;
+export type ErrorsTypes = typeof errors;
 
 export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onSuccess = () => {} }: PaymentCardsProps) {
     const [formState, setFormState] = React.useState(form);
@@ -129,7 +129,7 @@ export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onS
         const element = event.target;
         const { name, value } = element;
         const typedNames = name as nameType;
-        if (isInvalidInput(name, value)) {
+        if (isInvalidInput(typedNames, value)) {
             element.value = formState[typedNames];
             return;
         }
