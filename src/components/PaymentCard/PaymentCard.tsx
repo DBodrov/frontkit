@@ -48,7 +48,7 @@ export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): J
                     className={styles.mb10}
                     error={errors['cc-number']}
                     autoComplete="cc-number"
-                    data-testid={dataTestId + '-cc-number'}
+                    dataTestId={dataTestId + '-cc-number'}
                 />
                 <div className={styles.flex}>
                     <CardInput
@@ -57,7 +57,7 @@ export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): J
                         className={styles.ccName}
                         error={errors['cc-name']}
                         autoComplete="cc-name"
-                        data-testid={dataTestId + '-cc-name'}
+                        dataTestId={dataTestId + '-cc-name'}
                     />
                     <CardInput
                         name="cc-exp"
@@ -65,7 +65,7 @@ export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): J
                         maxLength={5}
                         error={errors['cc-exp']}
                         autoComplete="cc-exp"
-                        data-testid={dataTestId + '-cc-exp'}
+                        dataTestId={dataTestId + '-cc-exp'}
                     />
                 </div>
             </div>
@@ -86,7 +86,7 @@ function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element 
                     maxLength={3}
                     error={errors['cc-csc']}
                     autoComplete="cc-csc"
-                    data-testid={dataTestId + '-cc-csc'}
+                    dataTestId={dataTestId + '-cc-csc'}
                 />
                 <div className={styles.cardText}>Последние 3 цифры на оборотной стороне карты</div>
             </div>
