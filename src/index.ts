@@ -9,4 +9,4 @@ export { Provider, Providers } from './components/Providers';
 export { BreadCrumbs } from './components/BreadCrumbs';
 export { Arrow, ArrowTypes } from './components/Arrow';
 export { Box } from './components/Box';
-export { PaymentCard } from './components/PaymentCard';
+export { PaymentCards } from './components/PaymentCard';
