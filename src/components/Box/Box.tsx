@@ -1,22 +1,22 @@
 import classnames from 'classnames';
 import React, { ReactNode } from 'react';
 
-import styles from './Card.module.css';
+import styles from './Box.module.css';
 
-interface CardProps extends React.HTMLAttributes<HTMLElement> {
-    /** Class names passed to card to change styling */
+interface BoxProps extends React.HTMLAttributes<HTMLElement> {
+    /** Class names passed to box to change styling */
     className?: string;
-    /** Inline style objects passed to card wrapper */
+    /** Inline style objects passed to box wrapper */
     style?: React.StyleHTMLAttributes<HTMLElement>;
     /** ID attribute for QA Auto-tests
-     * @default Card
+     * @default Box
      * */
     dataTestId?: string;
-    /** Childrens passed to card wrapper */
+    /** Childrens passed to box wrapper */
     children: ReactNode;
 }
 
-export function Card({ className, style, dataTestId = 'Card', children, ...rest }: CardProps): JSX.Element {
+export function Box({ className, style, dataTestId = 'Box', children, ...rest }: BoxProps): JSX.Element {
     return (
         <div data-testid={dataTestId} className={classnames(styles.wrapper, className)} style={style} {...rest}>
             {children}
