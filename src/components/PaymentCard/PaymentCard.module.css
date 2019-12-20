@@ -8,8 +8,6 @@
 
 .wrapper {
     width: 100%;
-    display: flex;
-    justify-content: center;
 }
 
 .cardsWrapper {
@@ -74,6 +72,10 @@
     font-family: cvc;
 }
 
+.cvv input::placeholder {
+    font-family: Graphik, sans-serif;
+}
+
 .cardText {
     font-size: 12px;
     line-height: 18px;
@@ -90,6 +92,9 @@
 }
 
 @media (min-width: 768px) {
+    .cardsWrapper {
+        height: 331px;
+    }
     .backCardBlock {
         width: 33%;
     }
