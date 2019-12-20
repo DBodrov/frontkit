@@ -84,12 +84,6 @@
     color: #7e8996;
 }
 
-@media (min-width: 576px) {
-    .backCardBlock {
-        width: 50%;
-    }
-}
-
 @media (min-width: 768px) {
     .cardsWrapper {
         height: 331px;
