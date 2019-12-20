@@ -41,7 +41,7 @@ describe('PaymentCard filling', () => {
 
     const mockFn = jest.fn();
 
-    test('should cards rendered', () => {
+    test('should cards filling', () => {
         const { getByTestId } = render(<PaymentCards dataTestId={cardsTestId} onSuccess={mockFn} />);
 
         const ccNumber = getByTestId(cardsTestId + '-cc-number-input');

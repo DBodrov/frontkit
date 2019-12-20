@@ -21,6 +21,8 @@ interface PaymentCardsProps extends React.HTMLAttributes<HTMLElement> {
     images?: Array<{ url: string; name: string }>;
     /** Function passed to Paymentcard to check success */
     onSuccess?: (successed: boolean) => unknown;
+    /** Function passed to Paymentcard to get state */
+    getState?: (state: FormFieldsTypes) => unknown;
 }
 
 interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
@@ -38,14 +40,14 @@ interface CardInputProps extends React.ComponentProps<typeof SmallInput> {
     error: boolean;
 }
 
-const CardInput = ({ error, ...rest }: CardInputProps) => (
+const CardInput = ({ error, ...rest }: CardInputProps): JSX.Element => (
     <SmallInput background={error ? BackgroundProp.Error : BackgroundProp.White} {...rest} />
 );
 
 export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): JSX.Element {
     return (
         <div className={frontCardCls}>
-            <div>{images && images.map(image => <img src={image.url} alt={image.name} />)}</div>
+            <div>{images && images.map(image => <img key={image.name} src={image.url} alt={image.name} />)}</div>
             <div>
                 <CardInput
                     name="cc-number"
@@ -117,15 +119,22 @@ const errors = {
 
 export type ErrorsTypes = typeof errors;
 
-export function PaymentCards({ className, style, dataTestId = 'PaymentCard', onSuccess = () => {} }: PaymentCardsProps) {
+export function PaymentCards({
+    className,
+    style,
+    dataTestId = 'PaymentCard',
+    onSuccess = (): void => {},
+    getState = (): void => {},
+}: PaymentCardsProps): JSX.Element {
     const [formState, setFormState] = React.useState(form);
     const [formErrors, setError] = React.useState(errors);
 
     React.useEffect(() => {
-        onSuccess && onSuccess(isFormInvalid(formErrors, formState));
-    }, [formErrors]);
+        getState(formState);
+        onSuccess(isFormInvalid(formErrors, formState));
+    }, [formErrors, formState, getState, onSuccess]);
 
-    const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const element = event.target;
         const { name, value } = element;
         const typedNames = name as nameType;
