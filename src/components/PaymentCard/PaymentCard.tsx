@@ -130,9 +130,9 @@ export function PaymentCards({
     const [formErrors, setError] = React.useState(errors);
 
     React.useEffect(() => {
-        getState && getState(formState);
-        onSuccess && onSuccess(isFormInvalid(formErrors, formState));
-    }, [formErrors]);
+        getState(formState);
+        onSuccess(isFormInvalid(formErrors, formState));
+    }, [formErrors, formState, getState, onSuccess]);
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const element = event.target;
