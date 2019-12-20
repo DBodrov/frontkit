@@ -8,6 +8,8 @@
 
 .wrapper {
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .cardsWrapper {
@@ -15,7 +17,7 @@
     width: 100%;
     min-width: 480px;
     max-width: 704px;
-    height: 331px;
+    height: 431px;
 }
 
 .cardWrapper {
@@ -83,9 +85,6 @@
 }
 
 @media (min-width: 576px) {
-    .cardsWrapper {
-        height: 431px;
-    }
     .backCardBlock {
         width: 50%;
     }
@@ -95,16 +94,7 @@
     .cardsWrapper {
         height: 331px;
     }
-    .backCardBlock {
-        width: 33%;
-    }
     .backCard {
         top: 50px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .backCardBlock {
-        width: 50%;
     }
 }
