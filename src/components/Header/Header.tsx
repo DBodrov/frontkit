@@ -33,3 +33,13 @@ export function H2(props: HeaderProps): JSX.Element {
         </h2>
     );
 }
+
+export function H3(props: HeaderProps): JSX.Element {
+    const { children, className, style, dataTestId = 'Header-H3' } = props;
+    const cls = classnames(styles.header, styles.h3, className);
+    return (
+        <h3 className={cls} style={style} data-testid={dataTestId}>
+            {children}
+        </h3>
+    );
+}
