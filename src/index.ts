@@ -10,3 +10,4 @@ export { BreadCrumbs } from './components/BreadCrumbs';
 export { Arrow, ArrowTypes } from './components/Arrow';
 export { Box } from './components/Box';
 export { PaymentCards } from './components/PaymentCard';
+export { Radio } from './components/Radio';
