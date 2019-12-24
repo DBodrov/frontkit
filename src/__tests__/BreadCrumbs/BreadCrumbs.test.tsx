@@ -10,7 +10,7 @@ const theme = {
     className: 'cn1',
 };
 
-const mockFunc = jest.fn(() => console.log('Главная'));
+const mockFunc = jest.fn();
 
 const simpleBreadCrumbs = [
     {
