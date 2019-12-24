@@ -16,7 +16,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    height: 22px;
+    min-height: 22px;
 }
 .radio__text .before {
     content: '';
