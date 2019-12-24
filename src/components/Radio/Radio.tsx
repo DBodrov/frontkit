@@ -32,11 +32,11 @@ export function Radio(props: RadioProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
     const { name, value, label, dataTestId = 'Radio', className, style, disabled = false, ...rest } = props;
     const themeColor = getThemeColor(theme);
-    const cls = classnames(styles.radio, theme.className, className);
+    const cls = classnames(styles.radio__text, theme.className, className);
     return (
-        <label key={name} className={cls} style={style} data-testid={dataTestId + '-wrap'}>
+        <label key={name} className={styles.radio} style={style} data-testid={dataTestId + '-wrap'}>
             <input {...rest} type="radio" name={name} id={value} value={value} disabled={disabled} data-testid={dataTestId} />
-            <div className={styles.radio__text}>
+            <div className={cls}>
                 <div className={styles.before} data-testid={dataTestId + '-BigCircle'} />
                 <span data-testid={dataTestId + '-text'}>{label}</span>
                 <div className={styles.after} style={themeColor} data-testid={dataTestId + '-SmallCircle'} />
