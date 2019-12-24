@@ -4,7 +4,7 @@ import { StyleTypeProp } from '../Button';
 import { ThemeContext, ThemeTypes } from '../ThemeProvider';
 import styles from './Radio.module.css';
 
-interface RadioProps {
+interface RadioProps extends React.AllHTMLAttributes<HTMLInputElement> {
     /** Class names passed to Radio in order to change styling */
     className?: string;
     /** Inline style objects passed to Radio */
