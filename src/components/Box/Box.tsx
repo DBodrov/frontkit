@@ -40,7 +40,7 @@ export function Box({
     dataTestId = 'Card',
     children,
     ...rest
-}: CardProps): JSX.Element {
+}: BoxProps): JSX.Element {
     return (
         <div data-testid={dataTestId} className={classnames(styles.wrapper, className)} style={style} {...rest}>
             {React.Children.toArray(children).map((child, index, origin) => (
