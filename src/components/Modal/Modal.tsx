@@ -10,7 +10,7 @@ interface PopupProps {
     closeOnClickOutside?: boolean;
     closeOnEsc?: boolean;
     header?: string;
-    dataTestId: string;
+    dataTestId?: string;
 }
 
 const EscapeCode = 27;
@@ -60,14 +60,14 @@ const Popup = ({ children, onClose, closeOnClickOutside = true, closeOnEsc = tru
 
     return (
         <>
-            <Dimmer dataTestId={dataTestId + 'Dimmer'} />
-            <div ref={wrapperRef} className={styles.wrapper}>
+            <Dimmer dataTestId={dataTestId + '-Dimmer'} />
+            <div ref={wrapperRef} className={styles.wrapper} data-testid={dataTestId + '-Wrapper'}>
                 <div className={styles.middle}>
-                    <div data-testid={dataTestId + '-Wrapper'} className={styles.popup}>
+                    <div data-testid={dataTestId} className={styles.popup}>
                         {Boolean(header) && <H3 className={styles.header}>{header}</H3>}
                         {onClose && (
                             <div onClick={onClose}>
-                                <div className={styles.close} data-testid={dataTestId + 'Close'} />
+                                <div className={styles.close} data-testid={dataTestId + '-Close'} />
                             </div>
                         )}
                         {children}
