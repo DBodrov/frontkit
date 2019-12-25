@@ -2,7 +2,8 @@ import React from 'react';
 import { BaseDropdown, Type } from './BaseDropdown';
 
 type IsSuitable<T> = (el: T, searchValue: string) => boolean;
-type GetElement<T> = (el: T) => React.ReactElement<{ key: React.Key }>;
+type GetElement<T> = (el: T) => React.ReactElement<{ key: React.Key; onClick: () => unknown }>;
+type SelectHandler<T> = (el: T) => unknown;
 function useInputValue(): [string, React.ChangeEventHandler<HTMLInputElement>] {
     const [value, setValue] = React.useState('');
     const onChangeInput = React.useCallback(
@@ -23,11 +24,12 @@ function useRenderedElements<T>(
     getElement: Props<T>['getElement'],
     inputThreshold: Props<T>['inputThreshold'],
     resultThreshold: Props<T>['resultThreshold'],
+    onSelect: Props<T>['onSelect'],
 ): [ReadonlyArray<React.ReactElement>, boolean] {
     const prefix = React.useRef<number>(0);
     const elements = React.useMemo(() => {
         prefix.current++;
-        return data.map((el, id) => React.cloneElement(getElement(el), { key: `${prefix.current}_${id}` }));
+        return data.map((el, id) => React.cloneElement(getElement(el), { key: `${prefix.current}_${id}`, onClick: () => onSelect(el) }));
     }, [data, getElement]);
     const [searchableData, showMore]: [ReadonlyArray<React.ReactElement>, ShowMore] = React.useMemo(() => {
         const res: Array<React.ReactElement> = [];
@@ -68,6 +70,7 @@ export type Props<T> = {
     inputThreshold: number;
     resultThreshold: number;
     dataTestId?: string;
+    onSelect: SelectHandler<T>;
 } & React.HTMLAttributes<HTMLDivElement>;
 export function Dropdown<T>({
     dataTestId = 'dropdown',
@@ -76,10 +79,11 @@ export function Dropdown<T>({
     getElement,
     inputThreshold,
     resultThreshold,
+    onSelect,
     ...rest
 }: Props<T>): JSX.Element {
     const [value, onChangeInput] = useInputValue();
-    const [elements, showMore] = useRenderedElements(value, data, isSuitable, getElement, inputThreshold, resultThreshold);
+    const [elements, showMore] = useRenderedElements(value, data, isSuitable, getElement, inputThreshold, resultThreshold, onSelect);
 
     const showDimmer = value.length >= inputThreshold;
     const type = getBaseDropdownType(showDimmer, elements, showMore);
