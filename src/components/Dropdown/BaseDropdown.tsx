@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Dropdown.module.css';
 import { BackgroundProp, Input, SearchIcon } from '../Input';
 import { Dimmer } from './Dimmer';
-import { Card, SplitType } from '../Card';
+import { Box, SplitType } from '../Box';
 import { Spinner } from '../Spinner';
 
 function More({ dataTestId }: { dataTestId: string }): JSX.Element {
@@ -20,30 +20,30 @@ type ListProps<T> = {
 };
 function List<T>({ dataTestId, data, showMore }: ListProps<T>): JSX.Element {
     return (
-        <Card
+        <Box
             dataTestId={dataTestId}
             className={styles.card}
             getSplitType={(splitOrder, size) => (size - 1 === splitOrder && showMore ? SplitType.Full : SplitType.Padding)}
         >
             {data}
             {showMore && <More dataTestId={dataTestId + '-more'} />}
-        </Card>
+        </Box>
     );
 }
 
 function NotFound({ dataTestId }: { dataTestId: string }): JSX.Element {
     return (
-        <Card className={styles.card} dataTestId={dataTestId}>
+        <Box className={styles.card} dataTestId={dataTestId}>
             <p>По запросу ничего не найдено</p>
-        </Card>
+        </Box>
     );
 }
 
 function Loading(): JSX.Element {
     return (
-        <Card className={styles.card}>
+        <Box className={styles.card}>
             <Spinner />
-        </Card>
+        </Box>
     );
 }
 
