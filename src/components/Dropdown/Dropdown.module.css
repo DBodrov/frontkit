@@ -1,0 +1,22 @@
+.input {
+    z-index: 1;
+    position: relative;
+}
+
+.card {
+    z-index: 1;
+    position: relative;
+    background-color: #ffffff;
+    margin-top: 18px;
+}
+
+.more {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    color: #4B8BDA;
+    cursor: pointer;
+}

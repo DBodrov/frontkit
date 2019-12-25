@@ -4,9 +4,14 @@
     border-radius: 6px;
 }
 
-.wrapper > * {
+.wrapper > *:not(.border) {
     padding: 30px;
 }
-.wrapper > *:not(:last-of-type) {
-    border-bottom: 1px solid #eeeeee;
+
+.border {
+    height: 1px;
+    background-color: #f3f6f9;
+}
+.paddingBorder {
+    margin: 0 30px;
 }
