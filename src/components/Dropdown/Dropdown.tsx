@@ -29,7 +29,9 @@ function useRenderedElements<T>(
     const prefix = React.useRef<number>(0);
     const elements = React.useMemo(() => {
         prefix.current++;
-        return data.map((el, id) => React.cloneElement(getElement(el), { key: `${prefix.current}_${id}`, onClick: () => onSelect(el) }));
+        return data.map((el, id) =>
+            React.cloneElement(getElement(el), { key: `${prefix.current}_${id}`, onClick: () => onSelect && onSelect(el) }),
+        );
     }, [data, getElement]);
     const [searchableData, showMore]: [ReadonlyArray<React.ReactElement>, ShowMore] = React.useMemo(() => {
         const res: Array<React.ReactElement> = [];
@@ -70,7 +72,7 @@ export type Props<T> = {
     inputThreshold: number;
     resultThreshold: number;
     dataTestId?: string;
-    onSelect: SelectHandler<T>;
+    onSelect?: SelectHandler<T>;
 } & React.HTMLAttributes<HTMLDivElement>;
 export function Dropdown<T>({
     dataTestId = 'dropdown',
