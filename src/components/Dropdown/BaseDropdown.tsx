@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Dropdown.module.css';
 import { BackgroundProp, Input, SearchIcon } from '../Input';
-import { Dimmer } from './Dimmer';
+import { Dimmer } from '../Dimmer';
 import { Box, SplitType } from '../Box';
 import { Spinner } from '../Spinner';
 
