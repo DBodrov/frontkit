@@ -1,11 +1,19 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Provider, Providers } from '../components/Providers';
+import { action } from '@storybook/addon-actions';
 
 storiesOf('Providers', module)
     .add(
         'Provider',
-        () => <Provider name="Очень длинный заголовок. ООООчень" src="https://www.a-3.ru/img/logo_png/home-icon.png" width="300px" />,
+        () => (
+            <Provider
+                onClick={action('click')}
+                name="Очень длинный заголовок. ООООчень"
+                src="https://www.a-3.ru/img/logo_png/home-icon.png"
+                width="300px"
+            />
+        ),
         {
             info: { inline: true },
         },
@@ -28,6 +36,7 @@ storiesOf('Providers', module)
                 ]}
                 size={5}
                 gap="1vw"
+                onClick={action('click')}
             />
         ),
         {

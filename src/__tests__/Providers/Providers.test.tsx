@@ -14,7 +14,7 @@ describe('<Providers />', () => {
                     { id: 1, name: 'name1', src: 'src1' },
                     { id: 2, name: 'name2', src: 'src2' },
                 ]}
-                gap='1fr'
+                gap="1fr"
             />,
         );
         const providers = getByTestId(testId);
@@ -34,6 +34,31 @@ describe('<Providers />', () => {
         const providers = getByTestId('providers');
         expect(providers).not.toBeNull();
     });
+
+    test('should return element after click on it', () => {
+        const clickHandler = jest.fn();
+        const el = { id: 1, name: 'name1', src: 'src1' };
+        const { getByTestId } = render(
+            <Providers dataTestId={testId} size={2} data={[el, { id: 2, name: 'name2', src: 'src2' }]} gap="1fr" onClick={clickHandler} />,
+        );
+        fireEvent.click(getByTestId(testId + '-single-1'));
+
+        expect(clickHandler).toBeCalledTimes(1);
+        expect(clickHandler).toBeCalledWith(el);
+    });
+
+
+    test('should return element after click on his children', () => {
+        const clickHandler = jest.fn();
+        const el = { id: 1, name: 'name1', src: 'src1' };
+        const { getByTestId } = render(
+            <Providers dataTestId={testId} size={2} data={[el, { id: 2, name: 'name2', src: 'src2' }]} gap="1fr" onClick={clickHandler} />,
+        );
+        fireEvent.click(getByTestId(testId + '-single-1-image'));
+
+        expect(clickHandler).toBeCalledTimes(1);
+        expect(clickHandler).toBeCalledWith(el);
+    });
 });
 
 describe('scrolling', () => {
@@ -52,7 +77,6 @@ describe('scrolling', () => {
             />,
         );
     });
-
 
     test('should third provider rendered after scroll right', () => {
         fireEvent.click(rendered.getByTestId(testId + '-scroller-increase'));
