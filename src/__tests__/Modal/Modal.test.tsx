@@ -2,8 +2,6 @@ import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { Modal } from '../../components/Modal';
 
-const mockFunc = jest.fn();
-
 class TestComp extends React.Component {
     state = {
         isOpen: false,
@@ -40,6 +38,7 @@ class TestComp extends React.Component {
 describe('<Modal />', () => {
     test('should render an Modal element', () => {
         const modalTestId = 'Modal';
+        const mockFunc = jest.fn();
         const { getByTestId } = render(
             <Modal onClose={mockFunc}>
                 <span>123</span>
@@ -58,8 +57,5 @@ describe('<Modal />', () => {
         fireEvent.click(elementClickToOpen);
         const modal = getByTestId('Modal');
         expect(modal).not.toBeNull();
-        // const closeBtn = getByTestId('Modal-Wrapper');
-        // fireEvent.click(closeBtn);
-        // expect(()=>getByTestId('Modal')).toThrow();
     });
 });
