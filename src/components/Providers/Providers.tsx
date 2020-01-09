@@ -7,12 +7,13 @@ type ProviderInfo = {
     src: string;
     name: string;
 };
-type Props = {
+interface Props {
     dataTestId?: string;
     data: ReadonlyArray<ProviderInfo>;
     size: number;
     gap?: string;
-};
+    onClick?: (info: ProviderInfo) => unknown;
+}
 
 function useOffset(max: number): [number, () => void, () => void] {
     const [offset, setOffset] = React.useState(0);
@@ -47,13 +48,43 @@ function createChildStyleForIE(order: number): object {
     };
 }
 
-export function Providers({ data, size, gap = '0', dataTestId = 'providers' }: Props): JSX.Element {
+function getDataId(el: HTMLDivElement): string {
+    const id = el.getAttribute('data-id');
+    if (id !== null) {
+        return id;
+    }
+    const dataIdTarget = el.closest('[data-id]');
+    return dataIdTarget?.getAttribute('data-id') ?? '';
+}
+
+export function Providers({ data, size, gap = '0', dataTestId = 'providers', onClick }: Props): JSX.Element {
     const max = data.length - size;
     const [offset, increase, decrease] = useOffset(max);
 
+    const providerInfoIndex = React.useMemo(() => {
+        const map = new Map<number, ProviderInfo>();
+        for (let i = 0; i < data.length; ++i) {
+            map.set(i, data[i]);
+        }
+        return map;
+    }, [data]);
+
+    const providerClickHandler = React.useCallback(
+        (e: React.MouseEvent<HTMLDivElement>) => {
+            const target = e.target as HTMLDivElement;
+            const idNumber = parseInt(getDataId(target), 10);
+            const el = providerInfoIndex.get(idNumber);
+
+            if (el !== undefined && onClick) {
+                onClick(el);
+            }
+        },
+        [onClick, providerInfoIndex],
+    );
+
     return (
         <div data-testid={dataTestId}>
-            <div className={styles.wrapper} style={createStyle(size, gap)}>
+            <div onClick={providerClickHandler} className={styles.wrapper} style={createStyle(size, gap)}>
                 {data.slice(offset, offset + size).map((provider, id, original) => (
                     <React.Fragment key={provider.id}>
                         <Provider
@@ -62,6 +93,7 @@ export function Providers({ data, size, gap = '0', dataTestId = 'providers' }: P
                             width="100%"
                             style={createChildStyleForIE(2 * (id + 1) - 1)}
                             dataTestId={`${dataTestId}-single-${provider.id}`}
+                            data-id={offset + id}
                         />
                         {id !== original.length - 1 && <div style={createChildStyleForIE(2 * (id + 1))} />}
                     </React.Fragment>

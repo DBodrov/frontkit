@@ -2,18 +2,19 @@ import React from 'react';
 import styles from './Provider.module.css';
 import cn from 'classnames';
 
-type Props = {
+interface Props {
     src: string;
     name: string;
     dataTestId?: string;
     width?: string;
     style?: object;
-};
-export function Provider({ src, name, dataTestId, width, style }: Props) {
+    onClick?: () => unknown;
+}
+export function Provider({ src, name, dataTestId, width, style, onClick, ...rest }: Props) {
     return (
-        <figure className={styles.wrapper} data-testid={dataTestId} style={{ width, ...style }}>
+        <figure {...rest} className={styles.wrapper} data-testid={dataTestId} style={{ width, ...style }} onClick={onClick} role="button">
             <div className={styles.content}>
-                <div className={cn(styles['image-wrapper'], styles['center-container'])}>
+                <div data-testid={dataTestId + '-image'} className={cn(styles['image-wrapper'], styles['center-container'])}>
                     <img className={styles.image} src={src} alt={name} />
                 </div>
                 <div className={cn(styles['caption-wrapper'], styles['center-container'])}>
