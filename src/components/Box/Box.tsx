@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import React, { ReactNode } from 'react';
 import cn from 'classnames';
 import styles from './Box.module.css';
@@ -42,7 +41,7 @@ export function Box({
     ...rest
 }: BoxProps): JSX.Element {
     return (
-        <div data-testid={dataTestId} className={classnames(styles.wrapper, className)} style={style} {...rest}>
+        <div data-testid={dataTestId} className={cn(styles.wrapper, className)} style={style} {...rest}>
             {React.Children.toArray(children).map((child, index, origin) => (
                 <React.Fragment key={index}>
                     {child}
