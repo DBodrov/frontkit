@@ -50,29 +50,29 @@ export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): J
             <div>{images && images.map(image => <img key={image.name} src={image.url} alt={image.name} />)}</div>
             <div>
                 <CardInput
-                    name="cc-number"
+                    name="ccNumber"
                     placeholder="Номер карты"
                     className={styles.mb10}
-                    error={errors['cc-number']}
+                    error={errors['ccNumber']}
                     autoComplete="cc-number"
-                    dataTestId={dataTestId + '-cc-number'}
+                    dataTestId={dataTestId + '-ccNumber'}
                 />
                 <div className={styles.flex}>
                     <CardInput
-                        name="cc-name"
+                        name="ccName"
                         placeholder="Владелец карты"
                         className={styles.ccName}
-                        error={errors['cc-name']}
+                        error={errors['ccName']}
                         autoComplete="cc-name"
-                        dataTestId={dataTestId + '-cc-name'}
+                        dataTestId={dataTestId + '-ccName'}
                     />
                     <CardInput
-                        name="cc-exp"
+                        name="ccExp"
                         placeholder="ММ/ГГ"
                         maxLength={5}
-                        error={errors['cc-exp']}
+                        error={errors['ccExp']}
                         autoComplete="cc-exp"
-                        dataTestId={dataTestId + '-cc-exp'}
+                        dataTestId={dataTestId + '-ccExp'}
                     />
                 </div>
             </div>
@@ -86,14 +86,14 @@ function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element 
             <div className={styles.magneticStrip}></div>
             <div className={styles.backCardBlock}>
                 <CardInput
-                    name="cc-csc"
+                    name="ccCsc"
                     type="text"
                     placeholder="CVV/CVC"
                     className={cvvCls}
                     maxLength={3}
-                    error={errors['cc-csc']}
+                    error={errors['ccCsc']}
                     autoComplete="cc-csc"
-                    dataTestId={dataTestId + '-cc-csc'}
+                    dataTestId={dataTestId + '-ccCsc'}
                 />
                 <div className={styles.cardText}>Последние 3 цифры на оборотной стороне карты</div>
             </div>
@@ -102,19 +102,19 @@ function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element 
 }
 
 const form = {
-    'cc-number': '',
-    'cc-name': '',
-    'cc-exp': '',
-    'cc-csc': '',
+    ccNumber: '',
+    ccName: '',
+    ccExp: '',
+    ccCsc: '',
 };
 
 export type FormFieldsTypes = typeof form;
 export type nameType = keyof FormFieldsTypes;
 const errors = {
-    'cc-number': false,
-    'cc-name': false,
-    'cc-exp': false,
-    'cc-csc': false,
+    ccNumber: false,
+    ccName: false,
+    ccExp: false,
+    ccCsc: false,
 };
 
 export type ErrorsTypes = typeof errors;
@@ -153,14 +153,14 @@ export function PaymentCards({
         const cur = value.replace(/\s/g, '').length;
 
         switch (typedNames) {
-            case 'cc-number':
+            case 'ccNumber':
                 if (cur >= prev) {
                     if (elementSelection % 5 === 0) {
                         elementNextSelection += 1;
                     }
                 }
                 break;
-            case 'cc-exp':
+            case 'ccExp':
                 if (cur >= prev) {
                     if (elementSelection === 3) {
                         elementNextSelection += 1;
