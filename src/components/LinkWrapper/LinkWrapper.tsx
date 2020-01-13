@@ -14,10 +14,7 @@ interface LinkWrapperProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const getThemeColor = (theme: ThemeTypes, style: React.StyleHTMLAttributes<HTMLElement>) => {
-    if (!theme.styles || !theme.styles.linkColor) {
-        return { color: DEFAULT_LINK_COLOR, ...style };
-    }
-    const { linkColor } = theme.styles;
+    const linkColor = theme.styles?.linkColor ?? DEFAULT_LINK_COLOR;
     return { color: linkColor, ...style };
 };
 
