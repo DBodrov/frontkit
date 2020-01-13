@@ -12,3 +12,4 @@ export { Box, SplitType } from './components/Box';
 export { PaymentCards } from './components/PaymentCard';
 export { Radio } from './components/Radio';
 export { Dropdown } from './components/Dropdown';
+export { LinkWrapper } from './components/LinkWrapper';
