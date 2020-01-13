@@ -28,5 +28,5 @@ storiesOf('Spinner', module)
                 <Spinner color="#0dd9d5" />
             </ThemeProvider>
         ),
-        { info: { inline: true } },
+        { info: { inline: true, propTablesExclude: [ThemeProvider] } },
     );
