@@ -11,11 +11,11 @@ const formatName = (value: string): string => value.toUpperCase();
 
 export const format = (name: string, value: string): string => {
     switch (name) {
-        case 'cc-number':
+        case 'ccNumber':
             return formatCreditCard(value);
-        case 'cc-name':
+        case 'ccName':
             return formatName(value);
-        case 'cc-exp':
+        case 'ccExp':
             return formatDate(value);
         default:
             return value;

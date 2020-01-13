@@ -43,13 +43,13 @@ const validateName = (value: string): boolean => value.replace(/\s/g, '').length
 
 export const isInvalidInput = (name: nameType, value: string): boolean => {
     switch (name) {
-        case 'cc-number':
+        case 'ccNumber':
             return REGEXP_NON_DDS.test(value);
-        case 'cc-name':
+        case 'ccName':
             return REGEXP_NON_LATIN.test(value);
-        case 'cc-exp':
+        case 'ccExp':
             return REGEXP_NON_DATE.test(value);
-        case 'cc-csc':
+        case 'ccCsc':
             return REGEXP_NON_DIGITS.test(value);
         default:
             return false;
@@ -58,13 +58,13 @@ export const isInvalidInput = (name: nameType, value: string): boolean => {
 
 export const validate = (name: nameType, value: string): boolean => {
     switch (name) {
-        case 'cc-number':
+        case 'ccNumber':
             return validateCreditCard(value);
-        case 'cc-name':
+        case 'ccName':
             return validateName(value);
-        case 'cc-exp':
+        case 'ccExp':
             return validateExp(value);
-        case 'cc-csc':
+        case 'ccCsc':
             return validateCvv(value);
         default:
             return true;
