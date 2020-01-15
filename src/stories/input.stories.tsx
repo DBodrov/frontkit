@@ -25,4 +25,5 @@ storiesOf('Input', module)
     )
     .add('search', () => <Input LeftIcon={SearchIcon} />, { info: { inline: true } })
     .add('small', () => <SmallInput placeholder="placeholder" />, { info: { inline: true } })
-    .add('placeholder', () => <Input placeholder="Подсказка" />, { info: { inline: true } });
+    .add('placeholder', () => <Input placeholder="Подсказка" />, { info: { inline: true } })
+    .add('disabled', () => <Input disabled value="Значение" />, { info: { inline: true } });
