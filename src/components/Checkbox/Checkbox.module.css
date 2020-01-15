@@ -33,10 +33,11 @@
     box-sizing: border-box;
     max-width: 100%;
     transition: 0.1s;
+    opacity: 0;
 }
 
 .checkbox:checked ~ .label > .bigBox > .smallBox {
-    background: none !important;
+    opacity: 1;
 }
 
 .checkbox:hover ~ .label > .bigBox {
