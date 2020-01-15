@@ -35,7 +35,7 @@ export function Checkbox(props: CheckboxProps): JSX.Element {
     const cls = classnames(styles.checkboxWrapper, theme.className, className);
     return (
         <div className={cls} style={style}>
-            <input type="checkbox" id={id} className={styles.checkbox} data-testid={dataTestId} {...rest} />
+            <input {...rest} type="checkbox" id={id} className={styles.checkbox} data-testid={dataTestId} />
             <label htmlFor={id} className={styles.label} data-testid={dataTestId + '-label'}>
                 <div className={styles.bigBox} data-testid={dataTestId + '-bigBox'}>
                     <div className={styles.smallBox} style={finalStyles} data-testid={dataTestId + '-smallBox'} />
