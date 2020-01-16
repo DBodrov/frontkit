@@ -17,4 +17,5 @@
 .input:disabled {
     color: #7C8A9E;
     font-weight: 500;
+    cursor: default;
 }
