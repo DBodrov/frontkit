@@ -56,6 +56,7 @@ export function BaseInput({
     rightPartClassName,
     inputClassName,
     showOutline = true,
+    disabled = false,
     ...rest
 }: BaseInputProps): JSX.Element {
     const [focused, onFocus, onBlur, fieldRef] = useFocus();
@@ -86,7 +87,7 @@ export function BaseInput({
     return (
         <div className={wrapperClassName} ref={fieldRef} style={style} data-testid={dataTestId}>
             <div
-                className={cn(styles.input, styles.leftArea, backgroundClass, leftPartClassName)}
+                className={cn(styles.input, styles.leftArea, backgroundClass, leftPartClassName, { [styles.disabled]: disabled })}
                 onClick={onFocus}
                 data-testid={dataTestId + '-left'}
             >
@@ -99,11 +100,12 @@ export function BaseInput({
                 ref={inputRef}
                 onFocus={onFocus}
                 onBlur={onBlur}
+                disabled={disabled}
                 data-testid={dataTestId + '-input'}
                 {...rest}
             />
             <div
-                className={cn(styles.input, styles.rightArea, backgroundClass, rightPartClassName)}
+                className={cn(styles.input, styles.rightArea, backgroundClass, rightPartClassName, { [styles.disabled]: disabled })}
                 onClick={onFocus}
                 data-testid={dataTestId + '-right'}
             >

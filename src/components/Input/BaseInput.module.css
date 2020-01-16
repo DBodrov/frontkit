@@ -53,3 +53,7 @@
 .leftIconExist {
     padding-left: 22px;
 }
+
+.disabled {
+    cursor: default;
+}
