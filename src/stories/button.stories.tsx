@@ -24,27 +24,42 @@ storiesOf('Button', module).add(
 storiesOf('Button', module).add(
     'Theme UsedDefault',
     () => (
-        <ThemeProvider value={theme}>
-            <Button styleType={StyleTypeProp.UsedDefault}>Отправить</Button>
-        </ThemeProvider>
+        <>
+            <ThemeProvider value={theme}>
+                <Button styleType={StyleTypeProp.UsedDefault}>Отправить</Button>
+            </ThemeProvider>
+            <Button styleType={StyleTypeProp.UsedDefault} style={{ marginTop: '15px' }}>
+                Отправить
+            </Button>
+        </>
     ),
     { info: { inline: true, propTablesExclude: [ThemeProvider] } },
 );
 storiesOf('Button', module).add(
     'Theme WhiteBodyWithBorder',
     () => (
-        <ThemeProvider value={theme}>
-            <Button styleType={StyleTypeProp.WhiteBodyWithBorder}>Отправить</Button>
-        </ThemeProvider>
+        <>
+            <ThemeProvider value={theme}>
+                <Button styleType={StyleTypeProp.WhiteBodyWithBorder}>Отправить</Button>
+            </ThemeProvider>
+            <Button styleType={StyleTypeProp.WhiteBodyWithBorder} style={{ marginTop: '15px' }}>
+                Отправить
+            </Button>
+        </>
     ),
     { info: { inline: true, propTablesExclude: [ThemeProvider] } },
 );
 storiesOf('Button', module).add(
     'Theme WhiteBodyWithShadow',
     () => (
-        <ThemeProvider value={theme}>
-            <Button styleType={StyleTypeProp.WhiteBodyWithShadow}>Отправить</Button>
-        </ThemeProvider>
+        <>
+            <ThemeProvider value={theme}>
+                <Button styleType={StyleTypeProp.WhiteBodyWithShadow}>Отправить</Button>
+            </ThemeProvider>
+            <Button styleType={StyleTypeProp.WhiteBodyWithShadow} style={{ marginTop: '15px' }}>
+                Отправить
+            </Button>
+        </>
     ),
     { info: { inline: true, propTablesExclude: [ThemeProvider] } },
 );
