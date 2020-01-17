@@ -2150,6 +2150,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-input-mask@^2.0.5":
+  version "2.0.5"
+  resolved "http://192.168.167.51:8081/repository/npm/@types/react-input-mask/-/react-input-mask-2.0.5.tgz#1ea1bb81641fd5bfd13b2dec269bda94b6adc870"
+  integrity sha512-4wPehO42dCk2sMrAGGT/xIfUG5GVdmzyGalweW5EvJARNXgtoxQ9HnkgSkXlVKR3oLVIHlT/vXk/DUXV+WSPyw==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-syntax-highlighter@10.1.0":
   version "10.1.0"
   resolved "http://192.168.167.51:8081/repository/npm/@types/react-syntax-highlighter/-/react-syntax-highlighter-10.1.0.tgz#9c534e29bbe05dba9beae1234f3ae944836685d4"
@@ -11260,6 +11267,14 @@ react-hotkeys@2.0.0-pre4:
   integrity sha512-oa+UncSWyOwMK3GExt+oELXaR7T3ItgcMolsupQFdKvwkEhVAluJd5rYczsRSQpQlVkdNoHG46De2NUeuS+88Q==
   dependencies:
     prop-types "^15.6.1"
+
+react-input-mask@^2.0.4:
+  version "2.0.4"
+  resolved "http://192.168.167.51:8081/repository/npm/react-input-mask/-/react-input-mask-2.0.4.tgz#9ade5cf8196f4a856dbf010820fe75a795f3eb14"
+  integrity sha512-1hwzMr/aO9tXfiroiVCx5EtKohKwLk/NT8QlJXHQ4N+yJJFyUuMT+zfTpLBwX/lK3PkuMlievIffncpMZ3HGRQ==
+  dependencies:
+    invariant "^2.2.4"
+    warning "^4.0.2"
 
 react-inspector@^3.0.2:
   version "3.0.2"
