@@ -92,6 +92,14 @@ describe('scrolling', () => {
         expect(rendered.getByTestId(testId + '-single-1')).not.toBeNull();
         expect(() => rendered.getByTestId(testId + '-single-3')).toThrow();
     });
+
+    test('should disable move right button if last provider rendered', () => {
+        fireEvent.click(rendered.getByTestId(testId + '-scroller-increase'));
+        fireEvent.click(rendered.getByTestId(testId + '-scroller-increase'));
+
+        expect(() => rendered.getByTestId(testId + '-single-4')).not.toThrow();
+        expect(rendered.getByTestId(testId + '-scroller-increase')).toBeDisabled();
+    });
 });
 
 describe('disabled scrolling', () => {

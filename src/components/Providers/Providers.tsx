@@ -15,10 +15,7 @@ interface Props {
     onClick?: (info: ProviderInfo) => unknown;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-function noop(): void {}
-
-function useOffset(max: number): [number, () => void, () => void] {
+function useOffset(max: number): [number, (() => void) | undefined, (() => void) | undefined] {
     const [offset, setOffset] = React.useState(0);
 
     React.useEffect(() => setOffset(0), [max]);
@@ -27,7 +24,7 @@ function useOffset(max: number): [number, () => void, () => void] {
     const decrease = React.useCallback(() => setOffset(o => Math.max(o - 1, 0)), [setOffset]);
 
     if (max <= 0) {
-        return [0, noop, noop];
+        return [0, undefined, undefined];
     }
 
     return [offset, increase, decrease];
