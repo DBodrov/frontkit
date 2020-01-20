@@ -93,3 +93,22 @@ describe('scrolling', () => {
         expect(() => rendered.getByTestId(testId + '-single-3')).toThrow();
     });
 });
+
+describe('disabled scrolling', () => {
+    test('shouldn\'t render scrolling control if size more data.length', () => {
+        const {getByTestId} = render(
+            <Providers
+                dataTestId={testId}
+                size={5}
+                data={[
+                    { id: 1, name: 'name1', src: 'src1' },
+                    { id: 2, name: 'name2', src: 'src2' },
+                    { id: 3, name: 'name3', src: 'src3' },
+                    { id: 4, name: 'name4', src: 'src4' },
+                ]}
+            />,
+        );
+
+        expect(() => getByTestId(testId + '-scroller')).toThrow();
+    });
+});
