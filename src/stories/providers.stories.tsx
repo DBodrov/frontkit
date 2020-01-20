@@ -42,4 +42,22 @@ storiesOf('Providers', module)
         {
             info: { inline: true },
         },
+    )
+    .add(
+        'small amount',
+        () => (
+            <Providers
+                data={[
+                    { id: 1, name: 'A', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                    { id: 2, name: 'B', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                    { id: 3, name: 'C', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                ]}
+                size={5}
+                gap="1vw"
+                onClick={action('click')}
+            />
+        ),
+        {
+            info: { inline: true },
+        },
     );
