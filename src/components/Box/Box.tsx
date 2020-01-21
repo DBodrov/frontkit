@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, CSSProperties } from 'react';
 import cn from 'classnames';
 import styles from './Box.module.css';
 
@@ -15,7 +15,7 @@ interface BoxProps extends React.HTMLAttributes<HTMLElement> {
     /** Class names passed to box to change styling */
     className?: string;
     /** Inline style objects passed to box wrapper */
-    style?: React.StyleHTMLAttributes<HTMLElement>;
+    style?: CSSProperties;
     /** ID attribute for QA Auto-tests
      * @default Box
      * */

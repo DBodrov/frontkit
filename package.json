@@ -6,6 +6,7 @@
     "module": "./dist/a3-uikit.esm.js",
     "dependencies": {
         "classnames": "^2.2.6",
+        "react-custom-scrollbars": "^4.2.1",
         "react-input-mask": "^2.0.4"
     },
     "peerDependencies": {
@@ -64,6 +65,7 @@
         "@types/jest": "^24.0.21",
         "@types/node": "12.11.1",
         "@types/react": "16.9.9",
+        "@types/react-custom-scrollbars": "^4.0.6",
         "@types/react-dom": "16.9.2",
         "@types/react-input-mask": "^2.0.5",
         "@types/storybook__addon-info": "^4.1.2",
