@@ -8,9 +8,18 @@ storiesOf('Input', module)
     .add('error', () => <Input RightIcon={ErrorIcon} background={BackgroundProp.Error} />, { info: { inline: true } })
     .add('success', () => <Input RightIcon={SuccessIcon} background={BackgroundProp.Success} />, { info: { inline: true } })
     .add('white background', () => <Input background={BackgroundProp.White} />, { info: { inline: true } })
-    .add('help', () => <Input RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст" />} />, {
-        info: { inline: true },
-    })
+    .add(
+        'help',
+        () => (
+            <>
+                <Input RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст" />} />
+                <Input RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст" />} />
+            </>
+        ),
+        {
+            info: { inline: true },
+        },
+    )
     .add(
         'custom styles',
         () => (
