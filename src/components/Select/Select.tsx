@@ -167,6 +167,10 @@ export const Select = ({
         },
         [setHoverValue],
     );
+    // OPEN ISSUES TS2605: JSX element type 'Element[]' is not a constructor function for JSX elements.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
+    const BL = <ButtonList data={listData} hoverValue={hoverValue} />;
 
     return (
         <div ref={wrapperRef} style={{ position: 'relative' }} data-testid={dataTestId + 'Wrapper'}>
@@ -191,8 +195,7 @@ export const Select = ({
                     buttonHover={buttonHover}
                     countToShowElements={countToShowElements}
                 >
-                    {/* OPEN ISSUES */}
-                    <ButtonList data={listData} hoverValue={hoverValue} />
+                    {BL}
                 </SelectItemsWrapper>
             )}
         </div>
