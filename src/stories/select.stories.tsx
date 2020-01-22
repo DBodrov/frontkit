@@ -13,12 +13,12 @@ const theme: ThemeTypes = {
 };
 
 const elements: ElementTypes[] = [
-    { name: '1', value: 'Vfufl', id: 111 },
-    { name: '2', value: 'JKHsdkjbdfgjknsdf', id: 222 },
-    { name: '3', value: 'jknfdv.njk', id: 333 },
-    { name: '4', value: '44', id: 444 },
-    { name: '5', value: '55', id: 555 },
-    { name: '6', value: '66', id: 666 },
+    { name: '1', value: 'Vfufl' },
+    { name: '2', value: 'JKHsdkjbdfgjknsdf' },
+    { name: '3', value: 'jknfdv.njk' },
+    { name: '4', value: '44' },
+    { name: '5', value: '55' },
+    { name: '6', value: '66' },
 ];
 
 storiesOf('Select', module).add(

@@ -10,7 +10,6 @@ import { getKeyCode } from '../../constants/events';
 import { useClickOutside } from '../../hooks/useClickOutsideSelect';
 
 export interface ElementTypes {
-    id: string | number;
     value: string;
     name: string;
     onClick?: () => unknown;
@@ -26,11 +25,11 @@ interface SelectInterface extends React.ComponentProps<typeof Input> {
     dataTestId?: string;
 }
 
-const ButtonList = ({ data, hoverValue }: { data: Omit<ElementTypes, 'name'>[]; hoverValue: string }) => {
+const ButtonList = ({ data, hoverValue }: { data: ElementTypes[]; hoverValue: string }) => {
     const arr = data.map(el => (
         <LinkWrapper
-            key={el.id}
-            dataTestId={'Select-Item-' + el.id}
+            key={el.name}
+            dataTestId={'Select-Item-' + el.name}
             data-value={el.value}
             className={cn(styles.item, { [styles.hover_item]: hoverValue === el.value })}
             onClick={el.onClick}
@@ -50,6 +49,7 @@ export const Select = ({
     placeholder = 'Выберите вариант',
     onChange,
     countToShowElements = 3,
+    className,
     ...props
 }: SelectInterface) => {
     const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -64,16 +64,16 @@ export const Select = ({
         el => {
             setValue(el.value);
             setOldValue('');
-            onChange && onChange(({ target: { value: el.id } } as unknown) as FormEvent<HTMLInputElement>);
+            onChange && onChange(({ target: { value: el.name } } as unknown) as FormEvent<HTMLInputElement>);
         },
         [setValue, setOldValue],
     );
 
     const selectIsOpen = oldValue !== '';
     const listData = elements
-        .filter(el => selectIsOpen && el.value && el.value.toLowerCase().includes(value.toLowerCase()))
+        .filter(el => selectIsOpen && el.value?.toLowerCase().includes(value.toLowerCase()))
         .map(el => ({
-            id: el.id,
+            id: el.name,
             value: el.value,
             onClick: () => {
                 handleClick(el);
@@ -82,8 +82,8 @@ export const Select = ({
 
     React.useEffect(() => {
         // Определение первоначального значения селекта
-        const element = elements.find(el => el.id === defaultId);
-        setValue(element ? element.value : elements[0].value);
+        const element = elements.find(el => el.name === defaultId);
+        setValue(element?.value || elements[0].value);
     }, []);
 
     React.useEffect(() => {
@@ -127,7 +127,7 @@ export const Select = ({
     );
 
     const handleFocus = React.useCallback(() => {
-        if (oldValue === '' && elements.find(x => x.value && x.value.toLowerCase() === value.toLowerCase())) {
+        if (oldValue === '' && elements.find(x => x.value?.toLowerCase() === value.toLowerCase())) {
             setHoverValue(value);
             setOldValue(value);
             setValue('');
@@ -173,7 +173,7 @@ export const Select = ({
     const BL = <ButtonList data={listData} hoverValue={hoverValue} />;
 
     return (
-        <div ref={wrapperRef} style={{ position: 'relative' }} data-testid={dataTestId + 'Wrapper'}>
+        <div ref={wrapperRef} style={{ position: 'relative' }} className={className} data-testid={dataTestId + 'Wrapper'}>
             <A3InputSelect
                 {...props}
                 RightIcon={() => <Arrow type={oldValue.length === 0 ? ArrowTypes.Down : ArrowTypes.Up} />}
@@ -214,7 +214,7 @@ const SelectItemsWrapper = ({ children, scrollbar, buttonHover, countToShowEleme
     const [height, setHeight] = React.useState(0);
 
     React.useEffect(() => {
-        if (selectEl.current && selectEl.current.children) {
+        if (selectEl.current?.children) {
             setHeight(
                 Array.from(selectEl.current.children)
                     .slice(0, countToShowElements)
