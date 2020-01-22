@@ -31,6 +31,11 @@ module.exports = {
             statements: 80,
         },
     },
+    globals: {
+        'ts-jest': {
+            diagnostics: false
+        }
+    },
     // Only collect coverage for components
     collectCoverageFrom: ['src/components/**/*.{ts,tsx}'],
 };

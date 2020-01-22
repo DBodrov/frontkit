@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { ReactNode } from 'react';
+import React, { FormEvent, ReactNode } from 'react';
 import Scrollbars from 'react-custom-scrollbars';
 import { Arrow, ArrowTypes } from '../Arrow';
 import { Box } from '../Box';
@@ -16,10 +16,8 @@ export interface ElementTypes {
     onClick?: () => unknown;
 }
 
-interface SelectInterface {
+interface SelectInterface extends React.ComponentProps<typeof Input> {
     elements: ElementTypes[];
-    filter?: () => unknown;
-    notFoundText?: string;
     defaultId?: string | number;
     name: string;
     placeholder?: string;
@@ -28,34 +26,29 @@ interface SelectInterface {
     dataTestId?: string;
 }
 
-const ButtonList = ({ data, hoverValue }: { data: ElementTypes[]; hoverValue: string }) => {
-    const arr = data.map(el => {
-        return (
-            <LinkWrapper
-                key={el.id}
-                data-testid="Select-Item"
-                data-value={el.value}
-                className={cn(styles.item, { [styles.hover_item]: hoverValue === el.value })}
-                onClick={el.onClick}
-            >
-                {el.value}
-            </LinkWrapper>
-        );
-    });
+const ButtonList = ({ data, hoverValue }: { data: Omit<ElementTypes, 'name'>[]; hoverValue: string }) => {
+    const arr = data.map(el => (
+        <LinkWrapper
+            key={el.id}
+            dataTestId={'Select-Item-' + el.id}
+            data-value={el.value}
+            className={cn(styles.item, { [styles.hover_item]: hoverValue === el.value })}
+            onClick={el.onClick}
+        >
+            {el.value}
+        </LinkWrapper>
+    ));
     return arr;
 };
 
-const trueF = () => true;
-const defaultNotFoundText = 'button not found';
 export const Select = ({
     elements,
-    filter = trueF,
-    notFoundText = defaultNotFoundText,
     dataTestId = 'Select',
     defaultId,
     name,
     small = false,
     placeholder = 'Выберите вариант',
+    onChange,
     countToShowElements = 3,
     ...props
 }: SelectInterface) => {
@@ -63,7 +56,7 @@ export const Select = ({
     const scrollbar = React.useRef<Scrollbars>(null);
     const [value, setValue] = React.useState('');
     // не использовать top и bottom из элементов массива allRects. sideEffects.
-    const [allRects, setAllRects] = React.useState([]);
+    const [allRects, setAllRects] = React.useState<DOMRect[]>([]);
     const [hoverValue, setHoverValue] = React.useState('');
     const [oldValue, setOldValue] = React.useState('');
 
@@ -71,6 +64,7 @@ export const Select = ({
         el => {
             setValue(el.value);
             setOldValue('');
+            onChange && onChange(({ target: { value: el.id } } as unknown) as FormEvent<HTMLInputElement>);
         },
         [setValue, setOldValue],
     );
@@ -78,8 +72,8 @@ export const Select = ({
     const selectIsOpen = oldValue !== '';
     const listData = elements
         .filter(el => selectIsOpen && el.value && el.value.toLowerCase().includes(value.toLowerCase()))
-        .map((el, id) => ({
-            id,
+        .map(el => ({
+            id: el.id,
             value: el.value,
             onClick: () => {
                 handleClick(el);
@@ -95,10 +89,11 @@ export const Select = ({
     React.useEffect(() => {
         // Проматывание селекта до элемента, который выбран стрелочками.
         const element = document.querySelector(`[data-value='${hoverValue}']`);
-        if (!(hoverValue && scrollbar.current && element)) return;
+        const scrollbarsView = document.querySelector(`[data-testid='ScrollbarsView']`);
+        if (!(hoverValue && scrollbar.current && element && scrollbarsView)) return;
         const elementRect = element.getBoundingClientRect();
         const elementRectIndex = listData.findIndex(el => el.value === hoverValue);
-        const containerRect = scrollbar.current.view.getBoundingClientRect();
+        const containerRect = scrollbarsView.getBoundingClientRect();
         if (elementRectIndex === 0) {
             scrollbar.current.scrollToTop();
         } else if (elementRect.bottom > containerRect.bottom) {
@@ -128,7 +123,7 @@ export const Select = ({
         event => {
             setValue(event.target.value);
         },
-        [filter, elements],
+        [elements, onChange],
     );
 
     const handleFocus = React.useCallback(() => {
@@ -148,6 +143,7 @@ export const Select = ({
                 case 'Enter':
                 case 13:
                     event.target.blur();
+                    handleClick(listData[elemId]);
                     break;
                 case 'ArrowDown':
                 case 40:
@@ -161,7 +157,7 @@ export const Select = ({
                     break;
             }
         },
-        [hoverValue, setHoverValue, listData.length],
+        [hoverValue, setHoverValue, listData.length, setOldValue],
     );
 
     const buttonHover = React.useCallback(
@@ -177,9 +173,10 @@ export const Select = ({
             <A3InputSelect
                 {...props}
                 RightIcon={() => <Arrow type={oldValue.length === 0 ? ArrowTypes.Down : ArrowTypes.Up} />}
-                autocomplete="off"
+                type="text"
+                autoComplete="off"
                 name={name}
-                small={small}
+                small={small.toString()}
                 placeholder={placeholder}
                 value={value}
                 dataTestId={dataTestId}
@@ -189,11 +186,12 @@ export const Select = ({
             />
             {listData.length > 0 && (
                 <SelectItemsWrapper
-                    data-testid="CF-Select-ItemsWrapper"
+                    data-testid="Select-ItemsWrapper"
                     scrollbar={scrollbar}
                     buttonHover={buttonHover}
                     countToShowElements={countToShowElements}
                 >
+                    {/* OPEN ISSUES */}
                     <ButtonList data={listData} hoverValue={hoverValue} />
                 </SelectItemsWrapper>
             )}
@@ -231,7 +229,7 @@ const SelectItemsWrapper = ({ children, scrollbar, buttonHover, countToShowEleme
                     style={{ height }}
                     renderTrackHorizontal={props => <div {...props} style={{ display: 'none' }} />}
                     renderThumbHorizontal={props => <div {...props} style={{ display: 'none' }} />}
-                    renderView={props => <div {...props} />}
+                    renderView={props => <div {...props} data-testid="ScrollbarsView" />}
                 >
                     <div ref={selectEl} className={styles.select_items_wrapper}>
                         {children}
@@ -242,7 +240,8 @@ const SelectItemsWrapper = ({ children, scrollbar, buttonHover, countToShowEleme
     );
 };
 
-const propsWithoutSmall = ({ small, ...rest }) => rest;
+interface A3InputSelectProps extends React.ComponentProps<typeof Input> {
+    small: string;
+}
 
-const A3InputSelect = (props: SelectInterface) =>
-    props.small ? <SmallInput {...propsWithoutSmall(props)} /> : <Input {...propsWithoutSmall(props)} />;
+const A3InputSelect = (props: A3InputSelectProps) => (props.small === 'true' ? <SmallInput {...props} /> : <Input {...props} />);

@@ -40,7 +40,18 @@ describe('<Modal />', () => {
         const modalTestId = 'Modal';
         const mockFunc = jest.fn();
         const { getByTestId } = render(
-            <Modal onClose={mockFunc}>
+            <Modal onClose={mockFunc} closeOnClickOutside={false} closeOnEsc={false} header="123">
+                <span>123</span>
+            </Modal>,
+        );
+        const modal = getByTestId(modalTestId);
+        expect(modal).not.toBeNull();
+    });
+    test('should render an Modal element with modalTestId', () => {
+        const modalTestId = 'Modal1123123';
+        const mockFunc = jest.fn();
+        const { getByTestId } = render(
+            <Modal onClose={mockFunc} dataTestId={modalTestId}>
                 <span>123</span>
             </Modal>,
         );

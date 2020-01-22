@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { Select } from '../../components/Select';
 import { ElementTypes } from '../../components/Select/Select';
@@ -29,3 +29,18 @@ describe('Select', () => {
         expect(() => getByTestId(dataTestId)).not.toThrow();
     });
 });
+
+describe('Select change', () => {
+    test('should render an Select elements and changing', () => {
+        const dataTestId = 'fdssdfv';
+        const { getByTestId, getByPlaceholderText } = render(
+            <Select small countToShowElements={4} defaultId={222} elements={elements} name="select" dataTestId={dataTestId} placeholder="123"/>,
+        );
+        const select = getByTestId(dataTestId + '-input');
+        expect(() => select).not.toThrow();
+        expect(getByPlaceholderText("123")).not.toBeNull();
+        fireEvent.focus(select);
+        expect(() => getByTestId('ScrollbarsView')).not.toThrow();
+    });
+});
+
