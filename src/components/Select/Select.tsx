@@ -88,8 +88,8 @@ export const Select = ({
 
     React.useEffect(() => {
         // Проматывание селекта до элемента, который выбран стрелочками.
-        const element = document.querySelector(`[data-value='${hoverValue}']`);
-        const scrollbarsView = document.querySelector(`[data-testid='ScrollbarsView']`);
+        const element = wrapperRef.current ? document.querySelector(`[data-value='${hoverValue}']`) : null;
+        const scrollbarsView = wrapperRef.current ? wrapperRef.current.querySelector(`[data-value='ScrollbarsView']`) : null;
         if (!(hoverValue && scrollbar.current && element && scrollbarsView)) return;
         const elementRect = element.getBoundingClientRect();
         const elementRectIndex = listData.findIndex(el => el.value === hoverValue);
@@ -103,13 +103,13 @@ export const Select = ({
         } else if (elementRect.top < containerRect.top) {
             scrollbar.current.scrollTop(allRects.reduce((sum, el, i) => (i < elementRectIndex ? sum + el.height : sum), 0));
         }
-    }, [hoverValue, scrollbar.current, allRects, listData.length]);
+    }, [hoverValue, scrollbar.current, allRects, listData.length, wrapperRef]);
 
     React.useEffect(() => {
         // При изменении списка для отображения получаем координаты всех
         // элементов, чтобы потом не делать кучу запросов для каждого
-        const elements = document.querySelectorAll('[data-value]');
-        setAllRects(Array.from(elements).map(el => el.getBoundingClientRect()));
+        const elements = wrapperRef.current ? wrapperRef.current.querySelectorAll(`.${styles.item}`) : null;
+        elements && setAllRects(Array.from(elements).map(el => el.getBoundingClientRect()));
     }, [listData.length, setAllRects]);
 
     const handleReload = React.useCallback(() => {
@@ -229,7 +229,7 @@ const SelectItemsWrapper = ({ children, scrollbar, buttonHover, countToShowEleme
                     style={{ height }}
                     renderTrackHorizontal={props => <div {...props} style={{ display: 'none' }} />}
                     renderThumbHorizontal={props => <div {...props} style={{ display: 'none' }} />}
-                    renderView={props => <div {...props} data-testid="ScrollbarsView" />}
+                    renderView={props => <div {...props} data-value="ScrollbarsView" data-testid="ScrollbarsView" />}
                 >
                     <div ref={selectEl} className={styles.select_items_wrapper}>
                         {children}
