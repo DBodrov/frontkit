@@ -5,6 +5,10 @@ import { action } from '@storybook/addon-actions';
 
 import { PaymentCards } from '../components/PaymentCard';
 
-storiesOf('PaymentCard', module).add('PaymentCards', () => <PaymentCards onSuccess={action('onSuccess')} getState={action('getState')} />, {
-    info: { inline: true },
-});
+storiesOf('PaymentCard', module).add(
+    'PaymentCards',
+    () => <PaymentCards onSuccess={action('onSuccess')} onPaymentDataChange={action('onPaymentDataChange')} />,
+    {
+        info: { inline: true },
+    },
+);
