@@ -22,7 +22,7 @@ interface PaymentCardsProps extends React.HTMLAttributes<HTMLElement> {
     /** Function passed to Paymentcard to check success */
     onSuccess?: (successed: boolean) => unknown;
     /** Function passed to Paymentcard to get state */
-    getState?: (state: FormFieldsTypes) => unknown;
+    onPaymentDataChange?: (state: FormFieldsTypes) => unknown;
 }
 
 interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
@@ -124,15 +124,15 @@ export function PaymentCards({
     style,
     dataTestId = 'PaymentCard',
     onSuccess = (): void => {},
-    getState = (): void => {},
+    onPaymentDataChange = (): void => {},
 }: PaymentCardsProps): JSX.Element {
     const [formState, setFormState] = React.useState(form);
     const [formErrors, setError] = React.useState(errors);
 
     React.useEffect(() => {
-        getState(formState);
+        onPaymentDataChange(formState);
         onSuccess(isFormInvalid(formErrors, formState));
-    }, [formErrors, formState, getState, onSuccess]);
+    }, [formErrors, formState, onPaymentDataChange, onSuccess]);
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const element = event.target;
