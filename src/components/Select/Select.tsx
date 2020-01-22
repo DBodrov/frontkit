@@ -88,8 +88,8 @@ export const Select = ({
 
     React.useEffect(() => {
         // Проматывание селекта до элемента, который выбран стрелочками.
-        const element = wrapperRef.current ? document.querySelector(`[data-value='${hoverValue}']`) : null;
-        const scrollbarsView = wrapperRef.current ? wrapperRef.current.querySelector(`[data-value='ScrollbarsView']`) : null;
+        const element = wrapperRef.current?.querySelector(`[data-value='${hoverValue}']`);
+        const scrollbarsView = wrapperRef.current?.querySelector(`[data-value='ScrollbarsView']`);
         if (!(hoverValue && scrollbar.current && element && scrollbarsView)) return;
         const elementRect = element.getBoundingClientRect();
         const elementRectIndex = listData.findIndex(el => el.value === hoverValue);
@@ -108,7 +108,7 @@ export const Select = ({
     React.useEffect(() => {
         // При изменении списка для отображения получаем координаты всех
         // элементов, чтобы потом не делать кучу запросов для каждого
-        const elements = wrapperRef.current ? wrapperRef.current.querySelectorAll(`.${styles.item}`) : null;
+        const elements = wrapperRef.current?.querySelectorAll(`.${styles.item}`);
         elements && setAllRects(Array.from(elements).map(el => el.getBoundingClientRect()));
     }, [listData.length, setAllRects]);
 
