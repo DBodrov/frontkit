@@ -43,14 +43,15 @@ function stopPropagation(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void 
 }
 export type HelpIconProps = {
     text: string;
+    checkbox?: boolean;
 } & IconProps;
-export function HelpIcon({ dataTestId = 'input-search-icon', text }: HelpIconProps): JSX.Element {
+export function HelpIcon({ dataTestId = 'input-search-icon', text, checkbox = false }: HelpIconProps): JSX.Element {
     const [isOpen, setIsOpen] = React.useState(false);
     const onMouseLeave = React.useCallback(() => setIsOpen(false), [setIsOpen]);
     const onMouseEnter = React.useCallback(() => setIsOpen(true), [setIsOpen]);
     return (
         <div
-            className={styles.wrapper}
+            className={checkbox ? styles.wrapper : ''}
             data-testid={dataTestId}
             onClick={stopPropagation}
             onMouseLeave={onMouseLeave}
@@ -73,7 +74,7 @@ export function HelpIcon({ dataTestId = 'input-search-icon', text }: HelpIconPro
                 />
             </svg>
             {isOpen && (
-                <div className={styles.tooltip} data-testid={dataTestId + '-tooltip'}>
+                <div className={checkbox ? styles.tooltip_checkbox : styles.tooltip} data-testid={dataTestId + '-tooltip'}>
                     <div className={styles.tooltip_div}>{text}</div>
                 </div>
             )}

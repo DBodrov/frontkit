@@ -39,7 +39,7 @@ describe('<Checkbox />', () => {
         const label = 'label22';
         const { getByTestId } = render(
             <ThemeProvider value={theme}>
-                <Checkbox dataTestId={checkboxTestId} label={label} />
+                <Checkbox dataTestId={checkboxTestId} label={label} hintText="23434кц312312 3123 123 123 123 1231231 123123 123 к" />
             </ThemeProvider>,
         );
         const checkbox = getByTestId(checkboxTestId + '-smallBox');

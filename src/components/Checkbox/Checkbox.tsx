@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 import { ThemeContext, ThemeTypes } from '../ThemeProvider';
 import styles from './Checkbox.module.css';
+import { HelpIcon } from '../Input';
 
 interface CheckboxProps extends React.HTMLAttributes<HTMLElement> {
     /** Class names passed in order to change styling */
@@ -12,6 +13,7 @@ interface CheckboxProps extends React.HTMLAttributes<HTMLElement> {
      * @default Button
      * */
     dataTestId?: string;
+    hintText?: string;
     /** Description of checkbox */
     label?: string;
     /** ID attribute to change styling
@@ -30,7 +32,7 @@ const getFinalStyles = (theme: ThemeTypes) => {
 
 export function Checkbox(props: CheckboxProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
-    const { dataTestId = 'Checkbox', className, style, label, id = 'Checkbox', ...rest } = props;
+    const { dataTestId = 'Checkbox', className, style, label, id = 'Checkbox', hintText, ...rest } = props;
     const finalStyles = getFinalStyles(theme);
     const cls = classnames(styles.checkboxWrapper, theme.className, className);
     return (
@@ -45,6 +47,7 @@ export function Checkbox(props: CheckboxProps): JSX.Element {
                         {label}
                     </span>
                 )}
+                {hintText && hintText.length > 0 && <HelpIcon checkbox text={hintText} dataTestId={dataTestId + '-intText'} />}
             </label>
         </div>
     );
