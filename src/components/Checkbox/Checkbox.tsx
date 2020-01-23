@@ -34,7 +34,8 @@ export function Checkbox(props: CheckboxProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
     const { dataTestId = 'Checkbox', className, style, label, id = 'Checkbox', hintText, ...rest } = props;
     const finalStyles = getFinalStyles(theme);
-    const cls = classnames(styles.checkboxWrapper, theme.className, className);
+    const needHint = hintText && hintText.length > 0;
+    const cls = classnames(styles.checkboxWrapper, { [styles.cf]: needHint }, theme.className, className);
     return (
         <div className={cls} style={style}>
             <input {...rest} type="checkbox" id={id} className={styles.checkbox} data-testid={dataTestId} />
@@ -47,8 +48,8 @@ export function Checkbox(props: CheckboxProps): JSX.Element {
                         {label}
                     </span>
                 )}
-                {hintText && hintText.length > 0 && <HelpIcon checkbox text={hintText} dataTestId={dataTestId + '-intText'} />}
             </label>
+            {needHint && <HelpIcon checkbox text={hintText} dataTestId={dataTestId + '-intText'} />}
         </div>
     );
 }
