@@ -2,6 +2,11 @@
     display: inline-block;
 }
 
+.cf {
+    display: flex;
+    position: relative;
+}
+
 .checkbox  {
     position: absolute;
     z-index: -1;
