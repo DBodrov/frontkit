@@ -2,6 +2,17 @@
     cursor: pointer;
 }
 
+.wrapper {
+    margin: 1px 0 0 30px;
+}
+
+.tooltip_checkbox {
+    max-width: 180px;
+    position: absolute;
+    text-align: center;
+    margin-left: -30px;
+}
+
 .tooltip {
     position: absolute;
     text-align: right;
@@ -9,6 +20,7 @@
     max-width: 90%;
     padding-top: 5px;
     z-index: 1;
+    top: 41px;
 }
 
 .tooltip_div {
@@ -22,6 +34,7 @@
     line-height: 17px;
     color: #8a919c;
     max-width: 100%;
+    word-wrap: break-word;
 }
 
 .tooltip:before,

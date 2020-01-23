@@ -12,8 +12,12 @@ storiesOf('Input', module)
         'help',
         () => (
             <>
-                <Input RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст" />} />
-                <Input RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст" />} />
+                <Input
+                    RightIcon={() => (
+                        <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст Тестоasdas ads assd as dasd as das das dads sвый текст Тестоasdas ads assd as dasd as das das dads sвый текст Тестоasdas ads assd as dasd as das das dads sвый текст" />
+                    )}
+                />
+                <SmallInput RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст" />} />
             </>
         ),
         {
