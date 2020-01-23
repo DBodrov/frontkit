@@ -28,7 +28,7 @@ interface SelectInterface extends React.ComponentProps<typeof Input> {
 const ButtonList = ({ data, hoverValue }: { data: ElementTypes[]; hoverValue: string }) => {
     const arr = data.map(el => (
         <LinkWrapper
-            key={el.name}
+            key={el.name + el.value}
             dataTestId={'Select-Item-' + el.name}
             data-value={el.value}
             className={cn(styles.item, { [styles.hover_item]: hoverValue === el.value })}
