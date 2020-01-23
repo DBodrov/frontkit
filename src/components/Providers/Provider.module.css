@@ -37,3 +37,7 @@
     display: block;
     text-align: center;
 }
+
+.caption-wrapper {
+    padding: 0 10px;
+}
