@@ -32,7 +32,7 @@ const getFinalStyles = (theme: ThemeTypes) => {
 
 export function Checkbox(props: CheckboxProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
-    const { dataTestId = 'Checkbox', className, style, label, id = 'Checkbox', hintText, ...rest } = props;
+    const { dataTestId = 'Checkbox', className, style, label, id = 'Checkbox', hintText = '', ...rest } = props;
     const finalStyles = getFinalStyles(theme);
     const needHint = hintText && hintText.length > 0;
     const cls = classnames(styles.checkboxWrapper, { [styles.cf]: needHint }, theme.className, className);
