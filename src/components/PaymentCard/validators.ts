@@ -35,7 +35,26 @@ export const validateCreditCard = (value: string): boolean => {
     return nCheck !== 0 && nCheck % 10 === 0;
 };
 
-const validateExp = (value: string): boolean => value.replace(/[^0-9]/g, '').length === 4;
+const validateExp = (value: string): boolean => {
+    const today = new Date();
+    const parsedValue = value.replace(/[^0-9]/g, '');
+    const month = parseInt(parsedValue.substring(0, 2), 10);
+    const year = parsedValue.substring(2, 4);
+    const thisYear = today
+        .getFullYear()
+        .toString()
+        .substring(2, 4);
+
+    if (month > 12) {
+        return false;
+    }
+
+    if (year < thisYear) {
+        return false;
+    }
+
+    return value.replace(/[^0-9]/g, '').length === 4;
+};
 
 const validateCvv = (value: string): boolean => value.length === 3;
 
