@@ -24,6 +24,7 @@ interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes
 
 const getFinalStyles = (theme: ThemeTypes, style: ButtonProps['style'], styleType: StyleTypeProp) => {
     const mainColor = theme?.styles?.mainColor || '#69a6f1';
+    const btnTextColor = theme?.styles?.btnTextColor || '#ffffff';
     switch (styleType) {
         case StyleTypeProp.WhiteBodyWithBorder:
             return { color: mainColor, border: `1px solid ${mainColor}`, backgroundColor: '#ffffff', ...style };
@@ -38,7 +39,7 @@ const getFinalStyles = (theme: ThemeTypes, style: ButtonProps['style'], styleTyp
             return { color: mainColor, backgroundColor: '#EAEEF4', ...style };
         case StyleTypeProp.Default:
         default:
-            return { color: '#ffffff', backgroundColor: mainColor, ...style };
+            return { color: btnTextColor, backgroundColor: mainColor, ...style };
     }
 };
 

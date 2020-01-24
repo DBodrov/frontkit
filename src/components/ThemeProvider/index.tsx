@@ -4,6 +4,7 @@ export type ThemeTypes = {
     styles?: {
         mainColor?: string;
         linkColor?: string;
+        btnTextColor?: string;
     };
     className?: string;
 };

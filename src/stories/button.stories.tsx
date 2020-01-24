@@ -7,6 +7,7 @@ import { ThemeProvider, ThemeTypes } from '../components/ThemeProvider';
 const theme: ThemeTypes = {
     styles: {
         mainColor: '#8000ff',
+        btnTextColor: '#000000',
     },
     className: 'cn1',
 };
