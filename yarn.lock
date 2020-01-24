@@ -5216,6 +5216,11 @@ elegant-spinner@^1.0.1:
   resolved "http://192.168.167.51:8081/repository/npm/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
   integrity sha1-2wQ1IcldfjA/2PNFvtwzSc+wcp4=
 
+element-closest@^3.0.2:
+  version "3.0.2"
+  resolved "http://192.168.167.51:8081/repository/npm/element-closest/-/element-closest-3.0.2.tgz#3814a69a84f30e48e63eaf57341f4dbf4227d2aa"
+  integrity sha512-JxKQiJKX0Zr5Q2/bCaTx8P+UbfyMET1OQd61qu5xQFeWr1km3fGaxelSJtnfT27XQ5Uoztn2yIyeamAc/VX13g==
+
 element-resize-detector@^1.1.15:
   version "1.1.15"
   resolved "http://192.168.167.51:8081/repository/npm/element-resize-detector/-/element-resize-detector-1.1.15.tgz#48eba1a2eaa26969a4c998d972171128c971d8d2"
