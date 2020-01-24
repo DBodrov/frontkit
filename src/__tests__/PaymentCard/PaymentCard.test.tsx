@@ -51,7 +51,7 @@ describe('PaymentCard filling', () => {
 
         fireEvent.change(ccNumber, { target: { value: '4111111111111111' } });
         fireEvent.change(ccName, { target: { value: 'abu dvach' } });
-        fireEvent.change(ccExp, { target: { value: '1488' } });
+        fireEvent.change(ccExp, { target: { value: '1288' } });
         fireEvent.change(ccCsc, { target: { value: '123' } });
 
         const mockCalls = mockFn.mock.calls;
