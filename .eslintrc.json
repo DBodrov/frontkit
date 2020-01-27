@@ -30,6 +30,7 @@
     "plugins": ["react", "@typescript-eslint", "jest"],
     "rules": {
         "react/jsx-uses-vars": "error",
-        "react/jsx-uses-react": "error"
+        "react/jsx-uses-react": "error",
+        "react-hooks/exhaustive-deps": 0
     }
 }

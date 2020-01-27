@@ -10,8 +10,9 @@ type ProviderInfo = {
 interface Props {
     dataTestId?: string;
     data: ReadonlyArray<ProviderInfo>;
-    size: number;
     gap?: string;
+    rows?: number;
+    cols?: number;
     onClick?: (info: ProviderInfo) => unknown;
 }
 
@@ -30,25 +31,28 @@ function useOffset(max: number): [number, (() => void) | undefined, (() => void)
     return [offset, increase, decrease];
 }
 
-function createColumns(size: number, gap: string): string {
-    let res = '1fr';
-    for (let i = 1; i < size; ++i) {
-        res += ` ${gap} 1fr`;
+function createLine(size: number, gap: string): string {
+    let line = '1fr';
+    for (let colId = 1; colId < size; colId++) {
+        line += ` ${gap} 1fr`;
     }
-    return res;
+    return line;
 }
-function createStyle(size: number, gap: string): object {
-    const columns = createColumns(size, gap);
+function createStyle(rows: number, cols: number, gap: string): object {
+    const colsTemplate = createLine(cols, gap);
+    const rowsTemplate = createLine(rows, gap);
     return {
-        gridTemplateColumns: columns,
-        msGridColumns: columns,
+        gridTemplateColumns: colsTemplate,
+        gridTemplateRows: rowsTemplate,
+        msGridColumns: colsTemplate,
+        msGridRows: rowsTemplate,
     };
 }
 
-function createChildStyleForIE(order: number): object {
+function createChildStyleForIE(col: number, row: number): object {
     return {
-        msGridRow: '1',
-        msGridColumn: order.toString(),
+        msGridRow: row.toString(),
+        msGridColumn: col.toString(),
     };
 }
 
@@ -61,7 +65,48 @@ function getDataId(el: HTMLDivElement): string {
     return dataIdTarget?.getAttribute('data-id') ?? '';
 }
 
-export function Providers({ data, size, gap = '0', dataTestId = 'providers', onClick }: Props): JSX.Element {
+type OnProviderClick = (e: React.MouseEvent<HTMLDivElement>) => void;
+interface ProvidersLineProps {
+    data: Props['data'];
+    dataTestId: string;
+    offset: number;
+    height: number;
+}
+
+function ProvidersLine({ data, dataTestId, offset, height }: ProvidersLineProps): JSX.Element {
+    return (
+        <>
+            {data.map((provider, id, original) => (
+                <React.Fragment key={provider.id}>
+                    <Provider
+                        name={provider.name}
+                        src={provider.src}
+                        width="100%"
+                        style={createChildStyleForIE(2 * (id + 1) - 1, height + 1)}
+                        dataTestId={`${dataTestId}-single-${provider.id}`}
+                        data-id={offset + id}
+                    />
+                    {id !== original.length - 1 && <div style={createChildStyleForIE(2 * (id + 1), height + 1)} />}
+                </React.Fragment>
+            ))}
+        </>
+    );
+}
+
+interface EmptyLineProps {
+    row: number;
+    cols: number;
+}
+function EmptyLine({ row, cols }: EmptyLineProps): JSX.Element {
+    const res: Array<JSX.Element> = [];
+    for (let id = 0; id < 2 * cols - 1; id++) {
+        res.push(<div key={id} style={createChildStyleForIE(id + 1, row + 1)} />);
+    }
+    return <>{res}</>;
+}
+
+export function Providers({ data, gap = '0', dataTestId = 'providers', onClick, rows = 1, cols = 1 }: Props): JSX.Element {
+    const size = rows * cols;
     const max = data.length - size;
     const [offset, increase, decrease] = useOffset(max);
 
@@ -73,8 +118,8 @@ export function Providers({ data, size, gap = '0', dataTestId = 'providers', onC
         return map;
     }, [data]);
 
-    const providerClickHandler = React.useCallback(
-        (e: React.MouseEvent<HTMLDivElement>) => {
+    const providerClickHandler: OnProviderClick = React.useCallback(
+        e => {
             const target = e.target as HTMLDivElement;
             const idNumber = parseInt(getDataId(target), 10);
             const el = providerInfoIndex.get(idNumber);
@@ -86,23 +131,34 @@ export function Providers({ data, size, gap = '0', dataTestId = 'providers', onC
         [onClick, providerInfoIndex],
     );
 
+    const providersLines = React.useMemo(() => {
+        const lines: Array<JSX.Element> = [];
+        for (let rowId = 0; rowId < rows; ++rowId) {
+            const start = rowId * cols + offset;
+            const end = start + cols;
+            lines.push(
+                <ProvidersLine
+                    key={`pl-${rowId}`}
+                    data={data.slice(start, end)}
+                    dataTestId={dataTestId}
+                    offset={start}
+                    height={2 * rowId}
+                />,
+            );
+
+            if (rowId !== rows - 1) {
+                lines.push(<EmptyLine key={`el-${rowId}`} row={2 * rowId + 1} cols={cols} />);
+            }
+        }
+        return lines;
+    }, [offset, data, rows, cols]);
+
     return (
         <div data-testid={dataTestId}>
-            <div onClick={providerClickHandler} className={styles.wrapper} style={createStyle(size, gap)}>
-                {data.slice(offset, offset + size).map((provider, id, original) => (
-                    <React.Fragment key={provider.id}>
-                        <Provider
-                            name={provider.name}
-                            src={provider.src}
-                            width="100%"
-                            style={createChildStyleForIE(2 * (id + 1) - 1)}
-                            dataTestId={`${dataTestId}-single-${provider.id}`}
-                            data-id={offset + id}
-                        />
-                        {id !== original.length - 1 && <div style={createChildStyleForIE(2 * (id + 1))} />}
-                    </React.Fragment>
-                ))}
+            <div onClick={providerClickHandler} className={styles.wrapper} style={createStyle(rows, cols, gap)}>
+                {providersLines}
             </div>
+
             {max > 0 && (
                 <Scroller
                     onClickLeft={offset === 0 ? undefined : decrease}

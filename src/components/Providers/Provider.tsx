@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import styles from './Provider.module.css';
 import cn from 'classnames';
 
@@ -12,7 +12,7 @@ interface Props {
 }
 // В IE11 для figure установлены margin-ы по умолчанию, которые ломают вёрстку.
 // Сбросить их можно исключительно inline стилями
-const IE11FigureFix = { marginLeft: 0 };
+const IE11FigureFix: CSSProperties = { marginLeft: 0, marginRight: 0 };
 export function Provider({ src, name, dataTestId, width, style, onClick, ...rest }: Props): JSX.Element {
     return (
         <figure
