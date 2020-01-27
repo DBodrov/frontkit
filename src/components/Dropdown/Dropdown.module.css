@@ -1,10 +1,10 @@
 .input {
-    z-index: 1;
+    z-index: 2;
     position: relative;
 }
 
 .card {
-    z-index: 1;
+    z-index: 2;
     position: relative;
     background-color: #ffffff;
     margin-top: 18px;
@@ -17,6 +17,5 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 16px;
-    color: #4B8BDA;
     cursor: pointer;
 }

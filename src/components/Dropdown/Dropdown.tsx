@@ -1,26 +1,14 @@
 import React from 'react';
+import { getKeyCode as getCode } from '../../constants/events';
 import { BaseDropdown, Type } from './BaseDropdown';
 
-type IsSuitable<T> = (el: T, searchValue: string) => boolean;
 type GetElement<T> = (el: T) => React.ReactElement<{ key: React.Key; onClick: () => unknown }>;
 type SelectHandler<T> = (el: T) => unknown;
-function useInputValue(): [string, React.ChangeEventHandler<HTMLInputElement>] {
-    const [value, setValue] = React.useState('');
-    const onChangeInput = React.useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            setValue(e.target.value);
-        },
-        [setValue],
-    );
-
-    return [value, onChangeInput];
-}
 
 type ShowMore = boolean;
 function useRenderedElements<T>(
     value: string,
     data: Props<T>['data'],
-    isSuitable: Props<T>['isSuitable'],
     getElement: Props<T>['getElement'],
     inputThreshold: Props<T>['inputThreshold'],
     resultThreshold: Props<T>['resultThreshold'],
@@ -39,22 +27,23 @@ function useRenderedElements<T>(
             return [res, false];
         }
         for (let i = 0; i < data.length; ++i) {
-            if (isSuitable(data[i], value)) {
-                if (res.length >= resultThreshold) {
-                    return [res, true];
-                }
-                res.push(elements[i]);
+            if (res.length >= resultThreshold) {
+                return [res, true];
             }
+            res.push(elements[i]);
         }
         return [res, false];
-    }, [data, isSuitable, value, inputThreshold, resultThreshold]);
+    }, [data, value, inputThreshold, resultThreshold]);
 
     return [searchableData, showMore];
 }
 
-function getBaseDropdownType(showDimmer: boolean, elements: ReadonlyArray<unknown>, showMore: boolean): Type {
+function getBaseDropdownType(showDimmer: boolean, elements: ReadonlyArray<unknown>, showMore: boolean, loading: boolean): Type {
     if (!showDimmer) {
         return Type.InputOnly;
+    }
+    if (loading) {
+        return Type.Loading;
     }
     if (elements.length <= 0) {
         return Type.NotFound;
@@ -68,26 +57,74 @@ function getBaseDropdownType(showDimmer: boolean, elements: ReadonlyArray<unknow
 export type Props<T> = {
     data: ReadonlyArray<T>;
     getElement: GetElement<T>;
-    isSuitable: IsSuitable<T>;
     inputThreshold: number;
     resultThreshold: number;
     dataTestId?: string;
     onSelect?: SelectHandler<T>;
+    value: string;
+    onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    getKeyCode?: (key: string) => void;
+    showMoreElement?: JSX.Element;
+    clickOutSide?: () => void;
+    onFocus?: () => void;
+    loading?: boolean;
+    showDimmer?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>;
 export function Dropdown<T>({
     dataTestId = 'dropdown',
     data,
-    isSuitable,
     getElement,
     inputThreshold,
     resultThreshold,
     onSelect,
+    getKeyCode,
+    value,
+    onChangeInput,
+    loading = false,
+    showDimmer = false,
+    showMoreElement,
+    clickOutSide,
+    onFocus,
     ...rest
 }: Props<T>): JSX.Element {
-    const [value, onChangeInput] = useInputValue();
-    const [elements, showMore] = useRenderedElements(value, data, isSuitable, getElement, inputThreshold, resultThreshold, onSelect);
+    const [elements, showMore] = useRenderedElements(value, data, getElement, inputThreshold, resultThreshold, onSelect);
 
-    const showDimmer = value.length >= inputThreshold;
-    const type = getBaseDropdownType(showDimmer, elements, showMore);
-    return <BaseDropdown {...rest} dataTestId={dataTestId} data={elements} inputValue={value} onChangeInput={onChangeInput} type={type} />;
+    const type = getBaseDropdownType(showDimmer, elements, showMore, loading);
+
+    const handleKeyDown = React.useCallback(
+        event => {
+            switch (getCode(event)) {
+                case 'Enter':
+                case 13:
+                    getKeyCode && getKeyCode('Enter');
+                    break;
+                case 'ArrowDown':
+                case 40:
+                    getKeyCode && getKeyCode('ArrowDown');
+                    break;
+                case 'ArrowUp':
+                case 38:
+                    getKeyCode && getKeyCode('ArrowUp');
+                    break;
+                default:
+                    break;
+            }
+        },
+        [getKeyCode],
+    );
+
+    return (
+        <BaseDropdown
+            {...rest}
+            dataTestId={dataTestId}
+            handleKeyDown={handleKeyDown}
+            data={elements}
+            inputValue={value}
+            onChangeInput={onChangeInput}
+            showMoreElement={showMoreElement}
+            clickOutSide={clickOutSide}
+            onFocus={onFocus}
+            type={type}
+        />
+    );
 }

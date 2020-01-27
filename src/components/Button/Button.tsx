@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { ThemeContext, ThemeTypes } from '../ThemeProvider';
 import styles from './Button.module.css';
 
@@ -14,7 +14,7 @@ interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes
     /** Class names passed to Button in order to change styling */
     className?: string;
     /** Inline style objects passed to Button */
-    style?: React.StyleHTMLAttributes<HTMLElement>;
+    style?: CSSProperties;
     /** ID attribute for QA Auto-tests
      * @default Button
      * */
