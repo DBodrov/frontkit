@@ -33,7 +33,7 @@ function useRenderedElements<T>(
             res.push(elements[i]);
         }
         return [res, false];
-    }, [data, value, inputThreshold, resultThreshold]);
+    }, [data, value, inputThreshold, resultThreshold, elements]);
 
     return [searchableData, showMore];
 }
@@ -64,11 +64,12 @@ export type Props<T> = {
     value: string;
     onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
     getKeyCode?: (key: string) => void;
-    showMoreElement?: JSX.Element;
+    showMoreElement?: React.ComponentType;
     clickOutSide?: () => void;
     onFocus?: () => void;
     loading?: boolean;
     showDimmer?: boolean;
+    placeholder?: string;
 } & React.HTMLAttributes<HTMLDivElement>;
 export function Dropdown<T>({
     dataTestId = 'dropdown',
@@ -84,6 +85,7 @@ export function Dropdown<T>({
     showDimmer = false,
     showMoreElement,
     clickOutSide,
+    placeholder = 'Введите значение',
     onFocus,
     ...rest
 }: Props<T>): JSX.Element {
@@ -100,10 +102,12 @@ export function Dropdown<T>({
                     break;
                 case 'ArrowDown':
                 case 40:
+                    event.preventDefault();
                     getKeyCode && getKeyCode('ArrowDown');
                     break;
                 case 'ArrowUp':
                 case 38:
+                    event.preventDefault();
                     getKeyCode && getKeyCode('ArrowUp');
                     break;
                 default:
@@ -125,6 +129,7 @@ export function Dropdown<T>({
             clickOutSide={clickOutSide}
             onFocus={onFocus}
             type={type}
+            placeholder={placeholder}
         />
     );
 }

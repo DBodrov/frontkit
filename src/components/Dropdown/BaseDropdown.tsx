@@ -9,9 +9,9 @@ type ListProps<T> = {
     data: Props['data'];
     showMore: boolean;
     dataTestId: string;
-    showMoreElement?: JSX.Element;
+    ShowMoreElement?: React.ComponentType;
 };
-function List<T>({ dataTestId, data, showMore, showMoreElement }: ListProps<T>): JSX.Element {
+function List<T>({ dataTestId, data, showMore, ShowMoreElement }: ListProps<T>): JSX.Element {
     return (
         <Box
             dataTestId={dataTestId}
@@ -19,7 +19,7 @@ function List<T>({ dataTestId, data, showMore, showMoreElement }: ListProps<T>):
             getSplitType={(splitOrder, size) => (size - 1 === splitOrder && showMore ? SplitType.Full : SplitType.Padding)}
         >
             {data}
-            {showMore && showMoreElement}
+            {showMore && ShowMoreElement && <ShowMoreElement />}
         </Box>
     );
 }
@@ -50,12 +50,13 @@ export enum Type {
 
 type Props = {
     inputValue: string;
+    placeholder?: string;
     data: ReadonlyArray<React.ReactElement<{ key: React.Key }>>;
     type: Type;
     onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     dataTestId: string;
-    showMoreElement?: JSX.Element;
+    showMoreElement?: React.ComponentType;
     clickOutSide?: () => void;
     onFocus?: () => void;
 } & React.HTMLAttributes<HTMLDivElement>;
@@ -68,6 +69,7 @@ export function BaseDropdown({
     clickOutSide,
     onChangeInput,
     type,
+    placeholder,
     onFocus,
     ...rest
 }: Props): JSX.Element {
@@ -83,11 +85,12 @@ export function BaseDropdown({
                 onKeyDown={handleKeyDown}
                 dataTestId={dataTestId + '-input'}
                 onFocus={onFocus}
+                placeholder={placeholder}
             />
             {(type === Type.Data || type === Type.DataAndMore) && (
                 <List
                     dataTestId={dataTestId + '-data'}
-                    showMoreElement={showMoreElement}
+                    ShowMoreElement={showMoreElement}
                     data={data}
                     showMore={type === Type.DataAndMore}
                 />

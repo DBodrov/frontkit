@@ -29,7 +29,7 @@ storiesOf('Dropdown', module)
                 inputThreshold={1}
                 resultThreshold={2}
                 onSelect={action('selected')}
-                showMoreElement={<More />}
+                showMoreElement={More}
                 clickOutSide={action('clickOutSide')}
                 onFocus={action('focus')}
             />
@@ -50,7 +50,7 @@ storiesOf('Dropdown', module)
                 inputThreshold={1}
                 resultThreshold={2}
                 onSelect={action('selected')}
-                showMoreElement={<More />}
+                showMoreElement={More}
                 clickOutSide={action('clickOutSide')}
                 onFocus={action('focus')}
             />
@@ -71,7 +71,7 @@ storiesOf('Dropdown', module)
                 inputThreshold={1}
                 resultThreshold={2}
                 onSelect={action('selected')}
-                showMoreElement={<More />}
+                showMoreElement={More}
                 clickOutSide={action('clickOutSide')}
                 onFocus={action('focus')}
             />
@@ -92,7 +92,7 @@ storiesOf('Dropdown', module)
                 inputThreshold={1}
                 resultThreshold={2}
                 onSelect={action('selected')}
-                showMoreElement={<More />}
+                showMoreElement={More}
                 clickOutSide={action('clickOutSide')}
                 onFocus={action('focus')}
             />
