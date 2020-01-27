@@ -9,7 +9,7 @@ describe('<Providers />', () => {
         const { getByTestId } = render(
             <Providers
                 dataTestId={testId}
-                size={2}
+                cols={2}
                 data={[
                     { id: 1, name: 'name1', src: 'src1' },
                     { id: 2, name: 'name2', src: 'src2' },
@@ -24,7 +24,7 @@ describe('<Providers />', () => {
     test('default test id should be "providers"', () => {
         const { getByTestId } = render(
             <Providers
-                size={2}
+                cols={2}
                 data={[
                     { id: 1, name: 'name1', src: 'src1' },
                     { id: 2, name: 'name2', src: 'src2' },
@@ -39,7 +39,7 @@ describe('<Providers />', () => {
         const clickHandler = jest.fn();
         const el = { id: 1, name: 'name1', src: 'src1' };
         const { getByTestId } = render(
-            <Providers dataTestId={testId} size={2} data={[el, { id: 2, name: 'name2', src: 'src2' }]} gap="1fr" onClick={clickHandler} />,
+            <Providers dataTestId={testId} cols={2} data={[el, { id: 2, name: 'name2', src: 'src2' }]} gap="1fr" onClick={clickHandler} />,
         );
         fireEvent.click(getByTestId(testId + '-single-1'));
 
@@ -52,12 +52,28 @@ describe('<Providers />', () => {
         const clickHandler = jest.fn();
         const el = { id: 1, name: 'name1', src: 'src1' };
         const { getByTestId } = render(
-            <Providers dataTestId={testId} size={2} data={[el, { id: 2, name: 'name2', src: 'src2' }]} gap="1fr" onClick={clickHandler} />,
+            <Providers dataTestId={testId} cols={2} data={[el, { id: 2, name: 'name2', src: 'src2' }]} gap="1fr" onClick={clickHandler} />,
         );
         fireEvent.click(getByTestId(testId + '-single-1-image'));
 
         expect(clickHandler).toBeCalledTimes(1);
         expect(clickHandler).toBeCalledWith(el);
+    });
+
+    test('should render rectangle', () => {
+        const data = [
+            { id: 1, name: 'name1', src: 'src1' },
+            { id: 2, name: 'name2', src: 'src2' },
+            { id: 3, name: 'name3', src: 'src3' },
+            { id: 4, name: 'name4', src: 'src4' },
+            { id: 5, name: 'name5', src: 'src5' },
+            { id: 7, name: 'name6', src: 'src6' },
+        ];
+        const { getByTestId } = render(
+            <Providers dataTestId={testId} cols={2} rows={2} data={data} gap="1fr" />,
+        );
+
+        expect(() => getByTestId(testId)).not.toThrow();
     });
 });
 
@@ -67,7 +83,7 @@ describe('scrolling', () => {
         rendered = render(
             <Providers
                 dataTestId={testId}
-                size={2}
+                cols={2}
                 data={[
                     { id: 1, name: 'name1', src: 'src1' },
                     { id: 2, name: 'name2', src: 'src2' },
@@ -107,7 +123,7 @@ describe('disabled scrolling', () => {
         const {getByTestId} = render(
             <Providers
                 dataTestId={testId}
-                size={5}
+                cols={5}
                 data={[
                     { id: 1, name: 'name1', src: 'src1' },
                     { id: 2, name: 'name2', src: 'src2' },
