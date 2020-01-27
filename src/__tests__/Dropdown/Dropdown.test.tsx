@@ -1,8 +1,16 @@
 import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
-import { Dropdown } from '../..';
+import { Dropdown, LinkWrapper } from '../..';
 
 const data = ['123', '12321312', '789', '123213'];
+
+function More(): JSX.Element {
+    return (
+        <div>
+            <LinkWrapper>Показать все результаты</LinkWrapper>
+        </div>
+    );
+}
 
 describe('dropdown', () => {
     const mockFunc = jest.fn();
@@ -22,6 +30,7 @@ describe('dropdown', () => {
                 clickOutSide={mockFunc}
                 dataTestId={dataTestId}
                 onFocus={mockFunc}
+                showMoreElement={More}
             />,
         );
         expect(() => getByTestId(dataTestId)).not.toThrow();
@@ -122,6 +131,7 @@ describe('states', () => {
                 clickOutSide={mockFunc}
                 dataTestId={dataTestId}
                 onFocus={mockFunc}
+                placeholder="123"
             />,
         );
         const ddElement = getByTestId(data[0]);
