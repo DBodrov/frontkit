@@ -40,12 +40,13 @@ const validateExp = (value: string): boolean => {
     const parsedValue = value.replace(/[^0-9]/g, '');
     const month = parseInt(parsedValue.substring(0, 2), 10);
     const year = parsedValue.substring(2, 4);
+    const thisMonth = today.getMonth() + 1;
     const thisYear = today
         .getFullYear()
         .toString()
         .substring(2, 4);
 
-    if (month > 12) {
+    if (month > 12 || month < thisMonth) {
         return false;
     }
 
