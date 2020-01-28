@@ -84,6 +84,11 @@
     color: #7e8996;
 }
 
+.image {
+    height: 33px;
+    margin-right: 10px;
+}
+
 @media (min-width: 768px) {
     .cardsWrapper {
         height: 331px;
