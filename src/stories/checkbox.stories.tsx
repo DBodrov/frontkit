@@ -13,16 +13,20 @@ const theme: ThemeTypes = {
 
 storiesOf('Checkbox', module).add(
     'simple checkbox',
-    () => <Checkbox label="Клик" hintText="23434кц312312 3123 123 123 123 1231231 123123 123 к" />,
+    () => <Checkbox Label="Клик" hintText="23434кц312312 3123 123 123 123 1231231 123123 123 к" />,
     { info: { inline: true } },
 );
 storiesOf('Checkbox', module).add('simple checkbox no label', () => <Checkbox />, { info: { inline: true } });
-storiesOf('Checkbox', module).add(
-    'Theme checkbox',
-    () => (
-        <ThemeProvider value={theme}>
-            <Checkbox label="Клик" />
-        </ThemeProvider>
-    ),
-    { info: { inline: true, propTablesExclude: [ThemeProvider] } },
-);
+storiesOf('Checkbox', module)
+    .add(
+        'Theme checkbox',
+        () => (
+            <ThemeProvider value={theme}>
+                <Checkbox Label="Клик" />
+            </ThemeProvider>
+        ),
+        { info: { inline: true, propTablesExclude: [ThemeProvider] } },
+    )
+    .add('checkbox with label component', () => <Checkbox Label={() => <>Клик</>} />, {
+        info: { inline: true },
+    });

@@ -15,7 +15,7 @@ interface CheckboxProps extends React.HTMLAttributes<HTMLElement> {
     dataTestId?: string;
     hintText?: string;
     /** Description of checkbox */
-    label?: string;
+    Label?: React.FunctionComponent | string;
     /** ID attribute to change styling
      * @default Checkbox
      * */
@@ -32,7 +32,7 @@ const getFinalStyles = (theme: ThemeTypes) => {
 
 export function Checkbox(props: CheckboxProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
-    const { dataTestId = 'Checkbox', className, style, label, id = 'Checkbox', hintText = '', ...rest } = props;
+    const { dataTestId = 'Checkbox', className, style, Label, id = 'Checkbox', hintText = '', ...rest } = props;
     const finalStyles = getFinalStyles(theme);
     const needHint = hintText.length > 0;
     const cls = classnames(styles.checkboxWrapper, { [styles.cf]: needHint }, theme.className, className);
@@ -43,9 +43,9 @@ export function Checkbox(props: CheckboxProps): JSX.Element {
                 <div className={styles.bigBox} data-testid={dataTestId + '-bigBox'}>
                     <div className={styles.smallBox} style={finalStyles} data-testid={dataTestId + '-smallBox'} />
                 </div>
-                {label && (
+                {Label && (
                     <span className={styles.labelText} data-testid={dataTestId + '-label-text'}>
-                        {label}
+                        {typeof Label === 'string' ? Label : <Label />}
                     </span>
                 )}
             </label>
