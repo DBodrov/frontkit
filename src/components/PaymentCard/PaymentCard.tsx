@@ -7,6 +7,7 @@ import { format } from './formatters';
 import styles from './PaymentCard.module.css';
 
 import { SmallInput, BackgroundProp } from '../Input';
+import { BankLogos } from './BanksLogos';
 
 interface PaymentCardsProps extends React.HTMLAttributes<HTMLElement> {
     /** Class names passed to Paymentcard to change styling */
@@ -29,7 +30,7 @@ interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
     dataTestId?: string;
     /** Object of errors passed to Paymentcard to change validation styling */
     errors: ErrorsTypes;
-    images?: Array<{ url: string; name: string }>;
+    cardNumber?: string;
 }
 
 const frontCardCls = classnames(styles.cardWrapper, styles.frontCard);
@@ -44,10 +45,10 @@ const CardInput = ({ error, ...rest }: CardInputProps): JSX.Element => (
     <SmallInput background={error ? BackgroundProp.Error : BackgroundProp.White} {...rest} />
 );
 
-export function PaymentCard({ images, errors, dataTestId }: PaymentCardProps): JSX.Element {
+export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps): JSX.Element {
     return (
         <div className={frontCardCls}>
-            <div>{images && images.map(image => <img key={image.name} src={image.url} alt={image.name} />)}</div>
+            <BankLogos cardNumber={cardNumber} />
             <div>
                 <CardInput
                     name="ccNumber"
@@ -181,7 +182,7 @@ export function PaymentCards({
     return (
         <div className={wrapperCls} style={style} data-testid={dataTestId}>
             <div className={styles.cardsWrapper} onChange={handleFormChange}>
-                <PaymentCard errors={formErrors} dataTestId={dataTestId} />
+                <PaymentCard errors={formErrors} dataTestId={dataTestId} cardNumber={formState.ccNumber} />
                 <PaymentCardBack errors={formErrors} dataTestId={dataTestId} />
             </div>
         </div>
