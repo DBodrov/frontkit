@@ -44,6 +44,10 @@
     flex-basis: 75%;
 }
 
+.ccExp {
+    flex-basis: 25%;
+}
+
 .mb10 {
     margin-bottom: 10px;
 }

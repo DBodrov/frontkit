@@ -71,6 +71,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
                         name="ccExp"
                         placeholder="ММ/ГГ"
                         maxLength={5}
+                        className={styles.ccExp}
                         error={errors['ccExp']}
                         autoComplete="cc-exp"
                         dataTestId={dataTestId + '-ccExp'}
