@@ -41,7 +41,7 @@
 
 .ccName {
     margin-right: 10px;
-    width: 175%;
+    flex-basis: 75%;
 }
 
 .mb10 {
