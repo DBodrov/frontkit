@@ -2,7 +2,7 @@ import React from 'react';
 import { IconProps } from './Icons';
 import { BackgroundProp } from './BaseInput';
 
-export type Props = {
+export interface Props extends React.AllHTMLAttributes<HTMLInputElement> {
     value?: string;
     RightIcon?: React.ComponentType<IconProps>;
     LeftIcon?: React.ComponentType<IconProps>;
@@ -10,4 +10,5 @@ export type Props = {
     dataTestId?: string;
     right?: boolean;
     showOutline?: boolean;
-} & React.AllHTMLAttributes<HTMLInputElement>;
+    autoFocus?: boolean;
+}

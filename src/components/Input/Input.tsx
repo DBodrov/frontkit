@@ -4,5 +4,13 @@ import { Props } from './types';
 import { BaseInput } from './BaseInput';
 
 export function Input(props: Props): JSX.Element {
-    return <BaseInput leftPartClassName={styles.left} rightPartClassName={styles.right} inputClassName={styles.input} {...props} />;
+    return (
+        <BaseInput
+            autoFocus={props.autoFocus}
+            leftPartClassName={styles.left}
+            rightPartClassName={styles.right}
+            inputClassName={styles.input}
+            {...props}
+        />
+    );
 }

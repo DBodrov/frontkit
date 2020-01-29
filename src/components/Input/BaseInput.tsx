@@ -11,11 +11,11 @@ export enum BackgroundProp {
     White,
 }
 
-type BaseInputProps = {
+interface BaseInputProps extends Props {
     leftPartClassName?: string;
     rightPartClassName?: string;
     inputClassName?: string;
-} & Props;
+}
 
 function getBackgroundClass(background?: BackgroundProp): string {
     return cn({
@@ -24,8 +24,8 @@ function getBackgroundClass(background?: BackgroundProp): string {
         [styles.white]: background === BackgroundProp.White,
     });
 }
-function useFocus(): [boolean, () => void, () => void, React.RefObject<HTMLDivElement>] {
-    const [focused, setFocused] = React.useState(false);
+function useFocus(autoFocus: boolean): [boolean, () => void, () => void, React.RefObject<HTMLDivElement>] {
+    const [focused, setFocused] = React.useState(autoFocus);
     const inputRef = React.useRef<HTMLDivElement>(null);
 
     const onFocus = React.useCallback(() => setFocused(true), [setFocused]);
@@ -50,6 +50,7 @@ export function BaseInput({
     RightIcon,
     background,
     className,
+    autoFocus = false,
     style,
     dataTestId = 'input',
     leftPartClassName,
@@ -59,14 +60,16 @@ export function BaseInput({
     disabled = false,
     ...rest
 }: BaseInputProps): JSX.Element {
-    const [focused, onFocus, onBlur, fieldRef] = useFocus();
+    const [focused, onFocus, onBlur, fieldRef] = useFocus(autoFocus);
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     React.useEffect(() => {
         const { current } = inputRef;
+
         if (!current) {
             return;
         }
+
         if (focused) {
             current.focus();
         } else {
@@ -94,6 +97,7 @@ export function BaseInput({
                 {LeftIcon && <LeftIcon />}
             </div>
             <input
+                autoFocus={autoFocus}
                 value={value}
                 placeholder={placeholder}
                 className={inputTotalClassName}
