@@ -54,7 +54,7 @@ function getByPrefix(value?: string): PaymentSystem {
 
 function Visa(): JSX.Element {
     return (
-        <svg className={styles.image} width="39" height="12" viewBox="0 0 39 12">
+        <svg className={styles.image} width="76" viewBox="0 0 39 12">
             <path
                 fill="#171f64"
                 fillRule="evenodd"
@@ -66,7 +66,7 @@ function Visa(): JSX.Element {
 
 function Maestro(): JSX.Element {
     return (
-        <svg className={styles.image} width="39" height="24" viewBox="0 0 39 24">
+        <svg className={styles.image} width="47" viewBox="0 0 39 24">
             <circle fill="#eb001b" cx="12" cy="12" r="12" />
             <circle fill="#0099df" cx="27" cy="12" r="12" />
             <path fill="#6c6bbd" d="M14.93,12A11.957,11.957,0,0,1,19.5,2.6a11.956,11.956,0,0,1,0,18.8A11.957,11.957,0,0,1,14.93,12Z" />
@@ -76,7 +76,7 @@ function Maestro(): JSX.Element {
 
 function MasterCard(): JSX.Element {
     return (
-        <svg className={styles.image} width="39" height="24" viewBox="0 0 39 24">
+        <svg className={styles.image} width="48" viewBox="0 0 39 24">
             <circle fill="#eb001b" cx="12" cy="12" r="12" />
             <circle fill="#f79e1b" cx="27" cy="12" r="12" />
             <path fill="#ff5f00" d="M14.93,12A11.957,11.957,0,0,1,19.5,2.6a11.956,11.956,0,0,1,0,18.8A11.957,11.957,0,0,1,14.93,12Z" />
@@ -86,7 +86,7 @@ function MasterCard(): JSX.Element {
 
 function Mir(): JSX.Element {
     return (
-        <svg className={styles.image} width="42" height="12" viewBox="0 0 42 12">
+        <svg className={styles.image} width="75" viewBox="0 0 42 12">
             <path
                 fill="#4db45e"
                 d="M3.738,12V4.4L6.23,12H8.774l2.544-7.546V12h3.738V0h-3.79A2.342,2.342,0,0,0,9.189,1.729C8.7,3.406,7.528,7.389,7.528,7.389L5.918,1.939A2.412,2.412,0,0,0,3.53,0C1.48-.026,0,0,0,0V12H3.738ZM16.665,0V12h2.959a2.172,2.172,0,0,0,2.232-1.31c0.771-1.56,2.907-6.445,2.907-6.445V12H28.5V0H25.231a1.922,1.922,0,0,0-1.869,1.258C22.67,2.673,20.4,7.441,20.4,7.441V0m9.76,5.45V12H33.9V8.175h3.894A4.166,4.166,0,0,0,41.74,5.45H30.163Z"
