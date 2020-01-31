@@ -13,11 +13,7 @@ type ListProps<T> = {
 };
 function List<T>({ dataTestId, data, showMore, ShowMoreElement }: ListProps<T>): JSX.Element {
     return (
-        <Box
-            dataTestId={dataTestId}
-            className={styles.card}
-            getSplitType={(splitOrder, size) => (size - 1 === splitOrder && showMore ? SplitType.Full : SplitType.Padding)}
-        >
+        <Box dataTestId={dataTestId} className={styles.card} getSplitType={showMore ? SplitType.OnlyLastFull : SplitType.Padding}>
             {data}
             {showMore && ShowMoreElement && <ShowMoreElement />}
         </Box>

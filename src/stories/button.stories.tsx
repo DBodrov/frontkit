@@ -12,7 +12,16 @@ const theme: ThemeTypes = {
     className: 'cn1',
 };
 
-storiesOf('Button', module).add('simple button', () => <Button>Отправить</Button>, { info: { inline: true } });
+storiesOf('Button', module).add(
+    'simple button',
+    () => (
+        <div>
+            <Button>Отправить</Button>
+            <Button disabled>Отправить disabled</Button>
+        </div>
+    ),
+    { info: { inline: true } },
+);
 storiesOf('Button', module).add(
     'Theme Default',
     () => (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Box } from '../../components/Box';
+import { Box, SplitType } from '../../components/Box';
 
 function assert(value: unknown): asserts value {
     if (!value) {
@@ -13,7 +13,7 @@ describe('<Box />', () => {
 
     test('should box rendered', () => {
         const { getByTestId } = render(
-            <Box dataTestId={boxTestId}>
+            <Box dataTestId={boxTestId} getSplitType={SplitType.Full}>
                 <div>1</div>
             </Box>,
         );
@@ -23,7 +23,7 @@ describe('<Box />', () => {
     test('should have a childrens', () => {
         const className = 'ItsACAAAARd';
         const { container } = render(
-            <Box className={className}>
+            <Box className={className} getSplitType={SplitType.Padding}>
                 <div>1</div>
                 <div>2</div>
             </Box>,
@@ -38,7 +38,7 @@ describe('<Box />', () => {
     test('should have a passed className', () => {
         const className = 'ItsACAAAARd';
         const { getByTestId } = render(
-            <Box dataTestId={boxTestId} className={className}>
+            <Box dataTestId={boxTestId} className={className} getSplitType={SplitType.OnlyLastFull}>
                 <div>1</div>
                 <div>2</div>
             </Box>,
