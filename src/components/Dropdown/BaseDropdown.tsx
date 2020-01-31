@@ -83,7 +83,7 @@ export function BaseDropdown({
                 onChange={onChangeInput}
                 showOutline={type === Type.InputOnly}
                 onKeyDown={handleKeyDown}
-                dataTestId={dataTestId + '-input'}
+                dataTestId={dataTestId}
                 onFocus={onFocus}
                 placeholder={placeholder}
             />

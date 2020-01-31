@@ -7,7 +7,7 @@
     position: relative;
 }
 
-.checkbox  {
+.checkbox {
     position: absolute;
     z-index: -1;
     opacity: 0;
@@ -15,7 +15,6 @@
 
 .label {
     display: flex;
-    align-items: center;
     cursor: pointer;
     position: relative;
 }
@@ -29,7 +28,10 @@
     background: #EAEEF4;
     border-radius: 2px;
     box-sizing: border-box;
-    max-width: 100%;
+    max-width: 22px;
+    min-width: 22px;
+    max-height: 22px;
+    min-height: 22px;
 }
 
 .smallBox {
@@ -51,7 +53,7 @@
 }
 
 .labelText {
-    margin-left: 16px;
+    margin-left: 20px;
 }
 /*For IE*/
 .bigBox:hover {

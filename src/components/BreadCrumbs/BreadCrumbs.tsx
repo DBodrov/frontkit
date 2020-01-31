@@ -42,7 +42,7 @@ const getCrumb = (crumb: Crumb, name: string, dataTestId: string) => {
     const cls = classnames(styles.crumb, { [styles.active]: crumb.active });
     return (
         <div data-testid={dataTestId + '-' + name} className={cls}>
-            <span>{crumb.text}</span>
+            <span data-testid={dataTestId + '-' + name + '-text'}>{crumb.text}</span>
         </div>
     );
 };
