@@ -11,4 +11,7 @@ export interface Props extends React.AllHTMLAttributes<HTMLInputElement> {
     right?: boolean;
     showOutline?: boolean;
     autoFocus?: boolean;
+    leftPartClassName?: string;
+    rightPartClassName?: string;
+    inputClassName?: string;
 }

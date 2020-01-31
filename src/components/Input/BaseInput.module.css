@@ -4,6 +4,7 @@
     display: -ms-grid;
     grid-template-columns: fit-content(21px) 1fr fit-content(21px);
     -ms-grid-columns: min-content 1fr min-content;
+    -ms-grid-rows: 1fr;
 }
 .wrapper.focused {
     box-shadow: 0 0 6px #eaeef4;
