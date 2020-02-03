@@ -4,7 +4,7 @@ import { ThemeContext, ThemeTypes } from '../ThemeProvider';
 import styles from './Checkbox.module.css';
 import { HelpIcon } from '../Input';
 
-interface CheckboxProps extends React.HTMLAttributes<HTMLElement> {
+interface CheckboxProps extends React.AllHTMLAttributes<HTMLInputElement> {
     /** Class names passed in order to change styling */
     className?: string;
     /** Inline style objects passed */

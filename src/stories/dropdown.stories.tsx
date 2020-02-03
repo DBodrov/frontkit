@@ -8,7 +8,7 @@ const data = ['123', '12321312', '789', '123213'];
 
 function More(): JSX.Element {
     return (
-        <div className={styles.more}>
+        <div className={styles.more} onClick={action('Показать все результаты')}>
             <LinkWrapper>Показать все результаты</LinkWrapper>
         </div>
     );
