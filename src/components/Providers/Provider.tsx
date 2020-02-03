@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react';
 import styles from './Provider.module.css';
 import cn from 'classnames';
+import TextClamp from 'react-string-clamp';
 
 interface Props {
     src: string;
@@ -22,13 +23,14 @@ export function Provider({ src, name, dataTestId, width, style, onClick, ...rest
             style={{ width, ...style, ...IE11FigureFix }}
             onClick={onClick}
             role="button"
+            title={name}
         >
             <div className={styles.content}>
                 <div data-testid={dataTestId + '-image'} className={cn(styles['image-wrapper'], styles['center-container'])}>
                     <img className={styles.image} src={src} alt={name} />
                 </div>
                 <div className={cn(styles['caption-wrapper'], styles['center-container'])}>
-                    <figcaption className={styles.caption}>{name}</figcaption>
+                    <TextClamp lines={2} className={styles.caption} element="figcaption" text={name} />
                 </div>
             </div>
         </figure>
