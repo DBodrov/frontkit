@@ -6,9 +6,10 @@
     "module": "./dist/a3-uikit.esm.js",
     "dependencies": {
         "classnames": "^2.2.6",
-        "react-custom-scrollbars": "^4.2.1",
         "element-closest": "^3.0.2",
-        "react-input-mask": "^2.0.4"
+        "react-custom-scrollbars": "^4.2.1",
+        "react-input-mask": "^2.0.4",
+        "react-string-clamp": "^0.3.1"
     },
     "peerDependencies": {
         "react": "^16.11.0",
