@@ -1,7 +1,7 @@
 stages:
-    - test
     - build
     - deploy
+    - test
 
 test-feature-on-push:
     stage: test
@@ -70,6 +70,7 @@ build-release:
     image: registry.a-3.ru/frontend/base-images/node:12.13.1
     script:
         - yarn build
+        - ls
     artifacts:
         paths:
             - dist
