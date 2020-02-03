@@ -78,4 +78,6 @@ const Popup = ({ children, onClose, closeOnClickOutside = true, closeOnEsc = tru
     );
 };
 
-export const Modal = (props: PopupProps) => createPortal(<Popup {...props} />, document.body);
+export function Modal(props: PopupProps): React.ReactPortal {
+    return createPortal(<Popup {...props} />, document.body);
+}
