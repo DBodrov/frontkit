@@ -7,7 +7,8 @@ import cn from 'classnames';
 
 interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
     onClose?: (event?: React.MouseEvent<HTMLDivElement>) => void;
-    children: JSX.Element;
+    children: JSX.Element | Array<JSX.Element>;
+    className?: string;
     closeOnClickOutside?: boolean;
     closeOnEsc?: boolean;
     header?: string;
@@ -36,7 +37,16 @@ export function subscribeEvent(condition: boolean, eventName: string, handler: E
     }
 }
 
-const Popup = ({ children, onClose, closeOnClickOutside = true, closeOnEsc = true, header, dataTestId = 'Modal', ...rest }: PopupProps) => {
+const Popup = ({
+    children,
+    className,
+    onClose,
+    closeOnClickOutside = true,
+    closeOnEsc = true,
+    header,
+    dataTestId = 'Modal',
+    ...rest
+}: PopupProps): JSX.Element => {
     const wrapperRef = React.useRef(null);
 
     React.useEffect(changeBodyStyles, []);
@@ -63,7 +73,7 @@ const Popup = ({ children, onClose, closeOnClickOutside = true, closeOnEsc = tru
         <>
             <Dimmer dataTestId={dataTestId + '-Dimmer'} />
             <div ref={wrapperRef} className={styles.wrapper} data-testid={dataTestId + '-Wrapper'}>
-                <div {...rest} className={cn(styles.middle, rest.className)}>
+                <div {...rest} className={cn(styles.middle, className)}>
                     <div data-testid={dataTestId} className={styles.popup}>
                         {Boolean(header) && <H3 className={styles.header}>{header}</H3>}
                         {onClose && (
