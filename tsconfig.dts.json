@@ -15,9 +15,9 @@
         "declaration": true,
         "emitDeclarationOnly": true,
         "declarationMap": true,
-        "outDir": "dist/types/"
+        "outDir": "dist/types/",
+        "typeRoots": ["src/@types"]
     },
-    // "include": ["src/components/**/*.tsx"],
     "include": ["src/index.ts"],
     "exclude": ["node_modules"]
 }
