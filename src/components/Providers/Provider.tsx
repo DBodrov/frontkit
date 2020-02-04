@@ -1,6 +1,8 @@
 import React, { CSSProperties } from 'react';
 import styles from './Provider.module.css';
 import cn from 'classnames';
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import TextClamp from 'react-string-clamp';
 
 interface Props {

@@ -13,7 +13,7 @@ interface LinkWrapperProps extends React.HTMLAttributes<HTMLElement> {
     dataTestId?: string;
 }
 
-const getThemeColor = (theme: ThemeTypes, style: React.StyleHTMLAttributes<HTMLElement>) => {
+const getThemeColor = (theme: ThemeTypes, style: CSSProperties): CSSProperties => {
     const linkColor = theme.styles?.linkColor ?? DEFAULT_LINK_COLOR;
     return { color: linkColor, ...style };
 };
