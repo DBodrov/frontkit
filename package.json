@@ -17,7 +17,7 @@
     },
     "scripts": {
         "start": "start-storybook -p 9009 -s public",
-        "build": "yarn build:lib",
+        "build": "yarn && yarn build:lib",
         "build:lib": "yarn build:rollup && yarn build:dts",
         "build:rollup": "yarn rollup -c",
         "build:dts": "yarn tsc -p tsconfig.dts.json",
