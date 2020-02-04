@@ -69,6 +69,7 @@ build-release:
             - $CI_COMMIT_REF_NAME == "master"
     image: registry.a-3.ru/frontend/base-images/node:12.13.1
     script:
+        - yarn
         - yarn build
     artifacts:
         paths:
