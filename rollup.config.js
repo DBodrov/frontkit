@@ -1,4 +1,4 @@
-import resolve from 'rollup-plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import typescript from 'rollup-plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
@@ -16,7 +16,7 @@ export default [
     }, */
     {
         input: 'src/index.ts',
-        plugins: [resolve({ only: [] }), commonjs(), typescript(), postcss({ modules: true })],
+        plugins: [resolve(), commonjs(), typescript(), postcss({ modules: true })],
         output: [/* { file: pkg.main, format: 'cjs' }, */ { file: pkg.module, format: 'es' }],
     },
 ];

@@ -1,7 +1,7 @@
-import { useEffect, RefObject, DependencyList, EffectCallback } from 'react';
+import React from 'react';
 
-export function useOnClickOutside(ref: RefObject<HTMLElement | null>, f: EffectCallback, deps: DependencyList): void {
-    useEffect(() => {
+export function useOnClickOutside(ref: React.RefObject<HTMLElement | null>, f: React.EffectCallback, deps: React.DependencyList): void {
+    React.useEffect(() => {
         function clickHandler(e: MouseEvent): void {
             const { current } = ref;
             if (!current) {

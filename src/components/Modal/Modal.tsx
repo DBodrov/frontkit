@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import { Dimmer } from '../Dimmer';
 import { H3 } from '../Header';
-import { createPortal } from 'react-dom';
+import ReactDom from 'react-dom';
 import styles from './Modal.module.css';
 import cn from 'classnames';
 
@@ -80,5 +80,5 @@ const Popup = ({ children, onClose, closeOnClickOutside = true, closeOnEsc = tru
 };
 
 export function Modal(props: PopupProps): React.ReactPortal {
-    return createPortal(<Popup {...props} />, document.body);
+    return ReactDom.createPortal(<Popup {...props} />, document.body);
 }
