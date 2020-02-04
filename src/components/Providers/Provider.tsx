@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import styles from './Provider.module.css';
 import cn from 'classnames';
-import TextClamp from 'react-string-clamp/build/index';
+import TextClamp from 'react-string-clamp';
 
 interface Props {
     src: string;
