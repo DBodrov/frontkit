@@ -46,7 +46,7 @@ const validateExp = (value: string): boolean => {
         .toString()
         .substring(2, 4);
 
-    if (month > 12 || month < thisMonth) {
+    if (month > 12 || (month < thisMonth && year === thisYear)) {
         return false;
     }
 

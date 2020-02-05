@@ -57,4 +57,21 @@ describe('PaymentCard filling', () => {
         const mockCalls = mockFn.mock.calls;
         expect(mockCalls[mockCalls.length - 1]).toEqual([true]);
     });
+
+    test('should cards filling with 01/22', () => {
+        const { getByTestId } = render(<PaymentCards dataTestId={cardsTestId} onSuccess={mockFn} />);
+
+        const ccNumber = getByTestId(cardsTestId + '-ccNumber-input');
+        const ccName = getByTestId(cardsTestId + '-ccName-input');
+        const ccExp = getByTestId(cardsTestId + '-ccExp-input');
+        const ccCsc = getByTestId(cardsTestId + '-ccCsc-input');
+
+        fireEvent.change(ccNumber, { target: { value: '4111111111111111' } });
+        fireEvent.change(ccName, { target: { value: 'abu dvach' } });
+        fireEvent.change(ccExp, { target: { value: '0122' } });
+        fireEvent.change(ccCsc, { target: { value: '123' } });
+
+        const mockCalls = mockFn.mock.calls;
+        expect(mockCalls[mockCalls.length - 1]).toEqual([true]);
+    });
 });
