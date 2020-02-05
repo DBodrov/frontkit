@@ -58,7 +58,7 @@ describe('PaymentCard filling', () => {
         expect(mockCalls[mockCalls.length - 1]).toEqual([true]);
     });
 
-    test('should cards filling with 01/22', () => {
+    test('should cards filling with 01/99', () => {
         const { getByTestId } = render(<PaymentCards dataTestId={cardsTestId} onSuccess={mockFn} />);
 
         const ccNumber = getByTestId(cardsTestId + '-ccNumber-input');
@@ -68,14 +68,14 @@ describe('PaymentCard filling', () => {
 
         fireEvent.change(ccNumber, { target: { value: '4111111111111111' } });
         fireEvent.change(ccName, { target: { value: 'abu dvach' } });
-        fireEvent.change(ccExp, { target: { value: '0122' } });
+        fireEvent.change(ccExp, { target: { value: '0199' } });
         fireEvent.change(ccCsc, { target: { value: '123' } });
 
         const mockCalls = mockFn.mock.calls;
         expect(mockCalls[mockCalls.length - 1]).toEqual([true]);
     });
 
-    test('should cards broken with 01/20', () => {
+    test('should cards broken with 01/00', () => {
         const { getByTestId } = render(<PaymentCards dataTestId={cardsTestId} onSuccess={mockFn} />);
 
         const ccNumber = getByTestId(cardsTestId + '-ccNumber-input');
@@ -85,7 +85,41 @@ describe('PaymentCard filling', () => {
 
         fireEvent.change(ccNumber, { target: { value: '4111111111111111' } });
         fireEvent.change(ccName, { target: { value: 'abu dvach' } });
-        fireEvent.change(ccExp, { target: { value: '0120' } });
+        fireEvent.change(ccExp, { target: { value: '0100' } });
+        fireEvent.change(ccCsc, { target: { value: '123' } });
+
+        const mockCalls = mockFn.mock.calls;
+        expect(mockCalls[mockCalls.length - 1]).toEqual([false]);
+    });
+
+    test('should cards valid with 12/99', () => {
+        const { getByTestId } = render(<PaymentCards dataTestId={cardsTestId} onSuccess={mockFn} />);
+
+        const ccNumber = getByTestId(cardsTestId + '-ccNumber-input');
+        const ccName = getByTestId(cardsTestId + '-ccName-input');
+        const ccExp = getByTestId(cardsTestId + '-ccExp-input');
+        const ccCsc = getByTestId(cardsTestId + '-ccCsc-input');
+
+        fireEvent.change(ccNumber, { target: { value: '4111111111111111' } });
+        fireEvent.change(ccName, { target: { value: 'abu dvach' } });
+        fireEvent.change(ccExp, { target: { value: '1299' } });
+        fireEvent.change(ccCsc, { target: { value: '123' } });
+
+        const mockCalls = mockFn.mock.calls;
+        expect(mockCalls[mockCalls.length - 1]).toEqual([true]);
+    });
+
+    test('should cards invalid with 00/99', () => {
+        const { getByTestId } = render(<PaymentCards dataTestId={cardsTestId} onSuccess={mockFn} />);
+
+        const ccNumber = getByTestId(cardsTestId + '-ccNumber-input');
+        const ccName = getByTestId(cardsTestId + '-ccName-input');
+        const ccExp = getByTestId(cardsTestId + '-ccExp-input');
+        const ccCsc = getByTestId(cardsTestId + '-ccCsc-input');
+
+        fireEvent.change(ccNumber, { target: { value: '4111111111111111' } });
+        fireEvent.change(ccName, { target: { value: 'abu dvach' } });
+        fireEvent.change(ccExp, { target: { value: '0099' } });
         fireEvent.change(ccCsc, { target: { value: '123' } });
 
         const mockCalls = mockFn.mock.calls;

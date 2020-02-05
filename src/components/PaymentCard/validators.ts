@@ -37,13 +37,17 @@ export const validateCreditCard = (value: string): boolean => {
 
 const validateExp = (value: string): boolean => {
     const parsedValue = value.replace(/[^0-9]/g, '');
-    const month = parseInt(parsedValue.substring(0, 2), 10);
+    const month = parseInt(parsedValue.substring(0, 2), 10) - 1;
     const year = parseInt(parsedValue.substring(2, 4), 10);
 
     const today = +new Date();
     const inputDate = +new Date(2000 + year, month, 1);
 
     if (parsedValue.length < 4) {
+        return false;
+    }
+
+    if (month < 0 || month > 11) {
         return false;
     }
 
