@@ -4,30 +4,57 @@
     border-radius: 6px;
 }
 
-.w_padding > *:not(.border),
-.w_last_full > *:not(.border) {
-    padding: 25px 30px;
-}
-
-.w_padding > *:not(.border):first-of-type,
-.w_last_full > *:not(.border):first-of-type {
-    padding: 30px 30px 25px 30px;
-}
-
-.w_padding > *:not(.border):last-of-type {
-    padding: 25px 30px 30px 30px;
-}
-
-.w_full > *:not(.border),
-.w_last_full > *:not(.border):last-of-type {
-    padding: 30px;
-}
-
 .border {
     height: 1px;
     background-color: #f3f6f9;
 }
 
-.paddingBorder {
-    margin: 0 30px;
+@media (max-width: 540px) {
+    .w_padding > *:not(.border),
+    .w_last_full > *:not(.border) {
+        padding: 25px 30px;
+    }
+
+    .w_padding > *:not(.border):first-of-type,
+    .w_last_full > *:not(.border):first-of-type {
+        padding: 30px 30px 25px 30px;
+    }
+
+    .w_padding > *:not(.border):last-of-type {
+        padding: 25px 30px 30px 30px;
+    }
+
+    .w_full > *:not(.border),
+    .w_last_full > *:not(.border):last-of-type {
+        padding: 30px;
+    }
+
+    .paddingBorder {
+        margin: 0 30px;
+    }
+}
+
+@media (min-width: 541px) {
+    .w_padding > *:not(.border),
+    .w_last_full > *:not(.border) {
+        padding: 25px 23px;
+    }
+
+    .w_padding > *:not(.border):first-of-type,
+    .w_last_full > *:not(.border):first-of-type {
+        padding: 30px 23px 20px 23px;
+    }
+
+    .w_padding > *:not(.border):last-of-type {
+        padding: 25px 23px 30px 23px;
+    }
+
+    .w_full > *:not(.border),
+    .w_last_full > *:not(.border):last-of-type {
+        padding: 30px 23px;
+    }
+
+    .paddingBorder {
+        margin: 0 23px;
+    }
 }
