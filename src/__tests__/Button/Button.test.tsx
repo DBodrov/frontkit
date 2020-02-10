@@ -1,16 +1,12 @@
 import { render } from '@testing-library/react';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Button, StyleTypeProp } from '../../components/Button';
 import { ThemeProvider } from '../../components/ThemeProvider';
 
 const theme = {
-    styles: {
-        mainColor: '#8000ff',
-    },
-    className: 'cn2',
+    mainColor: '#8000ff',
 };
+const dataTestId = '123123qwasddas';
 
 describe('<Button />', () => {
     test('should render an Button element', () => {
@@ -46,34 +42,34 @@ describe('<Button />', () => {
                 <Button />
             </ThemeProvider>,
         );
-        const button = container.querySelector(`.${theme.className}`);
-        expect(button).toHaveStyle(`background-color: ${theme.styles.mainColor}`);
+        const button = container.querySelector(`button`);
+        expect(button).toHaveStyle(`background-color: ${theme.mainColor}`);
     });
     test('should have color from theme', () => {
-        const { container } = render(
+        const { getByTestId } = render(
             <ThemeProvider value={theme}>
-                <Button styleType={StyleTypeProp.UsedDefault} />
+                <Button dataTestId={dataTestId} styleType={StyleTypeProp.UsedDefault} />
             </ThemeProvider>,
         );
-        const button = container.querySelector(`.${theme.className}`);
+        const button = getByTestId(dataTestId);
         expect(button).toHaveStyle('background-color: #EAEEF4');
     });
     test('should have color from theme', () => {
-        const { container } = render(
+        const { getByTestId } = render(
             <ThemeProvider value={theme}>
-                <Button styleType={StyleTypeProp.WhiteBodyWithShadow} />
+                <Button dataTestId={dataTestId} styleType={StyleTypeProp.WhiteBodyWithShadow} />
             </ThemeProvider>,
         );
-        const button = container.querySelector(`.${theme.className}`);
+        const button = getByTestId(dataTestId);
         expect(button).toHaveStyle('box-shadow: 0px 4px 6px rgba(170, 187, 208, 0.16)');
     });
     test('should have color from theme', () => {
-        const { container } = render(
+        const { getByTestId } = render(
             <ThemeProvider value={theme}>
-                <Button styleType={StyleTypeProp.WhiteBodyWithBorder} />
+                <Button dataTestId={dataTestId} styleType={StyleTypeProp.WhiteBodyWithBorder} />
             </ThemeProvider>,
         );
-        const button = container.querySelector(`.${theme.className}`);
-        expect(button).toHaveStyle(`border: 1px solid ${theme.styles.mainColor}`);
+        const button = getByTestId(dataTestId);
+        expect(button).toHaveStyle(`border: 1px solid ${theme.mainColor}`);
     });
 });

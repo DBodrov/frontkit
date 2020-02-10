@@ -4,10 +4,7 @@ import { ThemeProvider } from '../../components/ThemeProvider';
 import { Spinner } from '../../components/Spinner';
 
 const theme = {
-    styles: {
-        mainColor: '#8000ff',
-    },
-    className: 'spinnerTest',
+    mainColor: '#8000ff',
 };
 
 describe('<Spinner />', () => {
@@ -31,13 +28,13 @@ describe('<Spinner />', () => {
         expect(spinner).toHaveClass('Spinnerrrrrrr');
     });
     test('should have a color', () => {
-        const className = theme.className;
+        const className = 'asdasdsa'
         const { container } = render(
             <ThemeProvider value={theme}>
                 <Spinner circleClassName={className} />
             </ThemeProvider>,
         );
         const circle = container.querySelector(`.${className}`);
-        expect(circle).toHaveStyle(`background-color: ${theme.styles.mainColor}`);
+        expect(circle).toHaveStyle(`background-color: ${theme.mainColor}`);
     });
 });

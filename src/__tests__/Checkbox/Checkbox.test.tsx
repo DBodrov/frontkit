@@ -4,10 +4,7 @@ import { Checkbox } from '../../components/Checkbox';
 import { ThemeProvider } from '../../components/ThemeProvider';
 
 const theme = {
-    styles: {
-        mainColor: '#8000ff',
-    },
-    className: 'cn2',
+    mainColor: '#8000ff',
 };
 
 const testId = 'wasasddasdas';
@@ -38,7 +35,7 @@ describe('<Checkbox />', () => {
             </ThemeProvider>,
         );
         const checkbox = getByTestId(testId + '-smallBox');
-        expect(checkbox).toHaveStyle(`background: ${theme.styles.mainColor}`);
+        expect(checkbox).toHaveStyle(`background: ${theme.mainColor}`);
     });
     test('should have default data-testid', () => {
         const { getByTestId } = render(<Checkbox />);
@@ -46,11 +43,11 @@ describe('<Checkbox />', () => {
     });
     test('should have default id', () => {
         const { container } = render(<Checkbox />);
-        expect(container.querySelector("#Checkbox")).not.toBeNull();
+        expect(container.querySelector('#Checkbox')).not.toBeNull();
     });
     test('should have id', () => {
         const id = 'kljdaskljdas';
         const { container } = render(<Checkbox id={id} />);
-        expect(container.querySelector("#" + id)).not.toBeNull();
+        expect(container.querySelector('#' + id)).not.toBeNull();
     });
 });

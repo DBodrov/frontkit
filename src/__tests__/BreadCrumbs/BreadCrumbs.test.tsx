@@ -4,10 +4,7 @@ import { ThemeProvider } from '../../components/ThemeProvider';
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 
 const theme = {
-    styles: {
-        linkColor: '#8000ff',
-    },
-    className: 'cn1',
+    linkColor: '#8000ff',
 };
 
 const mockFunc = jest.fn();
@@ -66,17 +63,14 @@ describe('<BreadCrumbs />', () => {
             </ThemeProvider>,
         );
         const element = getByTestId('BreadCrumbs-mc-text');
-        expect(element).toHaveStyle(`color: ${theme.styles.linkColor}`);
+        expect(element).toHaveStyle(`color: ${theme.linkColor}`);
     });
 });
 
 describe('click', () => {
     let rendered: RenderResult;
     beforeEach(() => {
-        rendered = render(
-            <BreadCrumbs data={fullBreadCrumbs}
-            />,
-        );
+        rendered = render(<BreadCrumbs data={fullBreadCrumbs} />);
     });
 
     test('should click', () => {

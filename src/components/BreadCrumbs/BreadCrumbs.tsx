@@ -1,21 +1,18 @@
 import classnames from 'classnames';
-import React from 'react';
-import { DEFAULT_LINK_COLOR } from '../../constants/style';
-import { ThemeContext, ThemeTypes } from '../ThemeProvider';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../ThemeProvider';
 import styles from './BreadCrumbs.module.css';
 import { Arrow, ArrowTypes } from '../Arrow';
 
-interface Crumb extends Object {
+interface Crumb {
     active: boolean;
-    onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+    onClick?: (event: React.MouseEvent<HTMLDivElement>) => unknown;
     text: string;
 }
 
 interface BreadCrumbsProps extends React.HTMLAttributes<HTMLElement> {
     /** Class names passed in order to change styling */
     className?: string;
-    /** Inline style objects passed */
-    style?: React.StyleHTMLAttributes<HTMLElement>;
     /** ID attribute for QA Auto-tests
      * @default BreadCrumbs
      * */
@@ -25,56 +22,61 @@ interface BreadCrumbsProps extends React.HTMLAttributes<HTMLElement> {
      * onClick - function
      * text - text crumb
      * */
-    data?: Crumb[];
+    data?: ReadonlyArray<Crumb>;
 }
 
-const getColor = (theme: ThemeTypes, needColor: boolean): string => {
-    if (!needColor) {
-        return 'inherit';
-    }
-    if (theme.styles && theme.styles.linkColor) {
-        return theme.styles.linkColor;
-    }
-    return DEFAULT_LINK_COLOR;
-};
+interface CrumbProps {
+    crumb: Crumb;
+    dataTestId: string;
+}
 
-const getCrumb = (crumb: Crumb, name: string, dataTestId: string) => {
+function Crumb({ crumb, dataTestId }: CrumbProps): JSX.Element {
     const cls = classnames(styles.crumb, { [styles.active]: crumb.active });
     return (
-        <div data-testid={dataTestId + '-' + name} className={cls}>
-            <span data-testid={dataTestId + '-' + name + '-text'}>{crumb.text}</span>
+        <div data-testid={dataTestId} className={cls}>
+            <span data-testid={dataTestId + '-text'}>{crumb.text}</span>
         </div>
     );
-};
+}
 
-const getMainCrumb = (crumb: Crumb, name: string, dataTestId: string, theme: ThemeTypes): JSX.Element => {
+interface MainCrumbProps {
+    crumb: Crumb;
+    dataTestId: string;
+}
+function MainCrumb({ crumb, dataTestId }: MainCrumbProps): JSX.Element {
+    const theme = useContext(ThemeContext);
     const cls = classnames(styles.mainCrumb, { [styles.link]: crumb.active });
-    const linkColor = getColor(theme, crumb.active);
+    const linkColor = crumb.active ? theme.linkColor : 'inherit';
     return (
-        <div className={cls} data-testid={dataTestId + '-' + name} onClick={crumb.active ? crumb.onClick : undefined}>
-            {crumb.active && (
-                <Arrow className={styles.vector} dataTestId={dataTestId + '-' + name + '-icon'} color={linkColor} type={ArrowTypes.Left} />
-            )}
-            <span style={{ color: linkColor }} data-testid={dataTestId + '-' + name + '-text'}>
+        <div className={cls} data-testid={dataTestId} onClick={crumb.active ? crumb.onClick : undefined}>
+            {crumb.active && <Arrow className={styles.vector} dataTestId={dataTestId + '-icon'} color={linkColor} type={ArrowTypes.Left} />}
+            <span style={{ color: linkColor }} data-testid={dataTestId + '-text'}>
                 {crumb.text}
             </span>
         </div>
     );
-};
+}
 
-export function BreadCrumbs(props: BreadCrumbsProps): JSX.Element {
-    const theme = React.useContext(ThemeContext);
-    const { dataTestId = 'BreadCrumbs', className, style, data: [mainCrumb, secondCrumb, thirdCrumb] = [], ...rest } = props;
+export function BreadCrumbs({
+    className,
+    data: [mainCrumb, secondCrumb, thirdCrumb] = [],
+    dataTestId = 'BreadCrumbs',
+    ...rest
+}: BreadCrumbsProps): JSX.Element {
     if (!mainCrumb) {
         return <div data-testid="emptyBreadCrumbs" />;
     }
-    const clsWrapper = classnames(styles.wrapper, theme.className, className);
+    const clsWrapper = classnames(styles.wrapper, className);
     return (
-        <div className={clsWrapper} style={style} data-testid={dataTestId} {...rest}>
-            {getMainCrumb(mainCrumb, 'mc', dataTestId, theme)}
-            {secondCrumb && getCrumb(secondCrumb, 'secondCrumb', dataTestId)}
-            {thirdCrumb && <Arrow className={styles.vector} dataTestId={dataTestId + '-right'} type={ArrowTypes.Right} />}
-            {thirdCrumb && getCrumb(thirdCrumb, 'thirdCrumb', dataTestId)}
+        <div {...rest} className={clsWrapper} data-testid={dataTestId}>
+            <MainCrumb crumb={mainCrumb} dataTestId={dataTestId + '-mc'} />
+            {secondCrumb && <Crumb crumb={secondCrumb} dataTestId={dataTestId + '-secondCrumb'} />}
+            {thirdCrumb && (
+                <>
+                    <Arrow className={styles.vector} dataTestId={dataTestId + '-right'} type={ArrowTypes.Right} />
+                    <Crumb crumb={thirdCrumb} dataTestId={dataTestId + '-thirdCrumb'} />
+                </>
+            )}
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import { StyleTypeProp } from '../Button';
-import { ThemeContext, ThemeTypes } from '../ThemeProvider';
+import { ThemeContext } from '../ThemeProvider';
 import styles from './Radio.module.css';
 
 interface RadioProps extends React.AllHTMLAttributes<HTMLInputElement> {
@@ -17,25 +17,16 @@ interface RadioProps extends React.AllHTMLAttributes<HTMLInputElement> {
     value: string;
     name: string;
     label: string;
-    disabled?: boolean;
 }
-
-const getThemeColor = (theme: ThemeTypes) => {
-    if (!theme.styles || !theme.styles.mainColor) {
-        return undefined;
-    }
-    const { mainColor } = theme.styles;
-    return { background: mainColor };
-};
 
 export function Radio(props: RadioProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
-    const { name, value, label, dataTestId = 'Radio', className, style, disabled = false, ...rest } = props;
-    const themeColor = getThemeColor(theme);
-    const cls = classnames(styles.radio__text, theme.className, className);
+    const { name, value, label, dataTestId = 'Radio', className, style, ...rest } = props;
+    const themeColor = { background: theme.mainColor };
+    const cls = classnames(styles.radio__text, className);
     return (
         <label key={name} className={styles.radio} style={style} data-testid={dataTestId + '-wrap'}>
-            <input {...rest} type="radio" name={name} id={value} value={value} disabled={disabled} data-testid={dataTestId} />
+            <input {...rest} type="radio" name={name} id={value} value={value} data-testid={dataTestId} />
             <div className={cls}>
                 <div className={styles.before} data-testid={dataTestId + '-BigCircle'} />
                 <span data-testid={dataTestId + '-text'}>{label}</span>
