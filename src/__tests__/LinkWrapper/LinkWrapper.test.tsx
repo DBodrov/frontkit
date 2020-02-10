@@ -4,9 +4,7 @@ import { LinkWrapper } from '../../components/LinkWrapper';
 import { ThemeProvider } from '../../components/ThemeProvider';
 
 const theme = {
-    styles: {
-        linkColor: '#8000ff',
-    },
+    linkColor: '#8000ff',
 };
 
 describe('<LinkWrapper />', () => {
@@ -26,7 +24,7 @@ describe('<LinkWrapper />', () => {
             </ThemeProvider>,
         );
         const link = getByTestId(testId);
-        expect(link).toHaveStyle(`color: ${theme.styles.linkColor}`);
+        expect(link).toHaveStyle(`color: ${theme.linkColor}`);
         expect(link).toHaveStyle(`padding: 30px`);
     });
 });

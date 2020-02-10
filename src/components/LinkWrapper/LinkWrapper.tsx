@@ -1,10 +1,7 @@
 import React, { CSSProperties } from 'react';
-import { DEFAULT_LINK_COLOR } from '../../constants/style';
-import { ThemeContext, ThemeTypes } from '../ThemeProvider';
+import { ThemeContext } from '../ThemeProvider';
 
-interface LinkWrapperProps extends React.HTMLAttributes<HTMLElement> {
-    /** Class names passed to link wrapper to change styling */
-    className?: string;
+interface LinkWrapperProps extends React.HTMLAttributes<HTMLSpanElement> {
     /** Inline style objects passed to link wrapper */
     style?: CSSProperties;
     /** ID attribute for QA Auto-tests
@@ -13,16 +10,11 @@ interface LinkWrapperProps extends React.HTMLAttributes<HTMLElement> {
     dataTestId?: string;
 }
 
-const getThemeColor = (theme: ThemeTypes, style: CSSProperties): CSSProperties => {
-    const linkColor = theme.styles?.linkColor ?? DEFAULT_LINK_COLOR;
-    return { color: linkColor, ...style };
-};
-
-export function LinkWrapper({ children, className, style = {}, dataTestId = 'LinkWrapper', ...rest }: LinkWrapperProps): JSX.Element {
+export function LinkWrapper({ children, style = {}, dataTestId = 'LinkWrapper', ...rest }: LinkWrapperProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
-    const styles = getThemeColor(theme, style);
+    const styles = { color: theme.linkColor, ...style };
     return (
-        <span {...rest} data-testid={dataTestId} className={className} style={styles}>
+        <span {...rest} data-testid={dataTestId} style={styles}>
             {children}
         </span>
     );

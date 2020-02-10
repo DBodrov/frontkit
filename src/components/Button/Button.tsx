@@ -22,9 +22,9 @@ interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes
     styleType?: StyleTypeProp;
 }
 
-const getFinalStyles = (theme: ThemeTypes, style: ButtonProps['style'], styleType: StyleTypeProp) => {
-    const mainColor = theme?.styles?.mainColor || '#69a6f1';
-    const btnTextColor = theme?.styles?.btnTextColor || '#ffffff';
+const getFinalStyles = (theme: ThemeTypes, style: ButtonProps['style'], styleType: StyleTypeProp): CSSProperties => {
+    const mainColor = theme.mainColor;
+    const btnTextColor = theme.btnTextColor;
     switch (styleType) {
         case StyleTypeProp.WhiteBodyWithBorder:
             return { color: mainColor, border: `1px solid ${mainColor}`, backgroundColor: '#ffffff', ...style };
@@ -47,9 +47,9 @@ export function Button(props: ButtonProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
     const { children, dataTestId = 'Button', className, style, styleType = StyleTypeProp.Default, ...rest } = props;
     const finalStyles = getFinalStyles(theme, style, styleType);
-    const cls = classnames(styles.button, theme.className, className);
+    const cls = classnames(styles.button, className);
     return (
-        <button className={cls} data-testid={dataTestId} style={finalStyles} {...rest}>
+        <button {...rest} className={cls} data-testid={dataTestId} style={finalStyles}>
             {children}
         </button>
     );

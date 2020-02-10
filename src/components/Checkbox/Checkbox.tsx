@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import React from 'react';
-import { ThemeContext, ThemeTypes } from '../ThemeProvider';
+import { ThemeContext } from '../ThemeProvider';
 import styles from './Checkbox.module.css';
 import { HelpIcon } from '../Input';
 
@@ -21,21 +21,12 @@ interface CheckboxProps extends React.AllHTMLAttributes<HTMLInputElement> {
      * */
     id?: string;
 }
-
-const getFinalStyles = (theme: ThemeTypes) => {
-    if (!theme.styles || !theme.styles.mainColor) {
-        return undefined;
-    }
-    const { mainColor } = theme.styles;
-    return { background: mainColor };
-};
-
 export function Checkbox(props: CheckboxProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
     const { dataTestId = 'Checkbox', className, style, Label, id = 'Checkbox', hintText = '', ...rest } = props;
-    const finalStyles = getFinalStyles(theme);
+    const finalStyles = { background: theme.mainColor };
     const needHint = hintText.length > 0;
-    const cls = classnames(styles.checkboxWrapper, { [styles.cf]: needHint }, theme.className, className);
+    const cls = classnames(styles.checkboxWrapper, { [styles.cf]: needHint }, className);
     return (
         <div className={cls} style={style}>
             <input {...rest} type="checkbox" id={id} className={styles.checkbox} data-testid={dataTestId} />
