@@ -10,7 +10,14 @@ interface MaskedInputProps extends InputProps {
 
 export function MaskedInput(props: MaskedInputProps): JSX.Element {
     return (
-        <InputMask mask={props.mask} maskChar={null} value={props.value} disabled={props.disabled} onChange={props.onChange}>
+        <InputMask
+            mask={props.mask}
+            maskChar={null}
+            value={props.value}
+            disabled={props.disabled}
+            onChange={props.onChange}
+            onFocus={props.onFocus}
+        >
             {(): JSX.Element => <Input {...props} />}
         </InputMask>
     );
