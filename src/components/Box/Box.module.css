@@ -42,7 +42,7 @@
 
     .w_padding > *:not(.border):first-of-type,
     .w_last_full > *:not(.border):first-of-type {
-        padding: 30px 23px 20px 23px;
+        padding: 30px 23px 25px 23px;
     }
 
     .w_padding > *:not(.border):last-of-type {
