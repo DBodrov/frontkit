@@ -9,7 +9,7 @@
     background-color: #f3f6f9;
 }
 
-@media (max-width: 540px) {
+@media (min-width: 541px) {
     .w_padding > *:not(.border),
     .w_last_full > *:not(.border) {
         padding: 25px 30px;
@@ -34,7 +34,7 @@
     }
 }
 
-@media (min-width: 541px) {
+@media (max-width: 540px) {
     .w_padding > *:not(.border),
     .w_last_full > *:not(.border) {
         padding: 25px 23px;
