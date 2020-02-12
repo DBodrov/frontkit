@@ -2087,6 +2087,16 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
+"@reatom/core@^1.1.0":
+  version "1.1.0"
+  resolved "http://192.168.167.51:8081/repository/npm/@reatom/core/-/core-1.1.0.tgz#a55807e316b4ac9a538adb949138f6b47c00f3b9"
+  integrity sha512-2cAdUhLvJK+4yKTU3tSRrrYT7W6ofgsdn6hhMtRgcTTZsA4JRNFLB/XGcdvW46R8YcLnf1Qz9nM3n7tHo2X1nA==
+
+"@reatom/react@^1.0.0":
+  version "1.0.0"
+  resolved "http://192.168.167.51:8081/repository/npm/@reatom/react/-/react-1.0.0.tgz#f8825ea6edebf15addf671880ccf0e93980e3c71"
+  integrity sha512-uYAxiwHZV0kPTq7xTa/qGORGllG/q3Tn86dfhkZADAm7NW8oX6OpwMCCCmUM+aWZiqCDx6un4YLMESXU3wXB+g==
+
 "@rollup/plugin-commonjs@^11.0.2":
   version "11.0.2"
   resolved "http://192.168.167.51:8081/repository/npm/@rollup/plugin-commonjs/-/plugin-commonjs-11.0.2.tgz#837cc6950752327cb90177b608f0928a4e60b582"

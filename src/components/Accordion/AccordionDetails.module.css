@@ -1,0 +1,64 @@
+.background {
+    background: #f2f6fb;
+    padding: 30px;
+}
+
+.header {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 120%;
+    color: #2C2E2B;
+    margin-bottom: 10px;
+}
+
+.regular {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 120%;
+    color: #2C2E2B;
+}
+
+.bold {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 120%;
+    color: #2C2E2B;
+}
+
+.bigMargin {
+    height: 15px;
+}
+
+/** Grid **/
+.grid {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.fullLine {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-column: 1 / span 2;
+}
+
+@media(max-width: 768px) {
+    .grid {
+        -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    }
+
+    .fullLine {
+        -ms-grid-column: 1;
+        grid-column: 1;
+    }
+}
+
+.right .value {
+    text-align: right;
+}
+
