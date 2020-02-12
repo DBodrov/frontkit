@@ -1,8 +1,8 @@
-import { AccordionDetailsSuccess } from './AccordionDetailsSuccess';
 import { AccordionLink } from './AccordionLink';
+import { AccordionDetails } from './AccordionDetails';
 
 export const Accordion = {
-    Details: AccordionDetailsSuccess,
+    Details: AccordionDetails,
     Link: AccordionLink,
 };
 

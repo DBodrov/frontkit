@@ -1,6 +1,4 @@
 import React from 'react';
-import { useGlobalState } from '../../reatom';
-import { accordionStateAtom, accordionStore, initAction } from './accordionState';
 import styles from './AccordionDetails.module.css';
 import cn from 'classnames';
 
@@ -22,7 +20,6 @@ export type Data =
     | { type: AccordionLineType.BigMargin };
 
 interface DetailsProps {
-    id: string;
     data: ReadonlyArray<Data>;
     align?: 'left' | 'right';
     dataTestId?: string;
@@ -84,18 +81,7 @@ function BigMargin(): JSX.Element {
     return <div className={cn(styles.bigMargin, styles.fullLine)} />;
 }
 
-export function AccordionDetailsSuccess({ id, data, align = 'left', dataTestId = 'AccordionDetails' }: DetailsProps): JSX.Element {
-    const state = useGlobalState(accordionStore, accordionStateAtom);
-    const value = state[id] || false;
-
-    React.useEffect(() => {
-        accordionStore.dispatch(initAction(id));
-    }, [accordionStore, initAction]);
-
-    if (!value) {
-        return <React.Fragment />;
-    }
-
+export function AccordionDetailsSuccess({ data, align = 'left', dataTestId = 'AccordionDetails' }: DetailsProps): JSX.Element {
     return (
         <div className={cn(styles.background, styles.grid, { [styles.right]: align === 'right' })} data-testid={dataTestId}>
             {data.map(

@@ -32,6 +32,17 @@
     height: 15px;
 }
 
+.errorText {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.errorButton {
+    width: 210px;
+    margin: 0 auto;
+    display: block;
+}
+
 /** Grid **/
 .grid {
     display: -ms-grid;
