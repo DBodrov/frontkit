@@ -84,7 +84,7 @@ function BigMargin(): JSX.Element {
     return <div className={cn(styles.bigMargin, styles.fullLine)} />;
 }
 
-export function AccordionDetails({ id, data, align = 'left', dataTestId = 'AccordionDetails' }: DetailsProps): JSX.Element {
+export function AccordionDetailsSuccess({ id, data, align = 'left', dataTestId = 'AccordionDetails' }: DetailsProps): JSX.Element {
     const state = useGlobalState(accordionStore, accordionStateAtom);
     const value = state[id] || false;
 
