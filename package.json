@@ -5,6 +5,8 @@
     "main": "./dist/a3-uikit.esm.js",
     "module": "./dist/a3-uikit.esm.js",
     "dependencies": {
+        "@reatom/core": "^1.1.0",
+        "@reatom/react": "^1.0.0",
         "classnames": "^2.2.6",
         "element-closest": "^3.0.2",
         "react-custom-scrollbars": "^4.2.1",
@@ -16,7 +18,7 @@
         "react-dom": "^16.12.0"
     },
     "scripts": {
-        "start": "start-storybook -p 9009 -s public",
+        "start": "start-storybook -p 9009 -s static",
         "build": "node bin/build.js",
         "build:lib": "yarn build:rollup && yarn build:dts",
         "build:rollup": "yarn rollup -c",
