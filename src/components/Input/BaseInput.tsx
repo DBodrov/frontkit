@@ -17,7 +17,7 @@ interface BaseInputProps extends Props {
     inputClassName?: string;
 }
 
-function getBackgroundClass(background?: BackgroundProp): string {
+function getBackgroundClass(background: BackgroundProp): string {
     return cn({
         [styles.defaultInput]: background === BackgroundProp.None,
         [styles.error]: background === BackgroundProp.Error,
