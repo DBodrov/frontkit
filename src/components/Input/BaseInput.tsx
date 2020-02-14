@@ -19,7 +19,7 @@ interface BaseInputProps extends Props {
 
 function getBackgroundClass(background?: BackgroundProp): string {
     return cn({
-        [styles.defaultInput]: background === BackgroundProp.None || undefined,
+        [styles.defaultInput]: background === BackgroundProp.None,
         [styles.error]: background === BackgroundProp.Error,
         [styles.success]: background === BackgroundProp.Success,
         [styles.white]: background === BackgroundProp.White,
@@ -49,7 +49,7 @@ export function BaseInput({
     placeholder,
     LeftIcon,
     RightIcon,
-    background,
+    background = BackgroundProp.None,
     className,
     autoFocus = false,
     style,
