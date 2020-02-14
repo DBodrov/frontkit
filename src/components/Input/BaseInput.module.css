@@ -13,7 +13,6 @@
 .input {
     display: flex;
     align-items: center;
-    background: #eaeef4;
     border: 0;
     box-sizing: border-box;
     cursor: text;
@@ -41,6 +40,16 @@
     -ms-grid-column: 3;
 }
 
+.defaultInput {
+    background-color: #eaeef4;
+    /*
+    При автозаполнении браузеры красят input в свой цвет.
+    Это правило никак не переопределить, поэтому делаем костыль:
+    Добавляем внутреннюю тень без размытия на весь input
+    */
+    box-shadow: inset 9999999px 9999999px 0 #eaeef4;
+}
+
 .error {
     background-color: #ffe3e3;
     /*
@@ -51,13 +60,13 @@
     box-shadow: inset 9999999px 9999999px 0 #ffe3e3;
 }
 .success {
-    background-color: #f7f9fb;
+    background-color: #dcf9e3;
     /*
     При автозаполнении браузеры красят input в свой цвет.
     Это правило никак не переопределить, поэтому делаем костыль:
     Добавляем внутреннюю тень без размытия на весь input
     */
-    box-shadow: inset 9999999px 9999999px 0 #f7f9fb;
+    box-shadow: inset 9999999px 9999999px 0 #dcf9e3;
 }
 .white {
     background-color: #ffffff;
