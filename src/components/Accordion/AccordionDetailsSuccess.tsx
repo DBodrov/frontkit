@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './AccordionDetails.module.css';
 import cn from 'classnames';
+import { useInsideBox } from '../Box/Box';
 
 export enum AccordionLineType {
     Header,
@@ -82,8 +83,12 @@ function BigMargin(): JSX.Element {
 }
 
 export function AccordionDetailsSuccess({ data, align = 'left', dataTestId = 'AccordionDetails' }: DetailsProps): JSX.Element {
+    const insideBox = useInsideBox();
     return (
-        <div className={cn(styles.background, styles.grid, { [styles.right]: align === 'right' })} data-testid={dataTestId}>
+        <div
+            className={cn(styles.background, styles.grid, { [styles.right]: align === 'right', [styles.insideBox]: insideBox })}
+            data-testid={dataTestId}
+        >
             {data.map(
                 (el, idx): JSX.Element => {
                     switch (el.type) {

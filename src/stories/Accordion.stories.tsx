@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accordion, AccordionLineType } from '..';
+import { Accordion, AccordionLineType, Box } from '..';
 import { storiesOf } from '@storybook/react';
 
 const getData: React.ComponentProps<typeof Accordion.Details>['getData'] = () =>
@@ -80,6 +80,18 @@ storiesOf('Accordion', module)
                 <Accordion.Link id="test" />
                 <Accordion.Details id="test" getData={getDelayError} align="right" />
             </>
+        ),
+        { info: { inline: true } },
+    )
+    .add(
+        'inside box',
+        () => (
+            <Box>
+                <div>
+                    <Accordion.Link id="test" />
+                    <Accordion.Details id="test" getData={getDelayError} align="right" />
+                </div>
+            </Box>
         ),
         { info: { inline: true } },
     );

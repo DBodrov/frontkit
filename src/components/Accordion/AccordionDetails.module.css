@@ -73,3 +73,7 @@
     text-align: right;
 }
 
+.insideBox {
+    margin-left: -30px;
+    margin-right: -30px;
+}
