@@ -8,7 +8,7 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 120%;
-    color: #2C2E2B;
+    color: #2c2e2b;
     margin-bottom: 10px;
 }
 
@@ -17,7 +17,7 @@
     font-weight: normal;
     font-size: 12px;
     line-height: 120%;
-    color: #2C2E2B;
+    color: #2c2e2b;
 }
 
 .bold {
@@ -25,7 +25,7 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 120%;
-    color: #2C2E2B;
+    color: #2c2e2b;
 }
 
 .bigMargin {
@@ -57,7 +57,7 @@
     grid-column: 1 / span 2;
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
     .grid {
         -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
@@ -83,7 +83,9 @@
         margin-left: -23px;
         margin-right: -23px;
     }
+}
 
+@media (max-width: 768px) {
     .right .value {
         text-align: left;
     }
