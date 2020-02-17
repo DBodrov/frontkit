@@ -77,3 +77,14 @@
     margin-left: -30px;
     margin-right: -30px;
 }
+
+@media (max-width: 540px) {
+    .insideBox {
+        margin-left: -23px;
+        margin-right: -23px;
+    }
+
+    .right .value {
+        text-align: left;
+    }
+}
