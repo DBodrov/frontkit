@@ -6,6 +6,8 @@ import styles from './AccordionDetails.module.css';
 import { Spinner } from '../Spinner';
 import { Button } from '../Button';
 import { lazy, RenderPromise } from './utils';
+import { useInsideBox } from '../Box/Box';
+import cn from 'classnames';
 
 interface DetailsProps {
     id: string;
@@ -18,16 +20,18 @@ type Props = Omit<React.ComponentProps<typeof AccordionDetailsSuccess>, 'data'>;
 const AccordionDetailsSuccessWrapper = (val: ReadonlyArray<Data>, props: Props) => <AccordionDetailsSuccess data={val} {...props} />;
 
 function Loading(props: Props): JSX.Element {
+    const insideBox = useInsideBox();
     return (
-        <div className={styles.background} data-testid={props.dataTestId}>
+        <div className={cn(styles.background, { [styles.insideBox]: insideBox })} data-testid={props.dataTestId}>
             <Spinner />
         </div>
     );
 }
 
 function Error(err: unknown, props: Props, reset: () => unknown): JSX.Element {
+    const insideBox = useInsideBox();
     return (
-        <div className={styles.background} data-testid={props.dataTestId}>
+        <div className={cn(styles.background, { [styles.insideBox]: insideBox })} data-testid={props.dataTestId}>
             <div data-testid={props.dataTestId + '-errorText'} className={styles.errorText}>
                 Произошла ошибка
             </div>

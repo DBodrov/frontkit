@@ -1,4 +1,4 @@
-import React, { ReactNode, CSSProperties } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 import cn from 'classnames';
 import styles from './Box.module.css';
 
@@ -35,30 +35,37 @@ function getSplitClass(type: SplitType): string {
     });
 }
 
+const boxContext = React.createContext(false);
+
+export function useInsideBox(): boolean {
+    return React.useContext(boxContext);
+}
 export function Box({ className, getSplitType = SplitType.Full, style, dataTestId = 'Card', children, ...rest }: BoxProps): JSX.Element {
     return (
-        <div
-            data-testid={dataTestId}
-            className={cn(
-                styles.wrapper,
-                {
-                    [styles.w_full]: getSplitType === SplitType.Full,
-                    [styles.w_padding]: getSplitType === SplitType.Padding,
-                    [styles.w_last_full]: getSplitType === SplitType.OnlyLastFull,
-                },
-                className,
-            )}
-            style={style}
-            {...rest}
-        >
-            {React.Children.toArray(children).map((child, index, origin) => (
-                <React.Fragment key={index}>
-                    {child}
-                    {index !== origin.length - 1 && (
-                        <div className={cn(styles.border, getSplitClass(SplitFunctions[getSplitType](index, origin.length - 1)))} />
-                    )}
-                </React.Fragment>
-            ))}
-        </div>
+        <boxContext.Provider value={true}>
+            <div
+                data-testid={dataTestId}
+                className={cn(
+                    styles.wrapper,
+                    {
+                        [styles.w_full]: getSplitType === SplitType.Full,
+                        [styles.w_padding]: getSplitType === SplitType.Padding,
+                        [styles.w_last_full]: getSplitType === SplitType.OnlyLastFull,
+                    },
+                    className,
+                )}
+                style={style}
+                {...rest}
+            >
+                {React.Children.toArray(children).map((child, index, origin) => (
+                    <React.Fragment key={index}>
+                        {child}
+                        {index !== origin.length - 1 && (
+                            <div className={cn(styles.border, getSplitClass(SplitFunctions[getSplitType](index, origin.length - 1)))} />
+                        )}
+                    </React.Fragment>
+                ))}
+            </div>
+        </boxContext.Provider>
     );
 }
