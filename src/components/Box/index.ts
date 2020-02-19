@@ -1,1 +1,1 @@
-export { Box, SplitType } from './Box';
+export { Box, SplitType, offsetMargin, useInsideBox } from './Box';

@@ -32,6 +32,10 @@
     .paddingBorder {
         margin: 0 30px;
     }
+    .no_paddings {
+        margin-left: -30px;
+        margin-right: -30px;
+    }
 }
 
 @media (max-width: 540px) {
@@ -56,5 +60,9 @@
 
     .paddingBorder {
         margin: 0 23px;
+    }
+    .no_paddings {
+        margin-left: -23px;
+        margin-right: -23px;
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './AccordionDetails.module.css';
 import cn from 'classnames';
-import { useInsideBox } from '../Box/Box';
+import { offsetMargin, useInsideBox } from '../Box';
 
 export enum AccordionLineType {
     Header,
@@ -86,7 +86,7 @@ export function AccordionDetailsSuccess({ data, align = 'left', dataTestId = 'Ac
     const insideBox = useInsideBox();
     return (
         <div
-            className={cn(styles.background, styles.grid, { [styles.right]: align === 'right', [styles.insideBox]: insideBox })}
+            className={cn(styles.background, styles.grid, { [styles.right]: align === 'right', [offsetMargin]: insideBox })}
             data-testid={dataTestId}
         >
             {data.map(
