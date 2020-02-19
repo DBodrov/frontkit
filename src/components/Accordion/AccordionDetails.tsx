@@ -6,7 +6,7 @@ import styles from './AccordionDetails.module.css';
 import { Spinner } from '../Spinner';
 import { Button } from '../Button';
 import { lazy, RenderPromise } from './utils';
-import { useInsideBox } from '../Box/Box';
+import { useInsideBox, offsetMargin } from '../Box';
 import cn from 'classnames';
 
 interface DetailsProps {
@@ -22,7 +22,7 @@ const AccordionDetailsSuccessWrapper = (val: ReadonlyArray<Data>, props: Props) 
 function Loading(props: Props): JSX.Element {
     const insideBox = useInsideBox();
     return (
-        <div className={cn(styles.background, { [styles.insideBox]: insideBox })} data-testid={props.dataTestId}>
+        <div className={cn(styles.background, { [offsetMargin]: insideBox })} data-testid={props.dataTestId}>
             <Spinner />
         </div>
     );
@@ -31,7 +31,7 @@ function Loading(props: Props): JSX.Element {
 function Error(err: unknown, props: Props, reset: () => unknown): JSX.Element {
     const insideBox = useInsideBox();
     return (
-        <div className={cn(styles.background, { [styles.insideBox]: insideBox })} data-testid={props.dataTestId}>
+        <div className={cn(styles.background, { [offsetMargin]: insideBox })} data-testid={props.dataTestId}>
             <div data-testid={props.dataTestId + '-errorText'} className={styles.errorText}>
                 Произошла ошибка
             </div>

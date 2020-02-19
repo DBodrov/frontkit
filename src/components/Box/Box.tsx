@@ -40,6 +40,7 @@ const boxContext = React.createContext(false);
 export function useInsideBox(): boolean {
     return React.useContext(boxContext);
 }
+export const offsetMargin = styles.no_paddings;
 export function Box({ className, getSplitType = SplitType.Full, style, dataTestId = 'Card', children, ...rest }: BoxProps): JSX.Element {
     return (
         <boxContext.Provider value={true}>

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../ThemeProvider';
 
 export enum ArrowTypes {
     Right,
@@ -41,7 +42,8 @@ export type IconProps = {
     type: ArrowTypes;
 };
 
-export function Arrow({ dataTestId, className, color = '#A6AAB0', type }: IconProps) {
+export function Arrow({ dataTestId, className, color, type }: IconProps) {
+    const theme = useContext(ThemeContext);
     return (
         <svg
             className={className}
@@ -52,7 +54,7 @@ export function Arrow({ dataTestId, className, color = '#A6AAB0', type }: IconPr
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
-            <path d={ArrowData[type].d} stroke={color} />
+            <path d={ArrowData[type].d} stroke={color || theme.linkColor} />
         </svg>
     );
 }

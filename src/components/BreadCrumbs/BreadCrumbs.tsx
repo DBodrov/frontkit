@@ -73,7 +73,7 @@ export function BreadCrumbs({
             {secondCrumb && <Crumb crumb={secondCrumb} dataTestId={dataTestId + '-secondCrumb'} />}
             {thirdCrumb && (
                 <>
-                    <Arrow className={styles.vector} dataTestId={dataTestId + '-right'} type={ArrowTypes.Right} />
+                    <Arrow className={styles.vector} dataTestId={dataTestId + '-right'} color="#A6AAB0" type={ArrowTypes.Right} />
                     <Crumb crumb={thirdCrumb} dataTestId={dataTestId + '-thirdCrumb'} />
                 </>
             )}

@@ -8,7 +8,7 @@ export { ThemeProvider } from './components/ThemeProvider';
 export { Provider, Providers } from './components/Providers';
 export { BreadCrumbs } from './components/BreadCrumbs';
 export { Arrow, ArrowTypes } from './components/Arrow';
-export { Box, SplitType } from './components/Box';
+export { Box, SplitType, offsetMargin } from './components/Box';
 export { PaymentCards } from './components/PaymentCard';
 export { Radio } from './components/Radio';
 export { Dropdown } from './components/Dropdown';
