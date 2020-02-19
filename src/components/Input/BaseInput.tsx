@@ -9,6 +9,7 @@ export enum BackgroundProp {
     Success,
     Error,
     White,
+    Warning,
 }
 
 interface BaseInputProps extends Props {
@@ -23,6 +24,7 @@ function getBackgroundClass(background: BackgroundProp): string {
         [styles.error]: background === BackgroundProp.Error,
         [styles.success]: background === BackgroundProp.Success,
         [styles.white]: background === BackgroundProp.White,
+        [styles.warning]: background === BackgroundProp.Warning,
     });
 }
 function useFocus(autoFocus: boolean): [boolean, () => void, () => void, React.RefObject<HTMLDivElement>] {

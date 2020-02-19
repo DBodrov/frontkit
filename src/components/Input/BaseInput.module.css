@@ -68,6 +68,15 @@
     */
     box-shadow: inset 9999999px 9999999px 0 #dcf9e3;
 }
+.warning {
+    background-color: #fff4c8;
+    /*
+    При автозаполнении браузеры красят input в свой цвет.
+    Это правило никак не переопределить, поэтому делаем костыль:
+    Добавляем внутреннюю тень без размытия на весь input
+    */
+    box-shadow: inset 9999999px 9999999px 0 #fff4c8;
+}
 .white {
     background-color: #ffffff;
     /*

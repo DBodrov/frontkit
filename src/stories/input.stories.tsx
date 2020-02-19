@@ -7,6 +7,7 @@ storiesOf('Input', module)
     .add('text align right', () => <Input right={true} defaultValue="123" />, { info: { inline: true } })
     .add('error', () => <Input RightIcon={ErrorIcon} background={BackgroundProp.Error} />, { info: { inline: true } })
     .add('success', () => <Input RightIcon={SuccessIcon} background={BackgroundProp.Success} />, { info: { inline: true } })
+    .add('warning', () => <Input background={BackgroundProp.Warning} />, { info: { inline: true } })
     .add('white background', () => <Input background={BackgroundProp.White} />, { info: { inline: true } })
     .add(
         'help',
