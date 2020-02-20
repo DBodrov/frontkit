@@ -7,7 +7,7 @@ import cn from 'classnames';
 
 interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
     onClose?: (event?: React.MouseEvent<HTMLDivElement>) => void;
-    children: JSX.Element | Array<JSX.Element>;
+    children: React.ReactNode;
     className?: string;
     closeOnClickOutside?: boolean;
     closeOnEsc?: boolean;

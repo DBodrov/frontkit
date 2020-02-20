@@ -10,21 +10,12 @@ class TestComp extends React.Component {
     handleClose = () => this.setState({ isOpen: false });
     handleOpen = () => this.setState({ isOpen: true });
 
-    render():
-        | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-        | string
-        | number
-        | {}
-        | React.ReactNodeArray
-        | React.ReactPortal
-        | boolean
-        | null
-        | undefined {
+    render(): React.ReactNode {
         const { isOpen } = this.state;
         return (
             <div>
-                <div data-testid="div2"/>
-                <div onClick={this.handleOpen} data-testid="div"/>
+                <div data-testid="div2" />
+                <div onClick={this.handleOpen} data-testid="div" />
                 {isOpen && (
                     <Modal onClose={this.handleClose}>
                         <span>123</span>
@@ -59,11 +50,9 @@ describe('<Modal />', () => {
         expect(modal).not.toBeNull();
     });
     test('should render an Modal element', () => {
-        const { getByTestId } = render(
-            <TestComp/>,
-        );
+        const { getByTestId } = render(<TestComp />);
         const elementClickToOpen = getByTestId('div');
-        expect(()=>getByTestId('Modal')).toThrow();
+        expect(() => getByTestId('Modal')).toThrow();
         expect(elementClickToOpen).not.toBeNull();
         fireEvent.click(elementClickToOpen);
         const modal = getByTestId('Modal');
