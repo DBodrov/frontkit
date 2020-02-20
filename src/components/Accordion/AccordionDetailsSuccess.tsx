@@ -26,19 +26,31 @@ interface DetailsProps {
     dataTestId?: string;
 }
 
+function createLineNumber(n: number): Record<string, number> {
+    return {
+        msGridRow: n,
+    };
+}
+
 interface BoldProps {
     name: string;
     value: string;
     dataTestId: string;
     localDataTestId?: string;
+    lineNumber: number;
 }
-function Bold({ name, value, dataTestId, localDataTestId = '' }: BoldProps): JSX.Element {
+function Bold({ name, lineNumber, value, dataTestId, localDataTestId = '' }: BoldProps): JSX.Element {
+    const lineStyles = createLineNumber(lineNumber);
     return (
         <>
-            <div className={styles.bold} data-testid={localDataTestId + dataTestId + '-name'}>
+            <div className={cn(styles.bold, styles.column1)} style={lineStyles} data-testid={localDataTestId + dataTestId + '-name'}>
                 {name}
             </div>
-            <div className={cn(styles.bold, styles.value)} data-testid={localDataTestId + dataTestId + '-value'}>
+            <div
+                style={lineStyles}
+                className={cn(styles.bold, styles.value, styles.column2)}
+                data-testid={localDataTestId + dataTestId + '-value'}
+            >
                 {value}
             </div>
         </>
@@ -49,10 +61,12 @@ interface HeaderProps {
     value: string;
     dataTestId: string;
     localDataTestId?: string;
+    lineNumber: number;
 }
-function Header({ value, dataTestId, localDataTestId = '' }: HeaderProps): JSX.Element {
+function Header({ lineNumber, value, dataTestId, localDataTestId = '' }: HeaderProps): JSX.Element {
+    const lineStyles = createLineNumber(lineNumber);
     return (
-        <div className={cn(styles.header, styles.fullLine)} data-testid={localDataTestId + dataTestId + '-header'}>
+        <div style={lineStyles} className={cn(styles.header, styles.fullLine)} data-testid={localDataTestId + dataTestId + '-header'}>
             {value}
         </div>
     );
@@ -63,23 +77,33 @@ interface RegularProps {
     value: string;
     dataTestId: string;
     localDataTestId?: string;
+    lineNumber: number;
 }
 
-function Regular({ name, value, dataTestId, localDataTestId = '' }: RegularProps): JSX.Element {
+function Regular({ lineNumber, name, value, dataTestId, localDataTestId = '' }: RegularProps): JSX.Element {
+    const lineStyles = createLineNumber(lineNumber);
     return (
         <>
-            <div className={styles.regular} data-testid={localDataTestId + dataTestId + '-name'}>
+            <div style={lineStyles} className={cn(styles.regular, styles.column1)} data-testid={localDataTestId + dataTestId + '-name'}>
                 {name}
             </div>
-            <div className={cn(styles.regular, styles.value)} data-testid={localDataTestId + dataTestId + '-value'}>
+            <div
+                style={lineStyles}
+                className={cn(styles.regular, styles.value, styles.column2)}
+                data-testid={localDataTestId + dataTestId + '-value'}
+            >
                 {value}
             </div>
         </>
     );
 }
 
-function BigMargin(): JSX.Element {
-    return <div className={cn(styles.bigMargin, styles.fullLine)} />;
+interface BigNumberProps {
+    lineNumber: number;
+}
+function BigMargin({ lineNumber }: BigNumberProps): JSX.Element {
+    const lineStyles = createLineNumber(lineNumber);
+    return <div style={lineStyles} className={cn(styles.bigMargin, styles.fullLine)} />;
 }
 
 export function AccordionDetailsSuccess({ data, align = 'left', dataTestId = 'AccordionDetails' }: DetailsProps): JSX.Element {
@@ -93,14 +117,30 @@ export function AccordionDetailsSuccess({ data, align = 'left', dataTestId = 'Ac
                 (el, idx): JSX.Element => {
                     switch (el.type) {
                         case AccordionLineType.Header:
-                            return <Header localDataTestId={el.dataTestId} dataTestId={dataTestId} key={idx} value={el.value} />;
+                            return (
+                                <Header
+                                    lineNumber={idx + 1}
+                                    localDataTestId={el.dataTestId}
+                                    dataTestId={dataTestId}
+                                    key={idx}
+                                    value={el.value}
+                                />
+                            );
                         case AccordionLineType.Bold:
                             return (
-                                <Bold localDataTestId={el.dataTestId} dataTestId={dataTestId} key={idx} name={el.name} value={el.value} />
+                                <Bold
+                                    lineNumber={idx + 1}
+                                    localDataTestId={el.dataTestId}
+                                    dataTestId={dataTestId}
+                                    key={idx}
+                                    name={el.name}
+                                    value={el.value}
+                                />
                             );
                         case AccordionLineType.Regular:
                             return (
                                 <Regular
+                                    lineNumber={idx + 1}
                                     localDataTestId={el.dataTestId}
                                     dataTestId={dataTestId}
                                     key={idx}
@@ -109,7 +149,7 @@ export function AccordionDetailsSuccess({ data, align = 'left', dataTestId = 'Ac
                                 />
                             );
                         case AccordionLineType.BigMargin:
-                            return <BigMargin key={idx} />;
+                            return <BigMargin lineNumber={idx + 1} key={idx} />;
                     }
                 },
             )}
