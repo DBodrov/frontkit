@@ -35,15 +35,15 @@ function getSplitClass(type: SplitType): string {
     });
 }
 
-const boxContext = React.createContext(false);
+export const offsetMargin = styles.no_paddings;
+const boxContext = React.createContext<string | undefined>(undefined);
 
-export function useInsideBox(): boolean {
+export function useInsideBoxClassName(): string | undefined {
     return React.useContext(boxContext);
 }
-export const offsetMargin = styles.no_paddings;
 export function Box({ className, getSplitType = SplitType.Full, style, dataTestId = 'Card', children, ...rest }: BoxProps): JSX.Element {
     return (
-        <boxContext.Provider value={true}>
+        <boxContext.Provider value={offsetMargin}>
             <div
                 data-testid={dataTestId}
                 className={cn(
