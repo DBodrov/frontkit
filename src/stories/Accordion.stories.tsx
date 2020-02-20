@@ -29,6 +29,35 @@ const getDelayData = () => sleep(2000).then(getData);
 
 const getDelayError = () => sleep(2000).then(Promise.reject);
 
+const getSimpleData: React.ComponentProps<typeof Accordion.Details>['getData'] = () =>
+    Promise.resolve([
+        {
+            type: AccordionLineType.Regular,
+            name: 'title',
+            value: 'value',
+        },
+        {
+            type: AccordionLineType.Regular,
+            name: 'title',
+            value: 'value',
+        },
+        {
+            type: AccordionLineType.Regular,
+            name: 'title',
+            value: 'value',
+        },
+        {
+            type: AccordionLineType.Regular,
+            name: 'title',
+            value: 'value',
+        },
+        {
+            type: AccordionLineType.Regular,
+            name: 'title',
+            value: 'value',
+        },
+    ]);
+
 storiesOf('Accordion', module)
     .add(
         'simple',
@@ -90,6 +119,18 @@ storiesOf('Accordion', module)
                 <div>
                     <Accordion.Link id="test" />
                     <Accordion.Details id="test" getData={getDelayError} align="right" />
+                </div>
+            </Box>
+        ),
+        { info: { inline: true } },
+    )
+    .add(
+        'regular lines only',
+        () => (
+            <Box>
+                <div>
+                    <Accordion.Link id="test" />
+                    <Accordion.Details id="test" getData={getSimpleData} align="right" />
                 </div>
             </Box>
         ),

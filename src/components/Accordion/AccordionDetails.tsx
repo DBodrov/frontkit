@@ -6,7 +6,7 @@ import styles from './AccordionDetails.module.css';
 import { Spinner } from '../Spinner';
 import { Button } from '../Button';
 import { lazy, RenderPromise } from './utils';
-import { useInsideBox, offsetMargin } from '../Box';
+import { useInsideBoxClassName } from '../Box';
 import cn from 'classnames';
 
 interface DetailsProps {
@@ -20,18 +20,18 @@ type Props = Omit<React.ComponentProps<typeof AccordionDetailsSuccess>, 'data'>;
 const AccordionDetailsSuccessWrapper = (val: ReadonlyArray<Data>, props: Props) => <AccordionDetailsSuccess data={val} {...props} />;
 
 function Loading(props: Props): JSX.Element {
-    const insideBox = useInsideBox();
+    const insideBox = useInsideBoxClassName();
     return (
-        <div className={cn(styles.background, { [offsetMargin]: insideBox })} data-testid={props.dataTestId}>
+        <div className={cn(styles.background, insideBox)} data-testid={props.dataTestId}>
             <Spinner />
         </div>
     );
 }
 
 function Error(err: unknown, props: Props, reset: () => unknown): JSX.Element {
-    const insideBox = useInsideBox();
+    const insideBox = useInsideBoxClassName();
     return (
-        <div className={cn(styles.background, { [offsetMargin]: insideBox })} data-testid={props.dataTestId}>
+        <div className={cn(styles.background, insideBox)} data-testid={props.dataTestId}>
             <div data-testid={props.dataTestId + '-errorText'} className={styles.errorText}>
                 Произошла ошибка
             </div>
