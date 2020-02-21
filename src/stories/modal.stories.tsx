@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions';
 import { ThemeProvider, ThemeTypes } from '../components/ThemeProvider';
 
 const theme: ThemeTypes = {
-    mainColor: '#8000ff',
+    linkColor: '#8000ff',
 };
 
 storiesOf('Modal', module).add(

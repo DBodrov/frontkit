@@ -51,7 +51,7 @@ const Popup = ({
 }: PopupProps): JSX.Element => {
     const wrapperRef = React.useRef(null);
     const theme = React.useContext(ThemeContext);
-    const finalColor = React.useMemo(() => theme.mainColor || DEFAULT_LINK_COLOR, [theme, DEFAULT_LINK_COLOR]);
+    const finalColor = React.useMemo(() => theme.linkColor || DEFAULT_LINK_COLOR, [theme, DEFAULT_LINK_COLOR]);
     React.useEffect(changeBodyStyles, []);
     React.useEffect(() => {
         function closeByClickOutside(e: Event) {
