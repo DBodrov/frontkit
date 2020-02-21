@@ -1,7 +1,9 @@
 import React from 'react';
+import { DEFAULT_LINK_COLOR } from '../../constants/style';
 import { Dimmer } from '../Dimmer';
 import { H3 } from '../Header';
 import ReactDom from 'react-dom';
+import { ThemeContext } from '../ThemeProvider';
 import styles from './Modal.module.css';
 import cn from 'classnames';
 
@@ -48,7 +50,7 @@ const Popup = ({
     ...rest
 }: PopupProps): JSX.Element => {
     const wrapperRef = React.useRef(null);
-
+    const theme = React.useContext(ThemeContext);
     React.useEffect(changeBodyStyles, []);
     React.useEffect(() => {
         function closeByClickOutside(e: Event) {
@@ -78,6 +80,7 @@ const Popup = ({
                         {Boolean(header) && <H3 className={styles.header}>{header}</H3>}
                         {onClose && (
                             <div onClick={onClose}>
+                                <style>{`.${styles.close}:after, .${styles.close}:before {background-color: ${theme.linkColor};}`}</style>
                                 <div className={styles.close} data-testid={dataTestId + '-Close'} />
                             </div>
                         )}
