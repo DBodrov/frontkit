@@ -51,7 +51,6 @@ const Popup = ({
 }: PopupProps): JSX.Element => {
     const wrapperRef = React.useRef(null);
     const theme = React.useContext(ThemeContext);
-    const finalColor = React.useMemo(() => theme.linkColor || DEFAULT_LINK_COLOR, [theme, DEFAULT_LINK_COLOR]);
     React.useEffect(changeBodyStyles, []);
     React.useEffect(() => {
         function closeByClickOutside(e: Event) {
@@ -81,7 +80,7 @@ const Popup = ({
                         {Boolean(header) && <H3 className={styles.header}>{header}</H3>}
                         {onClose && (
                             <div onClick={onClose}>
-                                <style>{`.${styles.close}:after, .${styles.close}:before {background-color: ${finalColor};}`}</style>
+                                <style>{`.${styles.close}:after, .${styles.close}:before {background-color: ${theme.linkColor};}`}</style>
                                 <div className={styles.close} data-testid={dataTestId + '-Close'} />
                             </div>
                         )}
