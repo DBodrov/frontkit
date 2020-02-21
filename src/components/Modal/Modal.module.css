@@ -41,7 +41,6 @@
     content: ' ';
     height: 15px;
     width: 1px;
-    background-color: black;
 }
 
 .close:after {
