@@ -14,4 +14,6 @@ export interface Props extends React.AllHTMLAttributes<HTMLInputElement> {
     leftPartClassName?: string;
     rightPartClassName?: string;
     inputClassName?: string;
+    disableLeftBorderRadius?: boolean;
+    disableRightBorderRadius?: boolean;
 }
