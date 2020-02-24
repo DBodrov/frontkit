@@ -15,7 +15,6 @@ export enum BackgroundProp {
 interface BaseInputProps extends Props {
     leftPartClassName?: string;
     rightPartClassName?: string;
-    inputClassName?: string;
 }
 
 function getBackgroundClass(background: BackgroundProp): string {
@@ -61,6 +60,8 @@ export function BaseInput({
     inputClassName,
     showOutline = true,
     disabled = false,
+    disableLeftBorderRadius = false,
+    disableRightBorderRadius = false,
     ...rest
 }: BaseInputProps): JSX.Element {
     const [focused, onFocus, onBlur, fieldRef] = useFocus(autoFocus);
@@ -93,7 +94,10 @@ export function BaseInput({
     return (
         <div className={wrapperClassName} ref={fieldRef} style={style} data-testid={dataTestId}>
             <div
-                className={cn(styles.input, styles.leftArea, backgroundClass, leftPartClassName, { [styles.disabled]: disabled })}
+                className={cn(styles.input, styles.leftArea, backgroundClass, leftPartClassName, {
+                    [styles.disabled]: disabled,
+                    [styles.leftAreaBorderRadius]: !disableLeftBorderRadius,
+                })}
                 onClick={onFocus}
                 data-testid={dataTestId + '-left'}
             >
@@ -112,7 +116,10 @@ export function BaseInput({
                 {...rest}
             />
             <div
-                className={cn(styles.input, styles.rightArea, backgroundClass, rightPartClassName, { [styles.disabled]: disabled })}
+                className={cn(styles.input, styles.rightArea, backgroundClass, rightPartClassName, {
+                    [styles.disabled]: disabled,
+                    [styles.rightAreaBorderRadius]: !disableRightBorderRadius,
+                })}
                 onClick={onFocus}
                 data-testid={dataTestId + '-right'}
             >

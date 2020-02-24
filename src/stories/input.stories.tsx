@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Input, ErrorIcon, SuccessIcon, BackgroundProp, SearchIcon, HelpIcon, SmallInput } from '../components/Input';
+import { BackgroundProp, ErrorIcon, HelpIcon, Input, SearchIcon, SmallInput, SuccessIcon } from '../components/Input';
 
 storiesOf('Input', module)
     .add('base', () => <Input />, { info: { inline: true } })
@@ -40,4 +40,8 @@ storiesOf('Input', module)
     .add('search', () => <Input LeftIcon={SearchIcon} />, { info: { inline: true } })
     .add('small', () => <SmallInput placeholder="placeholder" />, { info: { inline: true } })
     .add('placeholder', () => <Input placeholder="Подсказка" />, { info: { inline: true } })
-    .add('disabled', () => <Input disabled value="Значение" />, { info: { inline: true } });
+    .add('disabled', () => <Input disabled value="Значение" />, { info: { inline: true } })
+    .add('disabled left radius', () => <Input disableLeftBorderRadius value="Левая граница не закруглена" />, { info: { inline: true } })
+    .add('disabled right radius', () => <Input disableRightBorderRadius value="Правая граница не закруглена" />, {
+        info: { inline: true },
+    });

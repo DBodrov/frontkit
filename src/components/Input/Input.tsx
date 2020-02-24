@@ -8,8 +8,8 @@ export function Input(props: Props): JSX.Element {
     return (
         <BaseInput
             {...props}
-            leftPartClassName={cn(styles.left, props.leftPartClassName)}
-            rightPartClassName={cn(styles.right, props.rightPartClassName)}
+            leftPartClassName={styles.left}
+            rightPartClassName={styles.right}
             inputClassName={cn(styles.input, props.inputClassName)}
         />
     );
