@@ -39,12 +39,19 @@
 
 @media (max-width: 540px) {
     .mainCrumb {
+        order: 0;
         flex-basis: 80%;
+        margin-right: 0;
         margin-bottom: 20px;
     }
 
     .otherCrumb {
-        flex-basis: 20%;
-        order: 999;
+        order: 2;
+        flex-basis: 100%;
+    }
+
+    .rightComponent {
+        order: 1;
+        margin-left: auto;
     }
 }
