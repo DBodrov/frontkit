@@ -39,7 +39,7 @@ describe('<BreadCrumbs />', () => {
         const breadCrumbsTestId = 'newBreadCrumbs';
         const { getByTestId } = render(<BreadCrumbs data={fullBreadCrumbs} className={breadCrumbsClass} dataTestId={breadCrumbsTestId} />);
         const element = getByTestId(breadCrumbsTestId);
-        const link = getByTestId(breadCrumbsTestId + '-mc-text');
+        const link = getByTestId(breadCrumbsTestId + '-mc');
         expect(link).toHaveStyle('color: #4B8BDA');
         expect(element).not.toBeNull();
         expect(element).toHaveClass(breadCrumbsClass);
@@ -62,7 +62,7 @@ describe('<BreadCrumbs />', () => {
                 <BreadCrumbs data={fullBreadCrumbs} />
             </ThemeProvider>,
         );
-        const element = getByTestId('BreadCrumbs-mc-text');
+        const element = getByTestId('BreadCrumbs-mc');
         expect(element).toHaveStyle(`color: ${theme.linkColor}`);
     });
 });
@@ -76,5 +76,13 @@ describe('click', () => {
     test('should click', () => {
         fireEvent.click(rendered.getByTestId('BreadCrumbs-mc-text'));
         expect(mockFunc).toBeCalled();
+    });
+});
+
+describe('rightComponent', () => {
+    test('should render element', () => {
+        const testId = 'asdlasdk';
+        const { getByTestId } = render(<BreadCrumbs data={fullBreadCrumbs} RightComponent={() => <div data-testid={testId} />} />);
+        expect(() => getByTestId(testId)).not.toThrow();
     });
 });

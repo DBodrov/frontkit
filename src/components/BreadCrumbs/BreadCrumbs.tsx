@@ -1,12 +1,13 @@
 import classnames from 'classnames';
-import React, { useContext } from 'react';
-import { ThemeContext } from '../ThemeProvider';
+import React from 'react';
 import styles from './BreadCrumbs.module.css';
 import { Arrow, ArrowTypes } from '../Arrow';
+import { LinkWrapper } from '../LinkWrapper';
 
 interface Crumb {
     active: boolean;
-    onClick?: (event: React.MouseEvent<HTMLDivElement>) => unknown;
+    onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+    href?: string;
     text: string;
 }
 
@@ -23,6 +24,7 @@ interface BreadCrumbsProps extends React.HTMLAttributes<HTMLElement> {
      * text - text crumb
      * */
     data?: ReadonlyArray<Crumb>;
+    RightComponent?: React.ComponentType;
 }
 
 interface CrumbProps {
@@ -44,16 +46,22 @@ interface MainCrumbProps {
     dataTestId: string;
 }
 function MainCrumb({ crumb, dataTestId }: MainCrumbProps): JSX.Element {
-    const theme = useContext(ThemeContext);
     const cls = classnames(styles.mainCrumb, { [styles.link]: crumb.active });
-    const linkColor = crumb.active ? theme.linkColor : 'inherit';
     return (
-        <div className={cls} data-testid={dataTestId} onClick={crumb.active ? crumb.onClick : undefined}>
-            {crumb.active && <Arrow className={styles.vector} dataTestId={dataTestId + '-icon'} color={linkColor} type={ArrowTypes.Left} />}
-            <span style={{ color: linkColor }} data-testid={dataTestId + '-text'}>
-                {crumb.text}
-            </span>
-        </div>
+        <>
+            {crumb.active && (
+                <LinkWrapper className={cls} dataTestId={dataTestId}>
+                    <a data-testid={dataTestId + '-text'} onClick={crumb.onClick}>
+                        {crumb.text}
+                    </a>
+                </LinkWrapper>
+            )}
+            {!crumb.active && (
+                <div className={cls} data-testid={dataTestId}>
+                    <span data-testid={dataTestId + '-text'}>{crumb.text}</span>
+                </div>
+            )}
+        </>
     );
 }
 
@@ -61,6 +69,7 @@ export function BreadCrumbs({
     className,
     data: [mainCrumb, secondCrumb, thirdCrumb] = [],
     dataTestId = 'BreadCrumbs',
+    RightComponent,
     ...rest
 }: BreadCrumbsProps): JSX.Element {
     if (!mainCrumb) {
@@ -70,13 +79,16 @@ export function BreadCrumbs({
     return (
         <div {...rest} className={clsWrapper} data-testid={dataTestId}>
             <MainCrumb crumb={mainCrumb} dataTestId={dataTestId + '-mc'} />
-            {secondCrumb && <Crumb crumb={secondCrumb} dataTestId={dataTestId + '-secondCrumb'} />}
-            {thirdCrumb && (
-                <>
-                    <Arrow className={styles.vector} dataTestId={dataTestId + '-right'} color="#A6AAB0" type={ArrowTypes.Right} />
-                    <Crumb crumb={thirdCrumb} dataTestId={dataTestId + '-thirdCrumb'} />
-                </>
-            )}
+            <div className={styles.otherCrumb}>
+                {secondCrumb && <Crumb crumb={secondCrumb} dataTestId={dataTestId + '-secondCrumb'} />}
+                {thirdCrumb && (
+                    <>
+                        <Arrow className={styles.vector} dataTestId={dataTestId + '-right'} color="#A6AAB0" type={ArrowTypes.Right} />
+                        <Crumb crumb={thirdCrumb} dataTestId={dataTestId + '-thirdCrumb'} />
+                    </>
+                )}
+            </div>
+            <div className={styles.rightComponent}>{RightComponent && <RightComponent />}</div>
         </div>
     );
 }
