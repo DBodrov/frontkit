@@ -2,11 +2,13 @@
     display: flex;
     font-size: 12px;
     line-height: 12px;
-    color: #A6AAB0;
+    color: #a6aab0;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .mainCrumb {
+    display: block;
     margin-right: 60px;
 }
 
@@ -15,7 +17,7 @@
 }
 
 .active {
-    color: #2C2E2B;
+    color: #2c2e2b;
 }
 
 .vector {
@@ -23,5 +25,33 @@
 }
 
 .crumb {
+    display: block;
     margin-right: 18px;
+}
+
+.otherCrumb {
+    display: flex;
+}
+
+.rightComponent {
+    margin-left: auto;
+}
+
+@media (max-width: 540px) {
+    .mainCrumb {
+        order: 0;
+        flex-basis: 80%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .otherCrumb {
+        order: 2;
+        flex-basis: 100%;
+    }
+
+    .rightComponent {
+        order: 1;
+        margin-left: auto;
+    }
 }

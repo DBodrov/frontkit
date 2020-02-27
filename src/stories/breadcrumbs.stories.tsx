@@ -4,11 +4,8 @@ import { storiesOf } from '@storybook/react';
 import { BreadCrumbs } from '../components/BreadCrumbs';
 import { ThemeProvider, ThemeTypes } from '../components/ThemeProvider';
 
-const theme: ThemeTypes = {
-    styles: {
-        linkColor: '#8000ff',
-    },
-    className: 'cn1',
+const theme: Partial<ThemeTypes> = {
+    linkColor: '#8000ff',
 };
 
 const simpleBreadCrumbs = [
@@ -55,6 +52,15 @@ storiesOf('BreadCrumbs', module).add(
     () => (
         <ThemeProvider value={theme}>
             <BreadCrumbs data={fullBreadCrumbs} />
+        </ThemeProvider>
+    ),
+    { info: { inline: true, propTablesExclude: [ThemeProvider] } },
+);
+storiesOf('BreadCrumbs', module).add(
+    'basket breadcrumbs',
+    () => (
+        <ThemeProvider value={theme}>
+            <BreadCrumbs data={fullBreadCrumbs} RightComponent={() => <>Корзина</>} />
         </ThemeProvider>
     ),
     { info: { inline: true, propTablesExclude: [ThemeProvider] } },
