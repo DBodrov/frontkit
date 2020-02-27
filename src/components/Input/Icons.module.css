@@ -15,6 +15,16 @@
     top: 25px;
 }
 
+@media (max-width: 540px) {
+    .tooltip_checkbox {
+        margin-left: initial;
+        top: initial;
+        max-width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
 .tooltip {
     position: absolute;
     text-align: right;
