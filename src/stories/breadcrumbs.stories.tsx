@@ -65,3 +65,12 @@ storiesOf('BreadCrumbs', module).add(
     ),
     { info: { inline: true, propTablesExclude: [ThemeProvider] } },
 );
+storiesOf('BreadCrumbs', module).add(
+    'basket; only main link',
+    () => (
+        <ThemeProvider value={theme}>
+            <BreadCrumbs data={simpleBreadCrumbs} RightComponent={() => <>Корзина</>} />
+        </ThemeProvider>
+    ),
+    { info: { inline: true, propTablesExclude: [ThemeProvider] } },
+);
