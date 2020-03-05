@@ -6,10 +6,21 @@
             format('woff');
 }
 
+.globalRelativeWrapper {
+    position: relative;
+    height: 438px;
+}
+
 .wrapper {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.mobileAbsolute {
+    position: absolute;
+    left: 0;
+    z-index: 3;
 }
 
 .cardsWrapper {
@@ -17,7 +28,6 @@
     width: 100%;
     min-width: 480px;
     max-width: 704px;
-    height: 431px;
 }
 
 .cardWrapper {
@@ -28,7 +38,7 @@
     box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     background: #f2f6fb;
-    padding: 30px;
+    padding: 22px;
     width: 453px;
     height: 284px;
 }
@@ -39,13 +49,17 @@
     z-index: 1;
 }
 
+.frontCardInputs {
+    width: 72vw;
+}
+
 .ccName {
     margin-right: 10px;
-    flex-basis: 75%;
+    flex-basis: 70%;
 }
 
 .ccExp {
-    flex-basis: 25%;
+    flex-basis: 30%;
 }
 
 .mb10 {
@@ -65,11 +79,10 @@
 
 .backCardBlock {
     width: 50%;
-    margin-left: auto;
 }
 
 .magneticStrip {
-    margin: 0 -30px;
+    margin: 0 -22px;
     height: 68px;
     background: #eaeef4;
 }
@@ -93,9 +106,31 @@
     margin-right: 10px;
 }
 
-@media (min-width: 768px) {
-    .cardsWrapper {
-        height: 331px;
+@media (min-width: 450px) {
+    .frontCardInputs {
+        width: 100%;
+    }
+}
+
+@media (min-width: 541px) {
+    .mobileAbsolute {
+        position: relative;
+    }
+    .magneticStrip {
+        margin: 0 -30px;
+    }
+    .cardWrapper {
+        padding: 30px;
+    }
+
+    .backCardBlock {
+        margin-left: auto;
+    }
+}
+
+@media (min-width: 767px) {
+    .globalRelativeWrapper {
+        height: 339px;
     }
     .backCard {
         top: 50px;

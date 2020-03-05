@@ -49,7 +49,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
     return (
         <div className={frontCardCls}>
             <BankLogos cardNumber={cardNumber} />
-            <div>
+            <div className={styles.frontCardInputs}>
                 <CardInput
                     name="ccNumber"
                     placeholder="Номер карты"
@@ -89,7 +89,6 @@ function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element 
             <div className={styles.backCardBlock}>
                 <CardInput
                     name="ccCsc"
-                    type="text"
                     placeholder="CVV/CVC"
                     className={cvvCls}
                     maxLength={3}
@@ -179,12 +178,16 @@ export function PaymentCards({
         element.setSelectionRange(elementNextSelection, elementNextSelection);
     };
 
-    const wrapperCls = classnames(styles.wrapper, className);
+    const wrapperCls = classnames(styles.globalRelativeWrapper, className);
     return (
-        <div className={wrapperCls} style={style} data-testid={dataTestId}>
-            <div className={styles.cardsWrapper} onChange={handleFormChange}>
-                <PaymentCard errors={formErrors} dataTestId={dataTestId} cardNumber={formState.ccNumber} />
-                <PaymentCardBack errors={formErrors} dataTestId={dataTestId} />
+        <div className={wrapperCls} data-testid={dataTestId}>
+            <div className={styles.mobileAbsolute}>
+                <div className={styles.wrapper} style={style}>
+                    <div className={styles.cardsWrapper} onChange={handleFormChange}>
+                        <PaymentCard errors={formErrors} dataTestId={dataTestId} cardNumber={formState.ccNumber} />
+                        <PaymentCardBack errors={formErrors} dataTestId={dataTestId} />
+                    </div>
+                </div>
             </div>
         </div>
     );
