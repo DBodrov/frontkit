@@ -5,6 +5,22 @@
         url(data:font/woff;base64,d09GRgABAAAAAAS0AA4AAAAABvgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAAEmAAAABwAAAAchcbCfUdERUYAAAR0AAAAIgAAACYAJwAzT1MvMgAAAbwAAABQAAAAYF3aZtpjbWFwAAACIAAAAE4AAAFCDh8Y/GN2dCAAAAJwAAAABAAAAAQAIQJ5Z2FzcAAABGwAAAAIAAAACP//AANnbHlmAAACkAAAAIkAAAEQrLbWD2hlYWQAAAFEAAAANQAAADYQn20gaGhlYQAAAXwAAAAeAAAAJASuAHBobXR4AAACDAAAABQAAAAiBPYBKmxvY2EAAAJ0AAAAHAAAABwCCgJcbWF4cAAAAZwAAAAfAAAAIABTAEpuYW1lAAADHAAAASAAAAINOKNvZHBvc3QAAAQ8AAAALQAAADz/uwCteJxjYGRgYADi1O2/++P5bb4yyDO/AIowXG+ZKwmib8zt6WBQBCrRYpoF5HIwMIFEAVc7Ct4AAAB4nGNgZGBgbvovw8DA6M8ABIxaDIwMqIAFADyLAiIAAHicY2BkYGDgZeBhYAJiRiDJACRBYg4MeiAWAAbrAJ4AeJxjYGH0Z5zAwMrAwNTFFMHAwOANoRnjGIwYDYCi3KwszExsTEzMQDlGBiQQkOaaAqQMGCyZm/7LMJxgbmJ4AlPD+IfpBJBSYGAEAN96C294nGP0Z1BkAAJGfzA2xYQAMYgDJHicY2BgYGaAYBkGRgYQsAHyGMF8FgYFIM0ChCC+5f//QNLg////l6EqGRjZGGBMBkYmIMHEgAoYGTAAMwsrGzsHJxc3D6bcUAQAtxUHPgAAACECeQAAACoAKgAqAEAASABQAFgAYABoAHAAeACAAIh4nGNgYlBkYGDUYprFwMzAzqC3kZFB32YTOwvDW6ONbKx3bDYxMwGZDBuZQcKsIOFN7GyMf2w2MYLEjQUVBdWNBZUVGTlfHD/ONOtvmiJTBNA4BlOGj4xSjNcZuBkYzNRMTcyMjcRERdiUK5yd9Q2cnQ0+uoApfReG//9hagXYgC4YcD4A8DVDFwAAAHichY6xbsIwEIZ/Q6DKgirWLu4GEokckApia5HyAKhhj8AKFlGCjBlYO/Zh+ih9lj5C/wTTpQOW7Pt899/dD2CALwhczxMWngVC7D138IAPz10849tzgFAEnnt4FMpzn/mMShGE/L20XQ0LDPHuucO91nMXb/j0HFDz47kHKQae+xiKV6xQ44gLOw0K+nOQGGGLMeMUCgn9T8g5YioqHNoXq/p4sabYOznajuVUJYuJzGNTHQyLGRWOOocSGjvOQFY540q9I66ZK3BmLedWrHVxLnNCSidNXxMtFZpbl7z/p13zM7qLMOe9+URaVy6tbaHlUv5tJM9UNI8ak/e8bZizOLHeeJGc20yO26j4x0bbk6krqVQSK6XknYG/tH1PbHicY2BiAIP/FgxGQIqRAR3wgkWZGIQZRBhEGcQYxBkkGCQZpBikGWQAU44CaAAAAAAAAAH//wACeJxjYGRgYOABYjEGOQYmBkYg5AFiFqAIExAzQjAACS4AWwAAAAAAAQAAAADVpJjbAAAAANeEnRkAAAAA2J2MiA==)
             format('woff');
 }
+/* Отключение стрелок в input type='number'*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+.globalRelativeWrapper {
+    height: 438px;
+}
 
 .wrapper {
     width: 100%;
@@ -12,12 +28,17 @@
     justify-content: center;
 }
 
+.mobileAbsolute {
+    position: absolute;
+    left: 0;
+    z-index: 3;
+}
+
 .cardsWrapper {
     position: relative;
     width: 100%;
     min-width: 480px;
     max-width: 704px;
-    height: 431px;
 }
 
 .cardWrapper {
@@ -28,7 +49,7 @@
     box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     background: #f2f6fb;
-    padding: 30px;
+    padding: 22px;
     width: 453px;
     height: 284px;
 }
@@ -39,13 +60,17 @@
     z-index: 1;
 }
 
+.frontCardInputs {
+    width: 72vw;
+}
+
 .ccName {
     margin-right: 10px;
-    flex-basis: 75%;
+    flex-basis: 70%;
 }
 
 .ccExp {
-    flex-basis: 25%;
+    flex-basis: 30%;
 }
 
 .mb10 {
@@ -65,11 +90,10 @@
 
 .backCardBlock {
     width: 50%;
-    margin-left: auto;
 }
 
 .magneticStrip {
-    margin: 0 -30px;
+    margin: 0 -22px;
     height: 68px;
     background: #eaeef4;
 }
@@ -93,9 +117,31 @@
     margin-right: 10px;
 }
 
-@media (min-width: 768px) {
-    .cardsWrapper {
-        height: 331px;
+@media (min-width: 450px) {
+    .frontCardInputs {
+        width: 100%;
+    }
+}
+
+@media (min-width: 541px) {
+    .mobileAbsolute {
+        position: relative;
+    }
+    .magneticStrip {
+        margin: 0 -30px;
+    }
+    .cardWrapper {
+        padding: 30px;
+    }
+
+    .backCardBlock {
+        margin-left: auto;
+    }
+}
+
+@media (min-width: 767px) {
+    .globalRelativeWrapper {
+        height: 339px;
     }
     .backCard {
         top: 50px;

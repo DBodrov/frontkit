@@ -49,8 +49,9 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
     return (
         <div className={frontCardCls}>
             <BankLogos cardNumber={cardNumber} />
-            <div>
+            <div className={styles.frontCardInputs}>
                 <CardInput
+                    type="number"
                     name="ccNumber"
                     placeholder="Номер карты"
                     className={styles.mb10}
@@ -68,6 +69,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
                         dataTestId={dataTestId + '-ccName'}
                     />
                     <CardInput
+                        type="number"
                         name="ccExp"
                         placeholder="ММ/ГГ"
                         maxLength={5}
@@ -88,8 +90,8 @@ function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element 
             <div className={styles.magneticStrip}></div>
             <div className={styles.backCardBlock}>
                 <CardInput
+                    type="number"
                     name="ccCsc"
-                    type="text"
                     placeholder="CVV/CVC"
                     className={cvvCls}
                     maxLength={3}
@@ -181,10 +183,14 @@ export function PaymentCards({
 
     const wrapperCls = classnames(styles.wrapper, className);
     return (
-        <div className={wrapperCls} style={style} data-testid={dataTestId}>
-            <div className={styles.cardsWrapper} onChange={handleFormChange}>
-                <PaymentCard errors={formErrors} dataTestId={dataTestId} cardNumber={formState.ccNumber} />
-                <PaymentCardBack errors={formErrors} dataTestId={dataTestId} />
+        <div className={styles.globalRelativeWrapper} style={{ position: 'relative' }}>
+            <div className={styles.mobileAbsolute}>
+                <div className={wrapperCls} style={style} data-testid={dataTestId}>
+                    <div className={styles.cardsWrapper} onChange={handleFormChange}>
+                        <PaymentCard errors={formErrors} dataTestId={dataTestId} cardNumber={formState.ccNumber} />
+                        <PaymentCardBack errors={formErrors} dataTestId={dataTestId} />
+                    </div>
+                </div>
             </div>
         </div>
     );
