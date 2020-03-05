@@ -33,7 +33,7 @@ function Circle({ color, className, circleStyle }: CircleProps): JSX.Element {
 
 export function Spinner({ className, circleClassName, style, circleStyle, color, dataTestId = 'Spinner' }: SpinnerProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
-    const finalColor = color || theme.loaderColor || theme.mainColor;
+    const finalColor = color || theme.loaderColor;
     const finalCircleClassNames = classnames(styles.circle, styles.lineAnimation, circleClassName);
     return (
         <div data-testid={dataTestId} className={className} style={style}>
