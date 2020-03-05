@@ -4,6 +4,7 @@ const defaultTheme = {
     mainColor: '#69A6F1',
     linkColor: '#4B8BDA',
     btnTextColor: '#F2F2F2',
+    loaderColor: '',
 };
 
 export type ThemeTypes = typeof defaultTheme;

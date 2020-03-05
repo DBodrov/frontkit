@@ -4,16 +4,28 @@ import { Spinner } from '../components/Spinner';
 import { ThemeProvider, ThemeTypes } from '../components/ThemeProvider';
 
 const theme: ThemeTypes = {
-    styles: {
-        mainColor: '#8000ff',
-    },
-    className: 'cn1',
+    mainColor: '#8000ff',
+};
+
+const themeLoadedColor: ThemeTypes = {
+    mainColor: '#8000ff',
+    loaderColor: 'red',
 };
 
 storiesOf('Spinner', module)
     .add('Spinner', () => <Spinner />, { info: { inline: true } })
     .add(
         'Theme Spinner',
+        () => (
+            <ThemeProvider value={themeLoadedColor}>
+                <Spinner />
+            </ThemeProvider>
+        ),
+        { info: { inline: true } },
+    )
+    .add('Spinner', () => <Spinner />, { info: { inline: true } })
+    .add(
+        'Theme mainColor Spinner',
         () => (
             <ThemeProvider value={theme}>
                 <Spinner />

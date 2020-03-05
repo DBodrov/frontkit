@@ -5,10 +5,7 @@ import { Button } from '../components/Button';
 import { ThemeTypes, ThemeProvider } from '../components/ThemeProvider';
 
 const theme: ThemeTypes = {
-    styles: {
-        mainColor: '#8000ff',
-    },
-    className: 'cn1',
+    mainColor: '#8000ff',
 };
 
 storiesOf('Theme', module).add(
