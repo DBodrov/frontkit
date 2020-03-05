@@ -17,6 +17,6 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ value, children }: ThemeProviderProps): JSX.Element {
-    const colors = { ...defaultTheme, ...value, loaderColor: value.loaderColor || value.mainColor };
+    const colors = { ...defaultTheme, ...value, loaderColor: value.loaderColor || value.mainColor || defaultTheme.loaderColor };
     return <ThemeContext.Provider value={colors}>{children}</ThemeContext.Provider>;
 }
