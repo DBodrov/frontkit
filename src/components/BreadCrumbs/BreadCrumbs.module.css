@@ -9,7 +9,7 @@
 
 .mainCrumb {
     display: block;
-    margin-right: 60px;
+    margin-right: 40px;
 }
 
 .link {
@@ -55,5 +55,13 @@
 
     .rightComponent {
         order: 1;
+    }
+
+    .vector {
+        margin-right: 11px;
+    }
+
+    .crumb {
+        margin-right: 14px;
     }
 }

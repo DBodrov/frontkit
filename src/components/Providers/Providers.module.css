@@ -14,10 +14,11 @@ figure {
     margin: 40px auto 0 auto;
     width: 71px;
     height: 36px;
-
-    border: 1px solid #D5DAE0;
+    display: flex;
+    border: 1px solid #d5dae0;
     box-sizing: border-box;
     border-radius: 6px;
+    outline: none;
 }
 
 .scroller-button {
@@ -25,16 +26,24 @@ figure {
     border-radius: 6px;
     width: 50%;
     height: 100%;
-    background: #FFFFFF;
+    background: #ffffff;
     cursor: pointer;
-    color: #4B8BDA;
+    z-index: 1;
+    color: inherit;
+}
+.scroller-button:focus{
+    outline-color: inherit;
 }
 .scroller-button:first-child {
-    border-right: 1px solid #D5DAE0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 .scroller-button:disabled {
     cursor: auto;
-    color: #D5DAE0;
+}
+
+.del {
+    width: 1px;
+    height: 100%;
+    background-color: #d5dae0;
 }
