@@ -1,6 +1,8 @@
 import React from 'react';
-import styles from './Providers.module.css';
+import { Arrow, ArrowTypes } from '../Arrow';
+import { LinkWrapper } from '../LinkWrapper';
 import { Provider } from './Provider';
+import styles from './Providers.module.css';
 
 type ProviderInfo = {
     id: string | number;
@@ -173,23 +175,26 @@ export function Providers({ data, gap = '0', dataTestId = 'providers', onClick, 
 type ScrollerProps = { onClickLeft?: () => void; onClickRight?: () => void; dataTestId: string };
 function Scroller({ onClickLeft, onClickRight, dataTestId }: ScrollerProps): JSX.Element {
     return (
-        <div className={styles.scroller}>
-            <button
-                className={styles['scroller-button']}
-                onClick={onClickLeft}
-                disabled={!onClickLeft}
-                data-testid={dataTestId + '-decrease'}
-            >
-                &lsaquo;
-            </button>
-            <button
-                className={styles['scroller-button']}
-                onClick={onClickRight}
-                disabled={!onClickRight}
-                data-testid={dataTestId + '-increase'}
-            >
-                &rsaquo;
-            </button>
-        </div>
+        <LinkWrapper>
+            <div className={styles.scroller}>
+                <button
+                    className={styles['scroller-button']}
+                    onClick={onClickLeft}
+                    disabled={!onClickLeft}
+                    data-testid={dataTestId + '-decrease'}
+                >
+                    <Arrow type={ArrowTypes.Left} color={!onClickLeft ? '#D5DAE0' : ''} />
+                </button>
+                <div className={styles.del} />
+                <button
+                    className={styles['scroller-button']}
+                    onClick={onClickRight}
+                    disabled={!onClickRight}
+                    data-testid={dataTestId + '-increase'}
+                >
+                    <Arrow type={ArrowTypes.Right} color={!onClickRight ? '#D5DAE0' : ''} />
+                </button>
+            </div>
+        </LinkWrapper>
     );
 }
