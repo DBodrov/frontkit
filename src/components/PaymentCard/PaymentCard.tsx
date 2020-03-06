@@ -51,6 +51,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
             <BankLogos cardNumber={cardNumber} />
             <div className={styles.frontCardInputs}>
                 <CardInput
+                    type="tel"
                     name="ccNumber"
                     placeholder="Номер карты"
                     className={styles.mb10}
@@ -68,6 +69,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
                         dataTestId={dataTestId + '-ccName'}
                     />
                     <CardInput
+                        type="tel"
                         name="ccExp"
                         placeholder="ММ/ГГ"
                         maxLength={5}
@@ -88,6 +90,7 @@ function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element 
             <div className={styles.magneticStrip}></div>
             <div className={styles.backCardBlock}>
                 <CardInput
+                    type="tel"
                     name="ccCsc"
                     placeholder="CVV/CVC"
                     className={cvvCls}
