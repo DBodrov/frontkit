@@ -93,7 +93,7 @@ export function BaseDropdown({
             )}
             {type === Type.NotFound && <NotFound dataTestId={dataTestId + '-not-found'} />}
             {type === Type.Loading && <Loading dataTestId={dataTestId + '-loading'} />}
-            {type !== Type.InputOnly && <Dimmer clickOutSide={clickOutSide} dataTestId={dataTestId + '-dimmer'} />}
+            {type !== Type.InputOnly && <Dimmer clickOutSide={clickOutSide} dataTestId={dataTestId + '-dimmer'} zIndex={50} />}
         </div>
     );
 }

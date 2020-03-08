@@ -73,7 +73,7 @@ const Popup = ({
 
     return (
         <>
-            <Dimmer dataTestId={dataTestId + '-Dimmer'} />
+            <Dimmer dataTestId={dataTestId + '-Dimmer'} zIndex={90} />
             <div ref={wrapperRef} className={styles.wrapper} data-testid={dataTestId + '-Wrapper'}>
                 <div {...rest} className={cn(styles.middle, className)}>
                     <div data-testid={dataTestId} className={styles.popup}>

@@ -1,10 +1,10 @@
 .input {
-    z-index: 2;
+    z-index: 60;
     position: relative;
 }
 
 .card {
-    z-index: 2;
+    z-index: 60;
     position: relative;
     background-color: #ffffff;
     margin-top: 18px;
