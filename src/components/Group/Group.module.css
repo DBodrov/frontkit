@@ -24,4 +24,8 @@
     .group {
         flex-direction: column;
     }
+
+    .group > *:not(:last-child) {
+        margin-bottom: 30px;
+    }
 }
