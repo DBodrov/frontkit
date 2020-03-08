@@ -36,6 +36,7 @@
 .caption {
     display: block;
     text-align: center;
+    word-break: break-word;
 }
 
 .caption-wrapper {
