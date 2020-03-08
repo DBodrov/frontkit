@@ -29,6 +29,7 @@ input[type='number'] {
     border: 0;
     box-sizing: border-box;
     cursor: text;
+    border-radius: 0;
 }
 
 .input.right {

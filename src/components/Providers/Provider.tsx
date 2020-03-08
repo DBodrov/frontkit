@@ -32,7 +32,7 @@ export function Provider({ src, name, dataTestId, width, style, onClick, ...rest
                     <img className={styles.image} src={src} alt={name} />
                 </div>
                 <div className={cn(styles['caption-wrapper'], styles['center-container'])}>
-                    <TextClamp lines={2} className={styles.caption} element="figcaption" text={name} />
+                    <TextClamp lines={3} className={styles.caption} element="figcaption" text={name} />
                 </div>
             </div>
         </figure>
