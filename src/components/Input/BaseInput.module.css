@@ -24,7 +24,6 @@ input[type='number'] {
 }
 
 .input {
-    color: #000000;
     opacity: 1;
     display: flex;
     align-items: center;
@@ -32,11 +31,6 @@ input[type='number'] {
     box-sizing: border-box;
     cursor: text;
     border-radius: 0;
-}
-.input:disabled {
-    color: #000000;
-    -webkit-text-fill-color: #000000;
-    opacity: 1;
 }
 
 .input.right {

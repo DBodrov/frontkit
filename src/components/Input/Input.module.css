@@ -13,9 +13,12 @@
 .input::placeholder {
     font-size: 14px;
     color: #7C8A9E;
+    -webkit-text-fill-color: #7C8A9E;
 }
 .input:disabled {
     color: #7C8A9E;
+    -webkit-text-fill-color: #7C8A9E;
     font-weight: 500;
     cursor: default;
+    opacity: 1;
 }
