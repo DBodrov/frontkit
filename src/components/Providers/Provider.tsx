@@ -1,9 +1,5 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import styles from './Provider.module.css';
-import cn from 'classnames';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import TextClamp from 'react-string-clamp';
 
 interface Props {
     src: string;
@@ -13,28 +9,51 @@ interface Props {
     style?: object;
     onClick?: () => unknown;
 }
+enum Mode {
+    None,
+    Square,
+    Rectangle,
+}
 // В IE11 для figure установлены margin-ы по умолчанию, которые ломают вёрстку.
 // Сбросить их можно исключительно inline стилями
-const IE11FigureFix: CSSProperties = { marginLeft: 0, marginRight: 0 };
-export function Provider({ src, name, dataTestId, width, style, onClick, ...rest }: Props): JSX.Element {
+const IE11FigureFix: React.CSSProperties = { marginLeft: 0, marginRight: 0 };
+export function Provider({ src, name, dataTestId, width = '100%', style, onClick, ...rest }: Props): JSX.Element {
+    const [mode, setMode] = React.useState<Mode>(Mode.None);
+    const [computedWidth, setComputedWidth] = React.useState(0);
+    const figureRef = React.useRef<HTMLDivElement>(null);
+    React.useEffect(() => {
+        const current = figureRef.current;
+        if (!current) {
+            return;
+        }
+        setMode(current.offsetHeight > current.offsetWidth ? Mode.Rectangle : Mode.Square);
+        setComputedWidth(current.offsetWidth);
+    }, []);
+    let heightStyles: React.CSSProperties = {};
+    switch (mode) {
+        case Mode.None:
+            heightStyles = { visibility: 'hidden' };
+            break;
+        case Mode.Square:
+            heightStyles = { height: computedWidth + 'px' };
+            break;
+        case Mode.Rectangle:
+            heightStyles = {};
+            break;
+    }
     return (
         <figure
+            ref={figureRef}
             {...rest}
             className={styles.wrapper}
             data-testid={dataTestId}
-            style={{ width, ...style, ...IE11FigureFix }}
+            style={{ width, ...style, ...heightStyles, ...IE11FigureFix }}
             onClick={onClick}
             role="button"
             title={name}
         >
-            <div className={styles.content}>
-                <div data-testid={dataTestId + '-image'} className={cn(styles['image-wrapper'], styles['center-container'])}>
-                    <img className={styles.image} src={src} alt={name} />
-                </div>
-                <div className={cn(styles['caption-wrapper'], styles['center-container'])}>
-                    <TextClamp lines={3} className={styles.caption} element="figcaption" text={name} />
-                </div>
-            </div>
+            <img data-testid={dataTestId + '-image'} className={styles.image} src={src} alt={name} />
+            <figcaption className={styles.caption}>{name}</figcaption>
         </figure>
     );
 }

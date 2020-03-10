@@ -80,14 +80,14 @@ function ProvidersLine({ data, dataTestId, offset, height }: ProvidersLineProps)
         <>
             {data.map((provider, id, original) => (
                 <React.Fragment key={provider.id}>
-                    <Provider
-                        name={provider.name}
-                        src={provider.src}
-                        width="100%"
-                        style={createChildStyleForIE(2 * (id + 1) - 1, height + 1)}
-                        dataTestId={`${dataTestId}-single-${provider.id}`}
-                        data-id={offset + id}
-                    />
+                    <div style={createChildStyleForIE(2 * (id + 1) - 1, height + 1)}>
+                        <Provider
+                            name={provider.name}
+                            src={provider.src}
+                            dataTestId={`${dataTestId}-single-${provider.id}`}
+                            data-id={offset + id}
+                        />
+                    </div>
                     {id !== original.length - 1 && <div style={createChildStyleForIE(2 * (id + 1), height + 1)} />}
                 </React.Fragment>
             ))}
