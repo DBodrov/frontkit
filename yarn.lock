@@ -11688,11 +11688,6 @@ react-sizeme@^2.6.7:
     shallowequal "^1.1.0"
     throttle-debounce "^2.1.0"
 
-react-string-clamp@^0.3.1:
-  version "0.3.1"
-  resolved "http://192.168.167.51:8081/repository/npm/react-string-clamp/-/react-string-clamp-0.3.1.tgz#f03b40d7349a80ebf481af76903590082d01e689"
-  integrity sha512-JKCegkX9hr9s1OK02dNTDlZy9O6uJDZllhsY7rtwgceVaKiYcKykKoOobvmaCos1pROyeU86c+3G2QgAWFZxTQ==
-
 react-syntax-highlighter@^11.0.2:
   version "11.0.2"
   resolved "http://192.168.167.51:8081/repository/npm/react-syntax-highlighter/-/react-syntax-highlighter-11.0.2.tgz#4e3f376e752b20d2f54e4c55652fd663149e4029"
