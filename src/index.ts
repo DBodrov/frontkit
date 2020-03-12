@@ -4,7 +4,7 @@ export { Group } from './components/Group';
 export { H1, H2, H3 } from './components/Header';
 export { Input, SmallInput, BackgroundProp, ErrorIcon, SuccessIcon, SearchIcon, HelpIcon } from './components/Input';
 export { Spinner } from './components/Spinner';
-export { ThemeProvider } from './components/ThemeProvider';
+export { ThemeProvider, ThemeContext } from './components/ThemeProvider';
 export { Provider, Providers } from './components/Providers';
 export { BreadCrumbs } from './components/BreadCrumbs';
 export { Arrow, ArrowTypes } from './components/Arrow';
