@@ -4,9 +4,14 @@
     flex-direction: column;
     border-radius: 8px;
     box-sizing: border-box;
-    box-shadow: rgba(155, 179, 209, 0.3) 0 0 2px 0, rgba(170, 187, 208, 0.5) 0 4px 8px -4px;
     cursor: pointer;
     justify-content: space-between;
+}
+
+@media (max-width: 540px) {
+    .wrapper {
+        padding: 26px;
+    }
 }
 
 .image {

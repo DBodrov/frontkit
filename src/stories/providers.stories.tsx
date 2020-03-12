@@ -14,9 +14,9 @@ storiesOf('Providers', module)
         () => (
             <Provider
                 onClick={action('click')}
-                name="Очень длинный заголовок. ООООчень Очень длинный заголовок. ООООченьОчень длинный заголовок. ООООченьОчень длинный заголовок. ООООчень Очень длинный заголовок. ООООчень Очень длинный заголовок. ООООченьОчень длинный заголовок. ООООченьОчень длинный заголовок. ООООчень "
+                name={'МУНИЦИПАЛЬНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ АРТЕМОВСКОГО ГОРОДСКОГО ОКРУГА "ПРОГРЕСС"'}
                 src="https://www.a-3.ru/img/logo_png/home-icon.png"
-                width="300px"
+                width="227px"
             />
         ),
         {
@@ -27,23 +27,30 @@ storiesOf('Providers', module)
         'providers',
         () => (
             <ThemeProvider value={theme}>
-                <Providers
-                    data={[
-                        { id: 1, name: 'A', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                        { id: 2, name: 'B', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                        { id: 3, name: 'C', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                        { id: 4, name: 'D', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                        { id: 5, name: 'E', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                        { id: 6, name: 'F', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                        { id: 7, name: 'G', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                        { id: 8, name: 'H', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                        { id: 9, name: 'I', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                        { id: 10, name: 'J', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                    ]}
-                    cols={5}
-                    gap="1vw"
-                    onClick={action('click')}
-                />
+                <div style={{ width: '800px' }}>
+                    <Providers
+                        data={[
+                            { id: 1, name: 'A', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                            { id: 2, name: 'Смарт Восток (ЖКУ)', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                            { id: 3, name: 'Смарт Восток (ЖКУ)', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                            { id: 4, name: 'Смарт Восток (ЖКУ)', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                            { id: 5, name: 'Смарт Восток (ЖКУ)', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                            { id: 6, name: 'Смарт Восток (ЖКУ)', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                            {
+                                id: 7,
+                                name:
+                                    'МУНИЦИПАЛЬНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ АРТЕМОВСКОГО ГОРОДСКОГО ОКРУГА ЖИЛИЩНО-КОММУНАЛЬНОЕ ХОЗЯЙСТВО ПОСЕЛКА БУЛАНАШ',
+                                src: 'https://www.a-3.ru/img/logo_png/home-icon.png',
+                            },
+                            { id: 8, name: 'H', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                            { id: 9, name: 'I', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                            { id: 10, name: 'J', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                        ]}
+                        cols={3}
+                        gap="1vw"
+                        onClick={action('click')}
+                    />
+                </div>
             </ThemeProvider>
         ),
         {
