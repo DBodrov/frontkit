@@ -43,7 +43,7 @@ function DefaultProviderPic({ name, dataTestId }: { name: string; dataTestId: st
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="60%"
-                width="100%"
+                width="60%"
                 fill={colorHash.hex(
                     `${name[name.length - 1]}
                ${name.length}
