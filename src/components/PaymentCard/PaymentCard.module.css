@@ -50,7 +50,7 @@
 }
 
 .frontCardInputs {
-    width: 72vw;
+    width: 76vw;
 }
 
 .ccName {
@@ -106,7 +106,7 @@
     margin-right: 10px;
 }
 
-@media (min-width: 450px) {
+@media (min-width: 460px) {
     .frontCardInputs {
         width: 100%;
     }
