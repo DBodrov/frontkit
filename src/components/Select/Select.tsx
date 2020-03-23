@@ -205,27 +205,43 @@ export const Select = ({
 interface ItemsWrapperTypes {
     children: ReactNode;
     scrollbar: React.RefObject<Scrollbars>;
-    buttonHover: (event: unknown) => void;
+    buttonHover?: (event: unknown) => void;
     countToShowElements: number;
+    changeWidth?: boolean;
+    className?: string;
 }
 
-const SelectItemsWrapper = ({ children, scrollbar, buttonHover, countToShowElements }: ItemsWrapperTypes) => {
+export const SelectItemsWrapper = ({
+    className,
+    children,
+    scrollbar,
+    buttonHover,
+    countToShowElements,
+    changeWidth = false,
+}: ItemsWrapperTypes) => {
     const selectEl = React.useRef<HTMLDivElement>(null);
     const [height, setHeight] = React.useState(0);
+    const [width, setWidth] = React.useState(0);
 
     React.useEffect(() => {
         if (selectEl.current?.children) {
-            setHeight(
-                Array.from(selectEl.current.children)
-                    .slice(0, countToShowElements)
-                    .map(el => el.getBoundingClientRect())
-                    .reduce((sum, item) => sum + item.height, 0) - 1,
-            );
+            const arr = Array.from(selectEl.current.children).map(el => el.getBoundingClientRect());
+            setHeight(arr.reduce((sum, item, index) => (countToShowElements > index ? sum + item.height : sum), 0) - 1);
+            if (changeWidth) {
+                setWidth(arr.reduce((max, item) => (item.width > max ? item.width : max), 0) + 30);
+                // ниже грязный хак, потому что по другому не работает. Ещё подумаю что с этим можно сделать
+                selectEl.current.style.display = 'flex';
+                selectEl.current.style.flexDirection = 'column';
+            }
         }
-    }, [children, setHeight]);
+    }, [children, setHeight, setWidth, changeWidth]);
 
     return (
-        <Box className={styles.wrapper} style={{ minHeight: height }} onMouseOver={buttonHover}>
+        <Box
+            className={cn(styles.wrapper, className)}
+            style={{ minHeight: height, ...(changeWidth && { maxWidth: width }) }}
+            onMouseOver={buttonHover}
+        >
             <div style={{ padding: 0 }}>
                 <Scrollbars
                     ref={scrollbar}
