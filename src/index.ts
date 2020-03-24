@@ -14,6 +14,6 @@ export { Radio } from './components/Radio';
 export { Dropdown } from './components/Dropdown';
 export { LinkWrapper } from './components/LinkWrapper';
 export { MaskedInput } from './components/MaskedInput';
-export { Select } from './components/Select';
+export { Select, SimpleSelect, SimpleSelectPosition } from './components/Select';
 export { Modal } from './components/Modal';
 export { Accordion, AccordionLineType } from './components/Accordion';

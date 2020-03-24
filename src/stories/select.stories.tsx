@@ -1,15 +1,11 @@
-import React from 'react';
-
 import { storiesOf } from '@storybook/react';
-import { Select } from '../components/Select';
+import React from 'react';
+import { Select, SimpleSelect, SimpleSelectPosition } from '../components/Select';
 import { ElementTypes } from '../components/Select/Select';
 import { ThemeProvider, ThemeTypes } from '../components/ThemeProvider';
 
 const theme: ThemeTypes = {
-    styles: {
-        linkColor: '#8000ff',
-    },
-    className: 'cn1',
+    linkColor: '#8000ff',
 };
 
 const elements: ElementTypes[] = [
@@ -21,12 +17,33 @@ const elements: ElementTypes[] = [
     { name: '6', value: '66' },
 ];
 
-storiesOf('Select', module).add(
-    'simple Select',
-    () => (
-        <ThemeProvider value={theme}>
-            <Select elements={elements} name="12sdf34" />
-        </ThemeProvider>
-    ),
-    { info: { inline: true } },
-);
+const simpleElements = [
+    <div key="ewr">234234</div>,
+    <div key="ew2r">аывп</div>,
+    <div key="ew1r">ыеп</div>,
+    <div key="ew23r">вмыамыавмыапаииаыпиаыпиапи</div>,
+    <div key="e2wr">вывысвы</div>,
+    <div key="e4w2r">фквмаыв</div>,
+    <div key="ew5r">34кц34ав</div>,
+    <div key="ew26r">фвуск4уц</div>,
+];
+
+storiesOf('Select', module)
+    .add(
+        'Select',
+        () => (
+            <ThemeProvider value={theme}>
+                <Select elements={elements} name="12sdf34" />
+            </ThemeProvider>
+        ),
+        { info: { inline: true } },
+    )
+    .add(
+        'SimpleSelect',
+        () => (
+            <ThemeProvider value={theme}>
+                <SimpleSelect elements={simpleElements} mainText="kdjfgbhkdfj" position={SimpleSelectPosition.right} needArrow={true} />
+            </ThemeProvider>
+        ),
+        { info: { inline: true } },
+    );

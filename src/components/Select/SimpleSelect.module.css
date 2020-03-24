@@ -1,0 +1,14 @@
+.head {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.rightFlex {
+    justify-content: flex-end;
+}
+.right{
+    right: 0;
+}
+.arrow {
+    margin-left: 14px;
+}
