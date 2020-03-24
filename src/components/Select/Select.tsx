@@ -228,7 +228,7 @@ export const SelectItemsWrapper = ({
             const arr = Array.from(selectEl.current.children).map(el => el.getBoundingClientRect());
             setHeight(arr.reduce((sum, item, index) => (countToShowElements > index ? sum + item.height : sum), 0) - 1);
             if (changeWidth) {
-                setWidth(arr.reduce((max, item) => (item.width > max ? item.width : max), 0) + 30);
+                setWidth(arr.reduce((max, item) => (item.width > max ? item.width : max), 0) + 35);
                 // ниже грязный хак, потому что по другому не работает. Ещё подумаю что с этим можно сделать
                 selectEl.current.style.display = 'flex';
                 selectEl.current.style.flexDirection = 'column';
@@ -250,7 +250,7 @@ export const SelectItemsWrapper = ({
                     renderThumbHorizontal={props => <div {...props} style={{ display: 'none' }} />}
                     renderView={props => <div {...props} data-value="ScrollbarsView" data-testid="ScrollbarsView" />}
                 >
-                    <div ref={selectEl} className={styles.select_items_wrapper}>
+                    <div ref={selectEl} className={changeWidth ? styles.inlineChild : ''}>
                         {children}
                     </div>
                 </Scrollbars>

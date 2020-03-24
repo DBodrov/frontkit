@@ -17,7 +17,16 @@ const elements: ElementTypes[] = [
     { name: '6', value: '66' },
 ];
 
-const simpleElements = [<div key="ewr">234234</div>, <div key="ew2r">1233454</div>];
+const simpleElements = [
+    <div key="ewr">234234</div>,
+    <div key="ew2r">аывп</div>,
+    <div key="ew1r">ыеп</div>,
+    <div key="ew23r">вмыамыавмыапаииаыпиаыпиапи</div>,
+    <div key="e2wr">вывысвы</div>,
+    <div key="e4w2r">фквмаыв</div>,
+    <div key="ew5r">34кц34ав</div>,
+    <div key="ew26r">фвуск4уц</div>,
+];
 
 storiesOf('Select', module)
     .add(

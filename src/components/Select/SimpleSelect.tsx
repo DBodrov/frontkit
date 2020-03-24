@@ -18,6 +18,7 @@ type SimpleSelectProps = {
     needArrow?: boolean;
     position?: SimpleSelectPosition;
     dataTestId?: string;
+    countToShowElements?: number;
 };
 
 export const SimpleSelect = ({
@@ -27,6 +28,7 @@ export const SimpleSelect = ({
     className,
     position = SimpleSelectPosition.right,
     dataTestId = 'SimpleSelect',
+    countToShowElements = 4,
 }: SimpleSelectProps) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -54,7 +56,7 @@ export const SimpleSelect = ({
             {isOpen && (
                 <SelectItemsWrapper
                     className={position === SimpleSelectPosition.right ? styles.right : ''}
-                    countToShowElements={2}
+                    countToShowElements={countToShowElements}
                     scrollbar={scrollbar}
                     changeWidth
                 >

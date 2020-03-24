@@ -26,3 +26,7 @@
     color: #2c2e2b!important;
     font-weight: 500;
 }
+
+.inlineChild > * {
+    display: inline-block;
+}
