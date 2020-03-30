@@ -12,7 +12,16 @@ const elements: ElementTypes[] = [
     { name: '6', value: '66' },
 ];
 
-const simpleElements = [<div key="ewr" data-testid="firstElement">234234</div>, <div key="ew2r">1233454</div>];
+const mockFunc = jest.fn();
+
+const simpleElements = [
+    { value: 'Vfufl', onClick: mockFunc },
+    { value: '1', onClick: mockFunc },
+    { value: 'sdf', onClick: mockFunc },
+    { value: 'xcv', onClick: mockFunc },
+    { value: 'Vfuflasdasd', onClick: mockFunc },
+    { value: 'Vfuflsdfsdfsfd', onClick: mockFunc },
+];
 
 describe('Select', () => {
     test('should render an Select element', () => {
@@ -53,7 +62,7 @@ describe('Select change', () => {
 describe('SimpleSelect', () => {
     test('should render an SimpleSelect element', () => {
         const dataTestId = ';j3eqw;l;lqw';
-        const { getByTestId } = render(<SimpleSelect elements={simpleElements} mainText="asd" dataTestId={dataTestId} />);
+        const { getByTestId } = render(<SimpleSelect data={simpleElements} mainText="asd" dataTestId={dataTestId} />);
         expect(() => getByTestId(dataTestId)).not.toThrow();
         expect(() => getByTestId(dataTestId + '-arrow')).not.toThrow();
     });
@@ -62,7 +71,7 @@ describe('SimpleSelect', () => {
         const dataTestId = 'SimpleSelect';
         const { getByTestId } = render(
             <SimpleSelect
-                elements={simpleElements}
+                data={simpleElements}
                 mainText="asd"
                 position={SimpleSelectPosition.left}
                 className={'123'}
@@ -77,11 +86,11 @@ describe('SimpleSelect', () => {
 describe('Select change', () => {
     test('should render an Select elements and changing', () => {
         const dataTestId = 'fdssdfv';
-        const { getByTestId } = render(<SimpleSelect elements={simpleElements} mainText="asd" dataTestId={dataTestId} />);
+        const { getByTestId } = render(<SimpleSelect data={simpleElements} mainText="asd" dataTestId={dataTestId} />);
         const arrow = getByTestId(dataTestId + '-arrow');
         expect(() => arrow).not.toThrow();
-        expect(() => getByTestId('firstElement')).toThrow();
+        expect(() => getByTestId('Vfufl')).toThrow();
         fireEvent.click(arrow);
-        expect(() => getByTestId('firstElement')).not.toThrow();
+        expect(() => getByTestId('Vfufl')).not.toThrow();
     });
 });

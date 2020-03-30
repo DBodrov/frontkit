@@ -226,9 +226,10 @@ export const SelectItemsWrapper = ({
     React.useEffect(() => {
         if (selectEl.current?.children) {
             const arr = Array.from(selectEl.current.children).map(el => el.getBoundingClientRect());
-            setHeight(arr.reduce((sum, item, index) => (countToShowElements > index ? sum + item.height : sum), 0) - 1);
+            const minus = arr.length > countToShowElements ? 1 : 0;
+            setHeight(arr.reduce((sum, item, index) => (countToShowElements > index ? sum + item.height : sum), 0) - minus);
             if (changeWidth) {
-                setWidth(arr.reduce((max, item) => (item.width > max ? item.width : max), 0) + 35);
+                setWidth(arr.reduce((max, item) => (item.width > max ? item.width : max), 0) + 65);
                 // ниже грязный хак, потому что по другому не работает. Ещё подумаю что с этим можно сделать
                 selectEl.current.style.display = 'flex';
                 selectEl.current.style.flexDirection = 'column';
@@ -239,7 +240,7 @@ export const SelectItemsWrapper = ({
     return (
         <Box
             className={cn(styles.wrapper, className)}
-            style={{ minHeight: height, ...(changeWidth && { maxWidth: width }) }}
+            style={{ minHeight: height, ...(changeWidth && { maxWidth: width, minWidth: width }) }}
             onMouseOver={buttonHover}
         >
             <div style={{ padding: 0 }}>
