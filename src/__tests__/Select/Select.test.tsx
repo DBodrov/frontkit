@@ -12,13 +12,15 @@ const elements: ElementTypes[] = [
     { name: '6', value: '66' },
 ];
 
+const mockFunc = jest.fn();
+
 const simpleElements = [
-    { value: 'Vfufl', onClick: () => console.log('Vfufl') },
-    { value: '1', onClick: () => console.log('1') },
-    { value: 'sdf', onClick: () => console.log('sdf') },
-    { value: 'xcv', onClick: () => console.log('xcv') },
-    { value: 'Vfuflasdasd', onClick: () => console.log('Vfuflasdasd') },
-    { value: 'Vfuflsdfsdfsfd', onClick: () => console.log('Vfuflsdfsdfsfd') },
+    { value: 'Vfufl', onClick: mockFunc },
+    { value: '1', onClick: mockFunc },
+    { value: 'sdf', onClick: mockFunc },
+    { value: 'xcv', onClick: mockFunc },
+    { value: 'Vfuflasdasd', onClick: mockFunc },
+    { value: 'Vfuflsdfsdfsfd', onClick: mockFunc },
 ];
 
 describe('Select', () => {
