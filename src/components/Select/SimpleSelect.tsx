@@ -39,7 +39,7 @@ export const SimpleSelect = ({
     const elements = React.useMemo(
         () =>
             data.map(el => (
-                <LinkWrapper key={el.value} onClick={el.onClick} className={styles.element}>
+                <LinkWrapper key={el.value} dataTestId={el.value} onClick={el.onClick} className={styles.element}>
                     {el.value}
                 </LinkWrapper>
             )),
