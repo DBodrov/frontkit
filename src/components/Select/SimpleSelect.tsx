@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import Scrollbars from 'react-custom-scrollbars';
 import { useClickOutside } from '../../hooks/useClickOutsideSelect';
 import { Arrow, ArrowTypes } from '../Arrow';
+import { LinkWrapper } from '../LinkWrapper';
 import { SelectItemsWrapper } from './Select';
 import styles from './SimpleSelect.module.css';
 import cn from 'classnames';
@@ -13,7 +14,7 @@ export enum SimpleSelectPosition {
 
 type SimpleSelectProps = {
     mainText: ReactNode;
-    elements: ReactNode;
+    data: { value: string; onClick: () => void }[];
     className?: string;
     needArrow?: boolean;
     position?: SimpleSelectPosition;
@@ -23,7 +24,7 @@ type SimpleSelectProps = {
 
 export const SimpleSelect = ({
     mainText,
-    elements,
+    data,
     needArrow = true,
     className,
     position = SimpleSelectPosition.right,
@@ -35,9 +36,23 @@ export const SimpleSelect = ({
     const scrollbar = React.useRef<Scrollbars>(null);
     const handleClick = React.useCallback(() => setIsOpen(o => !o), [setIsOpen]);
     const handleClickOutside = React.useCallback(() => setIsOpen(false), [setIsOpen]);
+    const elements = React.useMemo(
+        () =>
+            data.map(el => (
+                <LinkWrapper key={el.value} onClick={el.onClick} className={styles.element}>
+                    {el.value}
+                </LinkWrapper>
+            )),
+        [data],
+    );
     useClickOutside(wrapperRef, handleClickOutside);
     return (
-        <div ref={wrapperRef} data-testid={dataTestId + '-wrapper'} className={className} style={{ position: 'relative' }}>
+        <div
+            ref={wrapperRef}
+            data-testid={dataTestId + '-wrapper'}
+            className={cn(className, styles.select)}
+            style={{ position: 'relative' }}
+        >
             <div
                 className={cn(styles.head, { [styles.rightFlex]: position === SimpleSelectPosition.right })}
                 onClick={handleClick}

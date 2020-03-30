@@ -18,14 +18,12 @@ const elements: ElementTypes[] = [
 ];
 
 const simpleElements = [
-    <div key="ewr">234234</div>,
-    <div key="ew2r">аывп</div>,
-    <div key="ew1r">ыеп</div>,
-    <div key="ew23r">вмыамыавмыапаииаыпиаыпиапи</div>,
-    <div key="e2wr">вывысвы</div>,
-    <div key="e4w2r">фквмаыв</div>,
-    <div key="ew5r">34кц34ав</div>,
-    <div key="ew26r">фвуск4уц</div>,
+    { value: 'Vfufl', onClick: () => console.log('Vfufl') },
+    { value: '1', onClick: () => console.log('1') },
+    { value: 'sdf', onClick: () => console.log('sdf') },
+    { value: 'xcv', onClick: () => console.log('xcv') },
+    { value: 'Vfuflasdasd', onClick: () => console.log('Vfuflasdasd') },
+    { value: 'Vfuflsdfsdfsfd', onClick: () => console.log('Vfuflsdfsdfsfd') },
 ];
 
 storiesOf('Select', module)
@@ -42,7 +40,10 @@ storiesOf('Select', module)
         'SimpleSelect',
         () => (
             <ThemeProvider value={theme}>
-                <SimpleSelect elements={simpleElements} mainText="kdjfgbhkdfj" position={SimpleSelectPosition.right} needArrow={true} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div>123</div>
+                    <SimpleSelect data={simpleElements} mainText="1" position={SimpleSelectPosition.right} needArrow={true} />
+                </div>
             </ThemeProvider>
         ),
         { info: { inline: true } },
