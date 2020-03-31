@@ -4,12 +4,13 @@
     line-height: 12px;
     color: #a6aab0;
     align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
 .mainCrumb {
     display: block;
-    margin-right: 40px;
+    margin-right: 10px;
 }
 
 .link {
@@ -31,17 +32,19 @@
 
 .otherCrumb {
     display: flex;
+    margin: 0 10px;
 }
 
-.rightComponent {
+.regionMode {
+    justify-content: normal;
+}
+
+.regions {
+    margin-right: 45px;
     margin-left: auto;
 }
 
 @media (max-width: 540px) {
-    .wrapper {
-        justify-content: space-between;
-    }
-
     .mainCrumb {
         order: 0;
         margin-right: 0;
@@ -50,7 +53,7 @@
     .otherCrumb {
         order: 2;
         flex-basis: 100%;
-        margin-top: 20px;
+        margin: 20px 0 0 0;
     }
 
     .rightComponent {
@@ -63,5 +66,13 @@
 
     .crumb {
         margin-right: 14px;
+    }
+
+    .regionMode .rightComponent {
+        order: 3;
+    }
+
+    .regionMode .regions {
+        margin-right: 0;
     }
 }

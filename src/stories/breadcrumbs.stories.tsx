@@ -66,6 +66,15 @@ storiesOf('BreadCrumbs', module).add(
     { info: { inline: true, propTablesExclude: [ThemeProvider] } },
 );
 storiesOf('BreadCrumbs', module).add(
+    'basket regions breadcrumbs',
+    () => (
+        <ThemeProvider value={theme}>
+            <BreadCrumbs data={activeBreadCrumbs} RegionsComponent={() => <>Регионы</>} RightComponent={() => <>Корзина</>} />
+        </ThemeProvider>
+    ),
+    { info: { inline: true, propTablesExclude: [ThemeProvider] } },
+);
+storiesOf('BreadCrumbs', module).add(
     'basket; only main link',
     () => (
         <ThemeProvider value={theme}>
