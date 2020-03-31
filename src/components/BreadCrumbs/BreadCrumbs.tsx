@@ -25,6 +25,7 @@ interface BreadCrumbsProps extends React.HTMLAttributes<HTMLElement> {
      * */
     data?: ReadonlyArray<Crumb>;
     RightComponent?: React.ComponentType;
+    RegionsComponent?: React.ComponentType;
 }
 
 interface CrumbProps {
@@ -70,12 +71,13 @@ export function BreadCrumbs({
     data: [mainCrumb, secondCrumb, thirdCrumb] = [],
     dataTestId = 'BreadCrumbs',
     RightComponent,
+    RegionsComponent,
     ...rest
 }: BreadCrumbsProps): JSX.Element {
     if (!mainCrumb) {
         return <div data-testid="emptyBreadCrumbs" />;
     }
-    const clsWrapper = classnames(styles.wrapper, className);
+    const clsWrapper = classnames(styles.wrapper, className, { [styles.regionMode]: Boolean(RegionsComponent) });
     return (
         <div {...rest} className={clsWrapper} data-testid={dataTestId}>
             <MainCrumb crumb={mainCrumb} dataTestId={dataTestId + '-mc'} />
@@ -88,6 +90,11 @@ export function BreadCrumbs({
                     </>
                 )}
             </div>
+            {RegionsComponent && (
+                <div className={styles.regions}>
+                    <RegionsComponent />
+                </div>
+            )}
             <div className={styles.rightComponent}>{RightComponent && <RightComponent />}</div>
         </div>
     );

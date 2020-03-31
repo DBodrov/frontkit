@@ -82,7 +82,15 @@ describe('click', () => {
 describe('rightComponent', () => {
     test('should render element', () => {
         const testId = 'asdlasdk';
-        const { getByTestId } = render(<BreadCrumbs data={fullBreadCrumbs} RightComponent={() => <div data-testid={testId} />} />);
+        const testId2 = 'asdlasdfgdk';
+        const { getByTestId } = render(
+            <BreadCrumbs
+                data={fullBreadCrumbs}
+                RegionsComponent={() => <div data-testid={testId2} />}
+                RightComponent={() => <div data-testid={testId} />}
+            />,
+        );
         expect(() => getByTestId(testId)).not.toThrow();
+        expect(() => getByTestId(testId2)).not.toThrow();
     });
 });
