@@ -37,10 +37,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    max-width: 220px;
 }
 
 @media (max-width: 540px) {
     .mainText {
-        max-width: 240px;
+        max-width: 160px;
     }
 }
