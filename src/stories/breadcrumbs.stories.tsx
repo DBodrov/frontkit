@@ -2,6 +2,7 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { BreadCrumbs } from '../components/BreadCrumbs';
+import { SimpleSelect, SimpleSelectPosition } from '../components/Select';
 import { ThemeProvider, ThemeTypes } from '../components/ThemeProvider';
 
 const theme: Partial<ThemeTypes> = {
@@ -18,10 +19,15 @@ const simpleBreadCrumbs = [
 
 const activeBreadCrumbs = [
     {
-        text: 'Главная',
+        text: 'Выбор поставщика',
         onClick: () => console.log('Главная'),
         active: true,
     },
+];
+
+const simpleElements = [
+    { value: 'Vfufl', onClick: () => console.log('Vfufl') },
+    { value: 'Vfuflsdfsdfsfd', onClick: () => console.log('Vfuflsdfsdfsfd') },
 ];
 
 const fullBreadCrumbs = [
@@ -69,7 +75,18 @@ storiesOf('BreadCrumbs', module).add(
     'basket regions breadcrumbs',
     () => (
         <ThemeProvider value={theme}>
-            <BreadCrumbs data={activeBreadCrumbs} RegionsComponent={() => <>Регионы</>} RightComponent={() => <>Корзина</>} />
+            <BreadCrumbs
+                data={activeBreadCrumbs}
+                RegionsComponent={() => (
+                    <SimpleSelect
+                        data={simpleElements}
+                        mainText="Кабардино‑Балкарская Республика 123123"
+                        position={SimpleSelectPosition.right}
+                        needArrow={true}
+                    />
+                )}
+                RightComponent={() => <>Корзина</>}
+            />
         </ThemeProvider>
     ),
     { info: { inline: true, propTablesExclude: [ThemeProvider] } },

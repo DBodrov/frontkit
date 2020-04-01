@@ -6,7 +6,7 @@
 .rightFlex {
     justify-content: flex-end;
 }
-.right{
+.right {
     right: 0;
 }
 .arrow {
@@ -25,10 +25,22 @@
 }
 
 .element:hover {
-    color: #2c2e2b!important;
+    color: #2c2e2b !important;
     font-weight: 500;
 }
 
 .element + .element {
     border-top: 1px solid #eeeeee;
+}
+
+.mainText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 540px) {
+    .mainText {
+        max-width: 240px;
+    }
 }

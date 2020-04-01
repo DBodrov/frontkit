@@ -11,6 +11,7 @@
 .mainCrumb {
     display: block;
     margin-right: 10px;
+    margin-bottom: 20px;
 }
 
 .link {
@@ -32,7 +33,7 @@
 
 .otherCrumb {
     display: flex;
-    margin: 0 10px;
+    margin: 0 10px 20px 10px;
 }
 
 .regionMode {
@@ -40,20 +41,22 @@
 }
 
 .regions {
-    margin-right: 45px;
-    margin-left: auto;
+    margin: 0 45px 20px auto;
+}
+
+.rightComponent {
+    margin-bottom: 20px;
 }
 
 @media (max-width: 540px) {
     .mainCrumb {
         order: 0;
-        margin-right: 0;
     }
 
     .otherCrumb {
         order: 2;
         flex-basis: 100%;
-        margin: 20px 0 0 0;
+        margin: 0;
     }
 
     .rightComponent {
