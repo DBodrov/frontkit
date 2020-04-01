@@ -58,7 +58,7 @@ export const SimpleSelect = ({
                 onClick={handleClick}
                 data-testid={dataTestId}
             >
-                {mainText}
+                <div className={styles.mainText}>{mainText}</div>
                 {needArrow && (
                     <Arrow
                         dataTestId={dataTestId + '-arrow'}
