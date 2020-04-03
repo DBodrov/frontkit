@@ -60,12 +60,7 @@ export const SimpleSelect = ({
             >
                 <div className={styles.mainText}>{mainText}</div>
                 {needArrow && (
-                    <Arrow
-                        dataTestId={dataTestId + '-arrow'}
-                        type={isOpen ? ArrowTypes.Up : ArrowTypes.Down}
-                        className={styles.arrow}
-                        color="black"
-                    />
+                    <Arrow dataTestId={dataTestId + '-arrow'} type={isOpen ? ArrowTypes.Up : ArrowTypes.Down} className={styles.arrow} />
                 )}
             </div>
             {isOpen && (
