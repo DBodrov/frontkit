@@ -70,6 +70,11 @@ input[type='number'] {
     box-shadow: inset 9999999px 9999999px 0 #eaeef4;
 }
 
+.focused .defaultInput {
+    background-color: #dfe5ee;
+    box-shadow: inset 9999999px 9999999px 0 #dfe5ee;
+}
+
 .error {
     background-color: #ffe3e3;
     /*
@@ -79,6 +84,12 @@ input[type='number'] {
     */
     box-shadow: inset 9999999px 9999999px 0 #ffe3e3;
 }
+
+.focused .error {
+    background-color: #ffd1ce;
+    box-shadow: inset 9999999px 9999999px 0 #ffd1ce;
+}
+
 .success {
     background-color: #dcf9e3;
     /*
@@ -87,6 +98,10 @@ input[type='number'] {
     Добавляем внутреннюю тень без размытия на весь input
     */
     box-shadow: inset 9999999px 9999999px 0 #dcf9e3;
+}
+.focused .success {
+    background-color: #c8ffd4;
+    box-shadow: inset 9999999px 9999999px 0 #c8ffd4;
 }
 .warning {
     background-color: #fff4c8;
@@ -97,6 +112,12 @@ input[type='number'] {
     */
     box-shadow: inset 9999999px 9999999px 0 #fff4c8;
 }
+
+.focused .warning {
+    background-color: #feefb9;
+    box-shadow: inset 9999999px 9999999px 0 #feefb9;
+}
+
 .white {
     background-color: #ffffff;
     /*
@@ -105,6 +126,11 @@ input[type='number'] {
     Добавляем внутреннюю тень без размытия на весь input
     */
     box-shadow: inset 9999999px 9999999px 0 #ffffff;
+}
+
+.focused .white {
+    background-color: #eaeef4;
+    box-shadow: inset 9999999px 9999999px 0 #eaeef4;
 }
 
 .leftIconExist {
