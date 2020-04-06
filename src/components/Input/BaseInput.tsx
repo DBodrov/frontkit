@@ -26,12 +26,32 @@ function getBackgroundClass(background: BackgroundProp): string {
         [styles.warning]: background === BackgroundProp.Warning,
     });
 }
-function useFocus(autoFocus: boolean): [boolean, () => void, () => void, React.RefObject<HTMLDivElement>] {
+function useFocus(
+    autoFocus: boolean,
+    rest: Pick<BaseInputProps, 'onFocus' | 'onBlur'>,
+): [
+    boolean,
+    (event: React.FocusEvent<HTMLInputElement>) => void,
+    (event: React.FocusEvent<HTMLInputElement>) => void,
+    React.RefObject<HTMLDivElement>,
+] {
     const [focused, setFocused] = React.useState(autoFocus);
     const inputRef = React.useRef<HTMLDivElement>(null);
 
-    const onFocus = React.useCallback(() => setFocused(true), [setFocused]);
-    const onBlur = React.useCallback(() => setFocused(false), [setFocused]);
+    const onFocus = React.useCallback(
+        event => {
+            event.type === 'focus' && rest.onFocus && rest.onFocus(event);
+            setFocused(true);
+        },
+        [setFocused, rest],
+    );
+    const onBlur = React.useCallback(
+        event => {
+            rest.onBlur && rest.onBlur(event);
+            setFocused(false);
+        },
+        [setFocused, rest],
+    );
 
     useOnClickOutside(
         inputRef,
@@ -64,7 +84,7 @@ export function BaseInput({
     disableRightBorderRadius = false,
     ...rest
 }: BaseInputProps): JSX.Element {
-    const [focused, onFocus, onBlur, fieldRef] = useFocus(autoFocus);
+    const [focused, onFocus, onBlur, fieldRef] = useFocus(autoFocus, rest);
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     React.useEffect(() => {
@@ -104,6 +124,7 @@ export function BaseInput({
                 {LeftIcon && <LeftIcon />}
             </div>
             <input
+                {...rest}
                 autoFocus={autoFocus}
                 value={value}
                 placeholder={placeholder}
@@ -113,7 +134,6 @@ export function BaseInput({
                 onBlur={onBlur}
                 disabled={disabled}
                 data-testid={dataTestId + '-input'}
-                {...rest}
             />
             <div
                 className={cn(styles.input, styles.rightArea, backgroundClass, rightPartClassName, {

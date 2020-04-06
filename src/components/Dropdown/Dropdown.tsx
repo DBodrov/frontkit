@@ -66,7 +66,7 @@ export type Props<T> = {
     getKeyCode?: (key: string) => void;
     showMoreElement?: React.ComponentType;
     clickOutSide?: () => void;
-    onFocus?: () => void;
+    onFocus?: (event: FocusEvent) => void;
     loading?: boolean;
     showDimmer?: boolean;
     placeholder?: string;

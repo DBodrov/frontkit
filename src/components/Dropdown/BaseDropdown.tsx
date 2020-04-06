@@ -54,7 +54,7 @@ type Props = {
     dataTestId: string;
     showMoreElement?: React.ComponentType;
     clickOutSide?: () => void;
-    onFocus?: () => void;
+    onFocus?: (event: FocusEvent) => void;
 } & React.HTMLAttributes<HTMLDivElement>;
 export function BaseDropdown({
     dataTestId,
