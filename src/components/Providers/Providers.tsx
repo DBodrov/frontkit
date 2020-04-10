@@ -112,6 +112,14 @@ export function Providers({ data, gap = '0', dataTestId = 'providers', onClick, 
     const max = data.length - size;
     const [offset, increase, decrease] = useOffset(max);
 
+    // заранее загружаем все изображения
+    React.useEffect(() => {
+        data.forEach(item => {
+            const img = new Image();
+            img.src = item.src;
+        });
+    }, [data]);
+
     const providerInfoIndex = React.useMemo(() => {
         const map = new Map<number, ProviderInfo>();
         for (let i = 0; i < data.length; ++i) {
