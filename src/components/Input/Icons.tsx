@@ -42,7 +42,7 @@ function stopPropagation(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void 
     e.stopPropagation();
 }
 export type HelpIconProps = {
-    text: string;
+    text: string | JSX.Element;
     checkbox?: boolean;
 } & IconProps;
 export function HelpIcon({ dataTestId = 'input-search-icon', text, checkbox = false }: HelpIconProps): JSX.Element {
