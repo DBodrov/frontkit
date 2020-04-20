@@ -44,14 +44,7 @@ const head = document.head || document.getElementsByTagName('head')[0],
 head.appendChild(style);
 
 style.type = 'text/css';
-const addStyle = (css: string) => {
-    if (style.styleSheet) {
-        // This is required for IE8 and below.
-        style.styleSheet.cssText = css;
-    } else {
-        style.appendChild(document.createTextNode(css));
-    }
-};
+const addStyle = (css: string) => style.appendChild(document.createTextNode(css));
 
 function stopPropagation(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
     e.stopPropagation();
@@ -113,9 +106,9 @@ const Tooltip = ({
 
         let right: number;
         let left = 0;
-        let top = 32;
-        tooltipElem.style.left = left;
-        tooltipElem.style.top = top;
+        let top = 0;
+        tooltipElem.style.left = left.toString();
+        tooltipElem.style.top = top.toString();
         tooltipElem.style.position = 'fixed';
 
         const diff = Math.abs(parentElem.offsetWidth - tooltipElem.offsetWidth) / 2;
@@ -151,9 +144,9 @@ const Tooltip = ({
             top = -(tooltipElem.offsetHeight + 10);
         }
         tooltipElem.style.minWidth = tooltipElem.offsetWidth + 1 + 'px';
-        tooltipElem.style.right = right ? right + 'px' : null;
-        tooltipElem.style.left = left ? left + 'px' : null;
-        tooltipElem.style.top = top ? top + 'px' : null;
+        tooltipElem.style.right = right ? right + 'px' : '';
+        tooltipElem.style.left = left ? left + 'px' : '';
+        tooltipElem.style.top = top ? top + 'px' : '';
         tooltipElem.style.position = 'absolute';
     }, [tooltip.current, parent.current]);
     return (
