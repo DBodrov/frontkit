@@ -105,16 +105,13 @@ const Tooltip = ({
         if (!coords || !parentElem || !tooltipElem || tooltipElem.offsetWidth === 0) return;
 
         let right: number;
-        let left = 0;
-        let top = 0;
-        tooltipElem.style.left = left.toString();
-        tooltipElem.style.top = top.toString();
-        tooltipElem.style.position = 'fixed';
+        let left: number;
+        let top: number;
 
         const diff = Math.abs(parentElem.offsetWidth - tooltipElem.offsetWidth) / 2;
         right = coords.right + diff;
         left = coords.left - diff;
-        if (right > window.innerWidth) {
+        if (right > window.innerWidth - 20) {
             // Надо двигать справа
             right = -10;
             left = 0;
@@ -134,7 +131,7 @@ const Tooltip = ({
             left !== 0 ? Math.abs(left) + parentElem.offsetWidth / 2 - 9 : tooltipElem.offsetWidth + right - parentElem.offsetWidth / 2 - 7;
         if (top < 0) {
             // если подсказка не помещается сверху, то отображать её снизу
-            addStyle(`.${styles.tooltip}:before {left: ${beforeLeft}px; top: -9px; border-bottom: 9px solid #fff; border-top: 0;}`);
+            addStyle(`.${styles.tooltip}:before {left: ${beforeLeft}px; top: -8px; border-bottom: 9px solid #fff; border-top: 0;}`);
             top = parentElem.offsetHeight + 10;
         } else {
             addStyle(
@@ -148,9 +145,15 @@ const Tooltip = ({
         tooltipElem.style.left = left ? left + 'px' : '';
         tooltipElem.style.top = top ? top + 'px' : '';
         tooltipElem.style.position = 'absolute';
+        tooltipElem.style.visibility = 'visible';
     }, [tooltip.current, parent.current]);
     return (
-        <div ref={tooltip} className={styles.tooltip} data-testid={dataTestId + '-tooltip'}>
+        <div
+            ref={tooltip}
+            style={{ top: '-999px', left: '-999px', position: 'fixed', visibility: 'hidden' }}
+            className={styles.tooltip}
+            data-testid={dataTestId + '-tooltip'}
+        >
             {text}
         </div>
     );
