@@ -40,7 +40,7 @@ export function Checkbox(props: CheckboxProps): JSX.Element {
                     </span>
                 )}
             </label>
-            {needHint && <HelpIcon checkbox text={hintText} dataTestId={dataTestId + '-intText'} />}
+            {needHint && <HelpIcon text={hintText} dataTestId={dataTestId + '-intText'} />}
         </div>
     );
 }
