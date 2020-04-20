@@ -107,7 +107,6 @@ const Tooltip = ({
         let right: number;
         let left: number;
         let top: number;
-        tooltipElem.style.position = 'fixed';
 
         const diff = Math.abs(parentElem.offsetWidth - tooltipElem.offsetWidth) / 2;
         right = coords.right + diff;
@@ -149,7 +148,12 @@ const Tooltip = ({
         tooltipElem.style.visibility = 'visible';
     }, [tooltip.current, parent.current]);
     return (
-        <div ref={tooltip} style={{ top: '-999px', left: '-999px' }} className={styles.tooltip} data-testid={dataTestId + '-tooltip'}>
+        <div
+            ref={tooltip}
+            style={{ top: '-999px', left: '-999px', position: 'fixed', visibility: 'hidden' }}
+            className={styles.tooltip}
+            data-testid={dataTestId + '-tooltip'}
+        >
             {text}
         </div>
     );
