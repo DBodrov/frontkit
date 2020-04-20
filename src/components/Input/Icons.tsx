@@ -38,24 +38,40 @@ export function SearchIcon({ dataTestId = 'input-search-icon' }: IconProps): JSX
     );
 }
 
+const head = document.head || document.getElementsByTagName('head')[0],
+    style = document.createElement('style');
+
+head.appendChild(style);
+
+style.type = 'text/css';
+const addStyle = (css: string) => {
+    if (style.styleSheet) {
+        // This is required for IE8 and below.
+        style.styleSheet.cssText = css;
+    } else {
+        style.appendChild(document.createTextNode(css));
+    }
+};
+
 function stopPropagation(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
     e.stopPropagation();
 }
 export type HelpIconProps = {
     text: string | JSX.Element;
-    checkbox?: boolean;
 } & IconProps;
-export function HelpIcon({ dataTestId = 'input-search-icon', text, checkbox = false }: HelpIconProps): JSX.Element {
+export function HelpIcon({ dataTestId = 'input-search-icon', text }: HelpIconProps): JSX.Element {
     const [isOpen, setIsOpen] = React.useState(false);
+    const element = React.useRef<HTMLDivElement>(null);
     const onMouseLeave = React.useCallback(() => setIsOpen(false), [setIsOpen]);
     const onMouseEnter = React.useCallback(() => setIsOpen(true), [setIsOpen]);
     return (
         <div
-            className={checkbox ? styles.wrapper : ''}
+            className={styles.wrapper}
             data-testid={dataTestId}
             onClick={stopPropagation}
             onMouseLeave={onMouseLeave}
             onMouseEnter={onMouseEnter}
+            ref={element}
         >
             <svg
                 role="button"
@@ -73,11 +89,76 @@ export function HelpIcon({ dataTestId = 'input-search-icon', text, checkbox = fa
                     fill="#8C929C"
                 />
             </svg>
-            {isOpen && (
-                <div className={checkbox ? styles.tooltip_checkbox : styles.tooltip} data-testid={dataTestId + '-tooltip'}>
-                    <div className={styles.tooltip_div}>{text}</div>
-                </div>
-            )}
+            {isOpen && <Tooltip text={text} dataTestId={dataTestId} parent={element} />}
         </div>
     );
 }
+
+const Tooltip = ({
+    text,
+    dataTestId,
+    parent,
+}: {
+    text: string | JSX.Element;
+    dataTestId?: string;
+    parent: React.RefObject<HTMLDivElement>;
+}) => {
+    const tooltip = React.useRef<HTMLDivElement>(null);
+    React.useEffect(() => {
+        const parentElem = parent.current;
+        const tooltipElem = tooltip.current;
+
+        const coords = parentElem?.getBoundingClientRect();
+        if (!coords || !parentElem || !tooltipElem || tooltipElem.offsetWidth === 0) return;
+
+        let right: number;
+        let left = 0;
+        let top = 32;
+        tooltipElem.style.left = left;
+        tooltipElem.style.top = top;
+        tooltipElem.style.position = 'fixed';
+
+        const diff = Math.abs(parentElem.offsetWidth - tooltipElem.offsetWidth) / 2;
+        right = coords.right + diff;
+        left = coords.left - diff;
+        if (right > window.innerWidth) {
+            // Надо двигать справа
+            right = -10;
+            left = 0;
+        } else if (left < 0) {
+            // Надо двигать слева
+            const indent = (window.innerWidth - tooltipElem.offsetWidth) / 2;
+            left = (indent > 30 ? 30 : indent) - coords.left;
+            right = 0;
+        } else {
+            // Центрируем
+            left = -diff;
+            right = 0;
+        }
+
+        top = coords.top - tooltipElem.offsetHeight - 15;
+        const beforeLeft =
+            left !== 0 ? Math.abs(left) + parentElem.offsetWidth / 2 - 9 : tooltipElem.offsetWidth + right - parentElem.offsetWidth / 2 - 7;
+        if (top < 0) {
+            // если подсказка не помещается сверху, то отображать её снизу
+            addStyle(`.${styles.tooltip}:before {left: ${beforeLeft}px; top: -9px; border-bottom: 9px solid #fff; border-top: 0;}`);
+            top = parentElem.offsetHeight + 10;
+        } else {
+            addStyle(
+                `.${styles.tooltip}:before {left: ${beforeLeft}px; top: ${tooltipElem.offsetHeight -
+                    1}px; border-top: 9px solid #fff; border-bottom: 0;}`,
+            );
+            top = -(tooltipElem.offsetHeight + 10);
+        }
+        tooltipElem.style.minWidth = tooltipElem.offsetWidth + 1 + 'px';
+        tooltipElem.style.right = right ? right + 'px' : null;
+        tooltipElem.style.left = left ? left + 'px' : null;
+        tooltipElem.style.top = top ? top + 'px' : null;
+        tooltipElem.style.position = 'absolute';
+    }, [tooltip.current, parent.current]);
+    return (
+        <div ref={tooltip} className={styles.tooltip} data-testid={dataTestId + '-tooltip'}>
+            {text}
+        </div>
+    );
+};
