@@ -113,7 +113,8 @@ const Tooltip = ({
         left = coords.left - diff;
         if (right > window.innerWidth - 20) {
             // Надо двигать справа
-            right = -10;
+            right =
+                coords.right + 10 - tooltipElem.offsetWidth > 0 ? -10 : coords.right - (window.innerWidth + tooltipElem.offsetWidth) / 2;
             left = 0;
         } else if (left < 0) {
             // Надо двигать слева
