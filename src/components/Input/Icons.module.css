@@ -3,82 +3,30 @@
 }
 
 .wrapper {
-    margin: 1px 0 0 30px;
-}
-
-.tooltip_checkbox {
-    max-width: 180px;
-    position: absolute;
-    text-align: center;
-    margin-left: -30px;
-    z-index: 70;
-    top: 25px;
-}
-
-@media (max-width: 540px) {
-    .tooltip_checkbox {
-        margin-left: initial;
-        top: initial;
-        max-width: 80%;
-        left: 50%;
-        transform: translateX(-50%);
-    }
+    position: relative;
 }
 
 .tooltip {
     position: absolute;
-    text-align: right;
-    right: 30px;
-    max-width: 90%;
-    padding-top: 5px;
+    max-width: 80%;
     z-index: 70;
-    top: 41px;
-}
-
-.tooltip_div {
     padding: 15px;
     background: #ffffff;
     box-sizing: border-box;
     box-shadow: 0 4px 6px rgba(170, 187, 208, 0.16);
     border-radius: 6px;
-    width: max-content;
-    font-size: 12px;
     line-height: 17px;
     color: #8a919c;
-    max-width: 100%;
-    word-wrap: break-word;
+    text-align: left;
 }
 
 .tooltip:before,
-.tooltip_div:before,
 .tooltip:after {
     position: absolute;
     pointer-events: none;
     content: '';
     height: 0;
     width: 0;
-}
-
-.tooltip:before {
-    border: 3px solid white;
-    border-radius: 50%;
-    border-bottom-color: #fff;
-    top: 1.4px;
-    right: 0;
-}
-.tooltip_div:before {
-    border: 3px solid white;
-    margin-top: 5px;
-    border-bottom-color: #fff;
-    top: 0;
-    right: 0;
-}
-
-.tooltip:after {
-    margin-top: -1px;
-    border: solid transparent;
-    border-width: 3px 5px;
-    border-bottom-color: #fff;
-    top: 0;
-    right: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
 }

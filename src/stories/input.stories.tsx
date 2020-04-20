@@ -3,6 +3,9 @@ import { storiesOf } from '@storybook/react';
 import { BackgroundProp, ErrorIcon, HelpIcon, Input, SearchIcon, SmallInput, SuccessIcon } from '../components/Input';
 import image from './static/Number_LS_all_regions.png';
 
+const img = new Image();
+img.src = image;
+
 storiesOf('Input', module)
     .add('base', () => <Input />, { info: { inline: true } })
     .add('text align right', () => <Input right={true} defaultValue="123" />, { info: { inline: true } })
@@ -18,9 +21,12 @@ storiesOf('Input', module)
                     RightIcon={() => (
                         <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст Тестоasdas ads assd as dasd as das das dads sвый текст Тестоasdas ads assd as dasd as das das dads sвый текст Тестоasdas ads assd as dasd as das das dads sвый текст" />
                     )}
+                    style={{ width: '150px', marginLeft: '100px' }}
                 />
+                <Input RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das" />} style={{ width: '150px' }} />
                 <Input RightIcon={() => <HelpIcon text={<img src={image} style={{ maxWidth: '100%' }} />} />} />
-                <SmallInput RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст" />} />
+                <SmallInput RightIcon={() => <HelpIcon text="Тестоasdas" />} />
+                <SmallInput style={{ width: '400px' }} RightIcon={() => <HelpIcon text="Тестоasdas" />} />
             </>
         ),
         {

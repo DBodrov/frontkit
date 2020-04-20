@@ -12,7 +12,6 @@ input[type='number'] {
 }
 
 .wrapper {
-    position: relative;
     display: grid;
     display: -ms-grid;
     grid-template-columns: fit-content(21px) 1fr fit-content(21px);
