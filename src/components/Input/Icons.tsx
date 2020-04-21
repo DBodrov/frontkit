@@ -57,15 +57,23 @@ export function HelpIcon({ dataTestId = 'input-search-icon', text }: HelpIconPro
     const element = React.useRef<HTMLDivElement>(null);
     const onMouseLeave = React.useCallback(() => setIsOpen(false), [setIsOpen]);
     const onMouseEnter = React.useCallback(() => setIsOpen(true), [setIsOpen]);
+    const onClick = React.useCallback(
+        (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+            stopPropagation(e);
+            onMouseEnter();
+        },
+        [onMouseEnter, stopPropagation],
+    );
     return (
         <div
             className={styles.wrapper}
             data-testid={dataTestId}
-            onClick={stopPropagation}
+            onClick={onClick}
             onMouseLeave={onMouseLeave}
             onMouseEnter={onMouseEnter}
             ref={element}
         >
+            <div className={styles.fakeBody} />
             <svg
                 role="button"
                 className={styles.icon}
