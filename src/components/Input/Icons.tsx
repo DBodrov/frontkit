@@ -55,17 +55,25 @@ export type HelpIconProps = {
 export function HelpIcon({ dataTestId = 'input-search-icon', text }: HelpIconProps): JSX.Element {
     const [isOpen, setIsOpen] = React.useState(false);
     const element = React.useRef<HTMLDivElement>(null);
-    const onMouseLeave = React.useCallback(() => setIsOpen(false), [setIsOpen]);
-    const onMouseEnter = React.useCallback(() => setIsOpen(true), [setIsOpen]);
+    const hideTooltip = React.useCallback(() => setIsOpen(false), [setIsOpen]);
+    const showTooltip = React.useCallback(() => setIsOpen(true), [setIsOpen]);
+    const onClick = React.useCallback(
+        (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+            stopPropagation(e);
+            showTooltip();
+        },
+        [showTooltip, stopPropagation],
+    );
     return (
         <div
             className={styles.wrapper}
             data-testid={dataTestId}
-            onClick={stopPropagation}
-            onMouseLeave={onMouseLeave}
-            onMouseEnter={onMouseEnter}
+            onClick={onClick}
+            onMouseLeave={hideTooltip}
+            onMouseEnter={showTooltip}
             ref={element}
         >
+            <div className={styles.fakeBody} />
             <svg
                 role="button"
                 className={styles.icon}

@@ -31,3 +31,11 @@
     border-left: 9px solid transparent;
     border-right: 9px solid transparent;
 }
+
+.fakeBody {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    top: -10px;
+    left: -10px;
+}
