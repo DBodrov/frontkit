@@ -110,7 +110,13 @@ export function BankLogos({ cardNumber }: { cardNumber?: string }): JSX.Element 
             )}
             {paymentSystem === PaymentSystem.Visa && <Visa />}
             {paymentSystem === PaymentSystem.Mir && <Mir />}
-            {paymentSystem === PaymentSystem.Maestro && <Maestro />}
+            {paymentSystem === PaymentSystem.Maestro && (
+                <div className={styles.frontCardInputs} style={{ color: '#e00908' }}>
+                    Уважаемый клиент, в настоящий момент оплата с карт Maestro может завершаться ошибкой. Мы работаем над решением. Приносим
+                    извинения за доставленные неудобства.
+                </div>
+            )}
+            {/* {paymentSystem === PaymentSystem.Maestro && <Maestro />} */}
             {paymentSystem === PaymentSystem.MasterCard && <MasterCard />}
         </div>
     );
