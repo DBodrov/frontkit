@@ -21,6 +21,7 @@ interface CheckboxProps extends React.AllHTMLAttributes<HTMLInputElement> {
      * */
     id?: string;
 }
+
 export function Checkbox(props: CheckboxProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
     const { dataTestId = 'Checkbox', className, style, Label, id = 'Checkbox', hintText = '', ...rest } = props;

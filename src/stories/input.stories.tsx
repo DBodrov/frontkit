@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { BackgroundProp, ErrorIcon, HelpIcon, Input, SearchIcon, SmallInput, SuccessIcon } from '../components/Input';
+import { RootContainerProvider } from '../components/RootContainer';
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 import image from './static/Number_LS_all_regions.png';
 
 const img = new Image();
 img.src = image;
-
+const wrapperRef = React.createRef<HTMLInputElement>();
 storiesOf('Input', module)
     .add('base', () => <Input />, { info: { inline: true } })
     .add('text align right', () => <Input right={true} defaultValue="123" />, { info: { inline: true } })
@@ -16,18 +19,23 @@ storiesOf('Input', module)
     .add(
         'help',
         () => (
-            <>
-                <Input
-                    RightIcon={() => (
-                        <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст Тестоasdas ads assd as dasd as das das dads sвый текст Тестоasdas ads assd as dasd as das das dads sвый текст Тестоasdas ads assd as dasd as das das dads sвый текст" />
-                    )}
-                    style={{ width: '150px', marginLeft: '100px' }}
-                />
-                <Input RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das" />} style={{ width: '150px' }} />
-                <Input RightIcon={() => <HelpIcon text={<img src={image} style={{ maxWidth: '100%' }} />} />} />
-                <SmallInput RightIcon={() => <HelpIcon text="Тестоasdas" />} />
-                <SmallInput style={{ width: '400px' }} RightIcon={() => <HelpIcon text="Тестоasdas" />} />
-            </>
+            <RootContainerProvider value={wrapperRef}>
+                <div ref={wrapperRef} style={{ width: '450px', margin: '100px' }}>
+                    <Input
+                        RightIcon={() => (
+                            <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст Тестоasdas ads assd as dasd as das das dads sвый текст Тестоasdas ads assd as dasd as das das dads sвый текст Тестоasdas ads assd as dasd as das das dads sвый текст" />
+                        )}
+                        style={{ width: '150px', marginLeft: '100px' }}
+                    />
+                    <Input
+                        RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das dasТестоasdas ads assd as dasd as das das" />}
+                        style={{ width: '150px' }}
+                    />
+                    <Input RightIcon={() => <HelpIcon text={<img src={image} style={{ maxWidth: '100%' }} />} />} />
+                    <SmallInput RightIcon={() => <HelpIcon text="Тестоasdas" />} />
+                    <SmallInput style={{ width: '400px' }} RightIcon={() => <HelpIcon text="Тестоasdas" />} />
+                </div>
+            </RootContainerProvider>
         ),
         {
             info: { inline: true },
@@ -36,10 +44,14 @@ storiesOf('Input', module)
     .add(
         'custom styles',
         () => (
-            <Input
-                style={{ width: '200px' }}
-                RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст" />}
-            />
+            <RootContainerProvider value={wrapperRef}>
+                <div ref={wrapperRef} style={{ width: '200px', margin: '100px' }}>
+                    <Input
+                        style={{ width: '200px' }}
+                        RightIcon={() => <HelpIcon text="Тестоasdas ads assd as dasd as das das dads sвый текст" />}
+                    />
+                </div>
+            </RootContainerProvider>
         ),
         {
             info: { inline: true },

@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { Checkbox } from '../../components/Checkbox';
+import { RootContainerProvider } from '../../components/RootContainer';
 import { ThemeProvider } from '../../components/ThemeProvider';
 
 const theme = {
@@ -29,9 +30,14 @@ describe('<Checkbox />', () => {
     });
     test('have theme style an Checkbox element', () => {
         const label = 'label22';
+        const wrapperRef = React.createRef<HTMLDivElement>();
         const { getByTestId } = render(
             <ThemeProvider value={theme}>
-                <Checkbox dataTestId={testId} Label={label} hintText="23434кц312312 3123 123 123 123 1231231 123123 123 к" />
+                <RootContainerProvider value={wrapperRef}>
+                    <div ref={wrapperRef}>
+                        <Checkbox dataTestId={testId} Label={label} hintText="23434кц312312 3123 123 123 123 1231231 123123 123 к" />
+                    </div>
+                </RootContainerProvider>
             </ThemeProvider>,
         );
         const checkbox = getByTestId(testId + '-smallBox');

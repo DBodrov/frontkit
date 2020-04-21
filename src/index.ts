@@ -17,3 +17,4 @@ export { MaskedInput } from './components/MaskedInput';
 export { Select, SimpleSelect, SimpleSelectPosition } from './components/Select';
 export { Modal } from './components/Modal';
 export { Accordion, AccordionLineType } from './components/Accordion';
+export { RootContainerProvider } from './components/RootContainer';
