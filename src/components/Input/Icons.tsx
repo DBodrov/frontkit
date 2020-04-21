@@ -1,4 +1,5 @@
 import React from 'react';
+import { RootContainerContext } from '../RootContainer';
 import styles from './Icons.module.css';
 
 export type IconProps = {
@@ -105,32 +106,39 @@ const Tooltip = ({
     parent: React.RefObject<HTMLDivElement>;
 }) => {
     const tooltip = React.useRef<HTMLDivElement>(null);
+    const rootRef = React.useContext(RootContainerContext);
     React.useEffect(() => {
+        const rootElement = rootRef.current;
         const parentElem = parent.current;
         const tooltipElem = tooltip.current;
 
         const coords = parentElem?.getBoundingClientRect();
-        if (!coords || !parentElem || !tooltipElem || tooltipElem.offsetWidth === 0) return;
+        const rootCoords = rootElement?.getBoundingClientRect();
+        if (!coords || !rootCoords || !parentElem || !tooltipElem || !rootElement || tooltipElem.offsetWidth === 0) return;
 
         let right: number;
         let left: number;
         let top: number;
 
         const diff = Math.abs(parentElem.offsetWidth - tooltipElem.offsetWidth) / 2;
+
         right = coords.right + diff;
         left = coords.left - diff;
-        if (right > window.innerWidth - 20) {
-            // Надо двигать справа
+
+        if (right > rootCoords.right) {
+            // console.log('Надо двигать справа');
             right =
-                coords.right + 10 - tooltipElem.offsetWidth > 0 ? -10 : coords.right - (window.innerWidth + tooltipElem.offsetWidth) / 2;
+                coords.right + 10 - tooltipElem.offsetWidth > 0
+                    ? -10
+                    : coords.right - (rootElement.offsetWidth + tooltipElem.offsetWidth) / 2;
             left = 0;
-        } else if (left < 0) {
-            // Надо двигать слева
-            const indent = (window.innerWidth - tooltipElem.offsetWidth) / 2;
-            left = (indent > 30 ? 30 : indent) - coords.left;
+        } else if (left < rootCoords.left) {
+            // console.log('Надо двигать слева');
+            const indent = (rootElement.offsetWidth - tooltipElem.offsetWidth) / 2;
+            left = (indent > 30 ? 30 : indent) - coords.left + rootCoords.left;
             right = 0;
         } else {
-            // Центрируем
+            // console.log('Центрируем');
             left = -diff;
             right = 0;
         }
@@ -159,7 +167,13 @@ const Tooltip = ({
     return (
         <div
             ref={tooltip}
-            style={{ top: '-999px', left: '-999px', position: 'fixed', visibility: 'hidden' }}
+            style={{
+                top: '-999px',
+                left: '-999px',
+                position: 'fixed',
+                visibility: 'hidden',
+                ...(rootRef.current && { maxWidth: rootRef.current.offsetWidth * 0.8 + 1 }),
+            }}
             className={styles.tooltip}
             data-testid={dataTestId + '-tooltip'}
         >

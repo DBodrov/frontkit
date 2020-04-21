@@ -8,7 +8,6 @@
 
 .tooltip {
     position: absolute;
-    max-width: 80%;
     z-index: 70;
     padding: 15px;
     background: #ffffff;
