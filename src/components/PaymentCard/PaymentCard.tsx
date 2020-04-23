@@ -155,6 +155,7 @@ export function PaymentCards({
         let elementNextSelection = elementSelection;
         const prev = formState[typedNames].replace(/\s/g, '').length;
         const cur = value.replace(/\s/g, '').length;
+        const error = !validate(typedNames, element.value);
 
         switch (typedNames) {
             case 'ccNumber':
@@ -169,6 +170,9 @@ export function PaymentCards({
                     if (elementSelection === 3) {
                         elementNextSelection += 1;
                     }
+                    if (elementSelection === 5 && !error) {
+                        document.getElementsByName('ccCsc')[0]?.focus();
+                    }
                 }
                 break;
             default:
@@ -176,7 +180,7 @@ export function PaymentCards({
         }
 
         element.value = format(typedNames, value);
-        setError({ ...formErrors, [typedNames]: !validate(typedNames, element.value) });
+        setError({ ...formErrors, [typedNames]: error });
         setFormState({ ...formState, [typedNames]: element.value });
         element.setSelectionRange(elementNextSelection, elementNextSelection);
     };
