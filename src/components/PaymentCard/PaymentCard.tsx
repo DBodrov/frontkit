@@ -171,7 +171,7 @@ export function PaymentCards({
                         elementNextSelection += 1;
                     }
                     if (elementSelection === 5 && !error) {
-                        document.getElementsByName('ccCsc')[0]?.focus();
+                        setTimeout(() => document.getElementsByName('ccCsc')[0]?.focus(), 10);
                     }
                 }
                 break;
