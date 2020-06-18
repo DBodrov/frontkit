@@ -53,6 +53,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
                 <CardInput
                     type="tel"
                     name="ccNumber"
+                    id="ccNumber"
                     placeholder="Номер карты"
                     className={styles.mb10}
                     error={errors['ccNumber']}
@@ -62,6 +63,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
                 <div className={styles.flex}>
                     <CardInput
                         name="ccName"
+                        id="ccName"
                         placeholder="Владелец карты"
                         className={styles.ccName}
                         error={errors['ccName']}
@@ -71,6 +73,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
                     <CardInput
                         type="tel"
                         name="ccExp"
+                        id="ccExp"
                         placeholder="ММ/ГГ"
                         maxLength={5}
                         className={styles.ccExp}
@@ -92,6 +95,7 @@ function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element 
                 <CardInput
                     type="tel"
                     name="ccCsc"
+                    id="ccCsc"
                     placeholder="CVV/CVC"
                     className={cvvCls}
                     maxLength={3}
