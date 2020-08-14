@@ -1,0 +1,68 @@
+.wrapper {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.active {
+    background: #F2F6FB;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: 20px;
+    line-height: 20px;
+    box-sizing: border-box;
+    height: 94px;
+}
+
+.title{
+    margin-right: 10px;
+    width: 220px;
+    overflow: hidden;
+    white-space: nowrap;
+    direction: rtl;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.image {
+    width: 120px;
+    margin-right: 10px;
+}
+
+.cvv {
+    width: 156px;
+}
+
+@media (max-width: 540px) {
+    .card {
+        font-size: 16px;
+        line-height: 16px;
+        height: 80px;
+        justify-content: flex-start;
+    }
+    .active .card {
+        justify-content: space-between;
+    }
+    .title {
+        width: 170px;
+    }
+    .image{
+        width: 100px;
+    }
+    .active .image{
+        width: 70px;
+    }
+    .image img,
+    .image svg {
+        max-width: 60px;
+        min-width: 60px;
+    }
+    .cvv {
+        max-width: 65px;
+        min-width: 65px;
+    }
+}

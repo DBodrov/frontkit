@@ -96,8 +96,27 @@ function Mir(): JSX.Element {
     );
 }
 
-export function BankLogos({ cardNumber }: { cardNumber?: string }): JSX.Element {
-    const paymentSystem = getByPrefix(cardNumber);
+function getByType(type?: string): PaymentSystem | undefined {
+    switch (type) {
+        case 'MIR':
+            return PaymentSystem.Mir;
+        case 'MC':
+            return PaymentSystem.MasterCard;
+        case 'VISA':
+            return PaymentSystem.Visa;
+        default:
+            return undefined;
+    }
+}
+
+export function BankLogos({ cardNumber, type, link }: { cardNumber?: string; type?: string; link?: string }): JSX.Element {
+    const typeRes = getByType(type);
+
+    if (type && !typeRes) {
+        return link ? <img src={link} alt="paymentSystem" /> : <div />;
+    }
+
+    const paymentSystem = typeRes || getByPrefix(cardNumber);
     return (
         <div>
             {paymentSystem === PaymentSystem.All && (
