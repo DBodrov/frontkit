@@ -1,12 +1,20 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { PaymentCards } from '../../components/PaymentCard';
+import { PaymentCards, SelectCard } from '../../components/PaymentCard';
 
 function assert(value: unknown): asserts value {
     if (!value) {
         throw new Error();
     }
 }
+
+const data = {
+    default: true,
+    id: '6fv1qjg2fk',
+    link: 'https://www.a-3.ru/img/logo_png/MasterCard-vlbank-78x25.png',
+    title: '**** **** **** 0002',
+    type: 'MC',
+};
 
 describe('<PaymentCard />', () => {
     const cardsTestId = 'cardZZ';
@@ -124,5 +132,71 @@ describe('PaymentCard filling', () => {
 
         const mockCalls = mockFn.mock.calls;
         expect(mockCalls[mockCalls.length - 1]).toEqual([false]);
+    });
+
+    test('should SelectCard filling', () => {
+        const { getByTestId } = render(<SelectCard
+            dataTestId={cardsTestId}
+            data={data}
+            active={true}
+            onSuccess={mockFn}
+        />);
+
+        const ccCsc = getByTestId(cardsTestId + '-ccCsc-input');
+
+        fireEvent.change(ccCsc, { target: { value: 'asd' } });
+        fireEvent.change(ccCsc, { target: { value: '123' } });
+
+        const mockCalls = mockFn.mock.calls;
+        expect(mockCalls[mockCalls.length - 2]).toEqual([false]);
+        expect(mockCalls[mockCalls.length - 1]).toEqual([true]);
+    });
+
+});
+
+describe('<SelectCard />', () => {
+    const cardsTestId = 'cardZZ';
+
+    test('should cards rendered', () => {
+        const { getByTestId } = render(
+            <SelectCard
+                dataTestId={cardsTestId}
+                data={data}
+                active={true}
+            />,
+        );
+        const cards = getByTestId(cardsTestId);
+        expect(cards).not.toBeNull();
+    });
+
+    test('should have default dataTestId', () => {
+        const className = 'testtt';
+        const { container } = render(
+            <SelectCard
+                data={data}
+                className={className}
+                active={true}
+            />,
+        );
+        const cards = container.querySelector<HTMLElement>('.' + className);
+        assert(cards);
+
+        expect(cards.dataset.testid).toBe('SelectCard');
+    });
+
+    test('should have a passed className', () => {
+        const cardsTestId = 'cardZZ';
+        const className = 'Плоти';
+
+        const { getByTestId } = render(
+            <SelectCard
+                dataTestId={cardsTestId}
+                data={data}
+                className={className}
+                active={false}
+            />,
+        );
+        const cards = getByTestId(cardsTestId);
+        expect(cards).toHaveClass('Плоти');
     });
 });

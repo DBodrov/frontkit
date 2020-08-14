@@ -9,7 +9,7 @@ export { Provider, Providers } from './components/Providers';
 export { BreadCrumbs } from './components/BreadCrumbs';
 export { Arrow, ArrowTypes } from './components/Arrow';
 export { Box, SplitType, offsetMargin } from './components/Box';
-export { PaymentCards } from './components/PaymentCard';
+export { PaymentCards, SelectCard } from './components/PaymentCard';
 export { Radio } from './components/Radio';
 export { Dropdown } from './components/Dropdown';
 export { LinkWrapper } from './components/LinkWrapper';

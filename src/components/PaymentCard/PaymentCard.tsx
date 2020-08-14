@@ -41,7 +41,7 @@ interface CardInputProps extends React.ComponentProps<typeof SmallInput> {
     error: boolean;
 }
 
-const CardInput = ({ error, ...rest }: CardInputProps): JSX.Element => (
+export const CardInput = ({ error, ...rest }: CardInputProps): JSX.Element => (
     <SmallInput background={error ? BackgroundProp.Error : BackgroundProp.White} {...rest} />
 );
 
@@ -90,7 +90,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
 function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element {
     return (
         <div className={backCardCls}>
-            <div className={styles.magneticStrip}></div>
+            <div className={styles.magneticStrip} />
             <div className={styles.backCardBlock}>
                 <CardInput
                     type="tel"
