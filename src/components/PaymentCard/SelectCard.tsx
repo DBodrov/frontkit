@@ -103,6 +103,7 @@ export function SelectCard({
                 {active && (
                     <div className={styles.cvv}>
                         <CardInput
+                            autoFocus
                             type="tel"
                             name="ccCsc"
                             id="ccCsc"
