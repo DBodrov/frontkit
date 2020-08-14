@@ -66,6 +66,11 @@ export function SelectCard({
         onSuccess(success);
     }, [cvcState, onPaymentDataChange, onSuccess]);
 
+    React.useEffect(() => {
+        setError(false);
+        setCvcState(getForm(data.id));
+    }, [active, setError, data, setCvcState]);
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const element = event.target;
         const { value } = element;
