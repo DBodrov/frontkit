@@ -34,6 +34,7 @@
 .otherCrumb {
     display: flex;
     margin: 0 10px 20px 10px;
+    align-items: center;
 }
 
 .regionMode {
