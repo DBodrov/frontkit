@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Arrow, ArrowTypes } from '../Arrow';
 import { LinkWrapper } from '../LinkWrapper';
 import { Provider } from './Provider';
@@ -10,6 +10,8 @@ type ProviderInfo = {
     name: string;
 };
 interface Props {
+    className?: string;
+    style?: CSSProperties;
     dataTestId?: string;
     data: ReadonlyArray<ProviderInfo>;
     gap?: string;
@@ -107,7 +109,7 @@ function EmptyLine({ row, cols }: EmptyLineProps): JSX.Element {
     return <>{res}</>;
 }
 
-export function Providers({ data, gap = '0', dataTestId = 'providers', onClick, rows = 1, cols = 1 }: Props): JSX.Element {
+export function Providers({ data, gap = '0', dataTestId = 'providers', onClick, rows = 1, cols = 1, ...rest }: Props): JSX.Element {
     const size = rows * cols;
     const max = data.length - size;
     const [offset, increase, decrease] = useOffset(max);
@@ -164,7 +166,7 @@ export function Providers({ data, gap = '0', dataTestId = 'providers', onClick, 
     }, [offset, data, rows, cols]);
 
     return (
-        <div data-testid={dataTestId}>
+        <div data-testid={dataTestId} {...rest}>
             <div onClick={providerClickHandler} className={styles.wrapper} style={createStyle(rows, cols, gap)}>
                 {providersLines}
             </div>
