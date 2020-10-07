@@ -49,6 +49,7 @@ storiesOf('Providers', module)
                         cols={3}
                         gap="1vw"
                         onClick={action('click')}
+                        style={{ marginBottom: '20px' }}
                     />
                 </div>
             </ThemeProvider>
