@@ -192,6 +192,7 @@ function Scroller({ onClickLeft, onClickRight, dataTestId }: ScrollerProps): JSX
                     onClick={onClickLeft}
                     disabled={!onClickLeft}
                     data-testid={dataTestId + '-decrease'}
+                    type="button"
                 >
                     <Arrow type={ArrowTypes.Left} color={!onClickLeft ? '#D5DAE0' : ''} />
                 </button>
@@ -201,6 +202,7 @@ function Scroller({ onClickLeft, onClickRight, dataTestId }: ScrollerProps): JSX
                     onClick={onClickRight}
                     disabled={!onClickRight}
                     data-testid={dataTestId + '-increase'}
+                    type="button"
                 >
                     <Arrow type={ArrowTypes.Right} color={!onClickRight ? '#D5DAE0' : ''} />
                 </button>
