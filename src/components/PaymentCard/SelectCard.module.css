@@ -2,6 +2,7 @@
     width: 100%;
     margin-bottom: 20px;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .active {

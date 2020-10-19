@@ -41,7 +41,7 @@ storiesOf('PaymentCard', module)
     .add(
         'PaymentCards',
         () => (
-            <div style={{ padding: '22px', border: '1px solid black' }}>
+            <div style={{ border: '1px solid black' }}>
                 <PaymentCards onSuccess={action('onSuccess')} onPaymentDataChange={action('onPaymentDataChange')} />
             </div>
         ),
@@ -52,7 +52,7 @@ storiesOf('PaymentCard', module)
     .add(
         'SelectCard',
         () => (
-            <div style={{ padding: '22px', border: '1px solid black' }}>
+            <div style={{ border: '1px solid black' }}>
                 <SelectCard onSuccess={action('onSuccess')} onPaymentDataChange={action('onPaymentDataChange')} data={data} active={true} />
                 <SelectCard
                     onSuccess={action('onSuccess')}
