@@ -128,7 +128,7 @@
     }
 }
 
-@media (min-width: 767px) {
+@media (min-width: 700px) {
     .globalRelativeWrapper {
         height: 339px;
     }
