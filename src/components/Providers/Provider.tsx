@@ -8,13 +8,14 @@ interface Props {
     dataTestId?: string;
     width?: string;
     style?: object;
+    addText?: string;
     onClick?: () => unknown;
 }
 const DefaultImgUrl = 'https://www.a-3.ru/img/logo_png/home-icon.png';
 // В IE11 для figure установлены margin-ы по умолчанию, которые ломают вёрстку.
 // Сбросить их можно исключительно inline стилями
 const IE11FigureFix: React.CSSProperties = { marginLeft: 0, marginRight: 0 };
-export function Provider({ src, name, dataTestId, width = '100%', style, onClick, ...rest }: Props): JSX.Element {
+export function Provider({ src, name, dataTestId, width = '100%', style, onClick, addText, ...rest }: Props): JSX.Element {
     return (
         <figure
             {...rest}
@@ -25,6 +26,11 @@ export function Provider({ src, name, dataTestId, width = '100%', style, onClick
             role="button"
             title={name}
         >
+            {addText?.length && (
+                <div className={styles.addText} data-testid={dataTestId + '-addText'}>
+                    {addText}
+                </div>
+            )}
             {src !== DefaultImgUrl && <img data-testid={dataTestId + '-image'} className={styles.image} src={src} alt={name} />}
             {src === DefaultImgUrl && <DefaultProviderPic name={name} dataTestId={dataTestId + 'image'} />}
             <figcaption className={styles.caption}>{name}</figcaption>

@@ -16,6 +16,7 @@ storiesOf('Providers', module)
                 onClick={action('click')}
                 name={'МУНИЦИПАЛЬНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ АРТЕМОВСКОГО ГОРОДСКОГО ОКРУГА "ПРОГРЕСС"'}
                 src="https://www.a-3.ru/img/logo_png/home-icon.png"
+                addText="Комиссия 0%"
                 width="227px"
             />
         ),
@@ -30,10 +31,25 @@ storiesOf('Providers', module)
                 <div style={{ width: '800px' }}>
                     <Providers
                         data={[
-                            { id: 1, name: 'A', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                            { id: 2, name: 'Смарт Восток (ЖКУ)', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                            { id: 3, name: 'Смарт Восток (ЖКУ)', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                            { id: 4, name: 'Смарт Восток (ЖКУ)', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                            { id: 1, name: 'A', src: 'https://www.a-3.ru/img/logo_png/home-icon.png', addText: 'Комиссия 0%' },
+                            {
+                                id: 2,
+                                name: 'Смарт Восток (ЖКУ)',
+                                src: 'https://www.a-3.ru/img/logo_png/home-icon.png',
+                                addText: 'Комиссия 0%',
+                            },
+                            {
+                                id: 3,
+                                name: 'Смарт Восток (ЖКУ)',
+                                src: 'https://www.a-3.ru/img/logo_png/home-icon.png',
+                                addText: 'Комиссия 0%',
+                            },
+                            {
+                                id: 4,
+                                name: 'Смарт Восток (ЖКУ)',
+                                src: 'https://www.a-3.ru/img/logo_png/home-icon.png',
+                                addText: 'Комиссия 0%',
+                            },
                             { id: 5, name: 'Смарт Восток (ЖКУ)', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
                             { id: 6, name: 'Смарт Восток (ЖКУ)', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
                             {
@@ -41,6 +57,7 @@ storiesOf('Providers', module)
                                 name:
                                     'МУНИЦИПАЛЬНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ АРТЕМОВСКОГО ГОРОДСКОГО ОКРУГА ЖИЛИЩНО-КОММУНАЛЬНОЕ ХОЗЯЙСТВО ПОСЕЛКА БУЛАНАШ',
                                 src: 'https://www.a-3.ru/img/logo_png/home-icon.png',
+                                addText: 'Комиссия 0%',
                             },
                             { id: 8, name: 'H', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
                             { id: 9, name: 'I', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },

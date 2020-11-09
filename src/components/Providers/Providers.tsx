@@ -8,6 +8,7 @@ type ProviderInfo = {
     id: string | number;
     src: string;
     name: string;
+    addText?: string;
 };
 interface Props {
     className?: string;
@@ -88,6 +89,7 @@ function ProvidersLine({ data, dataTestId, offset, height }: ProvidersLineProps)
                             src={provider.src}
                             dataTestId={`${dataTestId}-single-${provider.id}`}
                             data-id={offset + id}
+                            addText={provider.addText}
                         />
                     </div>
                     {id !== original.length - 1 && <div style={createChildStyleForIE(2 * (id + 1), height + 1)} />}
