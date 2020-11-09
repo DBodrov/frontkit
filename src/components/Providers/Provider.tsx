@@ -15,6 +15,7 @@ interface Props {
 }
 const DefaultImgUrl = 'https://www.a-3.ru/img/logo_png/home-icon.png';
 const defaultAddTextBgColor = '#fa5535';
+const defaultAddText = 'Комиссия 0%';
 // В IE11 для figure установлены margin-ы по умолчанию, которые ломают вёрстку.
 // Сбросить их можно исключительно inline стилями
 const IE11FigureFix: React.CSSProperties = { marginLeft: 0, marginRight: 0 };
@@ -46,7 +47,7 @@ export function Provider({
                     style={{ background: addTextBackgroundColor || defaultAddTextBgColor }}
                     data-testid={dataTestId + '-addText'}
                 >
-                    {addText}
+                    {addText || defaultAddText}
                 </div>
             )}
             {src !== DefaultImgUrl && <img data-testid={dataTestId + '-image'} className={styles.image} src={src} alt={name} />}
