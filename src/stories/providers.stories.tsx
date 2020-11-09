@@ -17,6 +17,8 @@ storiesOf('Providers', module)
                 name={'МУНИЦИПАЛЬНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ АРТЕМОВСКОГО ГОРОДСКОГО ОКРУГА "ПРОГРЕСС"'}
                 src="https://www.a-3.ru/img/logo_png/home-icon.png"
                 addText="Комиссия 0%"
+                addTextEnabled
+                addTextBackgroundColor="#935454"
                 width="227px"
             />
         ),
@@ -34,24 +36,28 @@ storiesOf('Providers', module)
                             { id: 1, name: 'A', src: 'https://www.a-3.ru/img/logo_png/home-icon.png', addText: 'Комиссия 0%' },
                             {
                                 id: 2,
-                                name: 'Смарт Восток (ЖКУ)',
+                                name: 'Смарт Восток (ЖКУ)1',
                                 src: 'https://www.a-3.ru/img/logo_png/home-icon.png',
+                                addTextEnabled: true,
+                                addTextBackgroundColor: '#935454',
                                 addText: 'Комиссия 0%',
                             },
                             {
                                 id: 3,
-                                name: 'Смарт Восток (ЖКУ)',
+                                name: 'Смарт Восток (ЖКУ)2',
                                 src: 'https://www.a-3.ru/img/logo_png/home-icon.png',
+                                addTextEnabled: false,
                                 addText: 'Комиссия 0%',
                             },
                             {
                                 id: 4,
-                                name: 'Смарт Восток (ЖКУ)',
+                                name: 'Смарт Восток (ЖКУ)3',
                                 src: 'https://www.a-3.ru/img/logo_png/home-icon.png',
+                                addTextEnabled: true,
                                 addText: 'Комиссия 0%',
                             },
-                            { id: 5, name: 'Смарт Восток (ЖКУ)', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
-                            { id: 6, name: 'Смарт Восток (ЖКУ)', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                            { id: 5, name: 'Смарт Восток (ЖКУ)4', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
+                            { id: 6, name: 'Смарт Восток (ЖКУ)5', src: 'https://www.a-3.ru/img/logo_png/home-icon.png' },
                             {
                                 id: 7,
                                 name:
