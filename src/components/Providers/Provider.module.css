@@ -6,6 +6,7 @@
     box-sizing: border-box;
     cursor: pointer;
     justify-content: space-between;
+    position: relative;
 }
 
 @media (max-width: 540px) {
@@ -25,4 +26,13 @@
     display: block;
     text-align: center;
     word-break: break-word;
+}
+
+.addText {
+    color: #fff;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    background: #fa5535;
+    padding: 5px;
 }
