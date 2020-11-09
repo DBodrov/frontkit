@@ -16,7 +16,6 @@ test-feature-on-push:
     image: registry.a-3.ru/frontend/base-images/node:12.13.1
     before_script:
         - yarn
-        - yarn add react react-dom --peer
     script:
         - yarn test
 
@@ -32,7 +31,6 @@ test-feature-on-merge:
     image: registry.a-3.ru/frontend/base-images/node:12.13.1
     before_script:
         - yarn
-        - yarn add react react-dom --peer
     script:
         - yarn test:coverage
 
@@ -49,7 +47,6 @@ test-release:
     image: registry.a-3.ru/frontend/base-images/node:12.13.1
     before_script:
         - yarn
-        - yarn add react react-dom --peer
     script:
         - yarn test:coverage
     artifacts:
