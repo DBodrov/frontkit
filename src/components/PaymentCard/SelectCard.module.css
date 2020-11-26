@@ -22,7 +22,6 @@
 }
 
 .title {
-    margin-right: 10px;
     overflow: hidden;
     white-space: nowrap;
     direction: rtl;
@@ -37,6 +36,7 @@
 
 .cvv {
     width: 156px;
+    margin: 0 20px;
 }
 
 .hidden {
@@ -52,7 +52,6 @@
     border: none;
     background: none;
     cursor: pointer;
-    margin-left: 10px;
     padding: 0;
 }
 
@@ -81,5 +80,6 @@
     .cvv {
         max-width: 65px;
         min-width: 65px;
+        margin: 0 10px;
     }
 }
