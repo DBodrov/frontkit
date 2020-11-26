@@ -26,7 +26,7 @@ interface SelectCardProps extends React.HTMLAttributes<HTMLElement> {
     /** Function passed to SelectCard to get state */
     onPaymentDataChange?: (state: FormFieldsTypes) => unknown;
     /** Function passed to SelectCard to delete card */
-    onDelete?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    onDelete?: (data: CardProps) => void;
     /** data card */
     data: CardProps;
     /** active */
@@ -88,10 +88,12 @@ export function SelectCard({
         setCvcState(s => ({ ...s, ccCsc: value }));
     };
 
+    const handleDeleteClick = React.useCallback(() => onDelete && onDelete(data), [data, onDelete]);
+
     const wrapperCls = classnames(styles.wrapper, className, { [styles.active]: active });
     return (
         <Box className={wrapperCls} style={style} dataTestId={dataTestId}>
-            <div className={cn(styles.card, { [styles.startFlex]: !onDelete })}>
+            <div className={styles.card}>
                 <div className={styles.image}>
                     <BankLogos type={data.type} link={data.link} />
                 </div>
@@ -118,11 +120,9 @@ export function SelectCard({
                     />
                 </div>
 
-                {!!onDelete && (
-                    <button type="button" className={styles.delete} onClick={onDelete}>
-                        Удалить
-                    </button>
-                )}
+                <button type="button" className={cn(styles.delete, { [styles.hidden]: !onDelete })} onClick={handleDeleteClick}>
+                    Удалить
+                </button>
             </div>
         </Box>
     );
