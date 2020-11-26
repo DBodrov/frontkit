@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import { Box } from '../Box';
-
+import cn from 'classnames';
 import { isInvalidInput, validate } from './validators';
 
 import styles from './SelectCard.module.css';
@@ -25,6 +25,8 @@ interface SelectCardProps extends React.HTMLAttributes<HTMLElement> {
     onSuccess?: (successed: boolean) => unknown;
     /** Function passed to SelectCard to get state */
     onPaymentDataChange?: (state: FormFieldsTypes) => unknown;
+    /** Function passed to SelectCard to delete card */
+    onDelete?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     /** data card */
     data: CardProps;
     /** active */
@@ -55,6 +57,7 @@ export function SelectCard({
     data,
     onSuccess = (): void => {},
     onPaymentDataChange = (): void => {},
+    onDelete,
     active,
 }: SelectCardProps): JSX.Element {
     const [cvcState, setCvcState] = React.useState(getForm(data.id));
@@ -88,7 +91,7 @@ export function SelectCard({
     const wrapperCls = classnames(styles.wrapper, className, { [styles.active]: active });
     return (
         <Box className={wrapperCls} style={style} dataTestId={dataTestId}>
-            <div className={styles.card}>
+            <div className={cn(styles.card, { [styles.startFlex]: !onDelete })}>
                 <div className={styles.image}>
                     <BankLogos type={data.type} link={data.link} />
                 </div>
@@ -100,21 +103,25 @@ export function SelectCard({
                     {/*смотри стили этого блока, там идет разворот слов назад для многоточия вначале предложения*/}
                 </div>
 
-                {active && (
-                    <div className={styles.cvv}>
-                        <CardInput
-                            autoFocus
-                            type="tel"
-                            name="ccCsc"
-                            id="ccCsc"
-                            placeholder="CVC"
-                            className={paymentCardsStyles.cvv}
-                            maxLength={3}
-                            error={error}
-                            dataTestId={dataTestId + '-ccCsc'}
-                            onChange={handleChange}
-                        />
-                    </div>
+                <div className={cn(styles.cvv, { [styles.hidden]: !active })}>
+                    <CardInput
+                        autoFocus
+                        type="tel"
+                        name="ccCsc"
+                        id="ccCsc"
+                        placeholder="CVC"
+                        className={paymentCardsStyles.cvv}
+                        maxLength={3}
+                        error={error}
+                        dataTestId={dataTestId + '-ccCsc'}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                {!!onDelete && (
+                    <button type="button" className={styles.delete} onClick={onDelete}>
+                        Удалить
+                    </button>
                 )}
             </div>
         </Box>

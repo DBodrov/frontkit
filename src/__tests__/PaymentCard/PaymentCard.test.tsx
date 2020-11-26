@@ -156,6 +156,7 @@ describe('PaymentCard filling', () => {
 
 describe('<SelectCard />', () => {
     const cardsTestId = 'cardZZ';
+    const mockFn = jest.fn();
 
     test('should cards rendered', () => {
         const { getByTestId } = render(
@@ -194,6 +195,8 @@ describe('<SelectCard />', () => {
                 data={data}
                 className={className}
                 active={false}
+                onPaymentDataChange={mockFn}
+                onDelete={mockFn}
             />,
         );
         const cards = getByTestId(cardsTestId);

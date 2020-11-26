@@ -6,14 +6,14 @@
 }
 
 .active {
-    background: #F2F6FB;
+    background: #f2f6fb;
     cursor: default;
 }
 
 .card {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     width: 100%;
     font-size: 20px;
     line-height: 20px;
@@ -21,7 +21,11 @@
     height: 94px;
 }
 
-.title{
+.startFlex {
+    justify-content: flex-start;
+}
+
+.title {
     margin-right: 10px;
     width: 220px;
     overflow: hidden;
@@ -40,12 +44,40 @@
     width: 156px;
 }
 
+.hidden {
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.delete {
+    font-size: 20px;
+    line-height: 20px;
+    text-align: right;
+    color: #a6aab0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 0;
+}
+
+.delete:focus,
+.delete:active,
+.delete:hover {
+    outline: none;
+    border: none;
+}
+
 @media (max-width: 540px) {
     .card {
         font-size: 16px;
         line-height: 16px;
         height: 80px;
         justify-content: flex-start;
+    }
+    .delete {
+        font-size: 16px;
+        line-height: 16px;
     }
     .image img,
     .image svg {
