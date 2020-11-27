@@ -19,6 +19,59 @@
     line-height: 20px;
     box-sizing: border-box;
     height: 94px;
+    position: relative;
+}
+
+.deleteWrap {
+    position: absolute;
+    background: #f2f6fb;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding-left: inherit;
+    padding-right: inherit;
+    align-items: center;
+}
+.deleteText {
+    margin: 0 20px;
+    text-align: center;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.btnWrap {
+    display: flex;
+}
+
+.btn {
+    border: 1px solid #a6aab0;
+    border-radius: 8px;
+    padding: 23px;
+    font-size: 20px;
+    line-height: 20px;
+    background: none;
+    cursor: pointer;
+}
+
+.btn + .btn {
+    margin-left: 15px;
+}
+
+.btnYes {
+    color: #13a438;
+}
+
+.btnNo {
+    color: #ff0000;
+}
+
+.spinnerWrap {
+    justify-content: center;
+    cursor: default;
 }
 
 .title {
@@ -54,12 +107,22 @@
     cursor: pointer;
     padding: 0;
 }
-
+.btn:focus,
+.btn:active,
+.btn:hover {
+    outline: none;
+}
+.btn:focus {
+    text-shadow: 0 0;
+}
 .delete:focus,
 .delete:active,
 .delete:hover {
     outline: none;
     border: none;
+}
+.delete:focus {
+    text-shadow: 0 0;
 }
 
 @media (max-width: 540px) {
@@ -81,5 +144,14 @@
         max-width: 65px;
         min-width: 65px;
         margin: 0 10px;
+    }
+    .btn {
+        padding: 15px;
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .btn + .btn {
+        margin-left: 10px;
     }
 }

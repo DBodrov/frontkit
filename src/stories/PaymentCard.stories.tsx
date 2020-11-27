@@ -60,6 +60,7 @@ storiesOf('PaymentCard', module)
                     data={data1}
                     active={true}
                     onDelete={action('onDelete')}
+                    loading={true}
                 />
                 <SelectCard
                     onSuccess={action('onSuccess')}
