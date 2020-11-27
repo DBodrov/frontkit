@@ -118,7 +118,7 @@ export function SelectCard({
         handleClick();
     }, [onDelete, data, handleClick]);
 
-    const wrapperCls = classnames(styles.wrapper, className, { [styles.active]: active });
+    const wrapperCls = classnames(styles.wrapper, className, { [styles.active]: active || showDeleteWrapper || loading });
     return (
         <Box className={wrapperCls} style={style} dataTestId={dataTestId}>
             <div className={styles.card}>

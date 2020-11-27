@@ -3,6 +3,7 @@
     margin-bottom: 20px;
     cursor: pointer;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .active {

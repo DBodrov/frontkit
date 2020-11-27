@@ -58,7 +58,7 @@ storiesOf('PaymentCard', module)
                     onSuccess={action('onSuccess')}
                     onPaymentDataChange={action('onPaymentDataChange')}
                     data={data1}
-                    active={true}
+                    active={false}
                     onDelete={action('onDelete')}
                     loading={true}
                 />
