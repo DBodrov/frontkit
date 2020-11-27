@@ -112,9 +112,11 @@ export function SelectCard({
         setCvcState(s => ({ ...s, ccCsc: value }));
     };
 
-    const handleDeleteClick = React.useCallback(() => setShowDeleteWrapper(true), [setShowDeleteWrapper]);
-    const handleDeleteClickNo = React.useCallback(() => setShowDeleteWrapper(false), [setShowDeleteWrapper]);
-    const handleDeleteClickYes = React.useCallback(() => onDelete && onDelete(data), [onDelete, data]);
+    const handleClick = React.useCallback(() => setShowDeleteWrapper(s => !s), [setShowDeleteWrapper]);
+    const handleDeleteClick = React.useCallback(() => {
+        onDelete && onDelete(data);
+        handleClick();
+    }, [onDelete, data, handleClick]);
 
     const wrapperCls = classnames(styles.wrapper, className, { [styles.active]: active });
     return (
@@ -146,7 +148,7 @@ export function SelectCard({
                     />
                 </div>
 
-                <button type="button" className={cn(styles.delete, { [styles.hidden]: !onDelete })} onClick={handleDeleteClick}>
+                <button type="button" className={cn(styles.delete, { [styles.hidden]: !onDelete })} onClick={handleClick}>
                     Удалить
                 </button>
                 {showDeleteWrapper && !loading && (
@@ -154,10 +156,10 @@ export function SelectCard({
                         <WarningIcon />
                         <div className={styles.deleteText}>Вы точно хотите удалить карту?</div>
                         <div className={styles.btnWrap}>
-                            <button type="button" className={cn(styles.btn, styles.btnYes)} onClick={handleDeleteClickYes}>
+                            <button type="button" className={cn(styles.btn, styles.btnYes)} onClick={handleDeleteClick}>
                                 Да
                             </button>
-                            <button type="button" className={cn(styles.btn, styles.btnNo)} onClick={handleDeleteClickNo}>
+                            <button type="button" className={cn(styles.btn, styles.btnNo)} onClick={handleClick}>
                                 Нет
                             </button>
                         </div>
