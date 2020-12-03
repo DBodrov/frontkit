@@ -96,8 +96,8 @@ export function SelectCard({
     React.useEffect(() => {
         const success = validate('ccCsc', cvcState.ccCsc);
         onPaymentDataChange(cvcState);
-        onSuccess(disabled ? false : success);
-    }, [cvcState, onPaymentDataChange, onSuccess, disabled]);
+        onSuccess(success);
+    }, [cvcState.ccCsc, onPaymentDataChange, onSuccess]);
 
     React.useEffect(() => {
         setError(false);
@@ -120,8 +120,10 @@ export function SelectCard({
 
     const handleClick = React.useCallback(() => {
         onPreDelete && onPreDelete(!showDeleteWrapper);
+        setCvcState(getForm(data.id));
         setShowDeleteWrapper(!showDeleteWrapper);
-    }, [setShowDeleteWrapper, showDeleteWrapper, onPreDelete]);
+    }, [setShowDeleteWrapper, showDeleteWrapper, onPreDelete, setCvcState]);
+
     const handleDeleteClick = React.useCallback(() => {
         onDelete && onDelete(data);
         setShowDeleteWrapper(s => !s);
