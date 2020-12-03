@@ -96,8 +96,8 @@ export function SelectCard({
     React.useEffect(() => {
         const success = validate('ccCsc', cvcState.ccCsc);
         onPaymentDataChange(cvcState);
-        onSuccess(success);
-    }, [cvcState, onPaymentDataChange, onSuccess]);
+        onSuccess(disabled ? false : success);
+    }, [cvcState, onPaymentDataChange, onSuccess, disabled]);
 
     React.useEffect(() => {
         setError(false);
