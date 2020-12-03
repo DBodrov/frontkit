@@ -47,12 +47,16 @@ interface SelectCardProps extends React.HTMLAttributes<HTMLElement> {
     onPaymentDataChange?: (state: FormFieldsTypes) => unknown;
     /** Function passed to SelectCard to delete card */
     onDelete?: (data: CardProps) => void;
+    /** Function passed to SelectCard to first click on delete card */
+    onPreDelete?: (status: boolean) => void;
     /** data card */
     data: CardProps;
     /** active */
     active: boolean;
     /** loading */
     loading?: boolean;
+    /** disabled */
+    disabled?: boolean;
 }
 
 interface CardProps {
@@ -80,6 +84,8 @@ export function SelectCard({
     onSuccess = (): void => {},
     onPaymentDataChange = (): void => {},
     onDelete,
+    onPreDelete,
+    disabled = false,
     active,
     loading = false,
 }: SelectCardProps): JSX.Element {
@@ -112,11 +118,14 @@ export function SelectCard({
         setCvcState(s => ({ ...s, ccCsc: value }));
     };
 
-    const handleClick = React.useCallback(() => setShowDeleteWrapper(s => !s), [setShowDeleteWrapper]);
+    const handleClick = React.useCallback(() => {
+        onPreDelete && onPreDelete(!showDeleteWrapper);
+        setShowDeleteWrapper(!showDeleteWrapper);
+    }, [setShowDeleteWrapper, showDeleteWrapper, onPreDelete]);
     const handleDeleteClick = React.useCallback(() => {
         onDelete && onDelete(data);
-        handleClick();
-    }, [onDelete, data, handleClick]);
+        setShowDeleteWrapper(s => !s);
+    }, [onDelete, data, setShowDeleteWrapper]);
 
     const wrapperCls = classnames(styles.wrapper, className, { [styles.active]: active || showDeleteWrapper || loading });
     return (
@@ -170,6 +179,7 @@ export function SelectCard({
                         <Spinner />
                     </div>
                 )}
+                {disabled && <div className={styles.disabled} />}
             </div>
         </Box>
     );

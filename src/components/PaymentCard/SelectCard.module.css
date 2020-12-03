@@ -36,12 +36,25 @@
     padding-left: inherit;
     padding-right: inherit;
     align-items: center;
+    z-index: 1;
 }
 .deleteText {
     margin: 0 20px;
     text-align: center;
     font-weight: 500;
     line-height: 24px;
+}
+
+.disabled {
+    position: absolute;
+    background: #1c1c1c;
+    opacity: 40%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    cursor: default;
 }
 
 .btnWrap {
