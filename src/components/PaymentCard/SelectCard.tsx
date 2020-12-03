@@ -11,7 +11,7 @@ import paymentCardsStyles from './PaymentCard.module.css';
 import { BankLogos } from './BanksLogos';
 import { CardInput } from './PaymentCard';
 
-export function WarningIcon({ dataTestId = 'warning-icon' }): JSX.Element {
+export function WarningIcon({ dataTestId }: { dataTestId: string }): JSX.Element {
     return (
         <svg data-testid={dataTestId} width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="59" height="56" fill="url(#pattern0)" />
@@ -151,6 +151,7 @@ export function SelectCard({
                         name="ccCsc"
                         id="ccCsc"
                         placeholder="CVC"
+                        value={cvcState.ccCsc}
                         className={paymentCardsStyles.cvv}
                         maxLength={3}
                         error={error}
@@ -159,29 +160,44 @@ export function SelectCard({
                     />
                 </div>
 
-                <button type="button" className={cn(styles.delete, { [styles.hidden]: !onDelete })} onClick={handleClick}>
+                <button
+                    type="button"
+                    data-testid={dataTestId + '-buttonDel'}
+                    className={cn(styles.delete, { [styles.hidden]: !onDelete })}
+                    onClick={handleClick}
+                >
                     Удалить
                 </button>
                 {showDeleteWrapper && !loading && (
                     <div className={styles.deleteWrap}>
-                        <WarningIcon />
+                        <WarningIcon dataTestId={dataTestId + '-warningIcon'} />
                         <div className={styles.deleteText}>Вы точно хотите удалить карту?</div>
                         <div className={styles.btnWrap}>
-                            <button type="button" className={cn(styles.btn, styles.btnYes)} onClick={handleDeleteClick}>
+                            <button
+                                type="button"
+                                data-testid={dataTestId + '-buttonYes'}
+                                className={cn(styles.btn, styles.btnYes)}
+                                onClick={handleDeleteClick}
+                            >
                                 Да
                             </button>
-                            <button type="button" className={cn(styles.btn, styles.btnNo)} onClick={handleClick}>
+                            <button
+                                type="button"
+                                data-testid={dataTestId + '-buttonNo'}
+                                className={cn(styles.btn, styles.btnNo)}
+                                onClick={handleClick}
+                            >
                                 Нет
                             </button>
                         </div>
                     </div>
                 )}
                 {loading && (
-                    <div className={cn(styles.deleteWrap, styles.spinnerWrap)}>
+                    <div data-testid={dataTestId + '-loading'} className={cn(styles.deleteWrap, styles.spinnerWrap)}>
                         <Spinner />
                     </div>
                 )}
-                {disabled && <div className={styles.disabled} />}
+                {disabled && <div data-testid={dataTestId + '-disabled'} className={styles.disabled} />}
             </div>
         </Box>
     );
