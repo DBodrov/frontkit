@@ -135,12 +135,7 @@ describe('PaymentCard filling', () => {
     });
 
     test('should SelectCard filling', () => {
-        const { getByTestId } = render(<SelectCard
-            dataTestId={cardsTestId}
-            data={data}
-            active={true}
-            onSuccess={mockFn}
-        />);
+        const { getByTestId } = render(<SelectCard dataTestId={cardsTestId} data={data} active={true} onSuccess={mockFn} />);
 
         const ccCsc = getByTestId(cardsTestId + '-ccCsc-input');
 
@@ -151,33 +146,23 @@ describe('PaymentCard filling', () => {
         expect(mockCalls[mockCalls.length - 2]).toEqual([false]);
         expect(mockCalls[mockCalls.length - 1]).toEqual([true]);
     });
-
 });
 
 describe('<SelectCard />', () => {
     const cardsTestId = 'cardZZ';
+    const mockFn = jest.fn();
 
     test('should cards rendered', () => {
-        const { getByTestId } = render(
-            <SelectCard
-                dataTestId={cardsTestId}
-                data={data}
-                active={true}
-            />,
-        );
+        const { getByTestId } = render(<SelectCard dataTestId={cardsTestId} data={data} loading disabled active />);
         const cards = getByTestId(cardsTestId);
         expect(cards).not.toBeNull();
+        expect(() => getByTestId(cardsTestId + '-loading')).not.toThrow();
+        expect(() => getByTestId(cardsTestId + '-disabled')).not.toThrow();
     });
 
     test('should have default dataTestId', () => {
         const className = 'testtt';
-        const { container } = render(
-            <SelectCard
-                data={data}
-                className={className}
-                active={true}
-            />,
-        );
+        const { container } = render(<SelectCard data={data} className={className} active={true} />);
         const cards = container.querySelector<HTMLElement>('.' + className);
         assert(cards);
 
@@ -187,6 +172,7 @@ describe('<SelectCard />', () => {
     test('should have a passed className', () => {
         const cardsTestId = 'cardZZ';
         const className = 'Плоти';
+        const onDeleteHandler = jest.fn();
 
         const { getByTestId } = render(
             <SelectCard
@@ -194,9 +180,20 @@ describe('<SelectCard />', () => {
                 data={data}
                 className={className}
                 active={false}
+                onPaymentDataChange={mockFn}
+                onDelete={onDeleteHandler}
+                onPreDelete={mockFn}
+                disabled={false}
+                loading={false}
             />,
         );
         const cards = getByTestId(cardsTestId);
         expect(cards).toHaveClass('Плоти');
+
+        fireEvent.click(getByTestId(cardsTestId + '-buttonDel'));
+        expect(() => getByTestId(cardsTestId + '-buttonYes')).not.toThrow();
+        expect(() => getByTestId(cardsTestId + '-warningIcon')).not.toThrow();
+        fireEvent.click(getByTestId(cardsTestId + '-buttonYes'));
+        expect(() => getByTestId(cardsTestId + '-buttonYes')).toThrow();
     });
 });

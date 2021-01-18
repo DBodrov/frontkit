@@ -58,24 +58,34 @@ storiesOf('PaymentCard', module)
                     onSuccess={action('onSuccess')}
                     onPaymentDataChange={action('onPaymentDataChange')}
                     data={data1}
-                    active={true}
+                    active={false}
+                    onPreDelete={action('onPreDelete')}
+                    onDelete={action('onDelete')}
+                    disabled
+                    loading={true}
                 />
                 <SelectCard
                     onSuccess={action('onSuccess')}
                     onPaymentDataChange={action('onPaymentDataChange')}
                     data={data2}
+                    onPreDelete={action('onPreDelete')}
                     active={true}
+                    onDelete={action('onDelete')}
                 />
                 <SelectCard
                     onSuccess={action('onSuccess')}
                     onPaymentDataChange={action('onPaymentDataChange')}
+                    onPreDelete={action('onPreDelete')}
                     data={data3}
+                    disabled
                     active={true}
                 />
                 <SelectCard
                     onSuccess={action('onSuccess')}
                     onPaymentDataChange={action('onPaymentDataChange')}
+                    onPreDelete={action('onPreDelete')}
                     data={data1}
+                    disabled
                     active={false}
                 />
                 <SelectCard
@@ -83,6 +93,7 @@ storiesOf('PaymentCard', module)
                     onPaymentDataChange={action('onPaymentDataChange')}
                     data={data2}
                     active={false}
+                    onDelete={action('onDelete')}
                 />
                 <SelectCard
                     onSuccess={action('onSuccess')}
