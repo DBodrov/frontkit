@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { Button, StyleTypeProp } from '../../components/Button';
+import { Button, LoadingButton, StyleTypeProp } from '../../components/Button';
 import { ThemeProvider } from '../../components/ThemeProvider';
 
 const theme = {
@@ -34,6 +34,20 @@ describe('<Button />', () => {
     test('should have data-testid', () => {
         const { getByTestId } = render(<Button />);
         const button = getByTestId('Button');
+        expect(button).not.toBeNull();
+    });
+    test('should have loading data-testid', () => {
+        const { getByTestId } = render(
+            <LoadingButton loading disabled styleType={StyleTypeProp.Default} text="asd" dataTestId="LoadingButton" />,
+        );
+        const button = getByTestId('LoadingButton');
+        expect(button).not.toBeNull();
+    });
+    test('should have loading data-testid 2', () => {
+        const { getByTestId } = render(
+            <LoadingButton disabled loading={false} styleType={StyleTypeProp.Default} text="asd" dataTestId="LoadingButton" />,
+        );
+        const button = getByTestId('LoadingButton');
         expect(button).not.toBeNull();
     });
     test('should have color from theme', () => {

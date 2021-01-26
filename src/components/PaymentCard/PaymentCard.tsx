@@ -24,6 +24,8 @@ interface PaymentCardsProps extends React.HTMLAttributes<HTMLElement> {
     onSuccess?: (successed: boolean) => unknown;
     /** Function passed to Paymentcard to get state */
     onPaymentDataChange?: (state: FormFieldsTypes) => unknown;
+    /** disabled add inputs */
+    disabled?: boolean;
 }
 
 interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
@@ -31,6 +33,8 @@ interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
     /** Object of errors passed to Paymentcard to change validation styling */
     errors: ErrorsTypes;
     cardNumber?: string;
+    /** disabled add inputs */
+    disabled?: boolean;
 }
 
 const frontCardCls = classnames(styles.cardWrapper, styles.frontCard);
@@ -45,7 +49,7 @@ export const CardInput = ({ error, ...rest }: CardInputProps): JSX.Element => (
     <SmallInput background={error ? BackgroundProp.Error : BackgroundProp.White} {...rest} />
 );
 
-export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps): JSX.Element {
+export function PaymentCard({ cardNumber, errors, dataTestId, disabled }: PaymentCardProps): JSX.Element {
     return (
         <div className={frontCardCls}>
             <BankLogos cardNumber={cardNumber} />
@@ -57,6 +61,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
                     placeholder="Номер карты"
                     className={styles.mb10}
                     error={errors['ccNumber']}
+                    disabled={disabled}
                     autoComplete="cc-number"
                     dataTestId={dataTestId + '-ccNumber'}
                 />
@@ -69,6 +74,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
                         error={errors['ccName']}
                         autoComplete="cc-name"
                         dataTestId={dataTestId + '-ccName'}
+                        disabled={disabled}
                     />
                     <CardInput
                         type="tel"
@@ -80,6 +86,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
                         error={errors['ccExp']}
                         autoComplete="cc-exp"
                         dataTestId={dataTestId + '-ccExp'}
+                        disabled={disabled}
                     />
                 </div>
             </div>
@@ -87,7 +94,7 @@ export function PaymentCard({ cardNumber, errors, dataTestId }: PaymentCardProps
     );
 }
 
-function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element {
+function PaymentCardBack({ errors, dataTestId, disabled }: PaymentCardProps): JSX.Element {
     return (
         <div className={backCardCls}>
             <div className={styles.magneticStrip} />
@@ -102,6 +109,7 @@ function PaymentCardBack({ errors, dataTestId }: PaymentCardProps): JSX.Element 
                     error={errors['ccCsc']}
                     autoComplete="cc-csc"
                     dataTestId={dataTestId + '-ccCsc'}
+                    disabled={disabled}
                 />
                 <div className={styles.cardText}>Последние 3 цифры на оборотной стороне карты</div>
             </div>
@@ -133,6 +141,7 @@ export function PaymentCards({
     dataTestId = 'PaymentCard',
     onSuccess = (): void => {},
     onPaymentDataChange = (): void => {},
+    disabled = false,
 }: PaymentCardsProps): JSX.Element {
     const [formState, setFormState] = React.useState(form);
     const [formErrors, setError] = React.useState(errors);
@@ -195,8 +204,8 @@ export function PaymentCards({
             <div className={styles.mobileAbsolute}>
                 <div className={styles.wrapper} style={style}>
                     <div className={styles.cardsWrapper} onChange={handleFormChange}>
-                        <PaymentCard errors={formErrors} dataTestId={dataTestId} cardNumber={formState.ccNumber} />
-                        <PaymentCardBack errors={formErrors} dataTestId={dataTestId} />
+                        <PaymentCard disabled={disabled} errors={formErrors} dataTestId={dataTestId} cardNumber={formState.ccNumber} />
+                        <PaymentCardBack disabled={disabled} errors={formErrors} dataTestId={dataTestId} />
                     </div>
                 </div>
             </div>
