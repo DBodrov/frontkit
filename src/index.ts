@@ -1,4 +1,4 @@
-export { Button, StyleTypeProp } from './components/Button';
+export { Button, StyleTypeProp, LoadingButton } from './components/Button';
 export { Checkbox } from './components/Checkbox';
 export { Group } from './components/Group';
 export { H1, H2, H3 } from './components/Header';

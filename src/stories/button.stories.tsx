@@ -1,15 +1,12 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { Button, StyleTypeProp } from '../components/Button';
+import { Button, LoadingButton, StyleTypeProp } from '../components/Button';
 import { ThemeProvider, ThemeTypes } from '../components/ThemeProvider';
 
 const theme: ThemeTypes = {
-    styles: {
-        mainColor: '#8000ff',
-        btnTextColor: '#000000',
-    },
-    className: 'cn1',
+    mainColor: '#8000ff',
+    btnTextColor: '#000000',
 };
 
 storiesOf('Button', module).add(
@@ -41,6 +38,20 @@ storiesOf('Button', module).add(
             <Button styleType={StyleTypeProp.UsedDefault} style={{ marginTop: '15px' }}>
                 Отправить
             </Button>
+        </>
+    ),
+    { info: { inline: true, propTablesExclude: [ThemeProvider] } },
+);
+storiesOf('Button', module).add(
+    'Loading button',
+    () => (
+        <>
+            <ThemeProvider value={theme}>
+                <LoadingButton loading styleType={StyleTypeProp.UsedDefault} style={{ marginTop: '15px' }} text="Отправить" />
+                <LoadingButton loading={false} styleType={StyleTypeProp.UsedDefault} style={{ marginTop: '15px' }} text="Отправить" />
+            </ThemeProvider>
+            <LoadingButton loading styleType={StyleTypeProp.UsedDefault} style={{ marginTop: '15px' }} text="Отправить" />
+            <LoadingButton loading={false} styleType={StyleTypeProp.UsedDefault} style={{ marginTop: '15px' }} text="Отправить" />
         </>
     ),
     { info: { inline: true, propTablesExclude: [ThemeProvider] } },
