@@ -1,13 +1,11 @@
 import classnames from 'classnames';
 import React from 'react';
-
 import { isInvalidInput, validate, isFormInvalid } from './validators';
 import { format } from './formatters';
-
 import styles from './PaymentCard.module.css';
-
 import { SmallInput, BackgroundProp } from '../Input';
 import { BankLogos } from './BanksLogos';
+import { DatePicker } from '../DatePicker';
 
 interface PaymentCardsProps extends React.HTMLAttributes<HTMLElement> {
     /** Class names passed to Paymentcard to change styling */
@@ -26,6 +24,8 @@ interface PaymentCardsProps extends React.HTMLAttributes<HTMLElement> {
     onPaymentDataChange?: (state: FormFieldsTypes) => unknown;
     /** disabled add inputs */
     disabled?: boolean;
+    /** dataPicker or input */
+    datePicker?: boolean;
 }
 
 interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
@@ -35,6 +35,7 @@ interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
     cardNumber?: string;
     /** disabled add inputs */
     disabled?: boolean;
+    datePicker?: boolean;
 }
 
 const frontCardCls = classnames(styles.cardWrapper, styles.frontCard);
@@ -49,7 +50,7 @@ export const CardInput = ({ error, ...rest }: CardInputProps): JSX.Element => (
     <SmallInput background={error ? BackgroundProp.Error : BackgroundProp.White} {...rest} />
 );
 
-export function PaymentCard({ cardNumber, errors, dataTestId, disabled }: PaymentCardProps): JSX.Element {
+export function PaymentCard({ cardNumber, errors, dataTestId, disabled, datePicker }: PaymentCardProps): JSX.Element {
     return (
         <div className={frontCardCls}>
             <BankLogos cardNumber={cardNumber} />
@@ -76,18 +77,28 @@ export function PaymentCard({ cardNumber, errors, dataTestId, disabled }: Paymen
                         dataTestId={dataTestId + '-ccName'}
                         disabled={disabled}
                     />
-                    <CardInput
-                        type="tel"
-                        name="ccExp"
-                        id="ccExp"
-                        placeholder="ММ/ГГ"
-                        maxLength={5}
-                        className={styles.ccExp}
-                        error={errors['ccExp']}
-                        autoComplete="cc-exp"
-                        dataTestId={dataTestId + '-ccExp'}
-                        disabled={disabled}
-                    />
+                    {datePicker ? (
+                        <DatePicker
+                            name="ccExp"
+                            error={errors['ccExp']}
+                            disabled={disabled}
+                            className={styles.datePickerWrap}
+                            dataTestId={dataTestId + '-picker-ccExp'}
+                        />
+                    ) : (
+                        <CardInput
+                            type="tel"
+                            name="ccExp"
+                            id="ccExp"
+                            placeholder="ММ/ГГ"
+                            maxLength={5}
+                            className={styles.ccExp}
+                            error={errors['ccExp']}
+                            autoComplete="cc-exp"
+                            dataTestId={dataTestId + '-ccExp'}
+                            disabled={disabled}
+                        />
+                    )}
                 </div>
             </div>
         </div>
@@ -142,6 +153,7 @@ export function PaymentCards({
     onSuccess = (): void => {},
     onPaymentDataChange = (): void => {},
     disabled = false,
+    datePicker = false,
 }: PaymentCardsProps): JSX.Element {
     const [formState, setFormState] = React.useState(form);
     const [formErrors, setError] = React.useState(errors);
@@ -204,7 +216,13 @@ export function PaymentCards({
             <div className={styles.mobileAbsolute}>
                 <div className={styles.wrapper} style={style}>
                     <div className={styles.cardsWrapper} onChange={handleFormChange}>
-                        <PaymentCard disabled={disabled} errors={formErrors} dataTestId={dataTestId} cardNumber={formState.ccNumber} />
+                        <PaymentCard
+                            disabled={disabled}
+                            errors={formErrors}
+                            dataTestId={dataTestId}
+                            cardNumber={formState.ccNumber}
+                            datePicker={datePicker}
+                        />
                         <PaymentCardBack disabled={disabled} errors={formErrors} dataTestId={dataTestId} />
                     </div>
                 </div>
