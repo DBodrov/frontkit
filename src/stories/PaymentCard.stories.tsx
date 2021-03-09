@@ -51,6 +51,18 @@ storiesOf('PaymentCard', module)
         },
     )
     .add(
+        'datePicker PaymentCards',
+        () => (
+            <div style={{ border: '1px solid black' }}>
+                <PaymentCards datePicker onSuccess={action('onSuccess')} onPaymentDataChange={action('onPaymentDataChange')} />
+                <PaymentCards disabled datePicker onSuccess={action('onSuccess')} onPaymentDataChange={action('onPaymentDataChange')} />
+            </div>
+        ),
+        {
+            info: { inline: true },
+        },
+    )
+    .add(
         'SelectCard',
         () => (
             <div style={{ border: '1px solid black' }}>

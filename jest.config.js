@@ -9,6 +9,9 @@ module.exports = {
         '^.+\\.tsx?$': 'ts-jest',
         '.+\\.(css|styl|less|sass|scss)$': '<rootDir>/node_modules/jest-css-modules-transform',
     },
+    transformIgnorePatterns: [
+        '<rootDir>/node_modules/(?!react-datepicker)',
+    ],
 
     //A dds special extended assertions to Jest
     setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
