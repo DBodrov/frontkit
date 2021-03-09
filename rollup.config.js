@@ -8,7 +8,7 @@ import pkg from './package.json';
 export default {
     input: 'src/index.ts',
     plugins: [
-        postcss({ modules: true }),
+        postcss(),
         babel({ extensions: ['.ts', '.tsx'] }),
         commonjs(),
         resolve({ extensions: ['.ts', '.tsx', '.js'] }),
