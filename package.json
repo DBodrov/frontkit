@@ -22,7 +22,7 @@
     "scripts": {
         "start": "start-storybook -p 9009 -s static",
         "build": "node bin/build.js",
-        "build:lib": "yarn build:rollup && yarn build:dts",
+        "build:lib": "yarn copyDataPickerCss && yarn build:rollup && yarn build:dts",
         "build:rollup": "yarn rollup -c",
         "build:dts": "yarn tsc -p tsconfig.dts.json",
         "build:storybook": "build-storybook -s public",
@@ -30,6 +30,7 @@
         "test:coverage": "jest --coverage",
         "test:watch": "jest --watch",
         "clean": "rimraf dist",
+        "copyDataPickerCss": "cpx \"node_modules/react-datepicker/dist/react-datepicker.css\" \"src/components/DatePicker\"",
         "lint:eslint": "eslint --fix",
         "lint:prettier": "prettier --write"
     },
@@ -75,6 +76,7 @@
         "@typescript-eslint/eslint-plugin": "^2.19.0",
         "@typescript-eslint/parser": "^2.19.0",
         "babel-loader": "^8.0.6",
+        "cpx": "^1.5.0",
         "css-loader": "^3.4.2",
         "cz-customizable": "^6.2.0",
         "eslint": "^6.8.0",

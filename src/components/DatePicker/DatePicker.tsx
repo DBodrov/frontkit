@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DatePickerBase, { registerLocale } from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import './react-datepicker.css';
 import './custom-styles.css';
 import { CardInput } from '../PaymentCard/PaymentCard';
 import ru from 'date-fns/locale/ru';
