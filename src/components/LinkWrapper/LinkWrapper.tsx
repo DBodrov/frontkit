@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import React, { CSSProperties } from 'react';
 import { ThemeContext } from '../ThemeProvider';
 
@@ -10,11 +11,12 @@ interface LinkWrapperProps extends React.HTMLAttributes<HTMLSpanElement> {
     dataTestId?: string;
 }
 
-export function LinkWrapper({ children, style = {}, dataTestId = 'LinkWrapper', ...rest }: LinkWrapperProps): JSX.Element {
+export function LinkWrapper({ children, style = {}, dataTestId = 'LinkWrapper', className, ...rest }: LinkWrapperProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
     const styles = { color: theme.linkColor, ...style };
+    const cls = classnames(className, 'LinkWrapper');
     return (
-        <span {...rest} data-testid={dataTestId} style={styles}>
+        <span {...rest} className={cls} data-testid={dataTestId} style={styles}>
             {children}
         </span>
     );
