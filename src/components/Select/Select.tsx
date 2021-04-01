@@ -12,6 +12,7 @@ import { useClickOutside } from '../../hooks/useClickOutsideSelect';
 export interface ElementTypes {
     value: string;
     name: string;
+    selected: boolean;
     onClick?: () => unknown;
 }
 
@@ -31,7 +32,7 @@ const ButtonList = ({ data, hoverValue }: { data: ElementTypes[]; hoverValue: st
             key={el.name + el.value}
             dataTestId={'Select-Item-' + el.name}
             data-value={el.value}
-            className={cn(styles.item, { [styles.hover_item]: hoverValue === el.value })}
+            className={cn(styles.item, { [styles.hover_item]: hoverValue === el.value, selectedListElement: el.selected })}
             onClick={el.onClick}
         >
             {el.value}
@@ -75,6 +76,7 @@ export const Select = ({
         .map(el => ({
             id: el.name,
             value: el.value,
+            selected: el.value === value || el.value === oldValue,
             onClick: () => {
                 handleClick(el);
             },
