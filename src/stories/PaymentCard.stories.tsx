@@ -44,6 +44,7 @@ storiesOf('PaymentCard', module)
             <div style={{ border: '1px solid black' }}>
                 <PaymentCards onSuccess={action('onSuccess')} onPaymentDataChange={action('onPaymentDataChange')} />
                 <PaymentCards disabled onSuccess={action('onSuccess')} onPaymentDataChange={action('onPaymentDataChange')} />
+                <PaymentCards randomNames onSuccess={action('onSuccess')} onPaymentDataChange={action('onPaymentDataChange')} />
             </div>
         ),
         {

@@ -20,7 +20,7 @@ describe('<PaymentCard />', () => {
     const cardsTestId = 'cardZZ';
 
     test('should cards rendered', () => {
-        const { getByTestId } = render(<PaymentCards disabled dataTestId={cardsTestId} />);
+        const { getByTestId } = render(<PaymentCards disabled randomNames dataTestId={cardsTestId} />);
         const cards = getByTestId(cardsTestId);
         expect(cards).not.toBeNull();
     });

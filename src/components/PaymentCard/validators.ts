@@ -1,4 +1,5 @@
 import { FormFieldsTypes, ErrorsTypes, nameType } from './PaymentCard';
+import { RANDOM_DATA } from './ramdomizer';
 
 export const REGEXP_NON_DDS = /[^0-9-\s]+/;
 export const REGEXP_NON_DATE = /[^0-9/]+/;
@@ -65,12 +66,16 @@ const validateName = (value: string): boolean => value.replace(/\s/g, '').length
 export const isInvalidInput = (name: nameType, value: string): boolean => {
     switch (name) {
         case 'ccNumber':
+        case RANDOM_DATA.cardNumber.name:
             return REGEXP_NON_DDS.test(value);
         case 'ccName':
+        case RANDOM_DATA.ccName.name:
             return REGEXP_LETTERS.test(value);
         case 'ccExp':
+        case RANDOM_DATA.ccExp.name:
             return REGEXP_NON_DATE.test(value);
         case 'ccCsc':
+        case RANDOM_DATA.ccCsc.name:
             return REGEXP_NON_DIGITS.test(value);
         default:
             return false;
@@ -80,12 +85,16 @@ export const isInvalidInput = (name: nameType, value: string): boolean => {
 export const validate = (name: nameType, value: string): boolean => {
     switch (name) {
         case 'ccNumber':
+        case RANDOM_DATA.cardNumber.name:
             return validateCreditCard(value);
         case 'ccName':
+        case RANDOM_DATA.ccName.name:
             return validateName(value);
         case 'ccExp':
+        case RANDOM_DATA.ccExp.name:
             return validateExp(value);
         case 'ccCsc':
+        case RANDOM_DATA.ccCsc.name:
             return validateCvv(value);
         default:
             return true;

@@ -1,3 +1,5 @@
+import { RANDOM_DATA } from './ramdomizer';
+
 const formatCreditCard = (value: string): string =>
     value
         .replace(/\s/g, '') // remove whitespace
@@ -48,10 +50,13 @@ const formatName = (value: string): string => {
 export const format = (name: string, value: string): string => {
     switch (name) {
         case 'ccNumber':
+        case RANDOM_DATA.cardNumber.name:
             return formatCreditCard(value);
         case 'ccName':
+        case RANDOM_DATA.ccName.name:
             return formatName(value);
         case 'ccExp':
+        case RANDOM_DATA.ccExp.name:
             return formatDate(value);
         default:
             return value;
