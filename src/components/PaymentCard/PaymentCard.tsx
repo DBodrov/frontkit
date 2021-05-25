@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import React from 'react';
+import { getCardData, RANDOM_DATA } from './ramdomizer';
 import { isInvalidInput, validate, isFormInvalid } from './validators';
 import { format } from './formatters';
 import styles from './PaymentCard.module.css';
@@ -26,6 +27,8 @@ interface PaymentCardsProps extends React.HTMLAttributes<HTMLElement> {
     disabled?: boolean;
     /** dataPicker or input */
     datePicker?: boolean;
+    /** need generate id and names for inputs */
+    randomNames?: boolean;
 }
 
 interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
@@ -36,6 +39,7 @@ interface PaymentCardProps extends React.HTMLAttributes<HTMLElement> {
     /** disabled add inputs */
     disabled?: boolean;
     datePicker?: boolean;
+    randomNames?: boolean;
 }
 
 const frontCardCls = classnames(styles.cardWrapper, styles.frontCard);
@@ -50,52 +54,53 @@ export const CardInput = ({ error, ...rest }: CardInputProps): JSX.Element => (
     <SmallInput background={error ? BackgroundProp.Error : BackgroundProp.White} {...rest} />
 );
 
-export function PaymentCard({ cardNumber, errors, dataTestId, disabled, datePicker }: PaymentCardProps): JSX.Element {
+export function PaymentCard({ cardNumber, errors, dataTestId, disabled, datePicker, randomNames = false }: PaymentCardProps): JSX.Element {
+    const cardData = getCardData(randomNames);
     return (
         <div className={frontCardCls}>
             <BankLogos cardNumber={cardNumber} />
             <div className={styles.frontCardInputs}>
                 <CardInput
                     type="tel"
-                    name="ccNumber"
-                    id="ccNumber"
-                    placeholder="Номер карты"
+                    name={cardData.cardNumber.name}
+                    id={cardData.cardNumber.name}
+                    placeholder={cardData.cardNumber.placeholderText}
                     className={styles.mb10}
-                    error={errors['ccNumber']}
+                    error={errors[cardData.cardNumber.name]}
                     disabled={disabled}
-                    autoComplete="cc-number"
-                    dataTestId={dataTestId + '-ccNumber'}
+                    autoComplete={cardData.cardNumber.autoComplete}
+                    dataTestId={dataTestId + '-' + cardData.cardNumber.name}
                 />
                 <div className={styles.flex}>
                     <CardInput
-                        name="ccName"
-                        id="ccName"
-                        placeholder="Владелец карты"
+                        name={cardData.ccName.name}
+                        id={cardData.ccName.name}
+                        placeholder={cardData.ccName.placeholderText}
                         className={styles.ccName}
-                        error={errors['ccName']}
-                        autoComplete="cc-name"
-                        dataTestId={dataTestId + '-ccName'}
+                        error={errors[cardData.ccName.name]}
+                        autoComplete={cardData.ccName.autoComplete}
+                        dataTestId={dataTestId + '-' + cardData.ccName.name}
                         disabled={disabled}
                     />
                     {datePicker ? (
                         <DatePicker
-                            name="ccExp"
-                            error={errors['ccExp']}
+                            name={cardData.ccExp.name}
+                            error={errors[cardData.ccExp.name]}
                             disabled={disabled}
                             className={styles.datePickerWrap}
-                            dataTestId={dataTestId + '-picker-ccExp'}
+                            dataTestId={dataTestId + '-picker-' + cardData.ccExp.name}
                         />
                     ) : (
                         <CardInput
                             type="tel"
-                            name="ccExp"
-                            id="ccExp"
-                            placeholder="ММ/ГГ"
+                            name={cardData.ccExp.name}
+                            id={cardData.ccExp.name}
+                            placeholder={cardData.ccExp.placeholderText}
                             maxLength={5}
                             className={styles.ccExp}
-                            error={errors['ccExp']}
-                            autoComplete="cc-exp"
-                            dataTestId={dataTestId + '-ccExp'}
+                            error={errors[cardData.ccExp.name]}
+                            autoComplete={cardData.ccExp.autoComplete}
+                            dataTestId={dataTestId + '-' + cardData.ccExp.name}
                             disabled={disabled}
                         />
                     )}
@@ -105,21 +110,22 @@ export function PaymentCard({ cardNumber, errors, dataTestId, disabled, datePick
     );
 }
 
-function PaymentCardBack({ errors, dataTestId, disabled }: PaymentCardProps): JSX.Element {
+function PaymentCardBack({ errors, dataTestId, disabled, randomNames = false }: PaymentCardProps): JSX.Element {
+    const cardData = getCardData(randomNames);
     return (
         <div className={backCardCls}>
             <div className={styles.magneticStrip} />
             <div className={styles.backCardBlock}>
                 <CardInput
                     type="tel"
-                    name="ccCsc"
-                    id="ccCsc"
-                    placeholder="CVV/CVC"
+                    name={cardData.ccCsc.name}
+                    id={cardData.ccCsc.name}
+                    placeholder={cardData.ccCsc.placeholderText}
                     className={cvvCls}
                     maxLength={3}
-                    error={errors['ccCsc']}
-                    autoComplete="cc-csc"
-                    dataTestId={dataTestId + '-ccCsc'}
+                    error={errors[cardData.ccCsc.name]}
+                    autoComplete={cardData.ccCsc.autoComplete}
+                    dataTestId={dataTestId + '-' + cardData.ccCsc.name}
                     disabled={disabled}
                 />
                 <div className={styles.cardText}>Последние 3 цифры на оборотной стороне карты</div>
@@ -133,6 +139,10 @@ const form = {
     ccName: '',
     ccExp: '',
     ccCsc: '',
+    [RANDOM_DATA.cardNumber.name]: '',
+    [RANDOM_DATA.ccName.name]: '',
+    [RANDOM_DATA.ccExp.name]: '',
+    [RANDOM_DATA.ccCsc.name]: '',
 };
 
 export type FormFieldsTypes = typeof form;
@@ -142,9 +152,22 @@ const errors = {
     ccName: false,
     ccExp: false,
     ccCsc: false,
+    [RANDOM_DATA.cardNumber.name]: false,
+    [RANDOM_DATA.ccName.name]: false,
+    [RANDOM_DATA.ccExp.name]: false,
+    [RANDOM_DATA.ccCsc.name]: false,
 };
 
 export type ErrorsTypes = typeof errors;
+
+function formStateFormatter<T>(formState: FormFieldsTypes | ErrorsTypes): T {
+    return ({
+        ccNumber: formState.ccNumber || formState[RANDOM_DATA.cardNumber.name],
+        ccName: formState.ccName || formState[RANDOM_DATA.ccName.name],
+        ccExp: formState.ccExp || formState[RANDOM_DATA.ccExp.name],
+        ccCsc: formState.ccCsc || formState[RANDOM_DATA.ccCsc.name],
+    } as unknown) as T;
+}
 
 export function PaymentCards({
     className,
@@ -154,21 +177,21 @@ export function PaymentCards({
     onPaymentDataChange = (): void => {},
     disabled = false,
     datePicker = false,
+    randomNames = false,
 }: PaymentCardsProps): JSX.Element {
     const [formState, setFormState] = React.useState(form);
     const [formErrors, setError] = React.useState(errors);
 
     React.useEffect(() => {
-        onPaymentDataChange(formState);
-        onSuccess(isFormInvalid(formErrors, formState));
+        onPaymentDataChange(formStateFormatter<FormFieldsTypes>(formState));
+        onSuccess(isFormInvalid(formStateFormatter<ErrorsTypes>(formErrors), formStateFormatter<FormFieldsTypes>(formState)));
     }, [formErrors, formState, onPaymentDataChange, onSuccess]);
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const element = event.target;
         const { name, value } = element;
-        const typedNames = name as nameType;
-        if (isInvalidInput(typedNames, value)) {
-            element.value = formState[typedNames];
+        if (isInvalidInput(name, value)) {
+            element.value = formState[name];
             return;
         }
 
@@ -178,12 +201,13 @@ export function PaymentCards({
             return;
         }
         let elementNextSelection = elementSelection;
-        const prev = formState[typedNames].replace(/\s/g, '').length;
+        const prev = formState[name].replace(/\s/g, '').length;
         const cur = value.replace(/\s/g, '').length;
-        const error = !validate(typedNames, element.value);
+        const error = !validate(name, element.value);
 
-        switch (typedNames) {
+        switch (name) {
             case 'ccNumber':
+            case RANDOM_DATA.cardNumber.name:
                 if (cur >= prev) {
                     if (elementSelection % 5 === 0) {
                         elementNextSelection += 1;
@@ -191,12 +215,14 @@ export function PaymentCards({
                 }
                 break;
             case 'ccExp':
+            case RANDOM_DATA.ccExp.name:
                 if (cur >= prev) {
                     if (elementSelection === 3) {
                         elementNextSelection += 1;
                     }
                     if (elementSelection === 5 && !error) {
-                        setTimeout(() => document.getElementsByName('ccCsc')[0]?.focus(), 10);
+                        const cardData = getCardData(randomNames);
+                        setTimeout(() => document.getElementsByName(cardData.ccCsc.name)[0]?.focus(), 10);
                     }
                 }
                 break;
@@ -204,9 +230,9 @@ export function PaymentCards({
                 break;
         }
 
-        element.value = format(typedNames, value);
-        setError({ ...formErrors, [typedNames]: error });
-        setFormState({ ...formState, [typedNames]: element.value });
+        element.value = format(name, value);
+        setError({ ...formErrors, [name]: error });
+        setFormState({ ...formState, [name]: element.value });
         element.setSelectionRange(elementNextSelection, elementNextSelection);
     };
 
@@ -217,13 +243,14 @@ export function PaymentCards({
                 <div className={styles.wrapper} style={style}>
                     <div className={styles.cardsWrapper} onChange={handleFormChange}>
                         <PaymentCard
+                            randomNames={randomNames}
                             disabled={disabled}
                             errors={formErrors}
                             dataTestId={dataTestId}
-                            cardNumber={formState.ccNumber}
+                            cardNumber={formState.ccNumber || formState[RANDOM_DATA.cardNumber.name]}
                             datePicker={datePicker}
                         />
-                        <PaymentCardBack disabled={disabled} errors={formErrors} dataTestId={dataTestId} />
+                        <PaymentCardBack randomNames={randomNames} disabled={disabled} errors={formErrors} dataTestId={dataTestId} />
                     </div>
                 </div>
             </div>
