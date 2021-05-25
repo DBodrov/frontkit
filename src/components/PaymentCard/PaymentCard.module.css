@@ -17,6 +17,14 @@
     justify-content: center;
 }
 
+.bankLogos {
+    display: block;
+}
+
+.bankLogos > div + div {
+    margin-top: 20px;
+}
+
 .mobileAbsolute {
     position: absolute;
     left: 0;
@@ -114,6 +122,12 @@
 @media (min-width: 460px) {
     .frontCardInputs {
         width: 100%;
+    }
+    .bankLogos {
+        display: flex;
+    }
+    .bankLogos > div + div {
+        margin-top: 0;
     }
 }
 
