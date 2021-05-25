@@ -120,12 +120,16 @@ export function BankLogos({ cardNumber, type, link }: { cardNumber?: string; typ
     return (
         <div>
             {paymentSystem === PaymentSystem.All && (
-                <>
-                    <Visa />
-                    <Maestro />
-                    <MasterCard />
-                    <Mir />
-                </>
+                <div className={styles.bankLogos}>
+                    <div>
+                        <Visa />
+                        <Maestro />
+                    </div>
+                    <div>
+                        <MasterCard />
+                        <Mir />
+                    </div>
+                </div>
             )}
             {paymentSystem === PaymentSystem.Visa && <Visa />}
             {paymentSystem === PaymentSystem.Mir && <Mir />}
