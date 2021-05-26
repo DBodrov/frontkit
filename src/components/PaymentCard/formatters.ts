@@ -40,7 +40,6 @@ const LETTERS = {
 
 const formatName = (value: string): string => {
     function toEngLetter(match: string): string {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
         return LETTERS[match] || '';
     }

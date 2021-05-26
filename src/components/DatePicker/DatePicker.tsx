@@ -51,7 +51,6 @@ export function DatePicker({ name, error, disabled, className, dataTestId }: Dat
     React.useEffect(() => {
         if (!value || !inputRef.current) return;
         const ev = new Event('input', { bubbles: true });
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
         inputRef.current._valueTracker?.setValue();
         inputRef.current.dispatchEvent(ev);

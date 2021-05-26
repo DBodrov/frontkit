@@ -1,18 +1,22 @@
 .wrapper {
+    text-align: center;
+    height: 100%;
+}
+
+.figure {
     display: flex;
-    padding: 38px;
+    padding: 15%;
     flex-direction: column;
     border-radius: 8px;
     box-sizing: border-box;
+    height: 100%;
     cursor: pointer;
-    justify-content: space-between;
     position: relative;
+    box-shadow: rgba(155, 179, 209, 0.3) 0 0 2px 0, rgba(170, 187, 208, 0.5) 0 4px 8px -4px;
 }
 
-@media (max-width: 540px) {
-    .wrapper {
-        padding: 26px;
-    }
+.buttonFigure {
+    height: calc(100% - 81px);
 }
 
 .image {
@@ -31,8 +35,14 @@
 .addText {
     color: #fff;
     position: absolute;
-    right: 8px;
-    top: 8px;
+    right: 0;
+    top: 0;
     background: #fa5535;
     padding: 5px;
+    border-radius: 0 5px 0 0;
+}
+
+.button {
+    margin-top: 19px;
+    width: 80%;
 }

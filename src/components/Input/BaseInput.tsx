@@ -118,7 +118,6 @@ export function BaseInput({
                     [styles.disabled]: disabled,
                     [styles.leftAreaBorderRadius]: !disableLeftBorderRadius,
                 })}
-                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore
                 onClick={onFocus}
                 data-testid={dataTestId + '-left'}
@@ -142,7 +141,6 @@ export function BaseInput({
                     [styles.disabled]: disabled,
                     [styles.rightAreaBorderRadius]: !disableRightBorderRadius,
                 })}
-                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore
                 onClick={onFocus}
                 data-testid={dataTestId + '-right'}

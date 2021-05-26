@@ -2,7 +2,6 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { BackgroundProp, ErrorIcon, HelpIcon, Input, SearchIcon, SmallInput, SuccessIcon } from '../components/Input';
 import { RootContainerProvider } from '../components/RootContainer';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import image from './static/Number_LS_all_regions.png';
 

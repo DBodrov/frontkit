@@ -8,7 +8,15 @@ describe('<Provider />', () => {
     test('should provider clickable', () => {
         const clickHandler = jest.fn();
         const { getByTestId } = render(
-            <Provider src="src" name="name" addTextEnabled addText="123" dataTestId={testId} onClick={clickHandler} />,
+            <Provider
+                src="src"
+                name="name"
+                addTextEnabled
+                addText="123"
+                dataTestId={testId}
+                onClick={clickHandler}
+                providerButtonText="123"
+            />,
         );
         const provider = getByTestId(testId);
         expect(provider).not.toBeNull();

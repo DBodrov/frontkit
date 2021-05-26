@@ -1,6 +1,10 @@
 import React from 'react';
+import { Button, StyleTypeProp } from '../Button';
 import styles from './Provider.module.css';
+import cn from 'classnames';
 import ColorHash from 'color-hash';
+// @ts-ignore
+import TextClamp from 'react-string-clamp';
 
 interface Props {
     src: string;
@@ -12,6 +16,7 @@ interface Props {
     addText?: string;
     addTextBackgroundColor?: string;
     onClick?: () => unknown;
+    providerButtonText?: string;
 }
 const DefaultImgUrl = 'https://www.a-3.ru/img/logo_png/home-icon.png';
 const defaultAddTextBgColor = '#fa5535';
@@ -29,31 +34,45 @@ export function Provider({
     addTextEnabled,
     addText,
     addTextBackgroundColor,
+    providerButtonText,
     ...rest
 }: Props): JSX.Element {
     return (
-        <figure
-            {...rest}
-            className={styles.wrapper}
-            data-testid={dataTestId}
-            style={{ width, ...style, ...IE11FigureFix }}
-            onClick={onClick}
-            role="button"
-            title={name}
-        >
-            {addTextEnabled && (
-                <div
-                    className={styles.addText}
-                    style={{ background: addTextBackgroundColor || defaultAddTextBgColor }}
-                    data-testid={dataTestId + '-addText'}
+        <div className={styles.wrapper}>
+            <figure
+                {...rest}
+                className={cn(styles.figure, { [styles.buttonFigure]: providerButtonText })}
+                data-testid={dataTestId}
+                style={{ width, ...style, ...IE11FigureFix }}
+                onClick={onClick}
+                role="button"
+                title={name}
+            >
+                {addTextEnabled && (
+                    <div
+                        className={styles.addText}
+                        style={{ background: addTextBackgroundColor || defaultAddTextBgColor }}
+                        data-testid={dataTestId + '-addText'}
+                    >
+                        {addText || defaultAddText}
+                    </div>
+                )}
+                {src !== DefaultImgUrl && <img data-testid={dataTestId + '-image'} className={styles.image} src={src} alt={name} />}
+                {src === DefaultImgUrl && <DefaultProviderPic name={name} dataTestId={dataTestId + 'image'} />}
+                <TextClamp className={styles.caption} text={name} lines={3} />
+            </figure>
+            {providerButtonText && (
+                <Button
+                    {...rest}
+                    dataTestId={dataTestId + '-providerButton'}
+                    type="button"
+                    styleType={StyleTypeProp.WhiteBodyWithBorder}
+                    className={styles.button}
                 >
-                    {addText || defaultAddText}
-                </div>
+                    {providerButtonText}
+                </Button>
             )}
-            {src !== DefaultImgUrl && <img data-testid={dataTestId + '-image'} className={styles.image} src={src} alt={name} />}
-            {src === DefaultImgUrl && <DefaultProviderPic name={name} dataTestId={dataTestId + 'image'} />}
-            <figcaption className={styles.caption}>{name}</figcaption>
-        </figure>
+        </div>
     );
 }
 
@@ -67,7 +86,7 @@ function DefaultProviderPic({ name, dataTestId }: { name: string; dataTestId: st
         <div data-testid={dataTestId} className={styles.image} title={name}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                height="60%"
+                height="100%"
                 width="60%"
                 fill={colorHash.hex(
                     `${name[name.length - 1]}
