@@ -5,6 +5,7 @@ import { Providers } from '../../components/Providers';
 const testId = 'dlaskljdaskljdas';
 
 describe('<Providers />', () => {
+    const mockFn = jest.fn();
     test('should providers rendered', () => {
         const { getByTestId } = render(
             <Providers
@@ -15,6 +16,16 @@ describe('<Providers />', () => {
                     { id: 2, name: 'name2', src: 'src2' },
                 ]}
                 gap="1fr"
+                HeadComponent={<h1>Header</h1>}
+                ButtonComponent={
+                    <button onClick={mockFn} type="button">
+                        Кнопка
+                    </button>
+                }
+                buttonLineClassName="qwe"
+                scrollerClassName="qwe"
+                headClassName="qwe"
+                providerButtonText="Добавить"
             />,
         );
         const providers = getByTestId(testId);
@@ -47,7 +58,6 @@ describe('<Providers />', () => {
         expect(clickHandler).toBeCalledWith(el);
     });
 
-
     test('should return element after click on his children', () => {
         const clickHandler = jest.fn();
         const el = { id: 1, name: 'name1', src: 'src1' };
@@ -69,9 +79,7 @@ describe('<Providers />', () => {
             { id: 5, name: 'name5', src: 'src5' },
             { id: 7, name: 'name6', src: 'src6' },
         ];
-        const { getByTestId } = render(
-            <Providers dataTestId={testId} cols={2} rows={2} data={data} gap="1fr" />,
-        );
+        const { getByTestId } = render(<Providers dataTestId={testId} cols={2} rows={2} data={data} gap="1fr" />);
 
         expect(() => getByTestId(testId)).not.toThrow();
     });
@@ -119,8 +127,8 @@ describe('scrolling', () => {
 });
 
 describe('disabled scrolling', () => {
-    test('shouldn\'t render scrolling control if size more data.length', () => {
-        const {getByTestId} = render(
+    test("shouldn't render scrolling control if size more data.length", () => {
+        const { getByTestId } = render(
             <Providers
                 dataTestId={testId}
                 cols={5}

@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import React, { CSSProperties } from 'react';
 import { Arrow, ArrowTypes } from '../Arrow';
 import { LinkWrapper } from '../LinkWrapper';
@@ -21,6 +22,12 @@ interface Props {
     rows?: number;
     cols?: number;
     onClick?: (info: ProviderInfo) => unknown;
+    HeadComponent?: JSX.Element;
+    ButtonComponent?: JSX.Element;
+    headClassName?: string;
+    buttonLineClassName?: string;
+    scrollerClassName?: string;
+    providerButtonText?: string;
 }
 
 function useOffset(max: number): [number, (() => void) | undefined, (() => void) | undefined] {
@@ -78,9 +85,10 @@ interface ProvidersLineProps {
     dataTestId: string;
     offset: number;
     height: number;
+    providerButtonText?: string;
 }
 
-function ProvidersLine({ data, dataTestId, offset, height }: ProvidersLineProps): JSX.Element {
+function ProvidersLine({ data, dataTestId, offset, height, providerButtonText }: ProvidersLineProps): JSX.Element {
     return (
         <>
             {data.map((provider, id, original) => (
@@ -94,6 +102,7 @@ function ProvidersLine({ data, dataTestId, offset, height }: ProvidersLineProps)
                             addTextEnabled={provider.addTextEnabled}
                             addText={provider.addText}
                             addTextBackgroundColor={provider.addTextBackgroundColor}
+                            providerButtonText={providerButtonText}
                         />
                     </div>
                     {id !== original.length - 1 && <div style={createChildStyleForIE(2 * (id + 1), height + 1)} />}
@@ -115,7 +124,21 @@ function EmptyLine({ row, cols }: EmptyLineProps): JSX.Element {
     return <>{res}</>;
 }
 
-export function Providers({ data, gap = '0', dataTestId = 'providers', onClick, rows = 1, cols = 1, ...rest }: Props): JSX.Element {
+export function Providers({
+    data,
+    gap = '0',
+    dataTestId = 'providers',
+    onClick,
+    rows = 1,
+    cols = 1,
+    HeadComponent,
+    ButtonComponent,
+    headClassName,
+    buttonLineClassName,
+    providerButtonText,
+    scrollerClassName,
+    ...rest
+}: Props): JSX.Element {
     const size = rows * cols;
     const max = data.length - size;
     const [offset, increase, decrease] = useOffset(max);
@@ -161,6 +184,7 @@ export function Providers({ data, gap = '0', dataTestId = 'providers', onClick, 
                     dataTestId={dataTestId}
                     offset={start}
                     height={2 * rowId}
+                    providerButtonText={providerButtonText}
                 />,
             );
 
@@ -171,28 +195,38 @@ export function Providers({ data, gap = '0', dataTestId = 'providers', onClick, 
         return lines;
     }, [offset, data, rows, cols]);
 
+    const haveHeadComponent = HeadComponent !== undefined;
+    const haveButtonComponent = ButtonComponent !== undefined;
+
     return (
         <div data-testid={dataTestId} {...rest}>
+            <div className={headClassName}>
+                {haveHeadComponent && haveButtonComponent && HeadComponent}
+                <div className={buttonLineClassName}>
+                    {haveHeadComponent && !haveButtonComponent && HeadComponent}
+                    {haveButtonComponent && ButtonComponent}
+                    {max > 0 && (
+                        <Scroller
+                            onClickLeft={offset === 0 ? undefined : decrease}
+                            onClickRight={offset === max ? undefined : increase}
+                            dataTestId={dataTestId + '-scroller'}
+                            scrollerClassName={scrollerClassName}
+                        />
+                    )}
+                </div>
+            </div>
             <div onClick={providerClickHandler} className={styles.wrapper} style={createStyle(rows, cols, gap)}>
                 {providersLines}
             </div>
-
-            {max > 0 && (
-                <Scroller
-                    onClickLeft={offset === 0 ? undefined : decrease}
-                    onClickRight={offset === max ? undefined : increase}
-                    dataTestId={dataTestId + '-scroller'}
-                />
-            )}
         </div>
     );
 }
 
-type ScrollerProps = { onClickLeft?: () => void; onClickRight?: () => void; dataTestId: string };
-function Scroller({ onClickLeft, onClickRight, dataTestId }: ScrollerProps): JSX.Element {
+type ScrollerProps = { onClickLeft?: () => void; onClickRight?: () => void; dataTestId: string; scrollerClassName?: string };
+function Scroller({ onClickLeft, onClickRight, dataTestId, scrollerClassName }: ScrollerProps): JSX.Element {
     return (
         <LinkWrapper>
-            <div className={styles.scroller}>
+            <div className={cn(styles.scroller, scrollerClassName)}>
                 <button
                     className={styles['scroller-button']}
                     onClick={onClickLeft}
