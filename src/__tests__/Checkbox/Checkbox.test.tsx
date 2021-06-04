@@ -21,7 +21,7 @@ describe('<Checkbox />', () => {
         expect(label).toHaveTextContent('123');
     });
     test('have dataTestId an Checkbox element', () => {
-        const { getByTestId } = render(<Checkbox dataTestId={testId} Label="labelText" />);
+        const { getByTestId } = render(<Checkbox colorizedHelpIcon dataTestId={testId} Label="labelText" />);
         expect(() => getByTestId(testId)).not.toThrow();
         expect(() => getByTestId(testId + '-label')).not.toThrow();
         expect(() => getByTestId(testId + '-bigBox')).not.toThrow();

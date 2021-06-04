@@ -20,11 +20,12 @@ interface CheckboxProps extends React.AllHTMLAttributes<HTMLInputElement> {
      * @default Checkbox
      * */
     id?: string;
+    colorizedHelpIcon?: boolean;
 }
 
 export function Checkbox(props: CheckboxProps): JSX.Element {
     const theme = React.useContext(ThemeContext);
-    const { dataTestId = 'Checkbox', className, style, Label, id = 'Checkbox', hintText = '', ...rest } = props;
+    const { dataTestId = 'Checkbox', className, style, Label, id = 'Checkbox', hintText = '', colorizedHelpIcon = false, ...rest } = props;
     const finalStyles = { background: theme.mainColor };
     const needHint = hintText.length > 0;
     const cls = classnames(styles.checkboxWrapper, { [styles.cf]: needHint }, className);
@@ -41,7 +42,7 @@ export function Checkbox(props: CheckboxProps): JSX.Element {
                     </span>
                 )}
             </label>
-            {needHint && <HelpIcon text={hintText} dataTestId={dataTestId + '-intText'} />}
+            {needHint && <HelpIcon colorized={colorizedHelpIcon} text={hintText} dataTestId={dataTestId + '-intText'} />}
         </div>
     );
 }

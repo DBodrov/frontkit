@@ -2,8 +2,13 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { BackgroundProp, ErrorIcon, HelpIcon, Input, SearchIcon, SmallInput, SuccessIcon } from '../components/Input';
 import { RootContainerProvider } from '../components/RootContainer';
+import { ThemeProvider, ThemeTypes } from '../components/ThemeProvider';
 // @ts-ignore
 import image from './static/Number_LS_all_regions.png';
+
+const theme: ThemeTypes = {
+    mainColor: '#8000ff',
+};
 
 const img = new Image();
 img.src = image;
@@ -33,6 +38,13 @@ storiesOf('Input', module)
                     <Input RightIcon={() => <HelpIcon text={<img src={image} style={{ maxWidth: '100%' }} />} />} />
                     <SmallInput RightIcon={() => <HelpIcon text="Тестоasdas" />} />
                     <SmallInput style={{ width: '400px' }} RightIcon={() => <HelpIcon text="Тестоasdas" />} />
+                    <ThemeProvider value={theme}>
+                        <SmallInput
+                            value="colorized"
+                            style={{ width: '400px' }}
+                            RightIcon={() => <HelpIcon colorized text="Тестоasdas" />}
+                        />
+                    </ThemeProvider>
                 </div>
             </RootContainerProvider>
         ),
