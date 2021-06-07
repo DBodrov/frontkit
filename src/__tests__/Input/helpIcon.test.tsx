@@ -22,7 +22,7 @@ describe('help icon', () => {
         const { getByTestId } = render(
             <RootContainerProvider value={wrapperRef}>
                 <div ref={wrapperRef}>
-                    <HelpIcon text="test" dataTestId={dataTestId} />
+                    <HelpIcon colorized text="test" dataTestId={dataTestId} />
                 </div>
             </RootContainerProvider>,
         );

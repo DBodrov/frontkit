@@ -6,10 +6,7 @@ import { RootContainerProvider } from '../components/RootContainer';
 import { ThemeProvider, ThemeTypes } from '../components/ThemeProvider';
 
 const theme: ThemeTypes = {
-    styles: {
-        mainColor: '#8000ff',
-    },
-    className: 'cn1',
+    mainColor: '#8000ff',
 };
 const wrapperRef = React.createRef<HTMLDivElement>();
 storiesOf('Checkbox', module).add(
@@ -18,6 +15,7 @@ storiesOf('Checkbox', module).add(
         <RootContainerProvider value={wrapperRef}>
             <div ref={wrapperRef} style={{ width: '200px' }}>
                 <Checkbox Label="Клик" hintText="23434кц312312 3123 123 123 123 1231231 123123 123 к" />
+                <Checkbox colorizedHelpIcon Label="Клик" hintText="23434кц312312 3123 123 123 123 1231231 123123 123 к" />
             </div>
         </RootContainerProvider>
     ),
