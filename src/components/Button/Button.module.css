@@ -16,6 +16,8 @@
 }
 .button:disabled:hover {
     opacity: 1;
+}
+.button:disabled {
     cursor: default;
 }
 .button:focus {
