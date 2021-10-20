@@ -1,165 +1,102 @@
 {
-    "name": "@a3/uikit",
-    "version": "0.5.8",
-    "description": "A-3 React UI Kit",
-    "main": "./dist/a3-uikit.esm.js",
-    "module": "./dist/a3-uikit.esm.js",
-    "dependencies": {
-        "@reatom/core": "^1.1.0",
-        "@reatom/react": "^1.0.0",
-        "@types/react-datepicker": "^3.1.5",
-        "classnames": "^2.2.6",
-        "color-hash": "^1.0.3",
-        "element-closest": "^3.0.2",
-        "react-custom-scrollbars": "^4.2.1",
-        "react-datepicker": "^3.6.0",
-        "react-input-mask": "^2.0.4",
-        "react-string-clamp": "^0.3.1"
-    },
-    "peerDependencies": {
-        "react": "^16.12.0",
-        "react-dom": "^16.12.0"
-    },
-    "scripts": {
-        "start": "start-storybook -p 9009 -s static",
-        "build": "node bin/build.js",
-        "build:lib": "yarn copyDataPickerCss && yarn build:rollup && yarn build:dts",
-        "build:rollup": "yarn rollup -c",
-        "build:dts": "yarn tsc -p tsconfig.dts.json",
-        "build:storybook": "build-storybook -s public",
-        "test": "jest",
-        "test:coverage": "jest --coverage",
-        "test:watch": "jest --watch",
-        "clean": "rimraf dist",
-        "copyDataPickerCss": "cpx \"node_modules/react-datepicker/dist/react-datepicker.css\" \"src/components/DatePicker\"",
-        "lint:eslint": "eslint --fix",
-        "lint:prettier": "prettier --write"
-    },
-    "eslintConfig": {
-        "extends": "react-app"
-    },
-    "browserslist": {
-        "development": [
-            "ie 11"
-        ]
-    },
-    "devDependencies": {
-        "@babel/core": "^7.8.4",
-        "@babel/plugin-proposal-class-properties": "^7.8.3",
-        "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
-        "@babel/plugin-proposal-optional-chaining": "^7.8.3",
-        "@babel/plugin-transform-runtime": "^7.8.3",
-        "@babel/preset-env": "^7.8.4",
-        "@babel/preset-react": "^7.8.3",
-        "@babel/preset-typescript": "^7.8.3",
-        "@commitlint/cli": "^8.3.5",
-        "@commitlint/config-conventional": "^8.3.4",
-        "@rollup/plugin-commonjs": "^11.0.2",
-        "@rollup/plugin-node-resolve": "^7.1.1",
-        "@storybook/addon-actions": "^5.3.12",
-        "@storybook/addon-info": "^5.3.12",
-        "@storybook/addon-links": "^5.3.12",
-        "@storybook/addon-viewport": "^5.3.14",
-        "@storybook/addons": "^5.3.12",
-        "@storybook/core": "^5.3.12",
-        "@storybook/react": "^5.3.12",
-        "@testing-library/jest-dom": "^5.1.1",
-        "@testing-library/react": "^9.4.0",
-        "@types/classnames": "^2.2.9",
-        "@types/color-hash": "^1.0.0",
-        "@types/jest": "^25.1.2",
-        "@types/node": "^13.7.0",
-        "@types/react": "^16.9.19",
-        "@types/react-custom-scrollbars": "^4.0.6",
-        "@types/react-dom": "^16.9.5",
-        "@types/react-input-mask": "^2.0.5",
-        "@types/storybook__addon-info": "^5.2.1",
-        "@typescript-eslint/eslint-plugin": "^2.19.0",
-        "@typescript-eslint/parser": "^2.19.0",
-        "babel-loader": "^8.0.6",
-        "cpx": "^1.5.0",
-        "css-loader": "^3.4.2",
-        "cz-customizable": "^6.2.0",
-        "eslint": "^6.8.0",
-        "eslint-config-prettier": "^6.10.0",
-        "eslint-plugin-jest": "^23.7.0",
-        "eslint-plugin-react": "^7.18.3",
-        "husky": "^4.2.1",
-        "jest": "^25.1.0",
-        "jest-css-modules-transform": "^4.0.0",
-        "lint-staged": "^10.0.7",
-        "postcss-modules": "^1.5.0",
-        "prettier": "^1.19.1",
-        "react": "^16.12.0",
-        "react-docgen-typescript-loader": "^3.6.0",
-        "react-dom": "^16.12.0",
-        "rimraf": "^3.0.2",
-        "rollup": "^1.31.0",
-        "rollup-plugin-auto-external": "^2.0.0",
-        "rollup-plugin-babel": "^4.3.3",
-        "rollup-plugin-postcss": "^2.0.6",
-        "style-loader": "^1.1.3",
-        "ts-jest": "^25.2.0",
-        "tslib": "^1.10.0",
-        "typescript": "^3.7.5",
-        "webpack": "^4.41.5",
-        "webpack-merge": "^4.2.2"
-    },
-    "config": {
-        "commitizen": {
-            "path": "node_modules/cz-customizable"
-        },
-        "cz-customizable": {
-            "config": "commitizen.js"
-        }
-    },
-    "husky": {
-        "hooks": {
-            "commit-msg": "yarn commitlint -E HUSKY_GIT_PARAMS -g commitlint.js",
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "!(*test).{ts,tsx}": [
-            "eslint --fix",
-            "prettier --write",
-            "git add"
-        ]
-    },
-    "files": [
-        "dist"
-    ],
-    "types": "./dist/types/index.d.ts",
-    "repository": {
-        "type": "git",
-        "url": "git+https://git.a-3.ru/frontend/a3-uikit.git"
-    },
-    "keywords": [
-        "uikit",
-        "react",
-        "components"
-    ],
-    "maintainers": [
-        {
-            "name": "Andrey Vassilyev",
-            "email": "vasiliev@a-3.ru"
-        },
-        {
-            "name": "Ilya Sharonov",
-            "email": "sharonov@a-3.ru"
-        },
-        {
-            "name": "Sergey Puhalenko",
-            "email": "puhalenko@a-3.ru"
-        },
-        {
-            "name": "Timofey Polonsky",
-            "email": "polonsky@a-3.ru"
-        }
-    ],
-    "license": "SEE LICENSE IN LICENSE.md",
-    "bugs": {
-        "url": "https://git.a-3.ru/frontend/a3-uikit/issues"
-    },
-    "homepage": "https://git.a-3.ru/frontend/a3-uikit.git"
+  "name": "a3-uikit",
+  "version": "1.0.0",
+  "description": "A3 UI kit",
+  "license": "ISC",
+  "author": "A3",
+  "main": "src/index.tsx",
+  "repository": {
+    "type": "git",
+    "url": "git@git.a-3.ru:frontend/a3-uikit.git"
+  },
+  "keywords": [
+    "A3",
+    "react",
+    "ui",
+    "library"
+  ],
+  "scripts": {
+    "build:production": "webpack --config configs/webpack.config.production.js --env BUILD_VERSION=$BUILD_VERSION",
+    "start": "webpack serve",
+    "pre-commit": "lint-staged",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,jsx,ts,tsx .",
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\""
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router": "^5.2.1",
+    "react-router-dom": "^5.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/eslint-parser": "^7.15.4",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-export-default-from": "^7.14.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-syntax-export-default-from": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.15.0",
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "@emotion/babel-preset-css-prop": "^11.2.0",
+    "@emotion/eslint-plugin": "^11.2.0",
+    "@emotion/jest": "^11.3.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.0-rc.5",
+    "@testing-library/dom": "^8.2.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/jest": "^27.0.1",
+    "@types/react": "^17.0.19",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-router": "^5.1.4",
+    "@types/react-router-dom": "^5.1.3",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "babel-jest": "^27.0.6",
+    "babel-loader": "^8.2.2",
+    "babel-preset-react-app": "^10.0.0",
+    "core-js": "^3.16.2",
+    "eslint": "^7.32.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^6.1.1",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.25.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "html-webpack-plugin": "^5.3.2",
+    "husky": "^7.0.2",
+    "jest": "^27.1.0",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.3.2",
+    "react-refresh": "^0.10.0",
+    "react-scripts": "^4.0.3",
+    "terser-webpack-plugin": "^5.1.4",
+    "typescript": "^4.3.5",
+    "webpack": "^5.51.1",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.0.0",
+    "webpack-merge": "^5.8.0",
+    "webpackbar": "^5.0.0-3",
+    "whatwg-fetch": "^3.6.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "engineStrict": true,
+  "msw": {
+    "workerDirectory": "build"
+  }
 }

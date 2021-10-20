@@ -1,1 +1,0 @@
-export { Dimmer } from './Dimmer';

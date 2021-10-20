@@ -1,0 +1,8 @@
+{
+  "site/**/*.+(js|json|ts|tsx)": [
+    "eslint"
+  ],
+  "site/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+    "prettier --write"
+  ]
+}
