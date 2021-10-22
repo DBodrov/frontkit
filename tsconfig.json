@@ -14,7 +14,7 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "@a3/uikit/*": ["src/*"],
+      "@a3/uikit": ["src"],
       "site/*": ["site/*"]
     }
   },

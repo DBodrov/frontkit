@@ -24,6 +24,7 @@ export const appStyles = css(
       '--color-background-secondary': '#eaeef4',
       '--color-error': '#e00908',
       '--color-success': '#52c41a',
+      '--color-inactive': '#EBF2FA',
       '--card-shadow': '0px 0px 1px rgba(12, 26, 75, 0.24), 0px 3px 8px -1px rgba(50, 50, 71, 0.05)',
     },
     '*': {boxSizing: 'border-box'},

@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import {css} from '@emotion/react';
 
 const baseHeading = css`
-  font-family: Graphik;
   font-style: normal;
   font-weight: bold;
   color: var(--color-text-lead);
