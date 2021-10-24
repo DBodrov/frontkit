@@ -4,7 +4,10 @@
   "description": "A3 UI kit",
   "license": "ISC",
   "author": "A3",
-  "main": "src/index.tsx",
+  "main": "src/index.ts",
+  "files": [
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git@git.a-3.ru:frontend/a3-uikit.git"
