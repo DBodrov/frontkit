@@ -20,6 +20,11 @@ export function Sidebar() {
             Loader
           </Link>
         </li>
+        <li css={{textAlign: 'center'}}>
+          <Link to="/radio" activeStyle={{color: 'var(--color-primary)'}}>
+            Radio and Checkbox
+          </Link>
+        </li>
       </RouteList>
     </Aside>
   );

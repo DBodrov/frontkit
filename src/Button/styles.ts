@@ -29,6 +29,10 @@ export const StyledButton = styled.button<IButtonProps>`
     background-color: var(--color-inactive, #EBF2FA);
     color: var(--color-text-secondary);
     border-color: var(--color-inactive, #EBF2FA);
+
+    &:hover {
+      background-color: var(--color-inactive, #EBF2FA);
+    }
   }
 
 

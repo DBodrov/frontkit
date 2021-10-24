@@ -6,29 +6,32 @@ export const RadioInput = styled.input`
   appearance: none;
   width: 24px;
   height: 24px;
-  border: 1px #c7c7c7 solid;
+  border: 2px var(--color-border) solid;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: var(--color-background);
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
 
   + label {
     cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   }
 
   &:checked {
-    border: 1px ${props => (props.disabled ? '#c7c7c7' : 'var(--a3-color-primary)')} solid;
+    border-color: ${props => (props.disabled ? 'var(--color-inactive)' : 'var(--color-primary)')};
     position: relative;
+    display: flex;
 
     &::after {
       content: '';
-      position: absolute;
-      top: 5px;
-      left: 5px;
+      margin: auto;
       width: 10px;
       height: 10px;
-      border: 1px ${props => (props.disabled ? '#c7c7c7' : 'var(--a3-color-primary)')} solid;
+      border: 1px ${props => (props.disabled ? '#c7c7c7' : 'var(--color-primary)')} solid;
       border-radius: 50%;
-      background-color: ${props => (props.disabled ? '#c7c7c7' : 'var(--a3-color-primary)')};
+      background-color: ${props => (props.disabled ? '#c7c7c7' : 'var(--color-primary)')};
     }
   }
 `;

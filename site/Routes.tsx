@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-import {TypographyPage, ButtonPage, LoaderPage} from './examples';
+import {TypographyPage, ButtonPage, LoaderPage, RadioPage} from './examples';
 
 export function Routes() {
   return (
@@ -16,6 +16,9 @@ export function Routes() {
       </Route>
       <Route path="/loader">
         <LoaderPage />
+      </Route>
+      <Route path="/radio">
+        <RadioPage />
       </Route>
     </Switch>
   );

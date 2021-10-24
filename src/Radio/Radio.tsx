@@ -2,8 +2,10 @@ import React from 'react';
 import {RadioInput} from './styles';
 import {IRadioButtonProps} from './types';
 
+const noop = () => {}
+
 export function Radio(props: IRadioButtonProps) {
-  const {name, id, value, children, checked = false, onChange, ...restProps} = props;
+  const {name, id, value, children, checked = false, onChange = noop, ...restProps} = props;
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   return (
