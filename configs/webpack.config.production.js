@@ -5,13 +5,14 @@ const TerserPlugin = require('terser-webpack-plugin');
 const {resolveApp} = require('./utils');
 const commonConfig = require('./webpack.config.common');
 
+const VERSION = require('../package.json').version;
+
 process.env.NODE_ENV = 'production';
 
 module.exports = env => {
   return webpackMerge.merge(commonConfig, {
     mode: 'production',
     stats: 'errors-only',
-    mode: 'production',
 
     output: {
       path: resolveApp('docs'),
@@ -68,7 +69,6 @@ module.exports = env => {
         filename: 'index.html',
         template: resolveApp('docs/index.html'),
         chunksSortMode: 'none',
-        version: JSON.stringify(env.BUILD_VERSION || '1'),
         minify: {
           removeComments: false,
           collapseWhitespace: true,
@@ -89,6 +89,7 @@ module.exports = env => {
 
       new webpack.EnvironmentPlugin({
         NODE_ENV: 'production',
+        LIB_VERSION: VERSION
       }),
     ],
   });

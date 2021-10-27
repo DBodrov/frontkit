@@ -8,6 +8,7 @@ const {sslCert, sslKey} = require('./cert');
 const commonConfig = require('./webpack.config.common');
 
 const PORT = 3000;
+const VERSION = require('../package.json').version;
 
 module.exports = (env, argv) => {
   return webpackMerge.merge(commonConfig, {
@@ -73,9 +74,10 @@ module.exports = (env, argv) => {
       new webpack.ProvidePlugin({
         process: 'process/browser',
       }),
-
       new webpack.EnvironmentPlugin({
         NODE_ENV: 'development',
+        LIB_VERSION: VERSION,
+
       }),
 
       new WebpackBar({name: appName}),

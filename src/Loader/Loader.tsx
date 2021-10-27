@@ -1,7 +1,5 @@
 import React from 'react';
 import {StyledLoader} from './styles';
-// import {P} from '../Typography';
-
 
 type TLoaderProps = {
   message?: string;
@@ -24,7 +22,7 @@ export function Loader(props: TLoaderProps) {
           x="0px"
           y="0px"
           viewBox="0 0 100 100"
-          enable-background="new 0 0 0 0"
+          enableBackground="new 0 0 0 0"
           xmlSpace="preserve"
         >
           <circle
@@ -49,7 +47,6 @@ export function Loader(props: TLoaderProps) {
         </svg>
       </div>
       {children}
-      {/* <P css={{display: 'flex', justifyContent: 'center', width: '100%', alignSelf: 'center'}}>{message}</P> */}
     </StyledLoader>
   );
 }

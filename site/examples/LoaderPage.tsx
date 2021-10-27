@@ -11,13 +11,13 @@ export function LoaderPage() {
         <Button onClick={() => setLoaderType('fullscreen')}>Show Fullscreen loader</Button>
         {loaderType === 'fullscreen' ? (
           <Loader fullscreen hasOverlay>
-            <span>Refresh page for hidden loader...</span>
+            <span>Refresh page for hide loader...</span>
           </Loader>
         ) : null}
         <Button onClick={() => setLoaderType('no overlay')}>Fullscreen no overlay</Button>
         {loaderType === 'no overlay' ? (
           <Loader fullscreen>
-            <span>Refresh page for hidden loader...</span>
+            <span>Refresh page for hide loader...</span>
           </Loader>
         ) : null}
 

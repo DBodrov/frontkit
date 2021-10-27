@@ -25,6 +25,11 @@ export function Sidebar() {
             Radio and Checkbox
           </Link>
         </li>
+        <li css={{textAlign: 'center'}}>
+          <Link to="/select" activeStyle={{color: 'var(--color-primary)'}}>
+            Select
+          </Link>
+        </li>
       </RouteList>
     </Aside>
   );
