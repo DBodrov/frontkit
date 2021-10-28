@@ -1,7 +1,7 @@
 {
-  "name": "a3-uikit",
+  "name": "a3-frontkit",
   "version": "1.0.0",
-  "description": "A3 UI kit",
+  "description": "A3 react components library",
   "license": "ISC",
   "author": "A3",
   "main": "src/index.ts",
@@ -20,11 +20,13 @@
     "library"
   ],
   "scripts": {
-    "build:production": "webpack --config configs/webpack.config.production.js --env BUILD_VERSION=$BUILD_VERSION",
+    "build:docs": "webpack --config configs/webpack.config.production.js",
     "start": "webpack serve",
     "pre-commit": "lint-staged",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,jsx,ts,tsx .",
-    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\""
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
+    "version": "git add -A",
+    "postversion": "git push && git push --tags"
   },
   "commitlint": {
     "extends": [
@@ -99,8 +101,5 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "engineStrict": true,
-  "msw": {
-    "workerDirectory": "build"
-  }
+  "engineStrict": true
 }
