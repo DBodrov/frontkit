@@ -18,6 +18,5 @@ deploy-release:
     - export TAG=$(echo $CI_COMMIT_TAG | grep -E 'v[0-9]+.[0-9]+.[0-9]+' | sed -E -n 's/v([0-9]+.[0-9]+.[0-9]+)/\1/p')
     - export NODE_AUTH_TOKEN=$NPM_TOKEN
     - export NPM_REGISTRY=$NPM_PUBLISH_REGISTRY
-    - ./configs/setup_npm.sh
   script:
-    - npm publish --registry ${NPM_REGISTRY}
+    - npm publish
