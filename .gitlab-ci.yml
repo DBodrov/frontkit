@@ -19,7 +19,5 @@ deploy-release:
     - export NODE_AUTH_TOKEN=$NPM_TOKEN
     - export NPM_REGISTRY=$NPM_PUBLISH_REGISTRY
   script:
-    - npm config set registry=${NPM_PUBLISH_REGISTRY}
-    - npm config set _auth=${NPM_TOKEN}
-    - npm config set always-auth=true
+    - echo "//192.168.167.51:8081/repository/local-npm/:_authToken=${NPM_TOKEN}">.npmrc
     - npm publish
