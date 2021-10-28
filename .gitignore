@@ -83,3 +83,4 @@ build/
 
 # local certificates
 configs/cert/*.pem
+.npmrc
