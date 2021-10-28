@@ -6,6 +6,7 @@ function setupNpm() {
   console.log('Setup npm...🚀')
   execSync(`npm config set _auth=${NPM_TOKEN}`);
   execSync(`npm config set registry=${NPM_REGISTRY}`);
+  execSync(`npm config set always-auth=true`);
   console.info('DEBUG INFO 🛠');
   console.log('registry :', NPM_REGISTRY);
   console.info('token :', NPM_TOKEN);

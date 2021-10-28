@@ -27,7 +27,7 @@
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
     "version": "git add -A",
     "postversion": "git push && git push --tags",
-    "prepublishOnly": "node ./scripts/publish.lib.js"
+    "prepublishOnly-ci": "node ./scripts/publish.lib.js"
   },
   "commitlint": {
     "extends": [
