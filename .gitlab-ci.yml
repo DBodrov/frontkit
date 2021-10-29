@@ -19,5 +19,5 @@ deploy-release:
     - export NODE_AUTH_TOKEN=$NPM_TOKEN
     - export NPM_REGISTRY=$NPM_PUBLISH_REGISTRY
   script:
-    - sh ./scripts/setup.sh
+    - node ./scripts/setup.js
     - npm publish
