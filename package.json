@@ -26,8 +26,7 @@
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,jsx,ts,tsx .",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
     "version": "git add -A",
-    "postversion": "git push && git push --tags",
-    "prepub-ci": "node ./scripts/publish.lib.js"
+    "postversion": "git push && git push --tags"
   },
   "commitlint": {
     "extends": [
