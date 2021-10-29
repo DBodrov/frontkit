@@ -10,6 +10,7 @@ function setupNpm() {
   email=noreply@a-3.ru
   always-auth=true
   `;
+
   fs.writeFileSync('.npmrc', content);
 }
 
