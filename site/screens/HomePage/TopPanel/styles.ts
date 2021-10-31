@@ -8,5 +8,5 @@ export const Navbar = styled.nav`
   width: 100%;
   height: 75px;
   background-color: var(--color-background);
-  padding: 1rem;
+  padding: 0;
 `;

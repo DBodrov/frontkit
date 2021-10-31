@@ -68,7 +68,6 @@ module.exports = (env, argv) => {
         inject: true,
         hash: true,
         chunksSortMode: 'none',
-        version: 'local',
       }),
 
       new webpack.ProvidePlugin({

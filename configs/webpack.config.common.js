@@ -21,7 +21,7 @@ module.exports = {
         type: 'asset/resource',
       },
       {
-        test: /\.(bmp|gif|jpg|png)$/,
+        test: /\.(bmp|gif|jpg|png|webp)$/,
         type: 'asset/resource',
       },
     ],

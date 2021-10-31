@@ -1,12 +1,13 @@
 import React from 'react';
+import LogoImage from 'site/assets/logoA3.webp';
 import {Navbar} from './styles';
 
 export function TopPanel() {
   return (
     <Navbar>
-      <span>
-        A3 Front Kit {process.env.LIB_VERSION} {process.env.NODE_ENV === 'development' ? 'development' : ''}
-      </span>
+      <div css={{width: 95, height: '100%', padding: 8, backgroundColor: 'var(--color-primary)'}}>
+        <img css={{maxWidth: '100%', height: '100%'}} src={LogoImage} alt="" />
+      </div>
     </Navbar>
   );
 }

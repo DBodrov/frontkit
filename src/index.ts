@@ -4,3 +4,5 @@ export * from './Loader';
 export * from './Radio';
 export * from './Checkbox';
 export * from './Select';
+export * from './Input';
+export * from './InputNumber';

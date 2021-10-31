@@ -3,3 +3,4 @@ export * from './ButtonPage';
 export * from './LoaderPage';
 export * from './RadioPage';
 export * from './SelectPage';
+export * from './InputPage';

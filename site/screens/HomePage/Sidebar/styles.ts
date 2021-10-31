@@ -19,6 +19,10 @@ export const RouteList = styled.ul`
   list-style: none;
 `;
 
+export const RouteListItem = styled.li`
+  text-align: center;
+`;
+
 export const Link = styled(NavLink)`
   display: flex;
   flex-flow: row wrap;
