@@ -6,3 +6,4 @@ export * from './Checkbox';
 export * from './Select';
 export * from './Input';
 export * from './InputNumber';
+export * from './InputPhone';

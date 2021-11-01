@@ -1,11 +1,11 @@
 import React from 'react';
-import {Input, InputNumber} from '@a3/uikit';
+import {Input, InputNumber, InputPhone} from '@a3/uikit';
 import {ExamplePage, Viewarea, PageTitle} from 'site/components/layout';
 
 export function InputPage() {
   const [text, setText] = React.useState('');
   const [number, setNumber] = React.useState(null);
-  const [ccNumber, setCCN] = React.useState('');
+  const [phone, setPhone] = React.useState('');
   const [hasError, setError] = React.useState(false);
   const validation = () => {
     if (text === '000') {
@@ -31,11 +31,22 @@ export function InputPage() {
             onBlur={validation}
             css={{borderColor: hasError ? 'var(--color-error) !important' : ''}}
           />
-          <span>type 000 for error style</span>
+          <span css={{fontSize: 10, color: 'var(--color-text-secondary)'}}>type 000 for error style</span>
         </div>
         <div css={{width: 300, paddingTop: 10}}>
           <label htmlFor="number">Number Input</label>
           <InputNumber onChange={val => setNumber(val)} value={number} id="number" />
+        </div>
+        <div css={{width: 300, paddingTop: 10}}>
+          <label htmlFor="phoneNumber">Phone Input</label>
+          <InputPhone
+            id="phoneNumber"
+            onChange={val => setPhone(val)}
+            value={phone}
+            countryCode="+7"
+            autoComplete="off"
+            placeholder="(___) ___-__-__"
+          />
         </div>
       </Viewarea>
     </ExamplePage>
