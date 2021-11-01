@@ -31,10 +31,8 @@ export const appStyles = css(
     'html, body': {
       margin: 0,
       padding: 0,
-      width: '100%',
-      minWidth: '480px',
-      height: '100%',
-      minHeight: '100vh',
+      width: '100vw',
+      height: '100vh',
       fontFamily: 'Lato, sans-serif',
       fontSize: '16px',
       color: 'var(--color-text)',
