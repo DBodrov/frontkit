@@ -1,6 +1,6 @@
 import React from 'react';
 import {Radio, Checkbox} from '@a3/uikit';
-import {ExamplePage, Viewarea, PageTitle} from 'site/components/layout';
+import {ExamplePage, Viewarea, PageTitle} from './ExamplePage';
 
 export function RadioPage() {
   const [color, setColor] = React.useState('white');

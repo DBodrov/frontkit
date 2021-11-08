@@ -1,6 +1,6 @@
 import React from 'react';
 import {H1, H2, H3, P, Span} from '@a3/uikit';
-import {ExamplePage, Viewarea, PageTitle} from 'site/components/layout';
+import {ExamplePage, Viewarea, PageTitle} from './ExamplePage';
 
 export function TypographyPage() {
   return (

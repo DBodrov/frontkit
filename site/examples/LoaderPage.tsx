@@ -1,6 +1,6 @@
 import React from 'react';
 import {Loader, Button} from '@a3/uikit';
-import {ExamplePage, Viewarea, PageTitle} from 'site/components/layout';
+import {ExamplePage, Viewarea, PageTitle} from './ExamplePage';
 
 export function LoaderPage() {
   const [loaderType, setLoaderType] = React.useState(null);

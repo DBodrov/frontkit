@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Loader} from '@a3/uikit';
-import {ExamplePage, Viewarea, PageTitle} from 'site/components/layout';
+import {ExamplePage, Viewarea, PageTitle} from './ExamplePage';
 import {ChatIcon} from 'site/assets/icons';
 
 export function ButtonPage() {

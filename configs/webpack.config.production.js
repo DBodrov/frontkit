@@ -67,10 +67,10 @@ module.exports = env => {
       new HtmlWebpackPlugin({
         inject: true,
         filename: 'index.html',
-        template: resolveApp('docs/index.html'),
+        template: resolveApp('site/index.html'),
         chunksSortMode: 'none',
         minify: {
-          removeComments: false,
+          removeComments: true,
           collapseWhitespace: true,
           removeRedundantAttributes: true,
           useShortDoctype: true,

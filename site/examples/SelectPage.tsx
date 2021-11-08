@@ -1,7 +1,7 @@
 import React from 'react';
 import {css} from '@emotion/react';
 import {Select, SelectInput, OptionsList} from '@a3/uikit';
-import {ExamplePage, Viewarea, PageTitle} from 'site/components/layout';
+import {ExamplePage, Viewarea, PageTitle} from './ExamplePage';
 
 const regionResponse = {
   result: '1',

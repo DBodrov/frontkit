@@ -1,6 +1,6 @@
 import React from 'react';
 import {Input, InputNumber, InputPhone} from '@a3/uikit';
-import {ExamplePage, Viewarea, PageTitle} from 'site/components/layout';
+import {ExamplePage, Viewarea, PageTitle} from './ExamplePage';
 
 export function InputPage() {
   const [text, setText] = React.useState('');

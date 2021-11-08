@@ -13,6 +13,7 @@ export const Viewarea = styled.article`
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
+  min-width: 500px;
   padding: 2rem;
   background-color: var(--color-background);
   box-shadow: 0px 9px 16px rgba(159, 162, 191, 0.18), 0px 2px 2px rgba(159, 162, 191, 0.32);

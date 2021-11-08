@@ -1,39 +1,39 @@
 import React from 'react';
+import {NavLinkProps} from 'react-router-dom';
 import {Aside, RouteList, RouteListItem, Link} from './styles';
+
+function SideNavLink({children, to}: NavLinkProps) {
+  return (
+    <Link
+      to={to}
+      style={({isActive}) => ({color: isActive ? 'var(--color-primary)' : 'var(--color-text-secondary)'})}
+    >
+      {children}
+    </Link>
+  );
+}
 
 export function Sidebar() {
   return (
     <Aside>
       <RouteList>
         <RouteListItem>
-          <Link to="/typography" activeStyle={{color: 'var(--color-primary)'}}>
-            Typography
-          </Link>
+          <SideNavLink to="typography">Typography</SideNavLink>
         </RouteListItem>
         <RouteListItem>
-          <Link to="/button" activeStyle={{color: 'var(--color-primary)'}}>
-            Button
-          </Link>
+          <SideNavLink to="button">Button</SideNavLink>
         </RouteListItem>
         <RouteListItem>
-          <Link to="/loader" activeStyle={{color: 'var(--color-primary)'}}>
-            Loader
-          </Link>
+          <SideNavLink to="loader">Loader</SideNavLink>
         </RouteListItem>
         <RouteListItem>
-          <Link to="/radio" activeStyle={{color: 'var(--color-primary)'}}>
-            Radio and Checkbox
-          </Link>
+          <SideNavLink to="radio">Radio and Checkbox</SideNavLink>
         </RouteListItem>
         <RouteListItem>
-          <Link to="/select" activeStyle={{color: 'var(--color-primary)'}}>
-            Select
-          </Link>
+          <SideNavLink to="select">Select</SideNavLink>
         </RouteListItem>
         <RouteListItem>
-          <Link to="/input" activeStyle={{color: 'var(--color-primary)'}}>
-            Input
-          </Link>
+          <SideNavLink to="input">Input</SideNavLink>
         </RouteListItem>
       </RouteList>
       <article css={{marginTop: 'auto'}}>
