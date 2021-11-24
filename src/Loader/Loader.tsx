@@ -8,7 +8,7 @@ type TLoaderProps = {
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export function Loader(props: TLoaderProps) {
-  const {message, children, hasOverlay, fullscreen, ...restProps} = props;
+  const {message, children, hasOverlay = false, fullscreen = false, ...restProps} = props;
 
   return (
     <StyledLoader hasOverlay={hasOverlay} fullscreen={fullscreen} >
